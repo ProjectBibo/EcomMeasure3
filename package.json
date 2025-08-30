@@ -1,20 +1,29 @@
 {
+  "name": "ecommeasure",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.7.2",
-    "@fortawesome/fontawesome-svg-core": "6.7.2",
-    "@fortawesome/free-brands-svg-icons": "6.7.2",
-    "@fortawesome/free-regular-svg-icons": "6.7.2",
-    "@fortawesome/free-solid-svg-icons": "6.7.2",
-    "@types/prismjs": "1.26.5",
-    "autoprefixer": "10.4.21",
-    "http-server": "14.1.1",
-    "image-size": "2.0.2",
-    "postcss": "8.5.6",
-    "pptxgenjs": "4.0.0",
-    "prismjs": "1.30.0",
-    "sharp": "0.34.1",
-    "tailwindcss": "4.1.10",
-    "ts-node": "10.9.2",
-    "typescript": "5.8.3"
+    "@react-three/drei": "^9.114.6",
+    "@react-three/fiber": "^8.15.17",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.471.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.7.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.10",
+    "vite": "^5.3.4"
   }
 }
