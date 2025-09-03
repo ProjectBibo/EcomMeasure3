@@ -18,6 +18,7 @@ export default function App() {
             <a href="#dashboard" className="hover:text-white">Dashboard</a>
             <a href="#results" className="hover:text-white">Resultaten</a>
             <a href="#faq" className="hover:text-white">FAQ</a>
+            <a href="#about" className="hover:text-white">Over mij</a>
             <a href="#contact" className="hover:text-white">Contact</a>
           </nav>
           <a href="#contact" className="px-4 py-2 rounded-xl bg-emerald-500 text-black font-medium hover:bg-emerald-400">
@@ -116,6 +117,29 @@ export default function App() {
         </div>
       </section>
 
+      {/* ABOUT */}
+      <section id="about" className="py-24 bg-neutral-900">
+        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+          <img src="/rowan.jpg" alt="Rowan" className="rounded-2xl shadow-lg" />
+          <div>
+            <h2 className="text-3xl font-bold mb-4">Over mij</h2>
+            <p className="text-neutral-300 mb-4">
+              Mijn naam is Rowan. Ik help webshops om hun metingen,
+              advertentiekoppelingen en cookietoestemming goed in te richten.
+            </p>
+            <p className="text-neutral-400 mb-6">
+              Tijdens mijn studie AD e-commerce aan Hogeschool Windesheim ontdekte ik
+              dat betere data leidt tot betere beslissingen — en dus tot groei.
+            </p>
+            <ul className="text-neutral-300 space-y-2">
+              <li>🔎 Duidelijk en transparant</li>
+              <li>⚡ Praktisch en snel toepasbaar</li>
+              <li>📈 Gericht op resultaat</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact" className="py-24 bg-neutral-900">
         <div className="max-w-3xl mx-auto px-4 text-center">
@@ -188,29 +212,6 @@ function Testimonial({ name, text }) {
     </div>
   );
 }
-
-<section id="about" className="py-24 bg-neutral-900">
-  <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-    <img src="/rowan.jpg" alt="Rowan" className="rounded-2xl shadow-lg" />
-    <div>
-      <h2 className="text-3xl font-bold mb-4">Over mij</h2>
-      <p className="text-neutral-300 mb-4">
-        Mijn naam is Rowan. Ik help webshops om hun metingen,
-        advertentiekoppelingen en cookietoestemming goed in te richten.
-      </p>
-      <p className="text-neutral-400 mb-6">
-        Tijdens mijn studie AD e-commerce aan Hogeschool Windesheim ontdekte ik
-        dat betere data leidt tot betere beslissingen — en dus tot groei.
-      </p>
-      <ul className="text-neutral-300 space-y-2">
-        <li>🔎 Duidelijk en transparant</li>
-        <li>⚡ Praktisch en snel toepasbaar</li>
-        <li>📈 Gericht op resultaat</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 
 function FAQ({ q, a }) {
   return (
