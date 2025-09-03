@@ -12,11 +12,11 @@ export default function App() {
             EcomMeasure <span className="text-neutral-400">· Measurement Studio</span>
           </a>
           <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
+            <a href="#results" className="hover:text-white">Resultaten</a>
             <a href="#features" className="hover:text-white">Diensten</a>
             <a href="#process" className="hover:text-white">Proces</a>
             <a href="#pricing" className="hover:text-white">Prijzen</a>
             <a href="#dashboard" className="hover:text-white">Dashboard</a>
-            <a href="#results" className="hover:text-white">Resultaten</a>
             <a href="#faq" className="hover:text-white">FAQ</a>
             <a href="#about" className="hover:text-white">Over mij</a>
             <a href="#contact" className="hover:text-white">Contact</a>
@@ -45,8 +45,20 @@ export default function App() {
         </div>
       </section>
 
+      {/* TESTIMONIALS (Resultaten) */}
+      <section id="results" className="py-24 bg-neutral-900">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-12">Resultaten</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Testimonial name="Sanne — D2C koffiemerk" text="Eindelijk kloppen onze cijfers. ROAS steeg en discussies over data zijn weg." />
+            <Testimonial name="Youssef — sportshop" text="Meta CAPI en consent goed geregeld. Minder afkeuringen, betere ads." />
+            <Testimonial name="Lotte — woonwebshop" text="Dashboard is top. We zien precies waar de funnel lekt." />
+          </div>
+        </div>
+      </section>
+
       {/* FEATURES */}
-      <section id="features" className="py-24 bg-neutral-900">
+      <section id="features" className="py-24 bg-neutral-950">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-12">Mijn diensten</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -90,18 +102,6 @@ export default function App() {
           <p className="text-neutral-400 mb-8">Zo ziet een Looker Studio rapport eruit: omzet, funnel en kanalen in één overzicht.</p>
           <div className="rounded-xl overflow-hidden border border-neutral-800">
             <img src="https://dummyimage.com/1200x500/0a0a0a/10b981&text=Voorbeeld+dashboard" alt="Voorbeeld dashboard" className="w-full h-96 object-cover" />
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section id="results" className="py-24 bg-neutral-900">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-12">Resultaten</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Testimonial name="Sanne — D2C koffiemerk" text="Eindelijk kloppen onze cijfers. ROAS steeg en discussies over data zijn weg." />
-            <Testimonial name="Youssef — sportshop" text="Meta CAPI en consent goed geregeld. Minder afkeuringen, betere ads." />
-            <Testimonial name="Lotte — woonwebshop" text="Dashboard is top. We zien precies waar de funnel lekt." />
           </div>
         </div>
       </section>
@@ -221,3 +221,4 @@ function FAQ({ q, a }) {
     </div>
   );
 }
+
