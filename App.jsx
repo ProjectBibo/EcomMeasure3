@@ -164,5 +164,16 @@ function PricingCard({ name, price, items, highlight }) {
           <li key={i}>• {item}</li>
         ))}
       </ul>
-      <a href="#contact" className={`block px-4 py-2 rounded-xl font-medium ${highlight ? "bg-emerald-500 text-black hover:bg-emerald-400" : "border border-neutral-700 hover:border-neutral-600"}`}>
-        {hig
+      <a
+        href="#contact"
+        className={`block px-4 py-2 rounded-xl font-medium ${
+          highlight
+            ? "bg-emerald-500 text-black hover:bg-emerald-400"
+            : "border border-neutral-700 hover:border-neutral-600"
+        }`}
+      >
+        {highlight ? "Meest gekozen" : "Kies dit pakket"}
+      </a>
+    </div>
+  );
+}
