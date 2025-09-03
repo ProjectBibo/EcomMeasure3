@@ -189,6 +189,29 @@ function Testimonial({ name, text }) {
   );
 }
 
+<section id="about" className="py-24 bg-neutral-900">
+  <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+    <img src="/rowan.jpg" alt="Rowan" className="rounded-2xl shadow-lg" />
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Over mij</h2>
+      <p className="text-neutral-300 mb-4">
+        Mijn naam is Rowan. Ik help webshops om hun metingen,
+        advertentiekoppelingen en cookietoestemming goed in te richten.
+      </p>
+      <p className="text-neutral-400 mb-6">
+        Tijdens mijn studie AD e-commerce aan Hogeschool Windesheim ontdekte ik
+        dat betere data leidt tot betere beslissingen — en dus tot groei.
+      </p>
+      <ul className="text-neutral-300 space-y-2">
+        <li>🔎 Duidelijk en transparant</li>
+        <li>⚡ Praktisch en snel toepasbaar</li>
+        <li>📈 Gericht op resultaat</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
 function FAQ({ q, a }) {
   return (
     <div className="mb-6">
