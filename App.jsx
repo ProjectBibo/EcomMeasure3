@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
@@ -16,14 +16,25 @@ import {
 } from "lucide-react";
 
 export default function App() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="bg-neutral-950 text-white min-h-screen scroll-smooth">
+      {/* Skip link voor toegankelijkheid */}
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 bg-black text-white px-3 py-2 rounded-md z-50"
+      >
+        Sla navigatie over
+      </a>
+
       {/* NAVBAR */}
       <header className="sticky top-0 z-40 w-full backdrop-blur bg-neutral-950/80 border-b border-neutral-800">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
           <a href="#hero" className="font-semibold tracking-tight">
             EcomMeasure <span className="text-neutral-400">· Measurement Studio</span>
           </a>
+
           <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
             <a href="#results" className="hover:text-white">Resultaten</a>
             <a href="#features" className="hover:text-white">Diensten</a>
@@ -34,9 +45,10 @@ export default function App() {
             <a href="#about" className="hover:text-white">Over mij</a>
             <a href="#contact" className="hover:text-white">Contact</a>
           </nav>
+
           <a
             href="#contact"
-            className="px-4 py-2 rounded-xl bg-emerald-500 text-black font-medium hover:bg-emerald-400"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-black font-semibold hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 transition"
           >
             Plan de sprint
           </a>
@@ -44,45 +56,44 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section
-        id="hero"
-        className="relative flex flex-col items-center justify-center text-center py-28"
-      >
+      <section id="hero" className="relative flex flex-col items-center justify-center text-center py-28 px-4">
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+          animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-5xl md:text-7xl font-bold"
         >
-          Meetbaar. Compliant.{" "}
-          <span className="text-emerald-400">Groeien.</span>
+          Meetbaar. Compliant. <span className="text-emerald-400">Groeien.</span>
         </motion.h1>
+
         <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.6 }}
           className="mt-4 max-w-2xl mx-auto text-lg text-neutral-300"
         >
-          In 30 dagen fixen we je metingen (GA4 + GTM), cookietoestemming en
-          advertentiekoppelingen — mét duidelijk dashboard.
+          Binnen 30 dagen: betrouwbare metingen (GA4 + GTM), privacy op orde en
+          een dashboard dat stuurt — zonder gedoe.
         </motion.p>
+
+        {/* CTA's */}
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <a
             href="#contact"
-            className="bg-emerald-500 text-black font-semibold px-6 py-3 rounded-xl hover:bg-emerald-400 flex items-center gap-2 justify-center"
+            className="bg-gradient-to-r from-emerald-400 to-teal-300 text-black font-semibold px-6 py-3 rounded-xl hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 transition flex items-center gap-2 justify-center"
           >
             Plan de sprint <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="#contact"
-            className="border border-neutral-700 hover:border-neutral-600 px-6 py-3 rounded-xl"
+            href="#pricing"
+            className="border border-neutral-800 hover:border-neutral-700 px-6 py-3 rounded-xl text-neutral-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 transition"
           >
-            Gratis scan aanvragen
+            Pakketten bekijken
           </a>
         </div>
 
         {/* TRUST STRIP */}
-        <div className="mt-10 px-4 w-full">
+        <div className="mt-10 w-full">
           <div className="mx-auto max-w-4xl rounded-xl border border-neutral-800 bg-neutral-900/60 p-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Stars count={5} />
@@ -93,13 +104,36 @@ export default function App() {
                 <Badge text="Tijdige levering" />
               </div>
             </div>
+
+            {/* Logo strip */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 opacity-80">
+              <img src="https://dummyimage.com/100x28/ffffff/000000&text=Shopify" alt="Shopify" className="h-6" />
+              <img src="https://dummyimage.com/100x28/ffffff/000000&text=GA4" alt="Google Analytics 4" className="h-6" />
+              <img src="https://dummyimage.com/100x28/ffffff/000000&text=GTM" alt="Google Tag Manager" className="h-6" />
+              <img src="https://dummyimage.com/100x28/ffffff/000000&text=Meta" alt="Meta" className="h-6" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* TESTIMONIALS + metrics */}
       <section id="results" className="py-20 bg-neutral-900">
         <div className="max-w-6xl mx-auto px-4 text-center">
+          {/* Result metrics */}
+          <div className="mb-10 grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              ["+38%", "Betere ROAS"],
+              ["-27%", "Afgekeurde events"],
+              ["<30 dgn", "Implementatie"],
+              ["1 bron", "Dashboard"],
+            ].map(([v, l], i) => (
+              <div key={i} className="rounded-lg border border-neutral-800 bg-neutral-950/70 p-4">
+                <div className="text-2xl font-bold">{v}</div>
+                <div className="text-sm text-neutral-400">{l}</div>
+              </div>
+            ))}
+          </div>
+
           <h2 className="text-3xl font-bold mb-12">Dit zeggen klanten</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Testimonial
@@ -227,7 +261,7 @@ export default function App() {
           <div className="rounded-xl overflow-hidden border border-neutral-800">
             <img
               src="https://dummyimage.com/1200x500/0a0a0a/10b981&text=Voorbeeld+dashboard"
-              alt="Voorbeeld dashboard"
+              alt="Voorbeeld van een Looker Studio dashboard met omzet- en kanalenoverzicht"
               className="w-full h-96 object-cover"
             />
           </div>
@@ -248,7 +282,7 @@ export default function App() {
           />
           <FAQ
             q="Voor wie is dit?"
-            a="Shopify/ WooCommerce-webshops die al adverteren of willen opschalen en betrouwbare data + privacy op orde willen."
+            a="Shopify/WooCommerce-webshops die al adverteren of willen opschalen en betrouwbare data + privacy op orde willen."
           />
           <FAQ
             q="Wat kost onderhoud?"
@@ -260,7 +294,11 @@ export default function App() {
       {/* OVER MIJ */}
       <section id="about" className="py-24">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <img src="/rowan.jpg" alt="Rowan" className="rounded-2xl shadow-lg" />
+          <img
+            src="/rowan.jpg"
+            alt="Rowan - specialist measurement & analytics"
+            className="rounded-2xl shadow-lg"
+          />
           <div>
             <h2 className="text-3xl font-bold mb-4">Over mij</h2>
             <p className="text-neutral-300 mb-4">
@@ -290,10 +328,16 @@ export default function App() {
           </p>
           <div className="flex flex-col gap-4 text-neutral-300">
             <p className="flex items-center justify-center gap-2">
-              <Mail className="h-5 w-5" /> info@ecommeasure.com
+              <Mail className="h-5 w-5" />{" "}
+              <a href="mailto:info@ecommeasure.com" className="hover:underline">
+                info@ecommeasure.com
+              </a>
             </p>
             <p className="flex items-center justify-center gap-2">
-              <Phone className="h-5 w-5" /> +31 6 12345678
+              <Phone className="h-5 w-5" />{" "}
+              <a href="tel:+31612345678" className="hover:underline">
+                +31 6 12345678
+              </a>
             </p>
             <p className="flex items-center justify-center gap-2">
               <MapPin className="h-5 w-5" /> Zwolle, Nederland
@@ -301,6 +345,15 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* Zwevende conversieknop */}
+      <a
+        href="#contact"
+        className="fixed bottom-4 right-4 md:right-6 md:bottom-6 px-4 py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-black font-semibold shadow-lg hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 transition"
+        aria-label="Plan de sprint"
+      >
+        Plan de sprint
+      </a>
     </div>
   );
 }
@@ -327,9 +380,9 @@ function Badge({ text }) {
 
 function Feature({ icon, title, desc }) {
   return (
-    <div className="p-6 bg-neutral-950 rounded-xl border border-neutral-800 text-left">
-      <div className="text-emerald-400 mb-3">{icon}</div>
-      <h3 className="font-semibold mb-2">{title}</h3>
+    <div className="group p-6 bg-neutral-950/80 rounded-xl border border-neutral-800 hover:border-neutral-700 transition">
+      <div className="text-emerald-400 mb-3 group-hover:scale-105 transition-transform">{icon}</div>
+      <h3 className="font-semibold mb-2 text-neutral-100">{title}</h3>
       <p className="text-neutral-400 text-sm">{desc}</p>
     </div>
   );
@@ -337,9 +390,9 @@ function Feature({ icon, title, desc }) {
 
 function Step({ icon, title, desc }) {
   return (
-    <div className="p-6 bg-neutral-950 rounded-xl border border-neutral-800">
-      <div className="text-emerald-400 mb-3">{icon}</div>
-      <h3 className="font-semibold mb-2">{title}</h3>
+    <div className="group p-6 bg-neutral-950/80 rounded-xl border border-neutral-800 hover:border-neutral-700 transition">
+      <div className="text-emerald-400 mb-3 group-hover:scale-105 transition-transform">{icon}</div>
+      <h3 className="font-semibold mb-2 text-neutral-100">{title}</h3>
       <p className="text-neutral-400 text-sm">{desc}</p>
     </div>
   );
@@ -348,12 +401,17 @@ function Step({ icon, title, desc }) {
 function PricingCard({ name, price, items, highlight }) {
   return (
     <div
-      className={`p-6 rounded-xl border ${
+      className={`p-6 rounded-xl border relative overflow-hidden ${
         highlight
-          ? "border-emerald-500 bg-neutral-950"
-          : "border-neutral-800 bg-neutral-950"
+          ? "border-emerald-500/60 bg-neutral-950/80 shadow-[0_0_0_1px_rgba(16,185,129,0.2)]"
+          : "border-neutral-800 bg-neutral-950/80"
       }`}
     >
+      {highlight && (
+        <span className="absolute right-3 top-3 text-xs rounded-full bg-emerald-500 text-black px-2 py-1 font-semibold">
+          Meest gekozen
+        </span>
+      )}
       <h3 className="font-semibold text-xl mb-2">{name}</h3>
       <p className="text-3xl font-bold mb-4">{price}</p>
       <ul className="text-sm text-neutral-400 mb-6 space-y-1">
@@ -369,8 +427,9 @@ function PricingCard({ name, price, items, highlight }) {
             : "border border-neutral-700 hover:border-neutral-600"
         }`}
       >
-        {highlight ? "Meest gekozen" : "Kies dit pakket"}
+        {highlight ? "Plan deze sprint" : "Kies dit pakket"}
       </a>
+      <p className="mt-3 text-xs text-neutral-500">14 dagen support na oplevering</p>
     </div>
   );
 }
