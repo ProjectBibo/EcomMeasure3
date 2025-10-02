@@ -134,7 +134,7 @@ export default function App() {
           </p>
           <div style={{ border: "1px solid #262626", borderRadius: 12, overflow: "hidden" }}>
             <img src="https://i.postimg.cc/Jn7sHGXC/Scherm-afbeelding-2025-10-02-om-12-08-37.png"
-                 alt="Voorbeeld dashboard" style={{ width: "100%", height: 420, objectFit: "cover" }} />
+                 alt="Voorbeeld dashboard" style={{ width: "100%", height: 380, objectFit: "cover" }} />
           </div>
         </div>
       </section>
