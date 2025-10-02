@@ -171,9 +171,9 @@ export default function App() {
               beslissingen — en dus tot groei.
             </p>
             <ul style={{ color: "#e5e5e5", paddingLeft: 18 }}>
-              <li>Duidelijk en transparant</li>
-              <li>Praktisch en snel toepasbaar</li>
-              <li>Gericht op resultaat</li>
+              <li>✅Duidelijk en transparant</li>
+              <li>✅Praktisch en snel toepasbaar</li>
+              <li>✅Gericht op resultaat</li>
             </ul>
           </div>
         </div>
@@ -187,7 +187,7 @@ export default function App() {
           <div style={{ display: "grid", gap: 10 }}>
             <p>📧 info@ecommeasure.com</p>
             <p>📞 +31 6 12345678</p>
-            <p>📍 Zwolle, Nederland</p>
+            <p>📍 Deventer, Nederland</p>
           </div>
         </div>
       </section>
