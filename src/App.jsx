@@ -133,7 +133,7 @@ export default function App() {
             Zo ziet een Looker Studio rapport eruit: omzet, funnel en kanalen in één overzicht.
           </p>
           <div style={{ border: "1px solid #262626", borderRadius: 12, overflow: "hidden" }}>
-            <img src="https://dummyimage.com/1200x500/0a0a0a/10b981&text=Voorbeeld+dashboard"
+            <img src="https://i.postimg.cc/Jn7sHGXC/Scherm-afbeelding-2025-10-02-om-12-08-37.png"
                  alt="Voorbeeld dashboard" style={{ width: "100%", height: 380, objectFit: "cover" }} />
           </div>
         </div>
