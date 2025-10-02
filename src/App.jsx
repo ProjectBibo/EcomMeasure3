@@ -186,7 +186,7 @@ export default function App() {
           <p style={{ color: "#a3a3a3", marginBottom: 16 }}>Plan een sprint of stel je vraag direct.</p>
           <div style={{ display: "grid", gap: 10 }}>
             <p>📧 info@ecommeasure.com</p>
-            <p>📞 +31 6 12345678</p>
+            <p>📞 +31 6 8252 3260</p>
             <p>📍 Deventer, Nederland</p>
           </div>
         </div>
