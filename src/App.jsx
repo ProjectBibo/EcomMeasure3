@@ -17,7 +17,6 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <HelmetProvider>
-      {/* 🔹 SEO instellingen */}
       <SEO
         title="EcomMeasure – Data-gedreven website optimalisatie"
         description="EcomMeasure helpt webshops en websites groeien met GA4, Consent Mode v2 en UX optimalisaties."
@@ -25,7 +24,7 @@ export default function App() {
         image="/og-image.png"
       />
 
-      {/* 🔹 Globale achtergrond + tekstkleur */}
+      {/* 🔹 Globale achtergrond en tekstkleur */}
       <div className="min-h-screen bg-surface.light dark:bg-surface.dark text-neutralInk dark:text-gray-200 font-sans">
         <Header />
         <Hero />
