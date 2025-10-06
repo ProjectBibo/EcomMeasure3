@@ -21,22 +21,26 @@ export default function App() {
       <ErrorBoundary>
         <SEO />
 
-        {/* Hele site krijgt achtergrondkleur via dark/light */}
+        {/* Hele site dark/light achtergrond */}
         <div className="min-h-screen bg-surface-light dark:bg-surface-dark transition-colors">
           <Header />
 
-          {/* Extra visuele lagen */}
+          {/* Decoratieve background kan blijven (zit -z idx) */}
           <SnakeBackground />
-          <ScrollyPortal />
 
-          {/* Content-secties */}
+          {/* --- BELANGRIJK: eerst de content (Hero bovenaan) --- */}
           <main>
             <Hero />
+
+            {/* Jouw contentsecties */}
             <USP />
             <Workflow />
             <Insights />
             <CaseHighlight />
             <Testimonial />
+
+            {/* --- PAS HIER de scrollytelling/portal-scenes --- */}
+            <ScrollyPortal />
           </main>
 
           <Footer />
