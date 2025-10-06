@@ -1,10 +1,6 @@
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
-
-// SEO
 import SEO from "./components/SEO";
-
-// Sections
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Workflow from "./components/Workflow";
@@ -13,8 +9,6 @@ import Testimonial from "./components/Testimonial";
 import CaseHighlight from "./components/CaseHighlight";
 import Insights from "./components/Insights";
 import Footer from "./components/Footer";
-
-// Animated puzzle slang
 import SnakeBackground from "./components/SnakeBackground";
 
 export default function App() {
@@ -28,19 +22,22 @@ export default function App() {
       />
 
       <div className="relative bg-surface-light dark:bg-surface-dark text-neutral-900 dark:text-gray-100 font-sans min-h-screen overflow-hidden">
-        {/* 🔹 Animated puzzle-slang achtergrond */}
+        {/* 🔹 Achtergrond */}
         <SnakeBackground />
 
-        {/* Pagina-secties */}
-        <Header />
-        <Hero />
-        <Workflow />
-        <USP />
-        <Testimonial />
-        <CaseHighlight />
-        <Insights />
-        <Footer />
+        {/* 🔹 Alle content boven de background */}
+        <div className="relative z-10">
+          <Header />
+          <Hero />
+          <Workflow />
+          <USP />
+          <Testimonial />
+          <CaseHighlight />
+          <Insights />
+          <Footer />
+        </div>
       </div>
     </HelmetProvider>
   );
 }
+
