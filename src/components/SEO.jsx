@@ -1,10 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
-/**
- * SEO component
- * Gebruik: <SEO title="Mijn titel" description="..." url="..." image="..." />
- */
 export default function SEO({
   title = "EcomMeasure – Data-gedreven website optimalisatie",
   description = "EcomMeasure helpt webshops groeien met GA4, Consent Mode en UX optimalisaties.",
@@ -13,10 +9,9 @@ export default function SEO({
 }) {
   return (
     <Helmet>
-      {/* Title & Description */}
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content="EcomMeasure, GA4, Google Analytics, UX Research, CRO, website optimalisatie" />
+      <meta name="keywords" content="EcomMeasure, GA4, Google Analytics, Consent Mode, UX Research, CRO, website optimalisatie" />
 
       {/* Open Graph */}
       <meta property="og:title" content={title} />
