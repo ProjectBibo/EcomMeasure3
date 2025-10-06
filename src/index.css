@@ -11,48 +11,37 @@
   will-change: transform, opacity;
 }
 
-/* Portal layers: superlicht, translucent */
+/* Scenes standaard verborgen; GSAP zet display:block bij aanvang */
+.scene { display: none; }
+
+/* Portal layers (transparant, theme-agnostic; JS zet kleuren/opacity) */
 .portal-layer {
   position: fixed;
   inset: 0;
-  z-index: 0; /* onder contentlaag (die heeft z-10) */
+  z-index: 0; /* onder contentlaag (z-10) */
   pointer-events: none;
 }
 
-/* Radial laag: transparante zachte glow */
-.portal-radial {
-  mix-blend-mode: screen;
-  filter: blur(14px);
-  transition: background 600ms ease;
-}
-
-/* Conic aura laag */
-.portal-conic {
-  mix-blend-mode: screen;
-  filter: blur(20px);
-  transition: background 600ms ease, transform 600ms ease, opacity 600ms ease;
-}
-
-/* Blur blobs container */
+/* Zachte blends: in light “screen” geeft gloed; in dark dempen we met lagere opacity uit JS */
+.portal-radial,
+.portal-conic,
 .portal-blobs {
   mix-blend-mode: screen;
-  filter: blur(40px);
 }
+
+.portal-radial { filter: blur(14px);  transition: background 600ms ease; }
+.portal-conic  { filter: blur(20px);  transition: background 600ms ease, transform 600ms ease, opacity 600ms ease; }
+.portal-blobs  { filter: blur(40px); }
+
+/* Blob basis (JS zet achtergrondkleur/transparantie per theme) */
 .blob {
   position: absolute;
   width: 55vmax;
   height: 55vmax;
   border-radius: 9999px;
-  background: radial-gradient(circle at 50% 50%, rgba(11,95,255,0.25), rgba(0,0,0,0) 60%);
-}
-.blob-b {
-  background: radial-gradient(circle at 50% 50%, rgba(14,165,165,0.22), rgba(0,0,0,0) 60%);
-}
-.blob-c {
-  background: radial-gradient(circle at 50% 50%, rgba(249,197,19,0.20), rgba(0,0,0,0) 60%);
 }
 
-/* (Optioneel) filmische grain-overlay — toggle in App.jsx */
+/* (Optioneel) filmische grain-overlay — toggle in App.jsx
 .grain-overlay {
   pointer-events: none;
   position: fixed;
@@ -71,3 +60,4 @@
   75% { transform: translate(-4px, 6px); }
   100% { transform: translate(0,0); }
 }
+*/
