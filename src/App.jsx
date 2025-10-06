@@ -25,16 +25,14 @@ export default function App() {
       />
 
       {/* Globale achtergrond + tekstkleur (licht/donker) */}
-      <div className="min-h-screen bg-surface-light dark:bg-surface-dark text-neutralInk dark:text-gray-200 font-sans">
-        <Header />
-        <Hero />
-        <Workflow />
-        <USP />
-        <Testimonial />
-        <CaseHighlight />
-        <Insights />
-        <Footer />
-      </div>
-    </HelmetProvider>
-  );
-}
+      <div className="bg-surface-light dark:bg-surface-dark text-neutral-900 dark:text-gray-100 font-sans min-h-screen">
+  <Header />
+  <Hero />
+  <Workflow />
+  <USP />
+  <Testimonial />
+  <CaseHighlight />
+  <Insights />
+  <Footer />
+</div>
+
