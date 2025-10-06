@@ -6,16 +6,16 @@ export default function Header() {
     <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         
-        {/* 🔹 Alleen het logo (vergroot) */}
+        {/* 🔹 Alleen het logo (nog groter) */}
         <a href="#hero" className="flex items-center">
           <img
-            src="/logo.png"   // jouw logo in /public/logo.png
+            src="/logo.png"
             alt="EcomMeasure logo"
-            className="h-16 w-auto"   // maak groter (h-16 ≈ 64px hoog)
+            className="h-24 w-auto"   // vergroot naar 96px hoog
           />
         </a>
 
-        {/* 🔹 Navigatie */}
+        {/* Navigatie */}
         <nav className="hidden md:flex gap-10 text-sm text-neutralInk dark:text-gray-300">
           <div className="flex flex-col items-center hover:text-brand-blue cursor-pointer">
             <span>Meer meten</span>
@@ -43,7 +43,7 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* 🔹 CTA + Dark toggle */}
+        {/* CTA + Dark toggle */}
         <div className="flex items-center gap-3">
           <a
             href="#contact"
