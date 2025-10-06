@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import HologramHandshake from "./HologramHandshake";
+import LottieHandshake from "./LottieHandshake";
 
 export default function Hero() {
   return (
@@ -10,7 +10,7 @@ export default function Hero() {
       id="hero"
       className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
     >
-      {/* Achtergrond blobs */}
+      {/* Achtergrond blobs (lichtgewicht, mag blijven) */}
       <motion.div
         className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-brand-blue/20 dark:bg-brand-blue/40 rounded-full blur-3xl -z-10"
         animate={{ scale: [1, 1.1, 1] }}
@@ -61,21 +61,27 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Hologram Handshake i.p.v. afbeelding */}
+      {/* Lottie Handshake i.p.v. afbeelding */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
         className="flex justify-center"
       >
-        {/* Pas height/density/shake aan naar smaak */}
-        <HologramHandshake height={460} density={0.28} shake={12} />
+        {/* Gebruik lokale JSON in /public of geef externe URL mee via jsonUrl prop */}
+        <LottieHandshake
+          jsonUrl="/handshake.json"
+          height={460}
+          tintLight="#0B5FFF"
+          tintDark="#60A5FA"
+          speed={1}
+        />
 
-        {/* Fallback voor als JS/canvas uit staat */}
+        {/* Fallback als JS uit staat */}
         <noscript>
           <img
             src="/og-image.png"
-            alt="EcomMeasure hologram handshake (fallback)"
+            alt="Handshake (fallback)"
             className="rounded-xl shadow-lg"
           />
         </noscript>
