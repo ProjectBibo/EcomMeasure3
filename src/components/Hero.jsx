@@ -74,10 +74,10 @@ export default function Hero() {
         className="flex justify-center"
       >
         <img
-          src="https://dummyimage.com/500x350/f2f6fb/004aad&text=Illustratie"
-          alt="Illustratie samenwerking"
-          className="rounded-xl shadow-lg"
-        />
+  src="https://i.postimg.cc/x8w89fFC/18ea172b-1632-4e40-86ac-088dca1b90a8.png"
+  alt="EcomMeasure hero afbeelding"
+  className="rounded-xl shadow-lg"
+/>
       </motion.div>
     </section>
   );
