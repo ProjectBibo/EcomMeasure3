@@ -3,16 +3,15 @@ import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
   return (
-    <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50 h-20">
-      {/* 🔹 h-20 = 80px hoge header, strak en vast */}
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-full">
+    <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 h-20">
         
-        {/* Logo vult nu de header-hoogte */}
-        <a href="#hero" className="flex items-center h-full">
+        {/* Logo forceren groter */}
+        <a href="#hero" className="flex items-center">
           <img
             src="/logo.png"
             alt="EcomMeasure logo"
-            className="h-full w-auto object-contain"
+            className="h-20 md:h-28 w-auto object-contain -my-2"
           />
         </a>
 
