@@ -2,8 +2,8 @@
 import React from "react";
 
 export default function BeforeAfter({
-  before = "/case-demo-before.jpg",
-  after = "/case-demo-after.jpg",
+  before = "/og-image.png",
+after = "/og-image.png",
   title = "Voorbeeld-case",
   note = "*Voorbeeld om het effect van kleine optimalisaties te illustreren.",
 }) {
