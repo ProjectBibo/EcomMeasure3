@@ -1,9 +1,7 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const COLORS = ["#004aad", "#0EA5A5", "#F9C513"]; // brand blue, teal, yellow
-
-// Posities van de blokjes (slangpatroon, diagonaal)
+const COLORS = ["#004aad", "#0EA5A5", "#F9C513"];
 const PIECES = [
   { x: 0,   y: 0,   r: 4,  c: 0 },
   { x: 90,  y: 20,  r: -4, c: 1 },
@@ -18,23 +16,20 @@ const PIECES = [
 ];
 
 export default function SnakeBackground() {
-  // Parallax: beweeg trager dan de pagina-scroll
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, 120]); // hoe lager de 2e waarde, hoe subtieler
+  const y = useTransform(scrollY, [0, 1000], [0, 120]);
 
   return (
     <motion.div
       style={{ y }}
-      className="pointer-events-none absolute inset-0 -z-10 overflow-visible"
+      className="pointer-events-none absolute inset-0 z-0 overflow-visible" // ⬅️ z-0 i.p.v. -z-10
       aria-hidden="true"
     >
-      {/* Het SVG canvas: groot, diagonaal geplaatst */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-50 -120 1000 400"
-        className="absolute left-1/2 -translate-x-1/2 top-[-180px] rotate-[-8deg] w-[1800px] h-auto opacity-35"
+        className="absolute left-1/2 -translate-x-1/2 top-[-180px] rotate-[-8deg] w-[1800px] h-auto opacity-50" // ⬅️ tijdelijk 50% om te testen
       >
-        {/* Subtiele ‘glow’ onderlaag voor luxe effect */}
         <defs>
           <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="18" result="blur"/>
@@ -61,10 +56,7 @@ export default function SnakeBackground() {
               ease: "easeInOut",
             }}
           >
-            {/* ‘Puzzelblok’ – ronde rechthoek */}
             <rect width="76" height="76" rx="14" fill={COLORS[p.c]} />
-
-            {/* Kleine ‘puzzle nubs’ voor het gevoel (optioneel, heel subtiel) */}
             <circle cx="38" cy="-8" r="8" fill={COLORS[p.c]} opacity="0.5" />
             <circle cx="38" cy="84" r="8" fill={COLORS[p.c]} opacity="0.5" />
           </motion.g>
