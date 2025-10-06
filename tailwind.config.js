@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", // <— belangrijk
+  darkMode: "class", // <- heel belangrijk
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -16,9 +16,9 @@ export default {
           secondary: "#475569",
         },
         surface: {
-          light: "#FFFFFF",   // achtergrond in light mode
-          soft: "#F7F8FA",    // lichte grijs voor secties/cards
-          dark: "#0F1115",    // achtergrond in dark mode
+          light: "#FFFFFF",   // lichte pagina-achtergrond
+          soft:  "#F7F8FA",   // zachte sectie-achtergrond
+          dark:  "#0F1115",   // donkere pagina-achtergrond
         },
       },
       fontFamily: {
