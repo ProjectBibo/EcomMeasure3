@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 // SEO
 import SEO from "./components/SEO";
 
-// Sections (jouw bestaande)
+// Jouw secties
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Workflow from "./components/Workflow";
@@ -15,8 +15,8 @@ import Insights from "./components/Insights";
 import Footer from "./components/Footer";
 
 // Animations
-import SnakeBackground from "./components/SnakeBackground"; // jouw verlengde slang
-import ScrollyAirElite from "./components/ScrollyAirElite"; // nieuwe ultra scrolly
+import SnakeBackground from "./components/SnakeBackground"; // (verlengt al lang door)
+import ScrollyPortal from "./components/ScrollyPortal";     // ⬅️ nieuwe “portal” scrolly
 
 export default function App() {
   return (
@@ -29,10 +29,10 @@ export default function App() {
       />
 
       <div className="relative text-gray-100 font-sans min-h-screen overflow-hidden">
-        {/* Achtergrond: puzzel-slang (gaat nu veel langer door) */}
+        {/* Achtergrond: jouw puzzel-slang (lang) */}
         <SnakeBackground />
 
-        {/* (Optioneel) Luxe film grain */}
+        {/* (Optioneel) luxe film grain */}
         {/* <div className="grain-overlay" /> */}
 
         {/* Contentlaag */}
@@ -40,10 +40,10 @@ export default function App() {
           <Header />
           <Hero />
 
-          {/* ✨ Ultra scrolly story met kleur-wipes, kinetic type, KPI, video, case reveal, magnetische CTA */}
-          <ScrollyAirElite />
+          {/* ✨ Portal scrolly (ultra smooth, translucent, jaw-dropping) */}
+          <ScrollyPortal />
 
-          {/* Jouw bestaande secties */}
+          {/* Rest van je layout */}
           <Workflow />
           <USP />
           {/* <Testimonial /> */}
