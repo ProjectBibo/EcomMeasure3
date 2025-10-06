@@ -113,3 +113,64 @@
   100% { transform: translate(0,0); }
 }
 */
+/* =========================================
+   HOLOGRAM (handshake) — light/dark aware
+   ========================================= */
+
+/* Kleuren op root, switchen mee met .dark op <html> */
+:root {
+  --holo-glow: rgba(0, 214, 255, 0.85);   /* outer glow (cyan) */
+  --holo-inner: rgba(0, 168, 255, 0.45);  /* inner fill */
+  --holo-dot: rgba(181, 255, 250, 0.95);  /* sharp core dots */
+  --holo-fade: rgba(255,255,255,0.0);
+  --holo-scan: rgba(0, 255, 255, 0.08);
+}
+.dark:root {
+  --holo-glow: rgba(56, 189, 248, 0.75);  /* iets donkerder glow */
+  --holo-inner: rgba(56, 189, 248, 0.28);
+  --holo-dot: rgba(224, 242, 254, 0.9);
+  --holo-fade: rgba(0,0,0,0.0);
+  --holo-scan: rgba(56, 189, 248, 0.08);
+}
+
+/* Container met additive blending voor een hologram vibe */
+.holo {
+  isolation: isolate;
+  filter: saturate(1.05);
+}
+
+/* Overlay: scanlines + verticale shimmer sweep */
+.holo-overlay::before,
+.holo-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Scanlines (subtiel) */
+.holo-overlay::before {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.4;
+}
+
+/* Shimmer sweep */
+.holo-overlay::after {
+  background: radial-gradient(120% 20% at 50% -10%, var(--holo-scan), transparent 60%);
+  animation: holoSweep 4.8s linear infinite;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+@keyframes holoSweep {
+  0%   { transform: translateY(-120%); }
+  100% { transform: translateY(120%);  }
+}
