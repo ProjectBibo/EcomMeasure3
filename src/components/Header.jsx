@@ -36,3 +36,9 @@ export default function Header() {
           >
             Laten we kennismaken
           </a>
+          <DarkModeToggle />
+        </div>
+      </div>
+    </header>
+  );
+}
