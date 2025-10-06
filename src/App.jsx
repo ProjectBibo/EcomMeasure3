@@ -27,7 +27,10 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section id="hero" className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center">
+      <section
+        id="hero"
+        className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
+      >
         <div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
             Bereik een geoptimaliseerde website dankzij een{" "}
@@ -181,3 +184,5 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
