@@ -1,20 +1,16 @@
 // src/components/ScrollyPortal.jsx
-import React, { useLayoutEffect, useRef, useEffect } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Scrollytelling “Portal Edition”
- * - Zeer smooth: power4 easing, langere timeline met ruimte tussen scenes
- * - Transparante, etherische kleurwipes (radial/conic + blend-modes)
- * - Portal-blobs met blur & mix-blend voor “andere dimensie” gevoel
- * - Kinetische typografie (per woord)
- * - XXL KPI count-up
- * - Fullscreen video + overlay (met placeholder)
- * - Case reveal met clip-path morph
- * - Magnetische CTA
+ * Scrollytelling “Portal Edition” — SMOOTHER + DARK-MODE + NO-OVERLAP
+ * - Transparante portal-layers die meekleuren met theme (light/dark)
+ * - Strikte scène-sequentie: geen doorslag/overlap van teksten
+ * - CTA blijft stil (geen magnetische micro-interactie)
+ * - Ruime, filmische timing
  *
  * Assets in /public:
  *  - /about.mp4 (+ optioneel /video-poster.jpg)
@@ -24,10 +20,10 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ScrollyPortal() {
   const root = useRef(null);
 
-  // layers
-  const bgRadial = useRef(null);   // zachte radial gradient (transparant)
-  const bgConic  = useRef(null);   // translucent conic “aura”
-  const blobs    = useRef(null);   // container met 3 blur-blobs
+  // portal layers
+  const bgRadial = useRef(null);
+  const bgConic  = useRef(null);
+  const blobs    = useRef(null);
 
   // scenes
   const sClaim = useRef(null);
@@ -47,10 +43,10 @@ export default function ScrollyPortal() {
   // case
   const caseAfter = useRef(null);
 
-  // progress
+  // progress rail
   const progressRef = useRef(null);
 
-  // helper: split tekst in <span class="word">
+  // helper: split naar <span class="word">
   const splitWords = (el) => {
     if (!el) return [];
     const words = el.innerText.trim().split(/\s+/);
@@ -68,6 +64,39 @@ export default function ScrollyPortal() {
     const ctx = gsap.context(() => {
       const HEADER_H = 80;
 
+      // Palet op basis van huidige theme
+      const isDark =
+        typeof document !== "undefined" &&
+        document.documentElement.classList.contains("dark");
+
+      const palette = isDark
+        ? {
+            // DARK: koeler, lager alpha
+            radialA: "radial-gradient(1200px 800px at 50% 50%, rgba(9,26,68,0.22), rgba(0,0,0,0) 60%)",
+            radialB: "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.18), rgba(0,0,0,0) 60%)",
+            conicA:  "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.18), rgba(14,165,165,0.16))",
+            conicB:  "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.20))",
+            blobA:   "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
+            blobB:   "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
+            blobC:   "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.16), rgba(0,0,0,0) 60%)",
+            radialOpacity: 0.48,
+            conicOpacity:  0.30,
+            blobOpacity:   [0.24, 0.22, 0.20],
+          }
+        : {
+            // LIGHT: iets helderder, toch translucent
+            radialA: "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
+            radialB: "radial-gradient(1200px 800px at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
+            conicA:  "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.18), rgba(14,165,165,0.18))",
+            conicB:  "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.20))",
+            blobA:   "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.25), rgba(0,0,0,0) 60%)",
+            blobB:   "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.22), rgba(0,0,0,0) 60%)",
+            blobC:   "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.20), rgba(0,0,0,0) 60%)",
+            radialOpacity: 0.55,
+            conicOpacity:  0.35,
+            blobOpacity:   [0.30, 0.26, 0.24],
+          };
+
       // Progress rail
       ScrollTrigger.create({
         trigger: root.current,
@@ -78,12 +107,12 @@ export default function ScrollyPortal() {
         },
       });
 
-      // Lange, smooth film-timeline (ruime ruimte tussen scenes)
+      // Lange, smooth film-timeline met RUIMTE tussen scenes
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: `top-=${HEADER_H} top`,
-          end: "+=4600", // ⬅️ meer tussenruimte/adem
+          end: "+=4600", // meer ruimte / adem
           scrub: true,
           pin: true,
           anticipatePin: 1,
@@ -91,28 +120,17 @@ export default function ScrollyPortal() {
         defaults: { ease: "power4.out" },
       });
 
-      // ===== Portal Base States =====
-      // Radial: heel transparant, soft
-      gsap.set(bgRadial.current, {
-        opacity: 0.55,
-        background:
-          "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
-      });
-      // Conic aura
-      gsap.set(bgConic.current, {
-        opacity: 0.35,
-        background:
-          "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.18), rgba(14,165,165,0.18))",
-      });
-      // Blobs
+      // ===== Portal base set (thema-afhankelijk) =====
       const [b1, b2, b3] = blobs.current.querySelectorAll(".blob");
+      gsap.set(bgRadial.current, { opacity: palette.radialOpacity, background: palette.radialA });
+      gsap.set(bgConic.current,  { opacity: palette.conicOpacity,  background: palette.conicA, rotate: 0 });
 
-      gsap.set(b1, { xPercent: -60, yPercent: -40, scale: 1.0, opacity: 0.30 });
-      gsap.set(b2, { xPercent:  40, yPercent: -30, scale: 1.2, opacity: 0.26 });
-      gsap.set(b3, { xPercent: -20, yPercent:  50, scale: 1.1, opacity: 0.24 });
+      gsap.set(b1, { xPercent: -60, yPercent: -40, scale: 1.0, opacity: palette.blobOpacity[0], background: palette.blobA });
+      gsap.set(b2, { xPercent:  40, yPercent: -30, scale: 1.2, opacity: palette.blobOpacity[1], background: palette.blobB });
+      gsap.set(b3, { xPercent: -20, yPercent:  50, scale: 1.1, opacity: palette.blobOpacity[2], background: palette.blobC });
 
-      // Helper: scene met ruime “hold” en sterke scale (maar zacht door easing)
-      const scene = (
+      // ===== Helper: STRIKT SEQUENCED scene (geen overlap) =====
+      const sceneStrict = (
         el,
         {
           inDur = 0.55,
@@ -122,109 +140,80 @@ export default function ScrollyPortal() {
           to   = { autoAlpha: 1, scale: 1.10, y: 0 },
         } = {}
       ) => {
-        tl.fromTo(el, from, { ...to, duration: inDur })
-          .to(el,  { autoAlpha: 1, duration: hold })
-          .to(el,  { autoAlpha: 0, scale: 0.99, y: -60, duration: outDur }, ">-0.08");
+        const L = tl.duration(); // huidige einde = label
+        tl.addLabel(`S${L}`);
+        tl.set(el, { autoAlpha: 0, display: "block" }, `S${L}`); // zorg dat de scène zichtbaar wordt pas bij start
+        tl.fromTo(el, from, { ...to, duration: inDur }, `S${L}`);
+        tl.to(el,  { autoAlpha: 1, duration: hold });
+        tl.to(el,  { autoAlpha: 0, scale: 0.99, y: -60, duration: outDur });
+        tl.set(el, { display: "none" }); // volledig weg na uitfaden → geen overlap
       };
 
-      // ===== Scene 1: Claim (kinetic words) =====
-      scene(sClaim.current, { from: { scale: 0.9, y: 50 }, to: { scale: 1.12, y: 0 } });
+      // ===== SCENE 1: Claim (kinetic words) =====
+      sceneStrict(sClaim.current, { from: { scale: 0.9, y: 50 }, to: { scale: 1.12, y: 0 } });
 
-      // Kinetic words
       const line1Words = splitWords(claimLine1Ref.current);
       const line2Words = splitWords(claimLine2Ref.current);
-      tl.from(line1Words, { yPercent: 140, rotation: 8, autoAlpha: 0, stagger: 0.06, duration: 0.7 }, "<+0.08");
-      tl.from(line2Words, { yPercent: 140, rotation: 8, autoAlpha: 0, stagger: 0.06, duration: 0.7 }, "<+0.04");
+      tl.from(line1Words, { yPercent: 140, rotation: 8, autoAlpha: 0, stagger: 0.06, duration: 0.7 }, ">-0.35");
+      tl.from(line2Words, { yPercent: 140, rotation: 8, autoAlpha: 0, stagger: 0.06, duration: 0.7 });
 
-      // Portal layers meebewegen (langzaam en etherisch)
+      // Portal gentle move + conic shift (thema-vriendelijk)
       tl.to(b1, { xPercent: -40, yPercent: -30, scale: 1.18, duration: 0.9 }, "<");
       tl.to(b2, { xPercent:  20, yPercent: -10, scale: 1.28, duration: 0.9 }, "<");
       tl.to(b3, { xPercent: -10, yPercent:  40, scale: 1.22, duration: 0.9 }, "<");
-      tl.to(bgRadial.current, { opacity: 0.60, duration: 0.7 }, "<+0.05");
-      tl.to(bgConic.current,  { opacity: 0.40, rotate: "+=30", duration: 0.9 }, "<");
+      tl.to(bgRadial.current, { background: palette.radialB, duration: 0.8 }, "<+0.1");
+      tl.to(bgConic.current,  { background: palette.conicB, rotate: "+=40", duration: 0.9 }, "<");
 
-      // ===== Scene 2: Subclaim =====
-      scene(sSub.current, { from: { scale: 0.94, y: 70 }, to: { scale: 1.08, y: 0 } });
-      // Aura shift (transparant)
-      tl.to(bgRadial.current, {
-        background:
-          "radial-gradient(1200px 800px at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
-        duration: 0.8,
-      }, "<+0.12");
-      tl.to(bgConic.current, {
-        rotate: "+=60",
-        opacity: 0.38,
-        duration: 0.8,
-      }, "<");
+      // ===== SCENE 2: Subclaim =====
+      sceneStrict(sSub.current, { from: { scale: 0.94, y: 70 }, to: { scale: 1.08, y: 0 } });
 
-      // ===== Scene 3: KPI (XXL) =====
-      scene(sKpi.current, { from: { scale: 0.96, y: 60 }, to: { scale: 1.12, y: 0 } });
+      // ===== SCENE 3: KPI (XXL) =====
+      sceneStrict(sKpi.current, { from: { scale: 0.96, y: 60 }, to: { scale: 1.12, y: 0 } });
+
+      // KPI count-up (binnen KPI-scene, zonder scenes te overlappen)
       const kObj = { val: 0 };
       tl.to(kObj, {
-        val: 128, // pas aan naar jouw grote KPI
+        val: 128,
         duration: 1.0,
         ease: "power2.out",
         onUpdate: () => { if (kVal.current) kVal.current.textContent = Math.round(kObj.val); }
-      }, "<+0.1");
-      // portal verdiepen
-      tl.to(b1, { xPercent: -20, yPercent: -20, scale: 1.32, duration: 1.0 }, "<");
-      tl.to(b2, { xPercent:  10, yPercent:  10, scale: 1.34, duration: 1.0 }, "<");
-      tl.to(b3, { xPercent: -5,  yPercent:  25, scale: 1.30, duration: 1.0 }, "<");
-      tl.to(bgConic.current, { rotate: "+=80", opacity: 0.45, duration: 1.0 }, "<");
+      }, ">-0.8");
 
-      // ===== Scene 4: Video =====
-      scene(sVideo.current, { from: { autoAlpha: 0, scale: 0.98 }, to: { autoAlpha: 1, scale: 1.08 } });
-      tl.to(sVideo.current, { "--overlay": 0.38, duration: 0.6 }, "<+0.08");
-      // aura tint donkerder/transparanter
-      tl.to(bgRadial.current, {
-        background:
-          "radial-gradient(1200px 800px at 50% 50%, rgba(9,26,68,0.22), rgba(0,0,0,0) 60%)",
-        duration: 0.8,
-      }, "<");
-      tl.to(bgConic.current, { rotate: "+=40", opacity: 0.32, duration: 0.8 }, "<");
+      // ===== SCENE 4: Video =====
+      sceneStrict(sVideo.current, { from: { autoAlpha: 0, scale: 0.98 }, to: { autoAlpha: 1, scale: 1.08 } });
+      tl.to(sVideo.current, { "--overlay": 0.36, duration: 0.6 }, ">-0.5");
 
-      // ===== Scene 5: Case (clip-path) =====
-      tl.fromTo(sCase.current, { autoAlpha: 0, y: 70, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.06, duration: 0.55 });
+      // ===== SCENE 5: Case (clip-path morph) =====
+      // in
+      const Lcase = tl.duration();
+      tl.addLabel(`CASE${Lcase}`);
+      tl.set(sCase.current, { autoAlpha: 0, display: "block" }, `CASE${Lcase}`);
+      tl.fromTo(sCase.current, { autoAlpha: 0, y: 70, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.06, duration: 0.55 }, `CASE${Lcase}`);
+      // morph
       tl.fromTo(
         caseAfter.current,
         { clipPath: "inset(0 85% 0 0 round 18px)" },
         { clipPath: "inset(0 0% 0 0 round 18px)", duration: 1.05, ease: "power3.out" },
-        "<+0.06"
+        ">-0.35"
       );
+      // out
       tl.to(sCase.current, { autoAlpha: 0, y: -50, scale: 0.99, duration: 0.5 });
+      tl.set(sCase.current, { display: "none" });
 
-      // ===== Scene 6: CTA (laat staan) =====
-      tl.fromTo(sCta.current, { autoAlpha: 0, y: 40, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.03, duration: 0.55 });
-
+      // ===== SCENE 6: CTA (blijft staan) =====
+      const Lcta = tl.duration();
+      tl.addLabel(`CTA${Lcta}`);
+      tl.set(sCta.current, { autoAlpha: 0, display: "block" }, `CTA${Lcta}`);
+      tl.fromTo(sCta.current, { autoAlpha: 0, y: 40, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.03, duration: 0.55 }, `CTA${Lcta}`);
+      // CTA blijft zichtbaar — geen out/none hier
     }, root);
 
     return () => ctx.revert();
   }, []);
 
-  // Magnetische CTA
-  useEffect(() => {
-    const btn = document.querySelector(".magnetic-cta");
-    if (!btn) return;
-    const onMove = (e) => {
-      const rect = btn.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / 10;
-      const dy = (e.clientY - cy) / 10;
-      btn.style.transform = `translate(${dx}px, ${dy}px)`;
-    };
-    const onLeave = () => { btn.style.transform = "translate(0,0)"; };
-    window.addEventListener("mousemove", onMove);
-    btn.addEventListener("mouseleave", onLeave);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      btn.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
   return (
     <section ref={root} className="relative">
-      {/* Portal Layers */}
+      {/* Portal layers (dark-mode aware via JS + blend in CSS) */}
       <div ref={bgRadial} className="portal-layer portal-radial" />
       <div ref={bgConic}  className="portal-layer portal-conic" />
       <div ref={blobs}    className="portal-layer portal-blobs">
@@ -241,7 +230,7 @@ export default function ScrollyPortal() {
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen overflow-hidden pt-24">
         {/* 1) Claim */}
-        <div ref={sClaim} className="absolute inset-0 grid place-items-center">
+        <div ref={sClaim} className="scene absolute inset-0 grid place-items-center">
           <div className="text-center px-6 leading-[1.07] select-none">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
               <span ref={claimLine1Ref}>Meer weten</span>
@@ -252,7 +241,7 @@ export default function ScrollyPortal() {
         </div>
 
         {/* 2) Subclaim */}
-        <div ref={sSub} className="absolute inset-0 grid place-items-center">
+        <div ref={sSub} className="scene absolute inset-0 grid place-items-center">
           <div className="text-center max-w-4xl px-6">
             <h2 className="text-4xl md:text-5xl font-bold mb-5">Ontdek quick wins</h2>
             <p className="text-xl md:text-2xl text-white/90">
@@ -262,7 +251,7 @@ export default function ScrollyPortal() {
         </div>
 
         {/* 3) KPI XXL */}
-        <div ref={sKpi} className="absolute inset-0 grid place-items-center">
+        <div ref={sKpi} className="scene absolute inset-0 grid place-items-center">
           <div className="text-center px-6">
             <div className="text-[18vw] leading-none font-black tracking-tight mix-blend-screen text-white/90 drop-shadow-xl">
               <span ref={kVal}>0</span><span className="align-top text-[8vw]">%</span>
@@ -271,10 +260,10 @@ export default function ScrollyPortal() {
           </div>
         </div>
 
-        {/* 4) Video (placeholder als geen /about.mp4) */}
+        {/* 4) Video (met placeholder) */}
         <div
           ref={sVideo}
-          className="absolute inset-0"
+          className="scene absolute inset-0"
           style={{ position: "absolute", inset: 0, "--overlay": 0 }}
         >
           <video
@@ -292,7 +281,7 @@ export default function ScrollyPortal() {
         </div>
 
         {/* 5) Case reveal */}
-        <div ref={sCase} className="absolute inset-0 grid place-items-center">
+        <div ref={sCase} className="scene absolute inset-0 grid place-items-center">
           <div className="relative w-[92vw] max-w-6xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl border border-white/20">
             <img src="/case-before.jpg" alt="Before" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 grid place-items-center bg-black/25 text-white text-xl font-semibold">
@@ -307,13 +296,13 @@ export default function ScrollyPortal() {
           </div>
         </div>
 
-        {/* 6) CTA */}
-        <div ref={sCta} className="absolute inset-0 grid place-items-center">
+        {/* 6) CTA (STIL, GEEN magnetisch gedrag) */}
+        <div ref={sCta} className="scene absolute inset-0 grid place-items-center">
           <div className="text-center px-6">
             <h3 className="text-4xl md:text-5xl font-extrabold mb-7 text-white">Klaar om te starten?</h3>
             <a
               href="#contact"
-              className="magnetic-cta inline-flex items-center gap-3 px-8 py-5 bg-white/90 text-neutral-900 text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transition will-change-transform backdrop-blur"
+              className="inline-flex items-center gap-3 px-8 py-5 bg-white/90 text-neutral-900 text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transition backdrop-blur"
             >
               Laten we kennismaken
             </a>
