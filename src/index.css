@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* optioneel: kleine basis */
-:root { color-scheme: dark; }
+/* Zorg dat de body altijd de juiste achtergrondkleur krijgt */
 html, body, #root { height: 100%; }
+
+/* Default light, switch naar dark via .dark op <html> */
+body { @apply bg-surface-light text-neutralInk; }
+.dark body { @apply bg-surface-dark text-gray-200; }
