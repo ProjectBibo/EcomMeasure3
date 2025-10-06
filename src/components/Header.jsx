@@ -6,12 +6,12 @@ export default function Header() {
     <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 h-20">
         
-        {/* Logo forceren groter */}
+        {/* Logo nog groter gemaakt */}
         <a href="#hero" className="flex items-center">
           <img
             src="/logo.png"
             alt="EcomMeasure logo"
-            className="h-20 md:h-28 w-auto object-contain -my-2"
+            className="h-32 md:h-40 w-auto object-contain -my-4"
           />
         </a>
 
