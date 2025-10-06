@@ -24,7 +24,7 @@ export default function App() {
         image="/og-image.png"
       />
 
-      {/* Globale achtergrond + tekstkleur (light -> dark) */}
+      {/* Globale achtergrond + tekstkleur (licht/donker) */}
       <div className="min-h-screen bg-surface-light dark:bg-surface-dark text-neutralInk dark:text-gray-200 font-sans">
         <Header />
         <Hero />
