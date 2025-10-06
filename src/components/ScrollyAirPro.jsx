@@ -5,14 +5,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Scrollytelling Pro (sneller + groter + placeholders)
+ * Scrollytelling Pro (ruimer tempo + grotere visuals + placeholders)
  * Scenes:
- * 1) Claim (big)
- * 2) Subclaim (big)
- * 3) Logos marquee (social proof)
+ * 1) Claim
+ * 2) Subclaim
+ * 3) Logos marquee
  * 4) KPI counters
- * 5) Video (placeholder als je nog geen /about.mp4 hebt)
- * 6) Case before/after (placeholder images)
+ * 5) Video (placeholder indien geen /about.mp4)
+ * 6) Case before/after (placeholders)
  * 7) CTA (blijft staan)
  */
 
@@ -42,7 +42,7 @@ export default function ScrollyAirPro() {
     const ctx = gsap.context(() => {
       const HEADER_H = 80;
 
-      // Progress rail rechts
+      // Progress rail
       ScrollTrigger.create({
         trigger: root.current,
         start: "top top",
@@ -54,12 +54,12 @@ export default function ScrollyAirPro() {
         },
       });
 
-      // Snellere, krachtigere timeline
+      // 🔹 Iets langere timeline voor meer ruimte tussen scenes
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: `top-=${HEADER_H} top`,
-          end: "+=2600",          // korter = sneller achter elkaar
+          end: "+=3200",           // groter getal = meer totale scrollduur
           scrub: true,
           pin: true,
           anticipatePin: 1,
@@ -67,32 +67,32 @@ export default function ScrollyAirPro() {
         defaults: { ease: "power2.out" },
       });
 
-      // Helper voor scènes (grotere schaal en snellere overgangen)
+      // Helper: ruimer "hold", iets langzamere in/out
       const scene = (
         el,
         {
-          inDur = 0.28,
-          hold = 0.20,
-          outDur = 0.28,
-          from = { autoAlpha: 0, scale: 0.90, y: 60 },
-          to   = { autoAlpha: 1, scale: 1.04, y: 0 },
+          inDur = 0.35,
+          hold = 0.32,
+          outDur = 0.35,
+          from = { autoAlpha: 0, scale: 0.92, y: 50 },
+          to   = { autoAlpha: 1, scale: 1.05, y: 0 },
         } = {}
       ) => {
         tl.fromTo(el, from, { ...to, duration: inDur })
           .to(el,  { autoAlpha: 1, duration: hold })
-          .to(el,  { autoAlpha: 0, scale: 0.98, y: -40, duration: outDur }, ">-0.04");
+          .to(el,  { autoAlpha: 0, scale: 0.99, y: -40, duration: outDur }, ">-0.05");
       };
 
-      // 1) Claim — groot
-      scene(sClaim.current, { from: { scale: 0.88, y: 40 }, to: { scale: 1.06, y: 0 } });
+      // 1) Claim
+      scene(sClaim.current, { from: { scale: 0.90, y: 40 }, to: { scale: 1.06, y: 0 } });
 
-      // 2) Subclaim — groot
-      scene(sSub.current,   { from: { scale: 0.92, y: 60 }, to: { scale: 1.05, y: 0 } });
+      // 2) Subclaim
+      scene(sSub.current,   { from: { scale: 0.94, y: 60 }, to: { scale: 1.05, y: 0 } });
 
       // 3) Logos
-      scene(sLogos.current, { from: { scale: 0.97, y: 40 }, to: { scale: 1.03, y: 0 } });
+      scene(sLogos.current, { from: { scale: 0.98, y: 40 }, to: { scale: 1.03, y: 0 } });
 
-      // 4) KPI-counters — snel animeren
+      // 4) KPI-counters (ruimer, maar nog steeds pittig)
       {
         const kpis = [
           { ref: k1, to: 42 },
@@ -100,44 +100,45 @@ export default function ScrollyAirPro() {
           { ref: k3, to: 97 },
         ].map(k => ({ ...k, val: 0 }));
 
-        tl.fromTo(sKpi.current, { autoAlpha: 0, y: 40, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.04, duration: 0.3 })
+        tl.fromTo(sKpi.current, { autoAlpha: 0, y: 40, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.04, duration: 0.35 })
           .to(kpis, {
             val: (i) => kpis[i].to,
-            duration: 0.55,
+            duration: 0.7,
             ease: "power1.out",
             onUpdate: () => {
               kpis.forEach(k => {
                 if (k.ref.current) k.ref.current.textContent = Math.round(k.val);
               });
             },
-          }, ">-0.12")
-          .to(sKpi.current, { autoAlpha: 1, duration: 0.18 })
-          .to(sKpi.current, { autoAlpha: 0, y: -40, scale: 0.98, duration: 0.28 });
+          }, ">-0.1")
+          .to(sKpi.current, { autoAlpha: 1, duration: 0.28 })
+          .to(sKpi.current, { autoAlpha: 0, y: -40, scale: 0.99, duration: 0.35 });
       }
 
-      // 5) Video (placeholder zichtbaar als je nog geen video hebt)
-      scene(sVideo.current, { from: { autoAlpha: 0, scale: 0.98 }, to: { autoAlpha: 1, scale: 1.04 } });
+      // 5) Video
+      scene(sVideo.current, { from: { autoAlpha: 0, scale: 0.98 }, to: { autoAlpha: 1, scale: 1.05 } });
 
-      // 6) Case before/after — reveal snel en vol scherm
-      tl.fromTo(sCase.current, { autoAlpha: 0, y: 50, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.03, duration: 0.3 })
-        .fromTo(afterRef.current, { scaleX: 0.1, transformOrigin: "left center" }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, ">-0.1")
-        .to(sCase.current, { autoAlpha: 0, y: -40, scale: 0.98, duration: 0.28 });
+      // 6) Case before/after (iets ruimer)
+      tl.fromTo(sCase.current, { autoAlpha: 0, y: 50, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.03, duration: 0.35 })
+        .fromTo(afterRef.current, { scaleX: 0.1, transformOrigin: "left center" }, { scaleX: 1, duration: 0.75, ease: "power2.out" }, ">-0.12")
+        .to(sCase.current, { autoAlpha: 0, y: -40, scale: 0.99, duration: 0.35 });
 
       // 7) CTA — blijft staan
-      tl.fromTo(sCta.current, { autoAlpha: 0, y: 30, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.02, duration: 0.35 });
+      tl.fromTo(sCta.current, { autoAlpha: 0, y: 30, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.03, duration: 0.45 });
     }, root);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} className="relative h-[360vh]">
+    // ❗️Geen vaste h-[...] meer — zo voorkomen we lege ruimte erna
+    <section ref={root} className="relative">
       {/* Progress rail rechts */}
       <div className="pointer-events-none hidden md:block absolute right-4 top-1/2 -translate-y-1/2 h-56 w-1 bg-black/10 dark:bg-white/10 rounded">
         <div ref={progressRef} className="origin-top h-full w-full bg-black/40 dark:bg-white/50 scale-y-0 rounded" />
       </div>
 
-      {/* Sticky viewport; pt-24 vult scherm beter en houdt rekening met je header */}
+      {/* Sticky viewport; pt-24 compenseert voor header en vult het scherm beter */}
       <div className="sticky top-0 h-screen overflow-hidden pt-24">
         {/* 1) Claim */}
         <div ref={sClaim} className="absolute inset-0 grid place-items-center">
@@ -162,13 +163,13 @@ export default function ScrollyAirPro() {
         <div ref={sLogos} className="absolute inset-0 grid place-items-center">
           <div className="w-full overflow-hidden">
             <div className="marquee-row">
-              {/* Zet je eigen logo’s in /public/logos/1.svg t/m 6.svg en dupliceer voor loop */}
               <img src="/logos/1.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/2.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/3.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/4.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/5.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/6.svg" className="h-12 mx-10 opacity-80" alt="" />
+              {/* dup voor naadloze loop */}
               <img src="/logos/1.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/2.svg" className="h-12 mx-10 opacity-80" alt="" />
               <img src="/logos/3.svg" className="h-12 mx-10 opacity-80" alt="" />
@@ -193,16 +194,14 @@ export default function ScrollyAirPro() {
           </div>
         </div>
 
-        {/* 5) Video — met duidelijke placeholder */}
+        {/* 5) Video — met placeholder */}
         <div ref={sVideo} className="absolute inset-0">
-          {/* Video-element (als je later /about.mp4 toevoegt werkt dit direct) */}
           <video
             className="w-full h-full object-cover"
             src="/about.mp4"
             playsInline muted autoPlay loop
             poster="/video-poster.jpg"
           />
-          {/* Placeholder overlay (blijft zichtbaar als je nog geen video hebt) */}
           <div className="absolute inset-0 grid place-items-center">
             <div className="px-6 py-3 rounded bg-black/50 text-white text-lg md:text-2xl">
               <strong>VIDEO PLACEHOLDER</strong> — vervang <code>/about.mp4</code> in <code>/public</code>
@@ -210,21 +209,19 @@ export default function ScrollyAirPro() {
           </div>
         </div>
 
-        {/* 6) Case before/after — met placeholders */}
+        {/* 6) Case before/after — placeholders */}
         <div ref={sCase} className="absolute inset-0 grid place-items-center">
           <div className="relative w-[92vw] max-w-6xl aspect-[16/9] rounded-xl overflow-hidden shadow-xl border border-black/5 dark:border-white/10">
-            {/* Before (achtergrond) */}
+            {/* Before */}
             <div className="absolute inset-0 w-full h-full">
               <img src="/case-before.jpg" alt="Before" className="w-full h-full object-cover" />
-              {/* Placeholder if no image */}
               <div className="absolute inset-0 grid place-items-center bg-black/20 text-white text-xl font-semibold">
                 CASE BEFORE PLACEHOLDER — voeg <code>case-before.jpg</code> toe aan <code>/public</code>
               </div>
             </div>
-            {/* After (reveal) */}
+            {/* After */}
             <div ref={afterRef} className="absolute inset-0 origin-left">
               <img src="/case-after.jpg" alt="After" className="w-full h-full object-cover" />
-              {/* Placeholder if no image */}
               <div className="absolute inset-0 grid place-items-center bg-black/10 text-white text-xl font-semibold">
                 CASE AFTER PLACEHOLDER — voeg <code>case-after.jpg</code> toe aan <code>/public</code>
               </div>
@@ -235,7 +232,7 @@ export default function ScrollyAirPro() {
           </div>
         </div>
 
-        {/* 7) CTA — eindigt groot in beeld */}
+        {/* 7) CTA — eindigt groot, blijft staan */}
         <div ref={sCta} className="absolute inset-0 grid place-items-center">
           <div className="text-center px-6">
             <h3 className="text-4xl md:text-5xl font-extrabold mb-7">Klaar om te starten?</h3>
