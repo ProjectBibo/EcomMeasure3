@@ -6,10 +6,11 @@ import {
 } from "framer-motion";
 
 /**
- * Dunne puzzel-slang met brede zig-zag — verlengde versie
- * - Meer stukjes (loopt langer door)
+ * Dunne puzzel-slang met brede zig-zag — EXTENDED
+ * - Veel meer stukjes (loopt door bijna de hele pagina)
  * - Brede zigzag
  * - Parallax meescroll
+ * - Performant: alleen GPU transforms
  */
 const SETTINGS = {
   COLORS: ["#004AAD", "#0EA5A5", "#F9C513"],
@@ -17,20 +18,24 @@ const SETTINGS = {
   PIECE_SIZE: 28,
   ROUND: 8,
   GAP: 8,
-  NUM_PIECES: 84,                 // 🔹 was 52 → langer doorlopend
 
+  // 🔹 MEER stukjes zodat de slang veel langer doorloopt
+  NUM_PIECES: 140,
+
+  // Zig-zag karakter
   AMP_X: 140,
   AMP_Y: 18,
   WAVE_FREQ: 0.9,
 
-  PHASE_SCROLL_RANGE: [0, 4200],  // 🔹 groter scroll bereik
-  PHASE_OUTPUT_RANGE: [0, Math.PI * 12],
-  PARALLAX_RANGE: [0, 4200],      // 🔹 idem
-  PARALLAX_SHIFT: [0, 420],       // iets sterker naar beneden
+  // 🔹 Langere scroll-range → slang blijft bewegen over meer scroll
+  PHASE_SCROLL_RANGE: [0, 8000],
+  PHASE_OUTPUT_RANGE: [0, Math.PI * 18],
+  PARALLAX_RANGE: [0, 8000],
+  PARALLAX_SHIFT: [0, 720], // iets meer meezakken naar beneden
 
   ROTATE_DEG: -10,
   TOP_OFFSET_VH: 8,
-  MAX_WIDTH: 2000,
+  MAX_WIDTH: 2400,
 };
 
 export default function SnakeBackground() {
@@ -52,6 +57,7 @@ export default function SnakeBackground() {
   useMotionValueEvent(phaseMV, "change", (v) => setPhase(v));
   useMotionValueEvent(parallaxYMV, "change", (v) => setParallaxY(v));
 
+  // Posities berekenen
   const pieces = React.useMemo(() => {
     const arr = [];
     const S = SETTINGS.PIECE_SIZE;
@@ -63,6 +69,7 @@ export default function SnakeBackground() {
       const localY =
         baseY +
         Math.cos(phase * 0.6 + i * SETTINGS.WAVE_FREQ * 0.85) * SETTINGS.AMP_Y;
+
       const localX =
         i * (S * 0.15) +
         Math.sin(phase + i * SETTINGS.WAVE_FREQ) * SETTINGS.AMP_X;
@@ -76,6 +83,7 @@ export default function SnakeBackground() {
     return arr;
   }, [phase]);
 
+  // Breedte voor centreren
   const totalWidth = Math.min(
     (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 +
       SETTINGS.AMP_X * 2 +
