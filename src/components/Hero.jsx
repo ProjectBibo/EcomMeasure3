@@ -23,7 +23,7 @@ export default function Hero() {
       />
 
       {/* Tekstkolom */}
-      <div>
+      <div className="order-2 md:order-1">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export default function Hero() {
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="flex justify-center"
+        className="flex justify-center order-1 md:order-2"
       >
         <LottieHandshake
           jsonUrl="/handshake.json"
