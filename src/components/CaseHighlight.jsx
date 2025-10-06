@@ -1,14 +1,20 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function CaseHighlight() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-8">
-      {/* Left block */}
-      <div className="bg-white border border-neutral-200 rounded-xl p-8 shadow-sm">
+      {/* Tekstblok */}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="bg-white border border-neutral-200 rounded-xl p-8 shadow"
+      >
         <h3 className="font-semibold mb-2 text-brand-blue">
           Welke problemen ervaren klanten bij hun webshop?
         </h3>
-        <p className="text-neutral-600 mb-4">
+        <p className="text-neutralInk/80 mb-4">
           Inzichten uit cases geven antwoord op echte klantproblemen en
           oplossingen.
         </p>
@@ -18,17 +24,24 @@ export default function CaseHighlight() {
         >
           Bekijk de case
         </a>
-      </div>
+      </motion.div>
 
-      {/* Right block (e.g. phone mockup or image) */}
-      <div className="bg-white border border-neutral-200 rounded-xl p-8 shadow-sm flex items-center justify-center">
+      {/* Afbeelding met overlay */}
+      <div className="relative rounded-xl overflow-hidden shadow">
         <img
-          src="https://dummyimage.com/300x500/eeeeee/004aad&text=Case+Image"
+          src="https://dummyimage.com/400x500/eeeeee/004aad&text=Case+Image"
           alt="Case voorbeeld"
-          className="rounded-lg shadow"
+          className="w-full h-full object-cover"
         />
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 text-white"
+        >
+          <p className="text-lg font-semibold">Bekijk de case</p>
+        </motion.div>
       </div>
     </section>
   );
 }
-
