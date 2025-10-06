@@ -1,41 +1,86 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section id="hero" className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center">
+    <section
+      id="hero"
+      className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
+    >
+      {/* 🔵 Achtergrond blobs */}
+      <motion.div
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-brand-blue/20 rounded-full blur-3xl -z-10"
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-60 -right-40 w-[500px] h-[500px] bg-brand-teal/20 rounded-full blur-3xl -z-10"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Tekst content */}
       <div>
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-neutralInk">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-neutralInk"
+        >
           Bereik een geoptimaliseerde website dankzij een{" "}
           <span className="text-brand-blue">data- én mens-gedreven</span>{" "}
           aanpak
-        </h1>
-        <p className="text-neutralInk/80 mb-8">
-          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je er het volledige potentieel uit kunt halen.
-        </p>
+        </motion.h1>
 
-        {/* Primair CTA = brand blue */}
-        <a
-          href="#contact"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-md hover:brightness-90 transition"
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="text-neutralInk/80 mb-8 max-w-lg"
         >
-          Zijn wij een goede match? <ArrowRight size={18} />
-        </a>
+          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat
+          je er het volledige potentieel uit kunt halen.
+        </motion.p>
 
-        <div className="mt-4">
-          <a href="#results" className="text-sm text-brand-blue hover:underline">
+        {/* CTA knoppen */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#contact"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-md shadow hover:shadow-lg transition"
+          >
+            Zijn wij een goede match? <ArrowRight size={18} />
+          </motion.a>
+
+          <a
+            href="#results"
+            className="inline-flex items-center px-6 py-3 border border-brand-blue text-brand-blue rounded-md font-medium hover:bg-brand-blue/5 transition"
+          >
             Bekijk hoe wij resultaat halen
           </a>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="flex justify-center">
+      {/* Afbeelding / illustratie */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="flex justify-center"
+      >
         <img
           src="https://dummyimage.com/500x350/f2f6fb/004aad&text=Illustratie"
           alt="Illustratie samenwerking"
           className="rounded-xl shadow-lg"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }
