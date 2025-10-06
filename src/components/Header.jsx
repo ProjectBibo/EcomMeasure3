@@ -6,12 +6,14 @@ export default function Header() {
     <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         
-        {/* 🔹 Alleen het logo (nog groter) */}
+        {/* 🔹 Alleen het logo (zeer groot) */}
         <a href="#hero" className="flex items-center">
           <img
             src="/logo.png"
             alt="EcomMeasure logo"
-            className="h-24 w-auto"   // vergroot naar 96px hoog
+            className="h-32 w-auto md:h-40" 
+            // h-32 = 128px hoog (mobiel/tablet)
+            // md:h-40 = 160px hoog (desktop en groter)
           />
         </a>
 
