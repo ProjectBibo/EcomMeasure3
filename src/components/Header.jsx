@@ -27,7 +27,7 @@ export default function Header() {
       <div className="bg-surface-light dark:bg-surface-dark border-b h-16 relative">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-full">
           {/* Logo */}
-          <a href="#hero" className="flex items-center relative -mt-[30px]">
+          <a href="#hero" className="flex items-center relative -mt-[40px]">
             <img
               src="/logo.png"
               alt="EcomMeasure logo"
