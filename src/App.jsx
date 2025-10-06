@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 // SEO
 import SEO from "./components/SEO";
 
-// Secties
+// Sections
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Workflow from "./components/Workflow";
@@ -24,15 +24,16 @@ export default function App() {
         image="/og-image.png"
       />
 
-      {/* Globale achtergrond + tekstkleur (licht/donker) */}
       <div className="bg-surface-light dark:bg-surface-dark text-neutral-900 dark:text-gray-100 font-sans min-h-screen">
-  <Header />
-  <Hero />
-  <Workflow />
-  <USP />
-  <Testimonial />
-  <CaseHighlight />
-  <Insights />
-  <Footer />
-</div>
-
+        <Header />
+        <Hero />
+        <Workflow />
+        <USP />
+        <Testimonial />
+        <CaseHighlight />
+        <Insights />
+        <Footer />
+      </div>
+    </HelmetProvider>
+  );
+}
