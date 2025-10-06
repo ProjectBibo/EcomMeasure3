@@ -6,42 +6,93 @@
    Scrollytelling helpers
    ========================= */
 
+/* Woorden kunnen afzonderlijk animeren */
 .word {
   display: inline-block;
   will-change: transform, opacity;
 }
 
-/* Scenes standaard verborgen; GSAP zet display:block bij aanvang */
-.scene { display: none; }
+/* Scenes standaard verborgen; GSAP activeert ze per stuk */
+.scene {
+  display: none;
+}
 
-/* Portal layers (transparant, theme-agnostic; JS zet kleuren/opacity) */
+/* =========================
+   Portal layers
+   ========================= */
+
 .portal-layer {
   position: fixed;
   inset: 0;
-  z-index: 0; /* onder contentlaag (z-10) */
+  z-index: 0; /* Altijd achter de content (z-10) */
   pointer-events: none;
 }
 
-/* Zachte blends: in light “screen” geeft gloed; in dark dempen we met lagere opacity uit JS */
+/* Zachte blends en transparante lagen */
 .portal-radial,
 .portal-conic,
 .portal-blobs {
   mix-blend-mode: screen;
 }
 
-.portal-radial { filter: blur(14px);  transition: background 600ms ease; }
-.portal-conic  { filter: blur(20px);  transition: background 600ms ease, transform 600ms ease, opacity 600ms ease; }
-.portal-blobs  { filter: blur(40px); }
+.portal-radial {
+  filter: blur(14px);
+  transition: background 600ms ease, opacity 400ms ease;
+}
+.portal-conic {
+  filter: blur(20px);
+  transition: background 600ms ease, transform 600ms ease, opacity 600ms ease;
+}
+.portal-blobs {
+  filter: blur(40px);
+}
 
-/* Blob basis (JS zet achtergrondkleur/transparantie per theme) */
+/* =========================
+   Blobs
+   ========================= */
 .blob {
   position: absolute;
   width: 55vmax;
   height: 55vmax;
   border-radius: 9999px;
+  will-change: transform, background, opacity;
+  transition: background 600ms ease, opacity 400ms ease;
 }
 
-/* (Optioneel) filmische grain-overlay — toggle in App.jsx
+/* =========================
+   Progress rail (rechts)
+   ========================= */
+.progress-rail {
+  pointer-events: none;
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14rem;
+  width: 0.25rem;
+  border-radius: 9999px;
+  background-color: rgba(0,0,0,0.1);
+}
+.dark .progress-rail {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: top;
+  border-radius: 9999px;
+  background-color: rgba(0,0,0,0.4);
+  transform: scaleY(0);
+}
+.dark .progress-bar {
+  background-color: rgba(255,255,255,0.5);
+}
+
+/* =========================
+   Optioneel: Film grain overlay
+   ========================= */
+/*
 .grain-overlay {
   pointer-events: none;
   position: fixed;
@@ -53,11 +104,12 @@
   mix-blend-mode: overlay;
   animation: grainMove 6s steps(10) infinite;
 }
+
 @keyframes grainMove {
-  0% { transform: translate(0,0); }
-  25% { transform: translate(-10px, 8px); }
-  50% { transform: translate(6px, -12px); }
-  75% { transform: translate(-4px, 6px); }
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(-10px, 8px); }
+  50%  { transform: translate(6px, -12px); }
+  75%  { transform: translate(-4px, 6px); }
   100% { transform: translate(0,0); }
 }
 */
