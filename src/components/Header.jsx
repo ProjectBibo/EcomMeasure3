@@ -7,7 +7,6 @@ export default function Header() {
       {/* 🔹 Top bar */}
       <div className="bg-blue-100 border-b">
         <div className="max-w-7xl mx-auto flex items-center justify-end px-6 py-2 text-sm text-neutralInk">
-          {/* Rechts: menu items */}
           <div className="flex items-center gap-6">
             <a href="#about" className="hover:text-brand-blue">Over EcomMeasure</a>
             <a href="#projects" className="hover:text-brand-blue">Projecten</a>
@@ -27,21 +26,20 @@ export default function Header() {
               Laten we kennismaken
             </a>
 
-            {/* Dark mode toggle */}
             <DarkModeToggle />
           </div>
         </div>
       </div>
 
       {/* 🔹 Main nav */}
-      <div className="bg-surface-light dark:bg-surface-dark border-b">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
-          {/* Logo (extra groot) */}
-          <a href="#hero" className="flex items-center">
+      <div className="bg-surface-light dark:bg-surface-dark border-b h-16 relative">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-full">
+          {/* Logo veel groter en laten uitsteken */}
+          <a href="#hero" className="flex items-center relative -mt-8">
             <img
               src="/logo.png"
               alt="EcomMeasure logo"
-              className="h-28 md:h-32 w-auto object-contain"
+              className="h-36 w-auto object-contain"
             />
           </a>
 
