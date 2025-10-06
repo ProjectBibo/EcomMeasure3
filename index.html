@@ -2,6 +2,27 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
+    <!-- Theme bootstrap: zet dark/light op <html> vóór eerste paint -->
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var dark = stored ? stored === 'dark' : prefersDark;
+      var root = document.documentElement;
+      root.classList.toggle('dark', dark);
+
+      // Browser UI kleur (adresbalk e.d.)
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', dark ? '#0f172a' : '#fafaf7');
+    } catch (e) {}
+  })();
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcomMeasure – Data-gedreven website optimalisatie</title>
 
