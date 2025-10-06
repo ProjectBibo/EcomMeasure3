@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
+      className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center bg-surface-light dark:bg-surface-dark transition-colors"
     >
       {/* Achtergrond blobs */}
       <motion.div
