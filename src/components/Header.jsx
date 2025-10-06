@@ -34,8 +34,8 @@ export default function Header() {
       {/* 🔹 Main nav */}
       <div className="bg-surface-light dark:bg-surface-dark border-b h-16 relative">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-full">
-          {/* Logo veel groter en laten uitsteken */}
-          <a href="#hero" className="flex items-center relative -mt-8">
+          {/* Logo (groot, subtiel lager gezet) */}
+          <a href="#hero" className="flex items-center relative -mt-[22px]">
             <img
               src="/logo.png"
               alt="EcomMeasure logo"
