@@ -29,3 +29,7 @@ body { @apply bg-surface-light text-neutralInk font-sans; }
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+.word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
