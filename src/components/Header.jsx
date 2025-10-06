@@ -3,36 +3,79 @@ import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
   return (
-    <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 h-20">
-        
-        {/* Logo nog groter gemaakt */}
-        <a href="#hero" className="flex items-center">
-          <img
-            src="/logo.png"
-            alt="EcomMeasure logo"
-            className="h-32 md:h-40 w-auto object-contain -my-4"
-          />
-        </a>
+    <header className="sticky top-0 z-50">
+      {/* 🔹 Top bar */}
+      <div className="bg-blue-100 border-b">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 text-sm text-neutralInk">
+          {/* Links: Google reviews */}
+          <div className="flex items-center gap-2">
+            <img src="/google-icon.svg" alt="Google" className="h-4 w-4" />
+            <span className="font-semibold">4.9</span>
+            <span className="text-yellow-500">★★★★★</span>
+            <span>| 80 reviews</span>
+          </div>
 
-        {/* Navigatie */}
-        <nav className="hidden md:flex gap-8 text-sm text-neutralInk dark:text-gray-300">
-          <a href="#ga4" className="self-center hover:text-brand-blue">Meer meten</a>
-          <a href="#ux" className="self-center hover:text-brand-blue">Optimaliseer</a>
-          <a href="#web" className="self-center hover:text-brand-blue">Nieuwe website</a>
-          <a href="#projects" className="self-center hover:text-brand-blue">Projecten</a>
-          <a href="#contact" className="self-center hover:text-brand-blue">Contact</a>
-        </nav>
+          {/* Rechts: menu items */}
+          <div className="flex items-center gap-6">
+            <a href="#speaker" className="hover:text-brand-blue">Spreker</a>
+            <a href="#about" className="hover:text-brand-blue">Over EcomMeasure</a>
+            <a href="#clients" className="hover:text-brand-blue">Opdrachtgevers</a>
+            <a href="#projects" className="hover:text-brand-blue">Projecten</a>
+            <a href="#contact" className="hover:text-brand-blue">Contact</a>
 
-        {/* CTA + Dark toggle */}
-        <div className="flex items-center gap-2">
-          <a
-            href="#contact"
-            className="px-4 py-2 rounded-md bg-brand-blue text-white text-sm font-semibold hover:brightness-90 transition"
-          >
-            Kennismaken
+            {/* Language switcher */}
+            <div className="flex items-center gap-1 cursor-pointer">
+              <img src="/flag-nl.svg" alt="NL" className="h-4 w-6" />
+              <span>NL ▾</span>
+            </div>
+
+            {/* CTA */}
+            <a
+              href="#contact"
+              className="px-3 py-2 rounded-md bg-brand-blue text-white text-sm font-semibold shadow hover:brightness-90 transition"
+            >
+              Laten we kennismaken
+            </a>
+
+            {/* Dark mode toggle */}
+            <DarkModeToggle />
+          </div>
+        </div>
+      </div>
+
+      {/* 🔹 Main nav */}
+      <div className="bg-surface-light dark:bg-surface-dark border-b">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* Logo */}
+          <a href="#hero" className="flex items-center">
+            <img
+              src="/logo.png"
+              alt="EcomMeasure logo"
+              className="h-14 md:h-16 w-auto object-contain"
+            />
           </a>
-          <DarkModeToggle />
+
+          {/* Diensten */}
+          <nav className="hidden md:flex gap-12 text-neutralInk dark:text-gray-200">
+            <div className="flex flex-col leading-tight hover:text-brand-blue cursor-pointer">
+              <span className="font-semibold">Meer meten</span>
+              <span className="text-sm text-neutralInk/60 dark:text-gray-400">
+                Google Analytics 4
+              </span>
+            </div>
+            <div className="flex flex-col leading-tight hover:text-brand-blue cursor-pointer">
+              <span className="font-semibold">Optimaliseer je website</span>
+              <span className="text-sm text-neutralInk/60 dark:text-gray-400">
+                UX / CRO
+              </span>
+            </div>
+            <div className="flex flex-col leading-tight hover:text-brand-blue cursor-pointer">
+              <span className="font-semibold">Een nieuwe website</span>
+              <span className="text-sm text-neutralInk/60 dark:text-gray-400">
+                Digitale ervaring op maat
+              </span>
+            </div>
+          </nav>
         </div>
       </div>
     </header>
