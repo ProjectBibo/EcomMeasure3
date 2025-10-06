@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center bg-surface-light dark:bg-surface-dark transition-colors"
+      className="relative overflow-hidden max-w-7xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-20 items-center bg-surface-light dark:bg-surface-dark transition-colors"
     >
       {/* Achtergrond blobs */}
       <motion.div
@@ -22,8 +22,8 @@ export default function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Tekstkolom */}
-      <div className="order-2 md:order-1">
+      {/* Tekstkolom (komt altijd eerst) */}
+      <div className="flex-1">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,12 +62,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Lottie Handshake */}
+      {/* Lottie Handshake (komt altijd daarna) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="flex justify-center order-1 md:order-2"
+        className="flex-1 flex justify-center"
       >
         <LottieHandshake
           jsonUrl="/handshake.json"
