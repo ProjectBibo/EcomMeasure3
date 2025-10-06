@@ -6,24 +6,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Air-achtige scrollytelling met "€10k feel":
- * - Kleur-wipes (achtergrondlaag)
+ * Ultra scrollytelling met €10k-feel:
+ * - Volscherm kleur-wipes
  * - Kinetische typografie (per woord)
- * - XXL KPI-scène (dramatische count-up + overlay)
- * - Fullscreen video (met placeholder overlay)
+ * - XXL KPI met count-up
+ * - Fullscreen video (met placeholder)
  * - Case reveal met clip-path morph
  * - Magnetische CTA
  *
- * Assets die je in /public/ zet:
- *  - /about.mp4 (+ optioneel /video-poster.jpg)
+ * Zet assets in /public:
+ *  - /about.mp4 (video) (+ optioneel /video-poster.jpg)
  *  - /case-before.jpg, /case-after.jpg
- *  - /logos/1.svg .. /logos/6.svg (optioneel voor marquee)
  */
 
 export default function ScrollyAirElite() {
   const root = useRef(null);
 
-  // achtergrond wipe layer
+  // achtergronddaag (kleur-wipes)
   const bg = useRef(null);
 
   // scenes
@@ -34,20 +33,20 @@ export default function ScrollyAirElite() {
   const sCase  = useRef(null);
   const sCta   = useRef(null);
 
-  // claim words refs
+  // claim words
   const claimLine1Ref = useRef(null);
   const claimLine2Ref = useRef(null);
 
-  // KPI refs
+  // KPI
   const kVal = useRef(null);
 
-  // case overlay
+  // case
   const caseAfter = useRef(null);
 
-  // progress rail
+  // progress
   const progressRef = useRef(null);
 
-  // helper: split een tekstnode in <span class="word">...</span>
+  // helper: split een element in <span class="word">woord</span>
   const splitWords = (el) => {
     if (!el) return [];
     const words = el.innerText.trim().split(/\s+/);
@@ -63,7 +62,7 @@ export default function ScrollyAirElite() {
     if (prefersReduced) return;
 
     const ctx = gsap.context(() => {
-      const HEADER_H = 80;
+      const HEADER_H = 80; // pas dit aan als jouw header hoger/lager is
 
       // progress rail
       ScrollTrigger.create({
@@ -75,12 +74,12 @@ export default function ScrollyAirElite() {
         },
       });
 
-      // hoofdtimeline: iets ruimer dan "Pro", maar nog strak
+      // hoofd-timeline (meer ruimte tussen scenes dan Pro, maar nog steeds strak)
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: `top-=${HEADER_H} top`,
-          end: "+=3800",  // ⬅️ totale “film”-duur; hoger = meer ruimte
+          end: "+=3800",   // hoger = meer tijd/ruimte tussen scenes
           scrub: true,
           pin: true,
           anticipatePin: 1,
@@ -88,7 +87,7 @@ export default function ScrollyAirElite() {
         defaults: { ease: "power3.out" },
       });
 
-      // SCENE: helper (with stronger scale and richer timings)
+      // scene-helper
       const scene = (
         el,
         {
@@ -104,60 +103,46 @@ export default function ScrollyAirElite() {
           .to(el,  { autoAlpha: 0, scale: 0.98, y: -50, duration: outDur }, ">-0.06");
       };
 
-      // 0) kleur-wipe start (achtergrondlaag)
+      // startkleur
       gsap.set(bg.current, { background: "linear-gradient(120deg, #F4F1EB 0%, #F4F1EB 100%)" });
 
-      // 1) Claim — kinetic words
+      // 1) Claim — kinetic words + wipe
       scene(sClaim.current, { from: { scale: 0.9, y: 40 }, to: { scale: 1.1, y: 0 } });
-
-      // kinetic words animatie (sub-timeline gekoppeld aan hetzelfde scrub venster)
       const line1Words = splitWords(claimLine1Ref.current);
       const line2Words = splitWords(claimLine2Ref.current);
       tl.from(line1Words, { yPercent: 120, rotation: 6, autoAlpha: 0, stagger: 0.06, duration: 0.6 }, "<+0.05");
       tl.from(line2Words, { yPercent: 120, rotation: 6, autoAlpha: 0, stagger: 0.06, duration: 0.6 }, "<+0.05");
-
-      // kleur-wipe naar brand-blauw → teal
       tl.to(bg.current, {
         background: "linear-gradient(120deg, #0B5FFF 0%, #00B6A1 100%)",
         duration: 0.8,
       }, "<+0.1");
 
-      // 2) Subclaim — groot, centrum
+      // 2) Subclaim + wipe
       scene(sSub.current, { from: { scale: 0.93, y: 60 }, to: { scale: 1.06, y: 0 } });
-
-      // wipe naar geel-accent
       tl.to(bg.current, {
         background: "linear-gradient(120deg, #00B6A1 0%, #F9C513 100%)",
         duration: 0.8,
       }, "<+0.1");
 
-      // 3) KPI — XXL
+      // 3) KPI XXL + wipe
       scene(sKpi.current, { from: { scale: 0.95, y: 50 }, to: { scale: 1.08, y: 0 } });
-
-      // KPI count-up
       const kObj = { val: 0 };
       tl.to(kObj, {
-        val: 128, // jouw grote “wow” KPI — pas aan
+        val: 128,           // pas aan naar jouw “wow” KPI
         duration: 0.9,
         ease: "power1.out",
-        onUpdate: () => {
-          if (kVal.current) kVal.current.textContent = Math.round(kObj.val);
-        },
+        onUpdate: () => { if (kVal.current) kVal.current.textContent = Math.round(kObj.val); }
       }, "<+0.1");
-
-      // wipe naar diepe blauw-tint
       tl.to(bg.current, {
         background: "linear-gradient(120deg, #091A44 0%, #0B5FFF 100%)",
         duration: 0.8,
       }, "<");
 
-      // 4) Video — fullscreen
+      // 4) Video fullscreen
       scene(sVideo.current, { from: { autoAlpha: 0, scale: 0.98 }, to: { autoAlpha: 1, scale: 1.06 } });
-
-      // zachte dark overlay op video
       tl.to(sVideo.current, { "--overlay": 0.35, duration: 0.5 }, "<+0.05");
 
-      // 5) Case — clip-path reveal (van kleine balk naar full)
+      // 5) Case reveal (clip-path morph)
       tl.fromTo(sCase.current, { autoAlpha: 0, y: 60, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.04, duration: 0.45 });
       tl.fromTo(
         caseAfter.current,
@@ -167,7 +152,7 @@ export default function ScrollyAirElite() {
       );
       tl.to(sCase.current, { autoAlpha: 0, y: -40, scale: 0.99, duration: 0.4 });
 
-      // 6) CTA — laatste blijft staan
+      // 6) CTA — laat staan
       tl.fromTo(sCta.current, { autoAlpha: 0, y: 40, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.02, duration: 0.5 });
 
     }, root);
@@ -175,7 +160,7 @@ export default function ScrollyAirElite() {
     return () => ctx.revert();
   }, []);
 
-  // Magnetische CTA micro-interactie
+  // magnetische CTA micro-interactie
   useEffect(() => {
     const btn = document.querySelector(".magnetic-cta");
     if (!btn) return;
@@ -198,7 +183,7 @@ export default function ScrollyAirElite() {
 
   return (
     <section ref={root} className="relative">
-      {/* achtergrond kleur-wipe laag */}
+      {/* achtergrondkleur-wipe laag */}
       <div ref={bg} className="fixed inset-0 -z-10 transition-colors duration-500" />
 
       {/* progress rail */}
@@ -206,9 +191,9 @@ export default function ScrollyAirElite() {
         <div ref={progressRef} className="origin-top h-full w-full bg-black/40 dark:bg-white/50 scale-y-0 rounded" />
       </div>
 
-      {/* sticky viewport */}
+      {/* sticky viewport (pt-24 houdt afstand tot header) */}
       <div className="sticky top-0 h-screen overflow-hidden pt-24">
-        {/* 1) Claim — kinetic words */}
+        {/* 1) Claim */}
         <div ref={sClaim} className="absolute inset-0 grid place-items-center">
           <div className="text-center px-6 leading-[1.08] select-none">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
