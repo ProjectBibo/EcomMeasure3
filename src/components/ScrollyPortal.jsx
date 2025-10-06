@@ -8,15 +8,15 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ScrollyPortal() {
   const root = useRef(null);
   const bgRadial = useRef(null);
-  const bgConic  = useRef(null);
-  const blobs    = useRef(null);
+  const bgConic = useRef(null);
+  const blobs = useRef(null);
 
   const sClaim = useRef(null);
-  const sSub   = useRef(null);
-  const sKpi   = useRef(null);
+  const sSub = useRef(null);
+  const sKpi = useRef(null);
   const sVideo = useRef(null);
-  const sCase  = useRef(null);
-  const sCta   = useRef(null);
+  const sCase = useRef(null);
+  const sCta = useRef(null);
 
   const claimLine1Ref = useRef(null);
   const claimLine2Ref = useRef(null);
@@ -27,7 +27,7 @@ export default function ScrollyPortal() {
   const splitWords = (el) => {
     if (!el) return [];
     const words = el.innerText.trim().split(/\s+/);
-    el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+    el.innerHTML = words.map((w) => `<span class="word">${w}</span>`).join(" ");
     return Array.from(el.querySelectorAll(".word"));
   };
 
@@ -35,33 +35,44 @@ export default function ScrollyPortal() {
   const getPalette = (isDark) =>
     isDark
       ? {
-          radialA: "radial-gradient(1200px 800px at 50% 50%, rgba(9,26,68,0.22), rgba(0,0,0,0) 60%)",
-          radialB: "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.18), rgba(0,0,0,0) 60%)",
-          conicA:  "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.18), rgba(14,165,165,0.16))",
-          conicB:  "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.20))",
-          blobA:   "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
-          blobB:   "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
-          blobC:   "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.16), rgba(0,0,0,0) 60%)",
+          radialA:
+            "radial-gradient(1200px 800px at 50% 50%, rgba(9,26,68,0.22), rgba(0,0,0,0) 60%)",
+          radialB:
+            "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.18), rgba(0,0,0,0) 60%)",
+          conicA:
+            "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.18), rgba(14,165,165,0.16))",
+          conicB:
+            "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.20))",
+          blobA:
+            "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
+          blobB:
+            "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
+          blobC:
+            "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.16), rgba(0,0,0,0) 60%)",
           radialOpacity: 0.48,
-          conicOpacity:  0.30,
-          blobOpacity:   [0.24, 0.22, 0.20],
-          text: "dark", // niet in CSS; alleen semantisch
+          conicOpacity: 0.3,
+          blobOpacity: [0.24, 0.22, 0.2],
         }
       : {
-          radialA: "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
-          radialB: "radial-gradient(1200px 800px at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
-          conicA:  "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.18), rgba(14,165,165,0.18))",
-          conicB:  "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.20))",
-          blobA:   "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.25), rgba(0,0,0,0) 60%)",
-          blobB:   "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.22), rgba(0,0,0,0) 60%)",
-          blobC:   "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.20), rgba(0,0,0,0) 60%)",
+          radialA:
+            "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
+          radialB:
+            "radial-gradient(1200px 800px at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
+          conicA:
+            "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.18), rgba(14,165,165,0.18))",
+          conicB:
+            "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.20))",
+          blobA:
+            "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.25), rgba(0,0,0,0) 60%)",
+          blobB:
+            "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.22), rgba(0,0,0,0) 60%)",
+          blobC:
+            "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.20), rgba(0,0,0,0) 60%)",
           radialOpacity: 0.55,
-          conicOpacity:  0.35,
-          blobOpacity:   [0.30, 0.26, 0.24],
-          text: "light",
+          conicOpacity: 0.35,
+          blobOpacity: [0.3, 0.26, 0.24],
         };
 
-  // Bouw timeline (centreren + geen overlap)
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const isDark = document.documentElement.classList.contains("dark");
@@ -73,25 +84,51 @@ export default function ScrollyPortal() {
         start: "top top",
         end: "bottom bottom",
         onUpdate: (self) => {
-          if (progressRef.current) gsap.set(progressRef.current, { scaleY: self.progress });
+          if (progressRef.current)
+            gsap.set(progressRef.current, { scaleY: self.progress });
         },
       });
 
       // Portal base
       const [b1, b2, b3] = blobs.current.querySelectorAll(".blob");
-      gsap.set(bgRadial.current, { opacity: palette.radialOpacity, background: palette.radialA });
-      gsap.set(bgConic.current,  { opacity: palette.conicOpacity,  background: palette.conicA, rotate: 0 });
+      gsap.set(bgRadial.current, {
+        opacity: palette.radialOpacity,
+        background: palette.radialA,
+      });
+      gsap.set(bgConic.current, {
+        opacity: palette.conicOpacity,
+        background: palette.conicA,
+        rotate: 0,
+      });
 
-      gsap.set(b1, { xPercent: -60, yPercent: -40, scale: 1.0, opacity: palette.blobOpacity[0], background: palette.blobA });
-      gsap.set(b2, { xPercent:  40, yPercent: -30, scale: 1.2, opacity: palette.blobOpacity[1], background: palette.blobB });
-      gsap.set(b3, { xPercent: -20, yPercent:  50, scale: 1.1, opacity: palette.blobOpacity[2], background: palette.blobC });
+      gsap.set(b1, {
+        xPercent: -60,
+        yPercent: -40,
+        scale: 1.0,
+        opacity: palette.blobOpacity[0],
+        background: palette.blobA,
+      });
+      gsap.set(b2, {
+        xPercent: 40,
+        yPercent: -30,
+        scale: 1.2,
+        opacity: palette.blobOpacity[1],
+        background: palette.blobB,
+      });
+      gsap.set(b3, {
+        xPercent: -20,
+        yPercent: 50,
+        scale: 1.1,
+        opacity: palette.blobOpacity[2],
+        background: palette.blobC,
+      });
 
       // Hoofd-timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=4600", // ruimte tussen scenes
+          end: "+=3200", // korter: scenes komen sneller
           scrub: true,
           pin: true,
           anticipatePin: 1,
@@ -99,27 +136,68 @@ export default function ScrollyPortal() {
         defaults: { ease: "power4.out" },
       });
 
-      const sceneStrict = (el, from = { autoAlpha: 0, scale: 0.88, y: 70 }, to = { autoAlpha: 1, scale: 1.10, y: 0 }) => {
+      // Kortere, snappier scenes
+      const sceneStrict = (
+        el,
+        from = { autoAlpha: 0, scale: 0.88, y: 70 },
+        to = { autoAlpha: 1, scale: 1.1, y: 0 }
+      ) => {
         const L = tl.duration();
         tl.addLabel(`S${L}`);
         tl.set(el, { autoAlpha: 0, display: "flex" }, `S${L}`);
-        tl.fromTo(el, from, { ...to, duration: 0.55 }, `S${L}`);
-        tl.to(el,  { autoAlpha: 1, duration: 0.44 });
-        tl.to(el,  { autoAlpha: 0, scale: 0.99, y: -60, duration: 0.55 });
+        tl.fromTo(el, from, { ...to, duration: 0.45 }, `S${L}`);
+        tl.to(el, { autoAlpha: 1, duration: 0.2 });
+        tl.to(el, { autoAlpha: 0, scale: 0.99, y: -50, duration: 0.4 });
         tl.set(el, { display: "none" });
       };
 
-      // 1) Claim
-      sceneStrict(sClaim.current, { autoAlpha: 0, scale: 0.90, y: 50 }, { autoAlpha: 1, scale: 1.12, y: 0 });
+      // 1) Claim (compacter)
+      sceneStrict(
+        sClaim.current,
+        { autoAlpha: 0, scale: 0.9, y: 50 },
+        { autoAlpha: 1, scale: 1.1, y: 0 }
+      );
       const line1Words = splitWords(claimLine1Ref.current);
       const line2Words = splitWords(claimLine2Ref.current);
-      tl.from(line1Words, { yPercent: 140, rotation: 8, autoAlpha: 0, stagger: 0.06, duration: 0.7 }, ">-0.35");
-      tl.from(line2Words, { yPercent: 140, rotation: 8, autoAlpha: 0, stagger: 0.06, duration: 0.7 });
-      tl.to(b1, { xPercent: -40, yPercent: -30, scale: 1.18, duration: 0.9 }, "<");
-      tl.to(b2, { xPercent:  20, yPercent: -10, scale: 1.28, duration: 0.9 }, "<");
-      tl.to(b3, { xPercent: -10, yPercent:  40, scale: 1.22, duration: 0.9 }, "<");
-      tl.to(bgRadial.current, { background: palette.radialB, duration: 0.8 }, "<+0.1");
-      tl.to(bgConic.current,  { background: palette.conicB, rotate: "+=40", duration: 0.9 }, "<");
+      tl.from(
+        line1Words,
+        {
+          yPercent: 120,
+          rotation: 6,
+          autoAlpha: 0,
+          stagger: 0.05,
+          duration: 0.45,
+        },
+        ">-0.25"
+      );
+      tl.from(
+        line2Words,
+        {
+          yPercent: 120,
+          rotation: 6,
+          autoAlpha: 0,
+          stagger: 0.05,
+          duration: 0.45,
+        },
+        "<+0.1"
+      );
+      tl.to(
+        b1,
+        { xPercent: -40, yPercent: -30, scale: 1.16, duration: 0.55 },
+        "<"
+      );
+      tl.to(
+        b2,
+        { xPercent: 20, yPercent: -10, scale: 1.22, duration: 0.55 },
+        "<"
+      );
+      tl.to(
+        b3,
+        { xPercent: -10, yPercent: 40, scale: 1.18, duration: 0.55 },
+        "<"
+      );
+      tl.to(bgRadial.current, { background: palette.radialB, duration: 0.45 }, "<+0.05");
+      tl.to(bgConic.current, { background: palette.conicB, rotate: "+=36", duration: 0.55 }, "<");
 
       // 2) Subclaim
       sceneStrict(sSub.current, { autoAlpha: 0, scale: 0.94, y: 70 }, { autoAlpha: 1, scale: 1.08, y: 0 });
@@ -131,7 +209,9 @@ export default function ScrollyPortal() {
         val: 128,
         duration: 1.0,
         ease: "power2.out",
-        onUpdate: () => { if (kVal.current) kVal.current.textContent = Math.round(kObj.val); }
+        onUpdate: () => {
+          if (kVal.current) kVal.current.textContent = Math.round(kObj.val);
+        },
       }, ">-0.8");
 
       // 4) Video
@@ -143,16 +223,11 @@ export default function ScrollyPortal() {
       tl.addLabel(`CASE${Lcase}`);
       tl.set(sCase.current, { autoAlpha: 0, display: "flex" }, `CASE${Lcase}`);
       tl.fromTo(sCase.current, { autoAlpha: 0, y: 70, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1.06, duration: 0.55 }, `CASE${Lcase}`);
-      tl.fromTo(
-        caseAfter.current,
-        { clipPath: "inset(0 85% 0 0 round 18px)" },
-        { clipPath: "inset(0 0% 0 0 round 18px)", duration: 1.05, ease: "power3.out" },
-        ">-0.35"
-      );
+      tl.fromTo(caseAfter.current, { clipPath: "inset(0 85% 0 0 round 18px)" }, { clipPath: "inset(0 0% 0 0 round 18px)", duration: 1.05, ease: "power3.out" }, ">-0.35");
       tl.to(sCase.current, { autoAlpha: 0, y: -50, scale: 0.99, duration: 0.5 });
       tl.set(sCase.current, { display: "none" });
 
-      // 6) CTA (blijft staan)
+      // 6) CTA
       const Lcta = tl.duration();
       tl.addLabel(`CTA${Lcta}`);
       tl.set(sCta.current, { autoAlpha: 0, display: "flex" }, `CTA${Lcta}`);
@@ -162,25 +237,24 @@ export default function ScrollyPortal() {
     return () => ctx.revert();
   }, []);
 
-  // LIVE theme-toggle support (zonder reload)
+  // Live theme support
   useEffect(() => {
     const html = document.documentElement;
     const applyTheme = () => {
       const isDark = html.classList.contains("dark");
       const p = getPalette(isDark);
-      const [b1, b2, b3] = blobs.current ? blobs.current.querySelectorAll(".blob") : [];
+      const [b1, b2, b3] = blobs.current
+        ? blobs.current.querySelectorAll(".blob")
+        : [];
       if (!bgRadial.current || !bgConic.current || !b1) return;
       gsap.set(bgRadial.current, { opacity: p.radialOpacity, background: p.radialA });
-      gsap.set(bgConic.current,  { opacity: p.conicOpacity,  background: p.conicA });
+      gsap.set(bgConic.current, { opacity: p.conicOpacity, background: p.conicA });
       gsap.set(b1, { background: p.blobA, opacity: p.blobOpacity[0] });
       gsap.set(b2, { background: p.blobB, opacity: p.blobOpacity[1] });
       gsap.set(b3, { background: p.blobC, opacity: p.blobOpacity[2] });
     };
 
-    // Eerste keer toepassen
     applyTheme();
-
-    // Observeer class-wijzigingen op <html>
     const mo = new MutationObserver(applyTheme);
     mo.observe(html, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
@@ -190,8 +264,8 @@ export default function ScrollyPortal() {
     <section ref={root} className="relative">
       {/* Portal layers */}
       <div ref={bgRadial} className="portal-layer portal-radial" />
-      <div ref={bgConic}  className="portal-layer portal-conic" />
-      <div ref={blobs}    className="portal-layer portal-blobs">
+      <div ref={bgConic} className="portal-layer portal-conic" />
+      <div ref={blobs} className="portal-layer portal-blobs">
         <div className="blob blob-a" />
         <div className="blob blob-b" />
         <div className="blob blob-c" />
@@ -202,9 +276,9 @@ export default function ScrollyPortal() {
         <div ref={progressRef} className="origin-top h-full w-full bg-black/40 dark:bg-white/50 scale-y-0 rounded" />
       </div>
 
-      {/* Sticky viewport — géén pt-24 meer zodat alles echt midden staat */}
+      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* 1) Claim (centraal) */}
+        {/* 1) Claim */}
         <div ref={sClaim} className="scene absolute inset-0 flex items-center justify-center text-center px-6">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-gray-100 leading-[1.07]">
             <span ref={claimLine1Ref}>Meer weten</span><br />
@@ -235,11 +309,7 @@ export default function ScrollyPortal() {
         </div>
 
         {/* 4) Video */}
-        <div
-          ref={sVideo}
-          className="scene absolute inset-0 flex items-center justify-center"
-          style={{ "--overlay": 0 }}
-        >
+        <div ref={sVideo} className="scene absolute inset-0 flex items-center justify-center" style={{ "--overlay": 0 }}>
           <video className="w-full h-full object-cover" src="/about.mp4" playsInline muted autoPlay loop poster="/video-poster.jpg" />
           <div className="absolute inset-0" style={{ background: "rgba(0,0,0,var(--overlay))" }} />
           <div className="absolute inset-0 grid place-items-center">
@@ -257,29 +327,4 @@ export default function ScrollyPortal() {
               CASE BEFORE PLACEHOLDER — voeg <code>case-before.jpg</code> toe
             </div>
             <div ref={caseAfter} className="absolute inset-0">
-              <img src="/case-after.jpg" alt="After" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 grid place-items-center bg-black/10 text-neutral-900 dark:text-gray-100 text-xl font-semibold">
-                CASE AFTER PLACEHOLDER — voeg <code>case-after.jpg</code> toe
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 6) CTA (blijft staan) */}
-        <div ref={sCta} className="scene absolute inset-0 flex items-center justify-center text-center px-6">
-          <div>
-            <h3 className="text-4xl md:text-5xl font-extrabold mb-7 text-neutral-900 dark:text-gray-100">
-              Klaar om te starten?
-            </h3>
-            <a href="#contact" className="inline-flex items-center gap-3 px-8 py-5 bg-brand-blue text-white text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transition">
-              Laten we kennismaken
-            </a>
-            <p className="mt-4 text-neutral-800 dark:text-gray-200">
-              Binnen 30 dagen live met betrouwbare metingen & zichtbare winst.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+              <img src="/case-after.jpg" alt="After" className="w-full h-full object
