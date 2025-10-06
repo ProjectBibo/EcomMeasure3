@@ -41,7 +41,7 @@ export default function Hero() {
           Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je er het volledige potentieel uit kunt halen.
         </motion.p>
 
-        {/* CTA's */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,13 +56,6 @@ export default function Hero() {
           >
             Zijn wij een goede match? <ArrowRight size={18} />
           </motion.a>
-
-          <a
-            href="#results"
-            className="inline-flex items-center px-6 py-3 border border-brand-blue text-brand-blue rounded-md font-medium hover:bg-brand-blue/5 transition"
-          >
-            Bekijk hoe wij resultaat halen
-          </a>
         </motion.div>
       </div>
 
@@ -74,10 +67,10 @@ export default function Hero() {
         className="flex justify-center"
       >
         <img
-  src="https://i.postimg.cc/x8w89fFC/18ea172b-1632-4e40-86ac-088dca1b90a8.png"
-  alt="EcomMeasure hero afbeelding"
-  className="rounded-xl shadow-lg"
-/>
+          src="https://i.postimg.cc/x8w89fFC/18ea172b-1632-4e40-86ac-088dca1b90a8.png"
+          alt="EcomMeasure hero afbeelding"
+          className="rounded-xl shadow-lg"
+        />
       </motion.div>
     </section>
   );
