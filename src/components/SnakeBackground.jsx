@@ -6,32 +6,33 @@ import {
 } from "framer-motion";
 
 /**
- * Doelen:
- * - Dunne puzzel-slang
- * - Echte zig-zag: links↔rechts terwijl hij meebeweegt naar beneden op scroll
- * - Performance: alleen CSS transforms, geen filters of per-item animatielussen
+ * Dunne puzzel-slang met brede zig-zag
+ * - Kleinere blokjes
+ * - Brede links↔rechts beweging (AMP_X hoog)
+ * - Parallax + horizontale sway
+ * - Performant: alleen GPU-transforms
  */
 const SETTINGS = {
   COLORS: ["#004AAD", "#0EA5A5", "#F9C513"], // brandkleuren
-  OPACITY_CLASS: "opacity-10",               // zachter/doorzichtig (pas aan naar smaak)
+  OPACITY_CLASS: "opacity-10",               // zachter/doorzichtig
   PIECE_SIZE: 30,                             // blokjes klein & strak
   ROUND: 8,                                   // afronding
   GAP: 10,                                    // afstand tussen blokjes
   NUM_PIECES: 36,                             // lengte van de slang
-  // golf-parameters
-  AMP_X: 60,          // links-rechts uitslag (groter = bredere zigzag)
-  AMP_Y: 18,          // verticale micro-golf binnen de slang
-  WAVE_FREQ: 0.9,     // hoe kronkelig (faseverschuiving per blokje)
-  // scroll→fase mapping
-  PHASE_SCROLL_RANGE: [0, 2200],           // scroll input (px)
-  PHASE_OUTPUT_RANGE: [0, Math.PI * 8],    // aantal zig-zag cycli over de pagina
-  // parallax van de hele slang
+
+  AMP_X: 140,         // 🔹 brede zigzag (links↔rechts uitslag)
+  AMP_Y: 18,          // verticale micro-golf
+  WAVE_FREQ: 0.9,     // hoe kronkelig de slang is
+
+  PHASE_SCROLL_RANGE: [0, 2200],           // scroll input
+  PHASE_OUTPUT_RANGE: [0, Math.PI * 8],    // aantal zig-zag cycli
+
   PARALLAX_RANGE: [0, 2200],  // scroll input
   PARALLAX_SHIFT: [0, 280],   // langzamer dan de content naar beneden
-  // wrapper
+
   ROTATE_DEG: -10,     // lichte diagonale hoek
   TOP_OFFSET_VH: 8,    // start iets onder de top (in vh)
-  MAX_WIDTH: 1400,     // maximale visuele breedte van de slang
+  MAX_WIDTH: 1600,     // maximale breedte
 };
 
 export default function SnakeBackground() {
@@ -51,13 +52,13 @@ export default function SnakeBackground() {
     SETTINGS.PARALLAX_SHIFT
   );
 
-  // We willen de numerieke waarde van phase/parallax in JS kunnen gebruiken
+  // Huidige waarden van phase & parallax opslaan
   const [phase, setPhase] = React.useState(0);
   const [parallaxY, setParallaxY] = React.useState(0);
   useMotionValueEvent(phaseMV, "change", (v) => setPhase(v));
   useMotionValueEvent(parallaxYMV, "change", (v) => setParallaxY(v));
 
-  // Vooraf posities uitrekenen
+  // Posities van de puzzelblokjes berekenen
   const pieces = React.useMemo(() => {
     const arr = [];
     const S = SETTINGS.PIECE_SIZE;
@@ -65,12 +66,19 @@ export default function SnakeBackground() {
     const step = S + G;
 
     for (let i = 0; i < SETTINGS.NUM_PIECES; i++) {
-      // basis “ruggengraat” (y) + micro-golf (AMP_Y)
+      // basis verticale positie
       const baseY = i * step;
-      const localY = baseY + Math.cos(phase * 0.6 + i * SETTINGS.WAVE_FREQ * 0.85) * SETTINGS.AMP_Y;
 
-      // zig-zag links↔rechts (AMP_X) — ECHTE richtingwissel bij scroll
-      const localX = i * (S * 0.15) + Math.sin(phase + i * SETTINGS.WAVE_FREQ) * SETTINGS.AMP_X;
+      // micro-golf
+      const localY =
+        baseY +
+        Math.cos(phase * 0.6 + i * SETTINGS.WAVE_FREQ * 0.85) *
+          SETTINGS.AMP_Y;
+
+      // zig-zag horizontaal (links↔rechts)
+      const localX =
+        i * (S * 0.15) +
+        Math.sin(phase + i * SETTINGS.WAVE_FREQ) * SETTINGS.AMP_X;
 
       arr.push({
         x: localX,
@@ -105,7 +113,9 @@ export default function SnakeBackground() {
         className="relative will-change-transform"
         style={{
           width: `${totalWidth}px`,
-          height: `${(SETTINGS.PIECE_SIZE + SETTINGS.GAP) * (SETTINGS.NUM_PIECES / 2)}px`,
+          height: `${
+            (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * (SETTINGS.NUM_PIECES / 2)
+          }px`,
         }}
       >
         {pieces.map((p, i) => (
@@ -123,10 +133,9 @@ export default function SnakeBackground() {
                 height: SETTINGS.PIECE_SIZE,
                 borderRadius: SETTINGS.ROUND,
                 background: p.color,
-                boxShadow: "0 0 0 rgba(0,0,0,0)", // geen filter, max performance
               }}
             />
-            {/* subtiele nubs (boven/onder) */}
+            {/* subtiele nubs */}
             <div
               style={{
                 width: 8,
