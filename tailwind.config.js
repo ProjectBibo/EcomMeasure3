@@ -5,11 +5,19 @@ export default {
     extend: {
       colors: {
         brand: {
-          blue: "#004AAD",      // hoofd kleur
-          yellow: "#F9C513",    // accent
-          red: "#E63946",
-          purple: "#3B2E7E",
-          graylight: "#F7F8FA",
+          blue: "#004AAD",      // primair (merk + CTA)
+          teal: "#0EA5A5",      // actie/accent (secundair)
+          tealHover: "#0C8E8E", // hover voor teal CTA
+          yellow: "#F9C513"     // highlight/badges
+        },
+        neutralInk: {
+          DEFAULT: "#0B1220",   // hoofdtekst op licht
+          secondary: "#475569"  // secundaire tekst
+        },
+        surface: {
+          light: "#FFFFFF",     // witte kaarten/achtergrond
+          soft:  "#F7F8FA",     // lichtgrijze secties
+          dark:  "#0F1115"      // (optioneel) donkere kaart
         },
       },
       fontFamily: {
