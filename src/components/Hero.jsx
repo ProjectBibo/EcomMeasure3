@@ -70,13 +70,12 @@ export default function Hero() {
       >
         {/* Gebruik lokale JSON in /public of geef externe URL mee via jsonUrl prop */}
         <LottieHandshake
-          jsonUrl="/handshake.json"
-          height={460}
-          tintLight="#0B5FFF"
-          tintDark="#60A5FA"
-          speed={1}
-        />
-
+  jsonUrl="/handshake.json"
+  height={460}
+  tintLight="#0B5FFF"
+  tintDark="#60A5FA"
+  speed={1}
+/>
         {/* Fallback als JS uit staat */}
         <noscript>
           <img
