@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", // <- heel belangrijk
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -12,13 +12,13 @@ export default {
           yellow: "#F9C513",
         },
         neutralInk: {
-          DEFAULT: "#0B1220",
-          secondary: "#475569",
+          DEFAULT: "#0B1220",  // primaire tekst op licht
+          secondary: "#475569" // secundaire tekst op licht
         },
         surface: {
-          light: "#FFFFFF",   // lichte pagina-achtergrond
-          soft:  "#F7F8FA",   // zachte sectie-achtergrond
-          dark:  "#0F1115",   // donkere pagina-achtergrond
+          light: "#FFFFFF",    // pagina-achtergrond licht
+          soft:  "#F7F8FA",    // zachte secties/cards
+          dark:  "#0F1115",    // pagina-achtergrond donker
         },
       },
       fontFamily: {
