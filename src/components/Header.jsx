@@ -4,12 +4,12 @@ export default function Header() {
   return (
     <header className="border-b bg-white sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        {/* Logo */}
+        {/* Logo / merk */}
         <a href="#hero" className="flex items-center gap-2 text-xl font-bold text-brand-blue">
           <span className="text-brand-blue">Ecom</span>Measure
         </a>
 
-        {/* Navigation */}
+        {/* Navigatie */}
         <nav className="hidden md:flex gap-10 text-sm text-neutral-700">
           <div className="flex flex-col items-center hover:text-brand-blue cursor-pointer">
             <span>Meer meten</span>
@@ -27,10 +27,10 @@ export default function Header() {
           <a href="#contact" className="hover:text-brand-blue">Contact</a>
         </nav>
 
-        {/* CTA */}
+        {/* Primair CTA = brand blue */}
         <a
           href="#contact"
-          className="px-4 py-2 rounded-md bg-brand-purple text-white font-semibold hover:opacity-90 transition"
+          className="px-4 py-2 rounded-md bg-brand-blue text-white font-semibold hover:brightness-90 transition"
         >
           Laten we kennismaken
         </a>
@@ -38,4 +38,3 @@ export default function Header() {
     </header>
   );
 }
-
