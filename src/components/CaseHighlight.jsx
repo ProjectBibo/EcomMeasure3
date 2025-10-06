@@ -4,19 +4,15 @@ import { motion } from "framer-motion";
 export default function CaseHighlight() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-8">
-      {/* Tekstblok */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="bg-white border border-neutral-200 rounded-xl p-8 shadow"
+        className="bg-white dark:bg-surface.dark border border-neutral-200 dark:border-neutral-700 rounded-xl p-8 shadow"
       >
-        <h3 className="font-semibold mb-2 text-brand-blue">
-          Welke problemen ervaren klanten bij hun webshop?
-        </h3>
-        <p className="text-neutralInk/80 mb-4">
-          Inzichten uit cases geven antwoord op echte klantproblemen en
-          oplossingen.
+        <h3 className="font-semibold mb-2 text-brand-blue">Welke problemen ervaren klanten bij hun webshop?</h3>
+        <p className="text-neutralInk/80 dark:text-gray-400 mb-4">
+          Inzichten uit cases geven antwoord op echte klantproblemen en oplossingen.
         </p>
         <a
           href="#cases"
@@ -26,7 +22,6 @@ export default function CaseHighlight() {
         </a>
       </motion.div>
 
-      {/* Afbeelding met overlay */}
       <div className="relative rounded-xl overflow-hidden shadow">
         <img
           src="https://dummyimage.com/400x500/eeeeee/004aad&text=Case+Image"
