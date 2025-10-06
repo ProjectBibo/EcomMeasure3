@@ -6,11 +6,10 @@ import {
 } from "framer-motion";
 
 /**
- * Dunne puzzel-slang met brede zig-zag — EXTENDED
- * - Veel meer stukjes (loopt door bijna de hele pagina)
- * - Brede zigzag
- * - Parallax meescroll
- * - Performant: alleen GPU transforms
+ * Dunne puzzel-slang met brede zig-zag — EXTENDED + cijfers in elk stukje
+ * - Veel stukjes (lange animatie)
+ * - Elk stukje toont een random cijfer (0–9), stabiel per stukje
+ * - Tekstkleur: donker in light mode, licht in dark mode
  */
 const SETTINGS = {
   COLORS: ["#004AAD", "#0EA5A5", "#F9C513"],
@@ -19,19 +18,16 @@ const SETTINGS = {
   ROUND: 8,
   GAP: 8,
 
-  // 🔹 MEER stukjes zodat de slang veel langer doorloopt
   NUM_PIECES: 140,
 
-  // Zig-zag karakter
   AMP_X: 140,
   AMP_Y: 18,
   WAVE_FREQ: 0.9,
 
-  // 🔹 Langere scroll-range → slang blijft bewegen over meer scroll
   PHASE_SCROLL_RANGE: [0, 8000],
   PHASE_OUTPUT_RANGE: [0, Math.PI * 18],
   PARALLAX_RANGE: [0, 8000],
-  PARALLAX_SHIFT: [0, 720], // iets meer meezakken naar beneden
+  PARALLAX_SHIFT: [0, 720],
 
   ROTATE_DEG: -10,
   TOP_OFFSET_VH: 8,
@@ -57,7 +53,16 @@ export default function SnakeBackground() {
   useMotionValueEvent(phaseMV, "change", (v) => setPhase(v));
   useMotionValueEvent(parallaxYMV, "change", (v) => setParallaxY(v));
 
-  // Posities berekenen
+  // Precompute stabiele random cijfers per stukje (0-9)
+  const digits = React.useMemo(() => {
+    const arr = [];
+    for (let i = 0; i < SETTINGS.NUM_PIECES; i++) {
+      arr.push(Math.floor(Math.random() * 10));
+    }
+    return arr;
+  }, []);
+
+  // Posities
   const pieces = React.useMemo(() => {
     const arr = [];
     const S = SETTINGS.PIECE_SIZE;
@@ -78,10 +83,11 @@ export default function SnakeBackground() {
         x: localX,
         y: localY,
         color: SETTINGS.COLORS[i % SETTINGS.COLORS.length],
+        digit: digits[i],
       });
     }
     return arr;
-  }, [phase]);
+  }, [phase, digits]);
 
   // Breedte voor centreren
   const totalWidth = Math.min(
@@ -116,14 +122,26 @@ export default function SnakeBackground() {
             className="absolute will-change-transform"
             style={{ transform: `translate3d(${p.x}px, ${p.y}px, 0)` }}
           >
+            {/* puzzelblok */}
             <div
               style={{
                 width: SETTINGS.PIECE_SIZE,
                 height: SETTINGS.PIECE_SIZE,
                 borderRadius: SETTINGS.ROUND,
                 background: p.color,
+                position: "relative",
               }}
-            />
+            >
+              {/* nummer in het midden; donker in light, licht in dark */}
+              <span
+                className="absolute inset-0 flex items-center justify-center text-[12px] md:text-[13px] font-semibold text-neutral-800/80 dark:text-gray-100/80"
+                style={{ lineHeight: 1 }}
+              >
+                {p.digit}
+              </span>
+            </div>
+
+            {/* kleine “knopjes” boven/onder voor puzzel-look */}
             <div
               style={{
                 width: 8,
