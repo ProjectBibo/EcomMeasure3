@@ -8,12 +8,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
         {/* Logo: hoogte begrensd zodat header niet meerekt */}
         <a href="#hero" className="shrink-0 flex items-center">
-          <img
-            src="/logo.png"
-            alt="EcomMeasure logo"
-            className="h-12 md:h-14 w-auto block" /* <= pas hieraan voor groter/kleiner */
-          />
-        </a>
+  <img
+    src="/logo.png"
+    alt="EcomMeasure logo"
+    className="max-h-12 md:max-h-14 w-36 md:w-44 object-contain"
+  />
+</a>
 
         {/* Navigatie (2-regelig maar compact) */}
         <nav className="hidden md:flex gap-8 text-sm text-neutralInk dark:text-gray-300">
