@@ -6,44 +6,45 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
+      className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center
+                 bg-surface.light dark:bg-surface.dark
+                 text-neutralInk dark:text-gray-200"
     >
       {/* 🔵 Achtergrond blobs */}
       <motion.div
-        className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-brand-blue/20 rounded-full blur-3xl -z-10"
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-brand-blue/20 dark:bg-brand-blue/40 rounded-full blur-3xl -z-10"
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-60 -right-40 w-[500px] h-[500px] bg-brand-teal/20 rounded-full blur-3xl -z-10"
+        className="absolute top-60 -right-40 w-[500px] h-[500px] bg-brand-teal/20 dark:bg-brand-teal/40 rounded-full blur-3xl -z-10"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Tekst content */}
+      {/* Tekst */}
       <div>
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-neutralInk"
+          className="text-4xl md:text-5xl font-bold leading-tight mb-6"
         >
           Bereik een geoptimaliseerde website dankzij een{" "}
-          <span className="text-brand-blue">data- én mens-gedreven</span>{" "}
-          aanpak
+          <span className="text-brand-blue">data- én mens-gedreven</span> aanpak
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-neutralInk/80 mb-8 max-w-lg"
+          className="text-neutralInk/80 dark:text-gray-400 mb-8 max-w-lg"
         >
           Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat
           je er het volledige potentieel uit kunt halen.
         </motion.p>
 
-        {/* CTA knoppen */}
+        {/* CTA’s */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,7 +69,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Afbeelding / illustratie */}
+      {/* Afbeelding */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
