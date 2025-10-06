@@ -7,20 +7,20 @@ import {
 
 /**
  * Dunne puzzel-slang met brede zig-zag
- * - Kleinere blokjes
- * - Brede links↔rechts beweging (AMP_X hoog)
- * - Parallax + horizontale sway
+ * - Meer stukjes (voller)
+ * - Kleine blokjes + kleine gap voor strakke ketting
+ * - Parallax + zigzag op scroll
  * - Performant: alleen GPU-transforms
  */
 const SETTINGS = {
   COLORS: ["#004AAD", "#0EA5A5", "#F9C513"], // brandkleuren
   OPACITY_CLASS: "opacity-10",               // zachter/doorzichtig
-  PIECE_SIZE: 30,                             // blokjes klein & strak
+  PIECE_SIZE: 28,                             // 🔹 iets kleiner
   ROUND: 8,                                   // afronding
-  GAP: 10,                                    // afstand tussen blokjes
-  NUM_PIECES: 36,                             // lengte van de slang
+  GAP: 8,                                     // 🔹 iets minder ruimte
+  NUM_PIECES: 52,                             // 🔹 meer blokjes (voller)
 
-  AMP_X: 140,         // 🔹 brede zigzag (links↔rechts uitslag)
+  AMP_X: 140,         // brede zigzag (links↔rechts uitslag)
   AMP_Y: 18,          // verticale micro-golf
   WAVE_FREQ: 0.9,     // hoe kronkelig de slang is
 
@@ -32,7 +32,7 @@ const SETTINGS = {
 
   ROTATE_DEG: -10,     // lichte diagonale hoek
   TOP_OFFSET_VH: 8,    // start iets onder de top (in vh)
-  MAX_WIDTH: 1600,     // maximale breedte
+  MAX_WIDTH: 1800,     // iets ruimer voor langere slang
 };
 
 export default function SnakeBackground() {
