@@ -22,8 +22,31 @@ export default function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Tekstkolom (komt altijd eerst) */}
-      <div className="flex-1">
+      {/* Animatie eerst in de DOM */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="flex-1 flex justify-center order-2 md:order-1"
+      >
+        <LottieHandshake
+          jsonUrl="/handshake.json"
+          height={460}
+          tintLight="#0B5FFF"
+          tintDark="#60A5FA"
+          speed={1}
+        />
+        <noscript>
+          <img
+            src="/og-image.png"
+            alt="Handshake (fallback)"
+            className="rounded-xl shadow-lg"
+          />
+        </noscript>
+      </motion.div>
+
+      {/* Tekstkolom daarna in de DOM */}
+      <div className="flex-1 order-1 md:order-2">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,29 +84,6 @@ export default function Hero() {
           </motion.a>
         </motion.div>
       </div>
-
-      {/* Lottie Handshake (komt altijd daarna) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="flex-1 flex justify-center"
-      >
-        <LottieHandshake
-          jsonUrl="/handshake.json"
-          height={460}
-          tintLight="#0B5FFF"
-          tintDark="#60A5FA"
-          speed={1}
-        />
-        <noscript>
-          <img
-            src="/og-image.png"
-            alt="Handshake (fallback)"
-            className="rounded-xl shadow-lg"
-          />
-        </noscript>
-      </motion.div>
     </section>
   );
 }
