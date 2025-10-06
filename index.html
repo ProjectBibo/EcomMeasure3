@@ -2,7 +2,7 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcomMeasure – Data-gedreven website optimalisatie</title>
 
     <!-- SEO Meta -->
@@ -32,18 +32,23 @@
     <link rel="icon" href="/favicon.ico" />
 
     <!-- Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Lottie (Bodymovin) voor handshake animatie -->
+    <script 
+      src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" 
+      integrity="sha512-7zCz0S1gqA2e0r8FQx5Qp4RxJj0Qp6aQ7q5N6X9d3jJw1k7u7E7s2n6Xh2lC3gU3Q+XrxywA1wK3vSxgXe0fNw==" 
+      crossorigin="anonymous" 
+      referrerpolicy="no-referrer">
+    </script>
   </head>
   <body>
-    <!-- React mount point -->
     <div id="root"></div>
-
-    <!-- Vite entry (nodig in zowel dev als productie) -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
