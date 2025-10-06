@@ -5,6 +5,7 @@ export default function DarkModeToggle() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
+    // check system preference of localStorage
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
