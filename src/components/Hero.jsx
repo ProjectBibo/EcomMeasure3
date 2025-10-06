@@ -1,6 +1,8 @@
+// src/components/Hero.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import HologramHandshake from "./HologramHandshake";
 
 export default function Hero() {
   return (
@@ -20,7 +22,7 @@ export default function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Tekst */}
+      {/* Tekstkolom */}
       <div>
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
@@ -59,18 +61,24 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Afbeelding */}
+      {/* Hologram Handshake i.p.v. afbeelding */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
         className="flex justify-center"
       >
-        <img
-          src="https://i.postimg.cc/x8w89fFC/18ea172b-1632-4e40-86ac-088dca1b90a8.png"
-          alt="EcomMeasure hero afbeelding"
-          className="rounded-xl shadow-lg"
-        />
+        {/* Pas height/density/shake aan naar smaak */}
+        <HologramHandshake height={460} density={0.28} shake={12} />
+
+        {/* Fallback voor als JS/canvas uit staat */}
+        <noscript>
+          <img
+            src="/og-image.png"
+            alt="EcomMeasure hologram handshake (fallback)"
+            className="rounded-xl shadow-lg"
+          />
+        </noscript>
       </motion.div>
     </section>
   );
