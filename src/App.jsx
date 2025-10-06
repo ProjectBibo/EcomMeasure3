@@ -1,25 +1,25 @@
 import React from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function App() {
   return (
-    <div className="bg-neutral-950 text-white font-sans">
+    <div className="bg-white text-neutral-900 font-sans">
       {/* HEADER */}
-      <header className="border-b border-neutral-800 bg-neutral-950/90 backdrop-blur sticky top-0 z-50">
+      <header className="border-b bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-          <a href="#hero" className="text-xl font-bold">
-            <span className="text-emerald-400">Ecom</span>Measure
+          <a href="#hero" className="flex items-center gap-2 text-xl font-bold text-brand-blue">
+            <span className="text-brand-blue">Ecom</span>Measure
           </a>
-          <nav className="hidden md:flex gap-6 text-sm text-neutral-300">
-            <a href="#services" className="hover:text-white">Meten</a>
-            <a href="#optimize" className="hover:text-white">Optimaliseer</a>
-            <a href="#newsite" className="hover:text-white">Nieuwe site</a>
-            <a href="#cases" className="hover:text-white">Projecten</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
+          <nav className="hidden md:flex gap-6 text-sm text-neutral-700">
+            <a href="#services" className="hover:text-brand-blue">Meer meten</a>
+            <a href="#optimize" className="hover:text-brand-blue">Optimaliseer je website</a>
+            <a href="#newsite" className="hover:text-brand-blue">Een nieuwe website</a>
+            <a href="#projects" className="hover:text-brand-blue">Projecten</a>
+            <a href="#contact" className="hover:text-brand-blue">Contact</a>
           </nav>
           <a
             href="#contact"
-            className="px-4 py-2 rounded-xl bg-emerald-400 text-black font-semibold hover:opacity-90 transition"
+            className="px-4 py-2 rounded-md bg-brand-purple text-white font-semibold hover:opacity-90 transition"
           >
             Laten we kennismaken
           </a>
@@ -32,25 +32,30 @@ export default function App() {
         className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
       >
         <div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-neutral-900">
             Bereik een geoptimaliseerde website dankzij een{" "}
-            <span className="text-emerald-400">data- én mens-gedreven</span>{" "}
+            <span className="text-brand-blue">data- én mens-gedreven</span>{" "}
             aanpak
           </h1>
-          <p className="text-neutral-300 mb-8">
+          <p className="text-neutral-600 mb-8">
             Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat
             je er het volledige potentieel uit kunt halen.
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-400 text-black font-semibold rounded-xl hover:opacity-90 transition"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-md hover:bg-blue-800 transition"
           >
             Zijn wij een goede match? <ArrowRight size={18} />
           </a>
+          <div className="mt-4">
+            <a href="#results" className="text-sm text-neutral-600 hover:underline">
+              Bekijk hoe wij resultaat halen
+            </a>
+          </div>
         </div>
         <div className="flex justify-center">
           <img
-            src="https://dummyimage.com/500x350/0a0a0a/10b981&text=Illustratie"
+            src="https://dummyimage.com/500x350/edf2f7/004aad&text=Illustratie"
             alt="Illustratie samenwerking"
             className="rounded-xl shadow-lg"
           />
@@ -58,128 +63,131 @@ export default function App() {
       </section>
 
       {/* USP BLOKKEN */}
-      <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8 text-center">
+      <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8">
         {[
           {
-            title: "Meer weten = minder gokken",
-            text: "Onze workflows zijn op maat gemaakt om websites en mensen te helpen groeien.",
-          },
-          {
             title: "Ontdek quick wins",
-            text: "Snelle verbeteringen dankzij GA4, SEO en trend-research.",
+            text: "Dankzij GA4, SEO en trend-research.",
           },
           {
             title: "Verbeter de gebruikservaring",
-            text: "Gericht User Experience research geeft je inzichten die conversie verhogen.",
+            text: "Gericht UX research dat conversie verhoogt.",
+          },
+          {
+            title: "Verzilver je klantenkennis",
+            text: "Met co-creatieprocessen en analyses.",
           },
         ].map((item, i) => (
           <div
             key={i}
-            className="bg-neutral-900 border border-neutral-800 p-6 rounded-xl"
+            className="bg-white border border-neutral-200 p-6 rounded-xl shadow-sm"
           >
-            <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-            <p className="text-neutral-400 text-sm">{item.text}</p>
+            <h3 className="text-lg font-semibold mb-2 text-brand-blue">{item.title}</h3>
+            <p className="text-neutral-600 text-sm">{item.text}</p>
           </div>
         ))}
       </section>
 
       {/* VIDEO + TESTIMONIAL */}
-      <section id="cases" className="bg-neutral-900 py-20">
+      <section id="testimonial" className="bg-brand-graylight py-20">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 px-6 items-center">
           <div>
-            <div className="aspect-video rounded-xl overflow-hidden border border-neutral-800">
+            <div className="aspect-video rounded-xl overflow-hidden border border-neutral-200 shadow-sm">
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/VIDEO_ID"
                 title="Klantvideo"
                 allowFullScreen
               ></iframe>
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-bold mb-4">Klanten aan het woord</h2>
-            <blockquote className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 mb-4">
-              <p className="mb-3 text-neutral-300">
-                “Goede communicatie en samenwerking. Duidelijke rapportages en
-                verbeterpunten.”
+            <span className="inline-block text-xs bg-brand-yellow text-neutral-900 px-3 py-1 rounded-full font-bold mb-3">
+              KLANTEN AAN HET WOORD
+            </span>
+            <blockquote className="bg-white border border-neutral-200 rounded-xl p-6 mb-4 shadow-sm">
+              <p className="mb-3 text-neutral-700">
+                “Goede communicatie en samenwerking voor de doorontwikkeling van de webshop. Levert duidelijke rapportages en verbeterpunten aan.”
               </p>
               <footer className="text-sm text-neutral-500">
-                — Joey Tulkstra, Offenga BMW Onderdelen
+                — Joey Tuinstra, Offenga BMW Onderdelen
               </footer>
             </blockquote>
-            <a href="#contact" className="text-emerald-400 hover:underline">
+            <a href="#reviews" className="text-brand-blue hover:underline font-medium">
               Bekijk alle reviews
             </a>
           </div>
         </div>
       </section>
 
-      {/* INSIGHTS / CASES */}
+      {/* CASES & INSIGHTS */}
       <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-8">
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8">
-          <h3 className="font-semibold mb-2">
+        <div className="bg-white border border-neutral-200 rounded-xl p-8 shadow-sm">
+          <h3 className="font-semibold mb-2 text-brand-blue">
             Welke problemen ervaren klanten bij hun webshop?
           </h3>
-          <p className="text-neutral-400 mb-4">
-            Inzichten uit cases geven antwoord op echte klantproblemen en
-            oplossingen.
+          <p className="text-neutral-600 mb-4">
+            Inzichten uit cases geven antwoord op echte klantproblemen en oplossingen.
           </p>
           <a
             href="#cases"
-            className="px-4 py-2 bg-emerald-400 text-black rounded-lg font-medium hover:opacity-90"
+            className="px-4 py-2 bg-brand-yellow text-neutral-900 rounded-md font-medium hover:opacity-90"
           >
-            Bekijk de cases
+            Bekijk de case
           </a>
         </div>
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8">
-          <h3 className="font-semibold mb-2">Ontwerpkeuzes maken met data</h3>
-          <p className="text-neutral-400 mb-4">
-            We helpen je betere beslissingen te nemen met betrouwbare data en
-            UX-onderzoek.
+        <div className="bg-white border border-neutral-200 rounded-xl p-8 shadow-sm">
+          <span className="inline-block text-xs bg-brand-yellow text-neutral-900 px-3 py-1 rounded-full font-bold mb-3">
+            Insight #1
+          </span>
+          <h3 className="font-semibold mb-2 text-brand-blue">
+            Ontwerpkeuzes maken met data
+          </h3>
+          <p className="text-neutral-600 mb-4">
+            We helpen je betere beslissingen te nemen met betrouwbare data en UX-onderzoek.
           </p>
-          <ul className="text-sm text-neutral-300 space-y-2">
-            <li className="flex gap-2 items-center">
-              <CheckCircle2 className="text-emerald-400" size={18} /> Duidelijk
-              en transparant
-            </li>
-            <li className="flex gap-2 items-center">
-              <CheckCircle2 className="text-emerald-400" size={18} /> Gericht op
-              resultaat
-            </li>
-            <li className="flex gap-2 items-center">
-              <CheckCircle2 className="text-emerald-400" size={18} /> Praktisch
-              en toepasbaar
-            </li>
-          </ul>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-neutral-900 border-t border-neutral-800 py-12 mt-12">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+      <footer className="bg-brand-graylight border-t border-neutral-200 py-12 mt-12">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
           <div>
-            <h4 className="font-semibold mb-3">EcomMeasure</h4>
-            <p className="text-neutral-400 text-sm">
-              Samen komen we altijd tot een voorstel op maat dat aansluit bij
-              jouw doelstellingen en budget.
+            <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
+            <p className="text-neutral-600 text-sm">
+              Samen komen we altijd tot een voorstel op maat dat aansluit bij jouw doelstellingen en budget.
             </p>
+            <a
+              href="#contact"
+              className="mt-4 inline-block px-4 py-2 bg-brand-yellow text-neutral-900 rounded-md font-medium hover:opacity-90"
+            >
+              Laten we kennismaken
+            </a>
           </div>
           <div>
-            <h4 className="font-semibold mb-3">Meer meten</h4>
-            <ul className="space-y-2 text-sm text-neutral-400">
+            <h4 className="font-semibold mb-3 text-brand-blue">Meer Meten</h4>
+            <ul className="space-y-2 text-sm text-neutral-600">
               <li>Google Analytics 4</li>
               <li>Consent Mode</li>
               <li>Dashboarding</li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3">Contact</h4>
-            <p className="text-neutral-400 text-sm">info@ecommeasure.com</p>
-            <p className="text-neutral-400 text-sm">+31 6 12345678</p>
+            <h4 className="font-semibold mb-3 text-brand-blue">Optimaliseer je site</h4>
+            <ul className="space-y-2 text-sm text-neutral-600">
+              <li>UX Audit</li>
+              <li>Optimalisatie aanvragen</li>
+              <li>Conversion Research</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-3 text-brand-blue">Contact</h4>
+            <p className="text-neutral-600 text-sm">info@ecommeasure.com</p>
+            <p className="text-neutral-600 text-sm">+31 6 12345678</p>
           </div>
         </div>
-        <div className="mt-8 text-center text-neutral-600 text-xs">
+        <div className="mt-8 text-center text-neutral-500 text-xs">
           © {new Date().getFullYear()} EcomMeasure. Alle rechten voorbehouden.
         </div>
       </footer>
