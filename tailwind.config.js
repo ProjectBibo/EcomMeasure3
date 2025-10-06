@@ -5,8 +5,8 @@ export default {
     extend: {
       colors: {
         brand: {
-          blue: "#004AAD", // hoofdkleur
-          yellow: "#F9C513",
+          blue: "#004AAD",      // hoofd kleur
+          yellow: "#F9C513",    // accent
           red: "#E63946",
           purple: "#3B2E7E",
           graylight: "#F7F8FA",
