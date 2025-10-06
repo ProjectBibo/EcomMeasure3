@@ -22,17 +22,11 @@ export default function USP() {
       {items.map((item, i) => (
         <motion.div
           key={i}
-          whileHover={{
-            y: -6,
-            scale: 1.02,
-            boxShadow: "0px 12px 30px rgba(0,0,0,0.1)",
-          }}
-          className="bg-white border border-neutral-200 rounded-xl p-8 transition"
+          whileHover={{ y: -6, scale: 1.02, boxShadow: "0px 12px 30px rgba(0,0,0,0.1)" }}
+          className="bg-white dark:bg-surface.dark border border-neutral-200 dark:border-neutral-700 rounded-xl p-8 transition"
         >
-          <h3 className="text-lg font-semibold mb-3 text-brand-blue">
-            {item.title}
-          </h3>
-          <p className="text-neutralInk/80 text-sm">{item.text}</p>
+          <h3 className="text-lg font-semibold mb-3 text-brand-blue">{item.title}</h3>
+          <p className="text-neutralInk/80 dark:text-gray-400 text-sm">{item.text}</p>
         </motion.div>
       ))}
     </section>
