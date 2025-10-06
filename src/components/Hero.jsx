@@ -10,7 +10,7 @@ export default function Hero() {
       id="hero"
       className="relative overflow-hidden max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6 py-20 items-center"
     >
-      {/* Achtergrond blobs (lichtgewicht, mag blijven) */}
+      {/* Achtergrond blobs */}
       <motion.div
         className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-brand-blue/20 dark:bg-brand-blue/40 rounded-full blur-3xl -z-10"
         animate={{ scale: [1, 1.1, 1] }}
@@ -28,7 +28,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="h1 mb-6"
+          className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6"
         >
           Bereik een geoptimaliseerde website dankzij een{" "}
           <span className="text-brand-blue">data- én mens-gedreven</span> aanpak
@@ -40,7 +40,8 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.3 }}
           className="text-neutral-600 dark:text-gray-400 mb-8 max-w-lg"
         >
-          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je er het volledige potentieel uit kunt halen.
+          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je
+          er het volledige potentieel uit kunt halen.
         </motion.p>
 
         {/* CTA */}
@@ -61,22 +62,20 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Lottie Handshake i.p.v. afbeelding */}
+      {/* Lottie Handshake */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
         className="flex justify-center"
       >
-        {/* Gebruik lokale JSON in /public of geef externe URL mee via jsonUrl prop */}
         <LottieHandshake
-  jsonUrl="/handshake.json"
-  height={460}
-  tintLight="#0B5FFF"
-  tintDark="#60A5FA"
-  speed={1}
-/>
-        {/* Fallback als JS uit staat */}
+          jsonUrl="/handshake.json"
+          height={460}
+          tintLight="#0B5FFF"
+          tintDark="#60A5FA"
+          speed={1}
+        />
         <noscript>
           <img
             src="/og-image.png"
