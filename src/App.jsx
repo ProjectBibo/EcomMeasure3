@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 // SEO
 import SEO from "./components/SEO";
 
-// Sections (alle componenten die je hebt aangemaakt)
+// Sections
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Workflow from "./components/Workflow";
@@ -17,7 +17,7 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <HelmetProvider>
-      {/* SEO instellingen */}
+      {/* 🔹 SEO instellingen */}
       <SEO
         title="EcomMeasure – Data-gedreven website optimalisatie"
         description="EcomMeasure helpt webshops en websites groeien met GA4, Consent Mode v2 en UX optimalisaties."
@@ -25,8 +25,8 @@ export default function App() {
         image="/og-image.png"
       />
 
-      {/* Hier zet je de pagina-layout in de juiste volgorde */}
-      <div className="bg-white text-neutral-900 font-sans">
+      {/* 🔹 Globale achtergrond + tekstkleur */}
+      <div className="min-h-screen bg-surface.light dark:bg-surface.dark text-neutralInk dark:text-gray-200 font-sans">
         <Header />
         <Hero />
         <Workflow />
