@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden max-w-7xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-20 items-center bg-surface-light dark:bg-surface-dark transition-colors"
+      className="relative overflow-hidden max-w-5xl mx-auto flex flex-col gap-12 px-6 py-20 items-center bg-surface-light dark:bg-surface-dark transition-colors"
     >
       {/* Achtergrond blobs */}
       <motion.div
@@ -22,12 +22,52 @@ export default function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Animatie eerst in de DOM */}
+      {/* === Tekstblok komt nu altijd eerst === */}
+      <div className="w-full text-center md:text-left">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6"
+        >
+          Bereik een geoptimaliseerde website dankzij een{" "}
+          <span className="text-brand-blue">data- én mens-gedreven</span> aanpak
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="text-neutral-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto md:mx-0"
+        >
+          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je
+          er het volledige potentieel uit kunt halen.
+        </motion.p>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+        >
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#contact"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-md shadow hover:shadow-lg transition"
+          >
+            Zijn wij een goede match? <ArrowRight size={18} />
+          </motion.a>
+        </motion.div>
+      </div>
+
+      {/* === Animatie komt nu eronder === */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="flex-1 flex justify-center order-2 md:order-1"
+        className="flex justify-center w-full"
       >
         <LottieHandshake
           jsonUrl="/handshake.json"
@@ -44,46 +84,6 @@ export default function Hero() {
           />
         </noscript>
       </motion.div>
-
-      {/* Tekstkolom daarna in de DOM */}
-      <div className="flex-1 order-1 md:order-2">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6"
-        >
-          Bereik een geoptimaliseerde website dankzij een{" "}
-          <span className="text-brand-blue">data- én mens-gedreven</span> aanpak
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="text-neutral-600 dark:text-gray-400 mb-8 max-w-lg"
-        >
-          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je
-          er het volledige potentieel uit kunt halen.
-        </motion.p>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4"
-        >
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-md shadow hover:shadow-lg transition"
-          >
-            Zijn wij een goede match? <ArrowRight size={18} />
-          </motion.a>
-        </motion.div>
-      </div>
     </section>
   );
 }
