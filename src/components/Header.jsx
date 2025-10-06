@@ -6,16 +6,13 @@ export default function Header() {
     <header className="border-b bg-white dark:bg-surface-dark sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         
-        {/* 🔹 Logo */}
-        <a href="#hero" className="flex items-center gap-3">
+        {/* 🔹 Alleen het logo (vergroot) */}
+        <a href="#hero" className="flex items-center">
           <img
-            src="/logo.png"           // dit logo moet in de map /public staan
+            src="/logo.png"   // jouw logo in /public/logo.png
             alt="EcomMeasure logo"
-            className="h-10 w-auto"
+            className="h-16 w-auto"   // maak groter (h-16 ≈ 64px hoog)
           />
-          <span className="text-xl font-bold text-brand-blue">
-            EcomMeasure
-          </span>
         </a>
 
         {/* 🔹 Navigatie */}
