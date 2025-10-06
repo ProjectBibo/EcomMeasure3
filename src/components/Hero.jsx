@@ -2,13 +2,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import LottieHandshake from "./LottieHandshake";
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden max-w-5xl mx-auto flex flex-col gap-12 px-6 py-20 items-center bg-surface-light dark:bg-surface-dark transition-colors"
+      className="relative overflow-hidden max-w-7xl mx-auto px-6 py-20"
     >
       {/* Achtergrond blobs */}
       <motion.div
@@ -22,13 +21,12 @@ export default function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* === Tekstblok komt nu altijd eerst === */}
-      <div className="w-full text-center md:text-left">
+      <div className="relative text-center max-w-3xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6"
         >
           Bereik een geoptimaliseerde website dankzij een{" "}
           <span className="text-brand-blue">data- én mens-gedreven</span> aanpak
@@ -38,52 +36,27 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-neutral-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto md:mx-0"
+          className="text-neutral-600 dark:text-gray-400 mb-8 max-w-xl mx-auto"
         >
-          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je
-          er het volledige potentieel uit kunt halen.
+          Samen met jou ontdekken we hoe we jouw website zó optimaliseren dat je er het volledige potentieel uit kunt halen.
         </motion.p>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+          className="flex justify-center"
         >
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-md shadow hover:shadow-lg transition"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-full shadow hover:shadow-lg transition"
           >
             Zijn wij een goede match? <ArrowRight size={18} />
           </motion.a>
         </motion.div>
       </div>
-
-      {/* === Animatie komt nu eronder === */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="flex justify-center w-full"
-      >
-        <LottieHandshake
-          jsonUrl="/handshake.json"
-          height={460}
-          tintLight="#0B5FFF"
-          tintDark="#60A5FA"
-          speed={1}
-        />
-        <noscript>
-          <img
-            src="/og-image.png"
-            alt="Handshake (fallback)"
-            className="rounded-xl shadow-lg"
-          />
-        </noscript>
-      </motion.div>
     </section>
   );
 }
