@@ -1,57 +1,47 @@
+// src/App.jsx
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 
-// SEO
-import SEO from "./components/SEO";
-
-// Jouw secties
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Workflow from "./components/Workflow";
 import USP from "./components/USP";
-// import Testimonial from "./components/Testimonial"; // reviews weggelaten
-import CaseHighlight from "./components/CaseHighlight";
+import Workflow from "./components/Workflow";
 import Insights from "./components/Insights";
+import CaseHighlight from "./components/CaseHighlight";
+import Testimonial from "./components/Testimonial";
 import Footer from "./components/Footer";
-
-// Animations
-import SnakeBackground from "./components/SnakeBackground"; // (verlengt al lang door)
-import ScrollyPortal from "./components/ScrollyPortal";     // ⬅️ nieuwe “portal” scrolly
+import SEO from "./components/SEO";
+import ErrorBoundary from "./ErrorBoundary";
+import SnakeBackground from "./components/SnakeBackground";
+import ScrollyPortal from "./components/ScrollyPortal";
 
 export default function App() {
   return (
     <HelmetProvider>
-      <SEO
-        title="EcomMeasure – Data-gedreven website optimalisatie"
-        description="EcomMeasure helpt webshops en websites groeien met GA4, Consent Mode v2 en UX optimalisaties."
-        url="https://www.ecommeasure.com"
-        image="/og-image.png"
-      />
+      <ErrorBoundary>
+        <SEO />
 
-      <div className="relative text-gray-100 font-sans min-h-screen overflow-hidden">
-        {/* Achtergrond: jouw puzzel-slang (lang) */}
-        <SnakeBackground />
-
-        {/* (Optioneel) luxe film grain */}
-        {/* <div className="grain-overlay" /> */}
-
-        {/* Contentlaag */}
-        <div className="relative z-10">
+        {/* Hele site krijgt achtergrondkleur via dark/light */}
+        <div className="min-h-screen bg-surface-light dark:bg-surface-dark transition-colors">
           <Header />
-          <Hero />
 
-          {/* ✨ Portal scrolly (ultra smooth, translucent, jaw-dropping) */}
+          {/* Extra visuele lagen */}
+          <SnakeBackground />
           <ScrollyPortal />
 
-          {/* Rest van je layout */}
-          <Workflow />
-          <USP />
-          {/* <Testimonial /> */}
-          <CaseHighlight />
-          <Insights />
+          {/* Content-secties */}
+          <main>
+            <Hero />
+            <USP />
+            <Workflow />
+            <Insights />
+            <CaseHighlight />
+            <Testimonial />
+          </main>
+
           <Footer />
         </div>
-      </div>
+      </ErrorBoundary>
     </HelmetProvider>
   );
 }
