@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-surface.soft dark:bg-surface.dark border-t border-neutral-200 dark:border-neutral-700 py-12 mt-12">
+    <footer className="relative bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-12 mt-12">
+      {/* Animated gradient bar */}
       <motion.div
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -12,7 +13,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
-          <p className="text-neutralInk/80 dark:text-gray-400 text-sm">
+          <p className="text-neutral-600 dark:text-gray-400 text-sm">
             Samen komen we altijd tot een voorstel op maat dat aansluit bij jouw doelstellingen en budget.
           </p>
           <a
@@ -24,7 +25,7 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">Meer Meten</h4>
-          <ul className="space-y-2 text-sm text-neutralInk/80 dark:text-gray-400">
+          <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
             <li>Google Analytics 4</li>
             <li>Consent Mode</li>
             <li>Dashboarding</li>
@@ -32,7 +33,7 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">Optimaliseer je site</h4>
-          <ul className="space-y-2 text-sm text-neutralInk/80 dark:text-gray-400">
+          <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
             <li>UX Audit</li>
             <li>Conversion Research</li>
             <li>Strategische verbeteringen</li>
@@ -40,9 +41,9 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">Contact</h4>
-          <p className="text-neutralInk/80 dark:text-gray-400 text-sm">info@ecommeasure.com</p>
-          <p className="text-neutralInk/80 dark:text-gray-400 text-sm">+31 6 12345678</p>
-          <p className="text-neutralInk/80 dark:text-gray-400 text-sm">Deventer, Nederland</p>
+          <p className="text-neutral-600 dark:text-gray-400 text-sm">info@ecommeasure.com</p>
+          <p className="text-neutral-600 dark:text-gray-400 text-sm">+31 6 12345678</p>
+          <p className="text-neutral-600 dark:text-gray-400 text-sm">Deventer, Nederland</p>
         </div>
       </div>
       <div className="mt-8 text-center text-neutral-500 dark:text-gray-500 text-xs">
