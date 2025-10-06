@@ -14,6 +14,9 @@ import CaseHighlight from "./components/CaseHighlight";
 import Insights from "./components/Insights";
 import Footer from "./components/Footer";
 
+// Animated puzzle slang
+import SnakeBackground from "./components/SnakeBackground";
+
 export default function App() {
   return (
     <HelmetProvider>
@@ -24,7 +27,12 @@ export default function App() {
         image="/og-image.png"
       />
 
-      <div className="bg-surface-light dark:bg-surface-dark text-neutral-900 dark:text-gray-100 font-sans min-h-screen">
+      <div className="relative bg-surface-light dark:bg-surface-dark text-neutral-900 dark:text-gray-100 font-sans min-h-screen overflow-hidden">
+        
+        {/* 🔹 Animated puzzle-slang achtergrond */}
+        <SnakeBackground />
+
+        {/* Pagina-secties */}
         <Header />
         <Hero />
         <Workflow />
