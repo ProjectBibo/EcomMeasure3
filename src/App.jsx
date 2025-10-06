@@ -1,13 +1,10 @@
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
-
-// SEO
 import SEO from "./components/SEO";
 
-// Sections
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import ScrollyAir from "./components/ScrollyAir";      // ⬅️ nieuw
+import ScrollyAirPro from "./components/ScrollyAirPro";  // ⬅️ nieuw
 import Workflow from "./components/Workflow";
 import USP from "./components/USP";
 import Testimonial from "./components/Testimonial";
@@ -15,8 +12,7 @@ import CaseHighlight from "./components/CaseHighlight";
 import Insights from "./components/Insights";
 import Footer from "./components/Footer";
 
-// (optioneel) jouw puzzel-slang achtergrond
-import SnakeBackground from "./components/SnakeBackground";
+import SnakeBackground from "./components/SnakeBackground"; // optioneel
 
 export default function App() {
   return (
@@ -27,20 +23,16 @@ export default function App() {
         url="https://www.ecommeasure.com"
         image="/og-image.png"
       />
-
       <div className="relative bg-surface-light dark:bg-surface-dark text-neutral-900 dark:text-gray-100 font-sans min-h-screen overflow-hidden">
-        {/* Achtergrondlaag (optioneel) */}
         <SnakeBackground />
-
-        {/* Contentlaag */}
         <div className="relative z-10">
           <Header />
           <Hero />
 
-          {/* ✨ Air-style scroll story */}
-          <ScrollyAir />
+          {/* ✨ Rijke scrolly-story */}
+          <ScrollyAirPro />
 
-          {/* Rest van je originele layout */}
+          {/* Jouw bestaande secties blijven gewoon staan */}
           <Workflow />
           <USP />
           <Testimonial />
