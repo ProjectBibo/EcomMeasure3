@@ -25,22 +25,22 @@ export default function App() {
         <div className="min-h-screen bg-surface-light dark:bg-surface-dark transition-colors">
           <Header />
 
-          {/* Decoratieve background kan blijven (zit -z idx) */}
+          {/* Decoratieve achtergrondlaag */}
           <SnakeBackground />
 
-          {/* --- BELANGRIJK: eerst de content (Hero bovenaan) --- */}
           <main>
+            {/* 1) Bovenaan: Hero (tekst) */}
             <Hero />
 
-            {/* Jouw contentsecties */}
+            {/* 2) Direct daarna: Animaties/Scenes */}
+            <ScrollyPortal />
+
+            {/* 3) Daarna pas de overige secties */}
             <USP />
             <Workflow />
             <Insights />
             <CaseHighlight />
             <Testimonial />
-
-            {/* --- PAS HIER de scrollytelling/portal-scenes --- */}
-            <ScrollyPortal />
           </main>
 
           <Footer />
