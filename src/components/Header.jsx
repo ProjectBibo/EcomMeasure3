@@ -35,13 +35,13 @@ export default function Header() {
 
       {/* 🔹 Main nav */}
       <div className="bg-surface-light dark:bg-surface-dark border-b">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          {/* Logo (extra groot gemaakt) */}
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
+          {/* Logo (extra groot) */}
           <a href="#hero" className="flex items-center">
             <img
               src="/logo.png"
               alt="EcomMeasure logo"
-              className="h-20 md:h-24 w-auto object-contain"
+              className="h-28 md:h-32 w-auto object-contain"
             />
           </a>
 
