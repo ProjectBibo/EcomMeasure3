@@ -6,20 +6,10 @@ export default function Header() {
     <header className="sticky top-0 z-50">
       {/* 🔹 Top bar */}
       <div className="bg-blue-100 border-b">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 text-sm text-neutralInk">
-          {/* Links: Google reviews */}
-          <div className="flex items-center gap-2">
-            <img src="/google-icon.svg" alt="Google" className="h-4 w-4" />
-            <span className="font-semibold">4.9</span>
-            <span className="text-yellow-500">★★★★★</span>
-            <span>| 80 reviews</span>
-          </div>
-
+        <div className="max-w-7xl mx-auto flex items-center justify-end px-6 py-2 text-sm text-neutralInk">
           {/* Rechts: menu items */}
           <div className="flex items-center gap-6">
-            <a href="#speaker" className="hover:text-brand-blue">Spreker</a>
             <a href="#about" className="hover:text-brand-blue">Over EcomMeasure</a>
-            <a href="#clients" className="hover:text-brand-blue">Opdrachtgevers</a>
             <a href="#projects" className="hover:text-brand-blue">Projecten</a>
             <a href="#contact" className="hover:text-brand-blue">Contact</a>
 
@@ -46,12 +36,12 @@ export default function Header() {
       {/* 🔹 Main nav */}
       <div className="bg-surface-light dark:bg-surface-dark border-b">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          {/* Logo */}
+          {/* Logo (extra groot gemaakt) */}
           <a href="#hero" className="flex items-center">
             <img
               src="/logo.png"
               alt="EcomMeasure logo"
-              className="h-14 md:h-16 w-auto object-contain"
+              className="h-20 md:h-24 w-auto object-contain"
             />
           </a>
 
