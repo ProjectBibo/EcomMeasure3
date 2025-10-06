@@ -1,23 +1,23 @@
-/** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class", // <- BELANGRIJK
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
         brand: {
-          blue: "#004AAD",      // primair (merk + CTA)
-          teal: "#0EA5A5",      // actie/accent (secundair)
-          tealHover: "#0C8E8E", // hover voor teal CTA
-          yellow: "#F9C513"     // highlight/badges
+          blue: "#004AAD",
+          teal: "#0EA5A5",
+          tealHover: "#0C8E8E",
+          yellow: "#F9C513",
         },
         neutralInk: {
-          DEFAULT: "#0B1220",   // hoofdtekst op licht
-          secondary: "#475569"  // secundaire tekst
+          DEFAULT: "#0B1220",
+          secondary: "#475569",
         },
         surface: {
-          light: "#FFFFFF",     // witte kaarten/achtergrond
-          soft:  "#F7F8FA",     // lichtgrijze secties
-          dark:  "#0F1115"      // (optioneel) donkere kaart
+          light: "#FFFFFF",
+          soft: "#F7F8FA",
+          dark: "#0F1115",
         },
       },
       fontFamily: {
