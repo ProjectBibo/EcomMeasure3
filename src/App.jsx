@@ -15,21 +15,19 @@ export default function App() {
   return (
     <>
       <SEO />
-      <div className="min-h-screen bg-surface-light dark:bg-surface-dark transition-colors relative overflow-hidden">
-        {/* ✅ geef content een hogere z-index dan Snake */}
-        <div className="relative z-10">
-          <Header />
-          <main>
-            <Hero />
-            <ScrollyPortal />
-            <USP />
-            <Workflow />
-            <Insights />
-            <CaseHighlight />
-            <Testimonial />
-          </main>
-          <Footer />
-        </div>
-         </>
+      <div className="min-h-screen bg-surface-light dark:bg-surface-dark transition-colors">
+        <Header />
+        <main>
+          <Hero />
+          <ScrollyPortal />
+          <USP />
+          <Workflow />
+          <Insights />
+          <CaseHighlight />
+          <Testimonial />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
