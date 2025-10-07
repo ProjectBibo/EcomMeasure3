@@ -1,39 +1,51 @@
-import React, { useEffect, useState } from "react";
+// src/components/DarkModeToggle.jsx
+import React, { useEffect, useState, useCallback } from "react";
 import { Moon, Sun } from "lucide-react";
 
 export default function DarkModeToggle() {
   const [isDark, setIsDark] = useState(false);
 
-  // Sync lokale state met huidige DOM state (gezet door index.html script)
   useEffect(() => {
+    if (typeof document === "undefined") return;
     const root = document.documentElement;
-    setIsDark(root.classList.contains("dark"));
+    setIsDark(root?.classList?.contains("dark") ?? false);
   }, []);
 
-  // Update <meta name="theme-color"> wanneer er geswitcht wordt
-  useEffect(() => {
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", isDark ? "#0f172a" : "#fafaf7");
-  }, [isDark]);
+  const toggle = useCallback(() => {
+    if (typeof document === "undefined") return;
 
-  const toggle = () => {
-    const root = document.documentElement;
-    const next = !root.classList.contains("dark");
-    root.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-    setIsDark(next);
+    try {
+      const root = document.documentElement;
+      const next = !(root?.classList?.contains("dark"));
 
-    // Optioneel: schakel een kleine kleur-overgang in na de eerste render
-    root.classList.add("theme-transition");
-    window.setTimeout(() => root.classList.remove("theme-transition"), 250);
-  };
+      if (root?.classList) {
+        root.classList.toggle("dark", next);
+        root.classList.add("theme-transition");
+        setTimeout(() => root.classList.remove("theme-transition"), 250);
+      } else {
+        // fallback
+        root.setAttribute(
+          "class",
+          (root.getAttribute("class") || "").replace(/\bdark\b/g, "") + (next ? " dark" : "")
+        );
+      }
+
+      localStorage.setItem("theme", next ? "dark" : "light");
+      setIsDark(next);
+
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", next ? "#0f172a" : "#fafaf7");
+    } catch (e) {
+      console.error("Theme toggle failed:", e);
+    }
+  }, []);
 
   return (
     <button
       type="button"
       onClick={toggle}
       aria-pressed={isDark}
-      className="inline-flex items-center gap-2 rounded-md px-3 py-2 border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+      className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
       title={isDark ? "Schakel licht thema in" : "Schakel donker thema in"}
     >
       {isDark ? <Sun size={16} /> : <Moon size={16} />}
