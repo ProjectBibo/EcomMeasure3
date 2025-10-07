@@ -1,22 +1,18 @@
-// src/components/SnakeBackground.jsx
 import React from "react";
-import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import {
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 
-/**
- * Dunne puzzel-slang met brede zig-zag — extended + cijfers in elk stukje
- * - Veel stukjes (lange animatie)
- * - Elk stukje toont een random cijfer (0–9), stabiel per stukje
- * - Tekstkleur: donker in light mode, licht in dark mode
- */
 const SETTINGS = {
   COLORS: ["#004AAD", "#0EA5A5", "#F9C513"],
-  OPACITY_CLASS: "opacity-10",
+  OPACITY_CLASS: "opacity-15", // iets duidelijker maken
   PIECE_SIZE: 28,
   ROUND: 8,
   GAP: 8,
 
   NUM_PIECES: 140,
-
   AMP_X: 140,
   AMP_Y: 18,
   WAVE_FREQ: 0.9,
@@ -32,16 +28,6 @@ const SETTINGS = {
 };
 
 export default function SnakeBackground() {
-  // Respecteer 'reduce motion' van gebruiker
-  const prefersReducedMotion = React.useMemo(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return false;
-    try {
-      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    } catch {
-      return false;
-    }
-  }, []);
-
   const { scrollY } = useScroll();
 
   const phaseMV = useTransform(
@@ -57,23 +43,9 @@ export default function SnakeBackground() {
 
   const [phase, setPhase] = React.useState(0);
   const [parallaxY, setParallaxY] = React.useState(0);
+  useMotionValueEvent(phaseMV, "change", (v) => setPhase(v));
+  useMotionValueEvent(parallaxYMV, "change", (v) => setParallaxY(v));
 
-  React.useEffect(() => {
-    if (prefersReducedMotion) {
-      setPhase(0);
-      setParallaxY(0);
-      return;
-    }
-    const unsub1 = phaseMV.on("change", setPhase);
-    const unsub2 = parallaxYMV.on("change", setParallaxY);
-    return () => {
-      unsub1?.();
-      unsub2?.();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prefersReducedMotion, phaseMV, parallaxYMV]);
-
-  // Stabiele random cijfers per stukje (0-9)
   const digits = React.useMemo(() => {
     const arr = [];
     for (let i = 0; i < SETTINGS.NUM_PIECES; i++) {
@@ -82,7 +54,6 @@ export default function SnakeBackground() {
     return arr;
   }, []);
 
-  // Posities
   const pieces = React.useMemo(() => {
     const arr = [];
     const S = SETTINGS.PIECE_SIZE;
@@ -109,21 +80,16 @@ export default function SnakeBackground() {
     return arr;
   }, [phase, digits]);
 
-  // Breedte voor centreren
-  const totalWidth = React.useMemo(
-    () =>
-      Math.min(
-        (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 +
-          SETTINGS.AMP_X * 2 +
-          200,
-        SETTINGS.MAX_WIDTH
-      ),
-    []
+  const totalWidth = Math.min(
+    (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 +
+      SETTINGS.AMP_X * 2 +
+      200,
+    SETTINGS.MAX_WIDTH
   );
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 -z-10 ${SETTINGS.OPACITY_CLASS}`}
+      className={`fixed inset-0 -z-10 ${SETTINGS.OPACITY_CLASS} pointer-events-none`}
       aria-hidden="true"
       style={{
         transform: `translate3d(-50%, ${parallaxY}px, 0) rotate(${SETTINGS.ROTATE_DEG}deg)`,
@@ -132,7 +98,7 @@ export default function SnakeBackground() {
       }}
     >
       <div
-        className="relative will-change-transform"
+        className="relative"
         style={{
           width: `${totalWidth}px`,
           height: `${
@@ -143,10 +109,9 @@ export default function SnakeBackground() {
         {pieces.map((p, i) => (
           <div
             key={i}
-            className="absolute will-change-transform"
+            className="absolute"
             style={{ transform: `translate3d(${p.x}px, ${p.y}px, 0)` }}
           >
-            {/* puzzelblok */}
             <div
               style={{
                 width: SETTINGS.PIECE_SIZE,
@@ -156,40 +121,10 @@ export default function SnakeBackground() {
                 position: "relative",
               }}
             >
-              {/* nummer — donker in light, licht in dark */}
-              <span
-                className="absolute inset-0 flex items-center justify-center text-[12px] md:text-[13px] font-semibold text-neutral-800/80 dark:text-gray-100/80"
-                style={{ lineHeight: 1 }}
-              >
+              <span className="absolute inset-0 flex items-center justify-center text-[12px] font-semibold text-neutral-800/80 dark:text-gray-100/80">
                 {p.digit}
               </span>
             </div>
-
-            {/* kleine “knopjes” boven/onder voor puzzel-look */}
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: 9999,
-                background: p.color,
-                opacity: 0.3,
-                position: "absolute",
-                left: SETTINGS.PIECE_SIZE / 2 - 4,
-                top: -6,
-              }}
-            />
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: 9999,
-                background: p.color,
-                opacity: 0.3,
-                position: "absolute",
-                left: SETTINGS.PIECE_SIZE / 2 - 4,
-                top: SETTINGS.PIECE_SIZE - 2,
-              }}
-            />
           </div>
         ))}
       </div>
