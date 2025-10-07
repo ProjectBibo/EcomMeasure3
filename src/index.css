@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Portal layers */
+/* ===== Zachte kleurtransitie bij togglen (optioneel) ===== */
+.theme-transition * {
+  transition: background-color 200ms, color 200ms, border-color 200ms, fill 200ms, stroke 200ms;
+}
+
+/* ===== Portal layers (ScrollyPortal) ===== */
 .portal-layer {
   position: fixed;
   inset: 0;
@@ -22,7 +27,7 @@
   will-change: transform, background, opacity;
 }
 
-/* Progress rail */
+/* ===== Progress rail (rechts) ===== */
 .progress-rail {
   pointer-events: none;
   position: fixed;
@@ -48,7 +53,8 @@
 .dark .progress-bar {
   background-color: rgba(255,255,255,0.5);
 }
-/* Link underline animatie */
+
+/* ===== Top-bar link underline animatie ===== */
 .nav-underline {
   position: relative;
   text-decoration: none;
@@ -64,7 +70,7 @@
 }
 .nav-underline:hover::after { width: 100%; }
 
-/* Pill links (diensten-cluster) */
+/* ===== Pill links (alternatief cluster-stijl, optioneel) ===== */
 .pill-link {
   display: inline-flex;
   align-items: center;
@@ -86,10 +92,55 @@
   filter: brightness(0.98);
 }
 
-/* Kleine hover lift voor CTA */
+/* ===== Diensten-kolommen (bottom bar) ===== */
+.svc-col { 
+  display: grid; 
+  align-content: center; 
+  gap: .2rem; 
+}
+.svc-head {
+  font-weight: 700; 
+  letter-spacing: .2px;
+  color: color-mix(in oklab, #0a0a0a 90%, transparent);
+  text-decoration: none;
+}
+.dark .svc-head { 
+  color: color-mix(in oklab, #ffffff 92%, transparent); 
+}
+.svc-sub {
+  font-size: .875rem; 
+  line-height: 1.15; 
+  text-decoration: none;
+  color: color-mix(in oklab, #0a0a0a 75%, transparent);
+  opacity: .9;
+}
+.dark .svc-sub { 
+  color: color-mix(in oklab, #ffffff 80%, transparent); 
+  opacity: .9; 
+}
+.svc-sub:hover, 
+.svc-head:hover { 
+  filter: brightness(0.98); 
+}
+
+/* ===== Mobile varianten (horizontale scroller) ===== */
+.svc-col-mobile { 
+  display: grid; 
+  gap: .15rem; 
+  padding: .35rem .6rem; 
+  border-radius: 10px;
+  background: color-mix(in oklab, #000 4%, transparent); 
+  border: 1px solid color-mix(in oklab, #000 8%, transparent);
+}
+.dark .svc-col-mobile {
+  background: color-mix(in oklab, #fff 6%, transparent);
+  border-color: color-mix(in oklab, #fff 14%, transparent);
+}
+
+/* ===== Kleine hover lift voor CTA ===== */
 .hover-lift { transform: translateY(0); }
 .hover-lift:hover { transform: translateY(-1px); }
 
-/* Verberg lelijke mobile scrollbars voor cluster */
+/* ===== Verberg lelijke mobile scrollbars ===== */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
