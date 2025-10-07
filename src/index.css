@@ -2,89 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =========================
-   Basis achtergrond + tekst (dark-mode aware)
-   ========================= */
-html, body, #root {
-  height: 100%;
-}
-
-body {
-  @apply bg-surface-light text-neutralInk antialiased;
-}
-.dark body {
-  @apply bg-surface-dark text-white;
-}
-
-/* Zorg dat native UI (forms, scrollbars) meekleuren */
-html { color-scheme: light; }
-.dark { color-scheme: dark; }
-
-/* Optioneel: subtiele overgang bij toggle */
-.theme-transition * {
-  @apply transition-colors duration-200;
-}
-
-/* =========================
-   Scrollytelling helpers
-   ========================= */
-
-/* Woorden kunnen afzonderlijk animeren */
-.word {
-  display: inline-block;
-  will-change: transform, opacity;
-}
-
-/* Scenes standaard verborgen; GSAP activeert ze per stuk */
-.scene {
-  display: none;
-}
-
-/* =========================
-   Portal layers
-   ========================= */
-
+/* Portal layers */
 .portal-layer {
   position: fixed;
   inset: 0;
-  z-index: 0; /* Altijd achter de content (z-10) */
+  z-index: 0;
   pointer-events: none;
 }
-
-/* Zachte blends en transparante lagen */
 .portal-radial,
 .portal-conic,
 .portal-blobs {
   mix-blend-mode: screen;
 }
-
-.portal-radial {
-  filter: blur(14px);
-  transition: background 600ms ease, opacity 400ms ease;
-}
-.portal-conic {
-  filter: blur(20px);
-  transition: background 600ms ease, transform 600ms ease, opacity 600ms ease;
-}
-.portal-blobs {
-  filter: blur(40px);
-}
-
-/* =========================
-   Blobs
-   ========================= */
 .blob {
   position: absolute;
   width: 55vmax;
   height: 55vmax;
   border-radius: 9999px;
   will-change: transform, background, opacity;
-  transition: background 600ms ease, opacity 400ms ease;
 }
 
-/* =========================
-   Progress rail (rechts)
-   ========================= */
+/* Progress rail */
 .progress-rail {
   pointer-events: none;
   position: fixed;
@@ -99,7 +37,6 @@ html { color-scheme: light; }
 .dark .progress-rail {
   background-color: rgba(255,255,255,0.1);
 }
-
 .progress-bar {
   height: 100%;
   width: 100%;
@@ -110,63 +47,4 @@ html { color-scheme: light; }
 }
 .dark .progress-bar {
   background-color: rgba(255,255,255,0.5);
-}
-
-/* =========================
-   Optioneel: Film grain overlay
-   ========================= */
-/*
-.grain-overlay { ... }
-@keyframes grainMove { ... }
-*/
-
-/* =========================================
-   HOLOGRAM (handshake) — light/dark aware
-   ========================================= */
-:root {
-  --holo-glow: rgba(0, 214, 255, 0.85);   /* outer glow (cyan) */
-  --holo-inner: rgba(0, 168, 255, 0.45);  /* inner fill */
-  --holo-dot: rgba(181, 255, 250, 0.95);  /* sharp core dots */
-  --holo-fade: rgba(255,255,255,0.0);
-  --holo-scan: rgba(0, 255, 255, 0.08);
-}
-.dark:root {
-  --holo-glow: rgba(56, 189, 248, 0.75);
-  --holo-inner: rgba(56, 189, 248, 0.28);
-  --holo-dot: rgba(224, 242, 254, 0.9);
-  --holo-fade: rgba(0,0,0,0.0);
-  --holo-scan: rgba(56, 189, 248, 0.08);
-}
-
-.holo {
-  isolation: isolate;
-  filter: saturate(1.05);
-}
-.holo-overlay::before,
-.holo-overlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.holo-overlay::before {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.03) 0px,
-    rgba(255,255,255,0.03) 1px,
-    transparent 2px,
-    transparent 4px
-  );
-  mix-blend-mode: screen;
-  opacity: 0.4;
-}
-.holo-overlay::after {
-  background: radial-gradient(120% 20% at 50% -10%, var(--holo-scan), transparent 60%);
-  animation: holoSweep 4.8s linear infinite;
-  mix-blend-mode: screen;
-  opacity: 0.6;
-}
-@keyframes holoSweep {
-  0%   { transform: translateY(-120%); }
-  100% { transform: translateY(120%);  }
 }
