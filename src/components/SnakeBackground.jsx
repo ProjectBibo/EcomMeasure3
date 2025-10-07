@@ -1,13 +1,10 @@
+// src/components/SnakeBackground.jsx
 import React from "react";
-import {
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
+import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const SETTINGS = {
   COLORS: ["#004AAD", "#0EA5A5", "#F9C513"],
-  OPACITY_CLASS: "opacity-15", // iets duidelijker maken
+  OPACITY_CLASS: "opacity-15", // maak evt. 'opacity-20' als je 'm sterker wil
   PIECE_SIZE: 28,
   ROUND: 8,
   GAP: 8,
@@ -29,67 +26,34 @@ const SETTINGS = {
 
 export default function SnakeBackground() {
   const { scrollY } = useScroll();
-
-  const phaseMV = useTransform(
-    scrollY,
-    SETTINGS.PHASE_SCROLL_RANGE,
-    SETTINGS.PHASE_OUTPUT_RANGE
-  );
-  const parallaxYMV = useTransform(
-    scrollY,
-    SETTINGS.PARALLAX_RANGE,
-    SETTINGS.PARALLAX_SHIFT
-  );
+  const phaseMV = useTransform(scrollY, SETTINGS.PHASE_SCROLL_RANGE, SETTINGS.PHASE_OUTPUT_RANGE);
+  const parallaxYMV = useTransform(scrollY, SETTINGS.PARALLAX_RANGE, SETTINGS.PARALLAX_SHIFT);
 
   const [phase, setPhase] = React.useState(0);
   const [parallaxY, setParallaxY] = React.useState(0);
-  useMotionValueEvent(phaseMV, "change", (v) => setPhase(v));
-  useMotionValueEvent(parallaxYMV, "change", (v) => setParallaxY(v));
+  useMotionValueEvent(phaseMV, "change", setPhase);
+  useMotionValueEvent(parallaxYMV, "change", setParallaxY);
 
-  const digits = React.useMemo(() => {
-    const arr = [];
-    for (let i = 0; i < SETTINGS.NUM_PIECES; i++) {
-      arr.push(Math.floor(Math.random() * 10));
-    }
-    return arr;
-  }, []);
-
+  const digits = React.useMemo(() => Array.from({ length: SETTINGS.NUM_PIECES }, () => Math.floor(Math.random()*10)), []);
   const pieces = React.useMemo(() => {
     const arr = [];
-    const S = SETTINGS.PIECE_SIZE;
-    const G = SETTINGS.GAP;
-    const step = S + G;
-
+    const S = SETTINGS.PIECE_SIZE, G = SETTINGS.GAP, step = S + G;
     for (let i = 0; i < SETTINGS.NUM_PIECES; i++) {
       const baseY = i * step;
-      const localY =
-        baseY +
-        Math.cos(phase * 0.6 + i * SETTINGS.WAVE_FREQ * 0.85) * SETTINGS.AMP_Y;
-
-      const localX =
-        i * (S * 0.15) +
-        Math.sin(phase + i * SETTINGS.WAVE_FREQ) * SETTINGS.AMP_X;
-
-      arr.push({
-        x: localX,
-        y: localY,
-        color: SETTINGS.COLORS[i % SETTINGS.COLORS.length],
-        digit: digits[i],
-      });
+      const y = baseY + Math.cos(phase * 0.6 + i * SETTINGS.WAVE_FREQ * 0.85) * SETTINGS.AMP_Y;
+      const x = i * (S * 0.15) + Math.sin(phase + i * SETTINGS.WAVE_FREQ) * SETTINGS.AMP_X;
+      arr.push({ x, y, color: SETTINGS.COLORS[i % SETTINGS.COLORS.length], digit: digits[i] });
     }
     return arr;
   }, [phase, digits]);
 
-  const totalWidth = Math.min(
-    (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 +
-      SETTINGS.AMP_X * 2 +
-      200,
-    SETTINGS.MAX_WIDTH
-  );
+  const totalWidth = React.useMemo(() =>
+    Math.min((SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 + SETTINGS.AMP_X * 2 + 200, SETTINGS.MAX_WIDTH)
+  , []);
 
   return (
     <div
-      className={`fixed inset-0 -z-10 ${SETTINGS.OPACITY_CLASS} pointer-events-none`}
+      className={`fixed inset-0 z-0 ${SETTINGS.OPACITY_CLASS} pointer-events-none`}
       aria-hidden="true"
       style={{
         transform: `translate3d(-50%, ${parallaxY}px, 0) rotate(${SETTINGS.ROTATE_DEG}deg)`,
@@ -101,17 +65,11 @@ export default function SnakeBackground() {
         className="relative"
         style={{
           width: `${totalWidth}px`,
-          height: `${
-            (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * (SETTINGS.NUM_PIECES / 2)
-          }px`,
+          height: `${(SETTINGS.PIECE_SIZE + SETTINGS.GAP) * (SETTINGS.NUM_PIECES / 2)}px`,
         }}
       >
         {pieces.map((p, i) => (
-          <div
-            key={i}
-            className="absolute"
-            style={{ transform: `translate3d(${p.x}px, ${p.y}px, 0)` }}
-          >
+          <div key={i} className="absolute" style={{ transform: `translate3d(${p.x}px, ${p.y}px, 0)` }}>
             <div
               style={{
                 width: SETTINGS.PIECE_SIZE,
@@ -121,7 +79,7 @@ export default function SnakeBackground() {
                 position: "relative",
               }}
             >
-              <span className="absolute inset-0 flex items-center justify-center text-[12px] font-semibold text-neutral-800/80 dark:text-gray-100/80">
+              <span className="absolute inset-0 flex items-center justify-center text-[12px] md:text-[13px] font-semibold text-neutral-800/80 dark:text-gray-100/80" style={{ lineHeight: 1 }}>
                 {p.digit}
               </span>
             </div>
