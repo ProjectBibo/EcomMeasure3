@@ -207,6 +207,15 @@ export default function ScrollyPortal() {
     return () => mo.disconnect();
   }, []);
 
+  // Reusable inline pattern voor de placeholder (geen extra CSS nodig)
+  const placeholderBg = {
+    backgroundImage: `
+      radial-gradient(80% 60% at 50% 40%, rgba(0,0,0,.18), rgba(0,0,0,0)),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.10) 0px, rgba(255,255,255,.10) 4px, rgba(255,255,255,0) 4px, rgba(255,255,255,0) 12px)
+    `,
+    backgroundBlendMode: "overlay, normal",
+  };
+
   return (
     <section ref={root} className="relative">
       {/* Portal layers */}
@@ -229,17 +238,70 @@ export default function ScrollyPortal() {
         <div ref={sVideoIntro} className="scene absolute inset-0 flex items-center justify-center px-6">
           <div
             ref={introFrameRef}
-            className="relative w-[92vw] max-w-6xl aspect-[16/9] overflow-hidden shadow-2xl"
+            className="relative w-[92vw] max-w-6xl aspect-[16/9] overflow-hidden shadow-2xl rounded-2xl bg-neutral-900/60 dark:bg-black/50"
             style={{ clipPath: "inset(22% 22% 22% 22% round 24px)" }}
           >
-            {/* Placeholder is zichtbaar zolang video niet ready is of bij fout */}
+            {/* --- VISUELE PLACEHOLDER --- */}
             {(!videoReady || videoError) && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-blue/50 to-brand-teal/50 text-white">
-                <div className="text-center px-6">
-                  <div className="text-3xl md:text-5xl font-extrabold mb-3">🎥 Intro-video</div>
-                  <div className="text-base md:text-xl opacity-90">
-                    Plaats je bestand als <code>/public/about.mp4</code><br />
-                    (poster optioneel: <code>/public/video-poster.jpg</code>)
+              <div
+                className="absolute inset-0 flex items-center justify-center text-white"
+                style={placeholderBg}
+                aria-label="Video placeholder"
+                role="img"
+              >
+                {/* Vulling & pseudo UI */}
+                <div className="absolute inset-0">
+                  {/* Top bar met titel */}
+                  <div className="absolute top-0 left-0 right-0 h-12 bg-black/30 backdrop-blur-sm flex items-center px-4 justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-block w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                      <span className="inline-block w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                      <span className="inline-block w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                      <span className="ml-3 text-sm md:text-base font-semibold tracking-wide opacity-90">Intro-video</span>
+                    </div>
+                    <span className="text-xs md:text-sm opacity-80">16:9 • /about.mp4</span>
+                  </div>
+
+                  {/* Bottom "controls" */}
+                  <div className="absolute left-0 right-0 bottom-0 px-5 pb-5">
+                    <div className="mx-auto w-full max-w-[92%] rounded-md bg-white/15 h-1.5 mb-3 overflow-hidden">
+                      <div className="h-full w-1/3 bg-white/60" />
+                    </div>
+                    <div className="flex items-center justify-between text-xs opacity-85">
+                      <span>00:00</span>
+                      <div className="flex items-center gap-3">
+                        <span className="hidden sm:inline">HD</span>
+                        <span className="hidden sm:inline">Subtitles</span>
+                        <span className="hidden sm:inline">Loop</span>
+                      </div>
+                      <span>00:12</span>
+                    </div>
+                  </div>
+
+                  {/* Hoeklabel */}
+                  <div className="absolute left-4 top-16 px-3 py-1 text-[11px] font-semibold tracking-wide rounded-full bg-white/15 backdrop-blur">
+                    VIDEO PLACEHOLDER
+                  </div>
+                </div>
+
+                {/* Groot “play” icoon (decoratief) */}
+                <div className="relative z-10 grid place-items-center">
+                  <div className="group inline-grid place-items-center rounded-full w-24 h-24 md:w-28 md:h-28 bg-white/20 backdrop-blur-lg ring-1 ring-white/40 hover:bg-white/30 transition">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" className="text-white/95">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <div className="mt-4 text-center px-6">
+                    <div className="text-xl md:text-2xl font-extrabold mb-1">Intro-video</div>
+                    <div className="text-xs md:text-sm opacity-90">
+                      Plaats je bestand als <code className="font-mono">/public/about.mp4</code>
+                      {` `} (optioneel poster: <code className="font-mono">/public/video-poster.jpg</code>)
+                    </div>
+                    {videoError && (
+                      <div className="mt-2 text-xs text-red-200/90">
+                        Kon video niet laden — controleer pad/bestand.
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -256,6 +318,7 @@ export default function ScrollyPortal() {
               preload="auto"
               poster="/video-poster.jpg"
               onLoadedData={() => setVideoReady(true)}
+              onCanPlay={() => setVideoReady(true)}
               onError={() => setVideoError(true)}
             />
           </div>
