@@ -10,7 +10,6 @@ import CaseHighlight from "./components/CaseHighlight";
 import Testimonial from "./components/Testimonial";
 import Footer from "./components/Footer";
 import SEO from "./components/SEO";
-import SnakeBackground from "./components/SnakeBackground";
 
 export default function App() {
   return (
