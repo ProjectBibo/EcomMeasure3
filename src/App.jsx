@@ -31,10 +31,3 @@ export default function App() {
           </main>
           <Footer />
         </div>
-
-        {/* ✅ Snake achter alles (z-0) */}
-        <SnakeBackground />
-      </div>
-    </>
-  );
-}
