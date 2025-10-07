@@ -48,3 +48,48 @@
 .dark .progress-bar {
   background-color: rgba(255,255,255,0.5);
 }
+/* Link underline animatie */
+.nav-underline {
+  position: relative;
+  text-decoration: none;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -0.2rem;
+  width: 0; height: 2px;
+  background: currentColor;
+  transition: width 200ms ease;
+  opacity: .7;
+}
+.nav-underline:hover::after { width: 100%; }
+
+/* Pill links (diensten-cluster) */
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .45rem .75rem;
+  border-radius: 9999px;
+  font-size: .875rem; /* text-sm */
+  line-height: 1;
+  background: color-mix(in oklab, var(--pill-bg, #f5f5f4) 80%, transparent);
+  border: 1px solid color-mix(in oklab, #000 8%, transparent);
+  color: color-mix(in oklab, #0a0a0a 85%, transparent);
+}
+.dark .pill-link {
+  background: color-mix(in oklab, #fff 8%, transparent);
+  border-color: color-mix(in oklab, #fff 16%, transparent);
+  color: color-mix(in oklab, #fff 92%, transparent);
+}
+.pill-link:hover {
+  filter: brightness(0.98);
+}
+
+/* Kleine hover lift voor CTA */
+.hover-lift { transform: translateY(0); }
+.hover-lift:hover { transform: translateY(-1px); }
+
+/* Verberg lelijke mobile scrollbars voor cluster */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
