@@ -1,12 +1,9 @@
+// src/components/SnakeBackground.jsx
 import React from "react";
-import {
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
+import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 /**
- * Dunne puzzel-slang met brede zig-zag — EXTENDED + cijfers in elk stukje
+ * Dunne puzzel-slang met brede zig-zag — extended + cijfers in elk stukje
  * - Veel stukjes (lange animatie)
  * - Elk stukje toont een random cijfer (0–9), stabiel per stukje
  * - Tekstkleur: donker in light mode, licht in dark mode
@@ -35,6 +32,16 @@ const SETTINGS = {
 };
 
 export default function SnakeBackground() {
+  // Respecteer 'reduce motion' van gebruiker
+  const prefersReducedMotion = React.useMemo(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return false;
+    try {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch {
+      return false;
+    }
+  }, []);
+
   const { scrollY } = useScroll();
 
   const phaseMV = useTransform(
@@ -50,10 +57,23 @@ export default function SnakeBackground() {
 
   const [phase, setPhase] = React.useState(0);
   const [parallaxY, setParallaxY] = React.useState(0);
-  useMotionValueEvent(phaseMV, "change", (v) => setPhase(v));
-  useMotionValueEvent(parallaxYMV, "change", (v) => setParallaxY(v));
 
-  // Precompute stabiele random cijfers per stukje (0-9)
+  React.useEffect(() => {
+    if (prefersReducedMotion) {
+      setPhase(0);
+      setParallaxY(0);
+      return;
+    }
+    const unsub1 = phaseMV.on("change", setPhase);
+    const unsub2 = parallaxYMV.on("change", setParallaxY);
+    return () => {
+      unsub1?.();
+      unsub2?.();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefersReducedMotion, phaseMV, parallaxYMV]);
+
+  // Stabiele random cijfers per stukje (0-9)
   const digits = React.useMemo(() => {
     const arr = [];
     for (let i = 0; i < SETTINGS.NUM_PIECES; i++) {
@@ -90,16 +110,20 @@ export default function SnakeBackground() {
   }, [phase, digits]);
 
   // Breedte voor centreren
-  const totalWidth = Math.min(
-    (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 +
-      SETTINGS.AMP_X * 2 +
-      200,
-    SETTINGS.MAX_WIDTH
+  const totalWidth = React.useMemo(
+    () =>
+      Math.min(
+        (SETTINGS.PIECE_SIZE + SETTINGS.GAP) * SETTINGS.NUM_PIECES * 0.35 +
+          SETTINGS.AMP_X * 2 +
+          200,
+        SETTINGS.MAX_WIDTH
+      ),
+    []
   );
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-0 ${SETTINGS.OPACITY_CLASS}`}
+      className={`pointer-events-none fixed inset-0 -z-10 ${SETTINGS.OPACITY_CLASS}`}
       aria-hidden="true"
       style={{
         transform: `translate3d(-50%, ${parallaxY}px, 0) rotate(${SETTINGS.ROTATE_DEG}deg)`,
@@ -132,7 +156,7 @@ export default function SnakeBackground() {
                 position: "relative",
               }}
             >
-              {/* nummer in het midden; donker in light, licht in dark */}
+              {/* nummer — donker in light, licht in dark */}
               <span
                 className="absolute inset-0 flex items-center justify-center text-[12px] md:text-[13px] font-semibold text-neutral-800/80 dark:text-gray-100/80"
                 style={{ lineHeight: 1 }}
