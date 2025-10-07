@@ -2,8 +2,6 @@
 <html lang="nl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-
-    <!-- Theme bootstrap: zet dark/light op <html> vóór eerste paint -->
     <script>
       (function () {
         try {
@@ -13,7 +11,7 @@
           var root = document.documentElement;
           root.classList.toggle('dark', dark);
 
-          // Browser UI kleur (adresbalk e.d.)
+          // Browser UI kleur (adresbalk)
           var meta = document.querySelector('meta[name="theme-color"]');
           if (!meta) {
             meta = document.createElement('meta');
@@ -28,33 +26,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcomMeasure – Data-gedreven website optimalisatie</title>
 
-    <!-- SEO Meta -->
-    <meta
-      name="description"
-      content="EcomMeasure helpt webshops en websites groeien met data-gedreven inzichten, GA4/Consent Mode en UX optimalisaties."
-    />
-    <meta
-      name="keywords"
-      content="EcomMeasure, GA4, Google Analytics, Consent Mode, UX Research, CRO, website optimalisatie"
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="EcomMeasure – Data-gedreven website optimalisatie" />
-    <meta property="og:description" content="Binnen 30 dagen: betrouwbare GA4 + Consent Mode v2 implementatie en UX-inzichten die je website laten groeien." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.ecommeasure.com/" />
+    <!-- Open Graph / Twitter etc. — laat zoals je had -->
     <meta property="og:image" content="/og-image.png" />
-
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="EcomMeasure – Data-gedreven website optimalisatie" />
-    <meta name="twitter:description" content="EcomMeasure helpt webshops groeien met data en UX-inzichten." />
-    <meta name="twitter:image" content="/og-image.png" />
 
-    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
-
-    <!-- Fonts: Inter -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -63,14 +40,9 @@
     />
   </head>
 
-  <body class="bg-surface-light dark:bg-surface-dark text-neutralInk dark:text-white">
+  <body class="bg-surface-light dark:bg-surface-dark">
     <div id="root"></div>
-
-    <!-- Vite mount -->
     <script type="module" src="/src/main.jsx"></script>
-
-    <noscript>
-      Deze site werkt beter met JavaScript ingeschakeld.
-    </noscript>
+    <noscript>Deze site werkt beter met JavaScript ingeschakeld.</noscript>
   </body>
 </html>
