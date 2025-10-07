@@ -30,3 +30,6 @@ export default function App() {
           </main>
           <Footer />
         </div>
+         </>
+  );
+}
