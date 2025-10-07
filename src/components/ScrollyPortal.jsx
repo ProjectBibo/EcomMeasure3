@@ -1,5 +1,5 @@
 // src/components/ScrollyPortal.jsx
-import React, { useLayoutEffect, useRef, useEffect } from "react";
+import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -26,6 +26,10 @@ export default function ScrollyPortal() {
   const claimLine2Ref = useRef(null);
   const caseAfter = useRef(null);
   const progressRef = useRef(null);
+
+  // Video state voor placeholder/zichtbaarheid
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   const splitWords = (el) => {
     if (!el) return [];
@@ -114,7 +118,8 @@ export default function ScrollyPortal() {
         const L = tl.duration();
         tl.addLabel(`INTRO${L}`);
         tl.set(sVideoIntro.current, { autoAlpha: 0, display: "flex" }, `INTRO${L}`);
-        // frame start klein & met afgeronde hoeken
+
+        // frame start klein & met afgeronde hoeken -> naar full
         tl.fromTo(
           introFrameRef.current,
           { clipPath: "inset(22% 22% 22% 22% round 24px)", scale: 0.9, autoAlpha: 0.0 },
@@ -122,7 +127,7 @@ export default function ScrollyPortal() {
           `INTRO${L}`
         );
         // houd even ‘full’
-        tl.to(introFrameRef.current, { duration: 0.3 });
+        tl.to(introFrameRef.current, { duration: 0.6 });
         // shrink & fade om plaats te maken voor volgende scene
         tl.to(introFrameRef.current, { clipPath: "inset(28% 28% 28% 28% round 24px)", scale: 0.86, duration: 0.7, ease: "power3.inOut" });
         tl.to(sVideoIntro.current, { autoAlpha: 0, duration: 0.4 }, "<");
@@ -227,20 +232,32 @@ export default function ScrollyPortal() {
             className="relative w-[92vw] max-w-6xl aspect-[16/9] overflow-hidden shadow-2xl"
             style={{ clipPath: "inset(22% 22% 22% 22% round 24px)" }}
           >
-            {/* Video layer */}
+            {/* Placeholder is zichtbaar zolang video niet ready is of bij fout */}
+            {(!videoReady || videoError) && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-blue/50 to-brand-teal/50 text-white">
+                <div className="text-center px-6">
+                  <div className="text-3xl md:text-5xl font-extrabold mb-3">🎥 Intro-video</div>
+                  <div className="text-base md:text-xl opacity-90">
+                    Plaats je bestand als <code>/public/about.mp4</code><br />
+                    (poster optioneel: <code>/public/video-poster.jpg</code>)
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Video layer (fade in zodra ready) */}
             <video
-              className="absolute inset-0 w-full h-full object-cover"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoReady && !videoError ? "opacity-100" : "opacity-0"}`}
               src="/about.mp4"
               playsInline
               muted
               autoPlay
               loop
+              preload="auto"
               poster="/video-poster.jpg"
+              onLoadedData={() => setVideoReady(true)}
+              onError={() => setVideoError(true)}
             />
-            {/* Placeholder overlay als video ontbreekt */}
-            <div className="absolute inset-0 grid place-items-center bg-black/20 text-white text-lg md:text-2xl">
-              <strong>INTRO VIDEO</strong> — plaats <code>/public/about.mp4</code>
-            </div>
           </div>
         </div>
 
