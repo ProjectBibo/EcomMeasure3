@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Radar, Compass, Sparkles } from "lucide-react";
 
 const uspItems = [
@@ -24,6 +24,8 @@ const uspItems = [
 ];
 
 export default function USP() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="diensten"
@@ -34,10 +36,10 @@ export default function USP() {
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
         <div className="grid gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.7fr)] items-start">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -30 }}
+            whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
             className="relative rounded-3xl border border-neutral-200/70 bg-white/80 p-8 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
@@ -60,10 +62,14 @@ export default function USP() {
             {uspItems.map((item, index) => (
               <motion.article
                 key={item.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.3 }}
+                transition={
+                  shouldReduceMotion
+                    ? undefined
+                    : { delay: index * 0.1, duration: 0.6 }
+                }
                 whileHover={{ y: -8 }}
                 className="group relative overflow-hidden rounded-2xl border border-white/70 bg-white/80 p-7 shadow-sm backdrop-blur transition dark:border-white/10 dark:bg-white/5"
               >

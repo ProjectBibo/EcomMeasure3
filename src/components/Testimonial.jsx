@@ -1,8 +1,10 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
 
 export default function Testimonial() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="reviews"
@@ -12,20 +14,22 @@ export default function Testimonial() {
       <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/10 via-transparent to-brand-yellow/10 dark:from-brand-blue/15 dark:via-transparent dark:to-brand-yellow/15" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+          transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
           className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-white/10 dark:bg-white/5"
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-yellow/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900">
             Klanten aan het woord
           </span>
           <motion.blockquote
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.6 }}
+            transition={
+              shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }
+            }
             className="mt-6 space-y-4 text-neutral-700 dark:text-gray-200"
           >
             <Quote className="text-brand-blue" size={28} />
@@ -50,10 +54,12 @@ export default function Testimonial() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.92 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+          viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+          transition={
+            shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.1 }
+          }
           className="relative aspect-video overflow-hidden rounded-3xl border border-white/50 shadow-2xl"
         >
           <iframe
