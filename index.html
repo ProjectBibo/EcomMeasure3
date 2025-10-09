@@ -5,20 +5,45 @@
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem('theme');
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var dark = stored ? stored === 'dark' : prefersDark;
-          var root = document.documentElement;
-          root.classList.toggle('dark', dark);
+          var MODE_KEY = 'theme-mode';
+          var PALETTE_KEY = 'theme-palette';
+          var DEFAULT_PALETTE = 'aurora';
+          var paletteMeta = {
+            aurora: { light: '#f5f7fb', dark: '#040816' },
+            nocturne: { light: '#f8f4ff', dark: '#0a041a' },
+            verdant: { light: '#f3fbf7', dark: '#03180f' },
+            solar: { light: '#fff4ec', dark: '#1a0604' },
+          };
 
-          // Browser UI kleur (adresbalk)
+          var root = document.documentElement;
+          var storedMode = localStorage.getItem(MODE_KEY);
+          if (storedMode !== 'dark' && storedMode !== 'light') {
+            storedMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          root.classList.toggle('dark', storedMode === 'dark');
+          localStorage.setItem(MODE_KEY, storedMode);
+
+          var storedPalette = localStorage.getItem(PALETTE_KEY);
+          if (!storedPalette || !paletteMeta[storedPalette]) {
+            storedPalette = DEFAULT_PALETTE;
+          }
+
+          Object.keys(paletteMeta).forEach(function (id) {
+            root.classList.remove('theme-' + id);
+          });
+          root.classList.add('theme-' + storedPalette);
+          root.dataset.theme = storedPalette;
+          localStorage.setItem(PALETTE_KEY, storedPalette);
+
+          var palette = paletteMeta[storedPalette];
+          var metaColor = storedMode === 'dark' ? palette.dark : palette.light;
           var meta = document.querySelector('meta[name="theme-color"]');
           if (!meta) {
             meta = document.createElement('meta');
             meta.name = 'theme-color';
             document.head.appendChild(meta);
           }
-          meta.setAttribute('content', dark ? '#0f172a' : '#fafaf7');
+          meta.setAttribute('content', metaColor);
         } catch (e) {}
       })();
     </script>

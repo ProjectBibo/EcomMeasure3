@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import USP from "./components/USP";
@@ -13,6 +13,18 @@ import SEO from "./components/SEO";
 import ThemeDock from "./components/ThemeDock";
 
 export default function App() {
+  useEffect(() => {
+    const portals = document.querySelectorAll(".scrolly-portal");
+    portals.forEach((node) => {
+      const parent = node.parentElement;
+      if (parent) {
+        parent.removeChild(node);
+      } else {
+        node.remove();
+      }
+    });
+  }, []);
+
   return (
     <>
       <SEO />
