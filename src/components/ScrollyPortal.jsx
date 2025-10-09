@@ -217,7 +217,7 @@ export default function ScrollyPortal() {
   };
 
   return (
-    <section ref={root} className="relative">
+    <section ref={root} data-snap-section className="relative">
       {/* Portal layers */}
       <div ref={bgRadial} className="portal-layer portal-radial" />
       <div ref={bgConic}  className="portal-layer portal-conic" />
