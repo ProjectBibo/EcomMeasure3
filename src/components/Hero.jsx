@@ -40,9 +40,9 @@ export default function Hero() {
       className="relative isolate overflow-hidden"
     >
       <div className="story-stripe" aria-hidden />
-      <div className="glow-orb glow-orb--blue -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
-      <div className="glow-orb glow-orb--teal top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
-      <div className="glow-orb glow-orb--yellow bottom-0 left-1/4 h-[22rem] w-[22rem]" aria-hidden />
+      <div className="glow-orb glow-orb--primary -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
+      <div className="glow-orb glow-orb--secondary top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
+      <div className="glow-orb glow-orb--tertiary bottom-0 left-1/4 h-[22rem] w-[22rem]" aria-hidden />
       <div className="grain-overlay" aria-hidden />
 
       <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
@@ -61,7 +61,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
-          Laat bezoekers meebewegen met een <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">magnetische customer journey</span>
+          Laat bezoekers meebewegen met een <span className="bg-gradient-to-r from-accent via-accent2 to-accent3 bg-clip-text text-transparent">magnetische customer journey</span>
         </motion.h1>
 
         <motion.p
@@ -83,7 +83,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-brand-blue/30 transition"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-[0_18px_40px_rgba(var(--accent-1)/0.35)] transition"
           >
             Plan een kennismaking <ArrowRight size={18} />
           </motion.a>
@@ -106,9 +106,9 @@ export default function Hero() {
               key={item.label}
               className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-sm backdrop-blur transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-white/5"
             >
-              <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-brand-blue/10 blur-xl transition group-hover:scale-125" aria-hidden />
+              <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-accent/10 blur-xl transition group-hover:scale-125" aria-hidden />
               <div className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">{item.label}</div>
-              <div className="mt-3 text-3xl font-bold text-brand-blue dark:text-brand-teal">{item.value}</div>
+              <div className="mt-3 text-3xl font-bold text-accent dark:text-accent2">{item.value}</div>
               <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.helper}</p>
             </div>
           ))}
@@ -120,11 +120,11 @@ export default function Hero() {
           transition={{ delay: 0.25, duration: 0.7 }}
           className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
         >
-          <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
+          <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-accent/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             {heroStoryline.map((story) => (
               <div key={story.title} className="relative pl-5">
-                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow" aria-hidden />
+                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-accent via-accent2 to-accent3" aria-hidden />
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>

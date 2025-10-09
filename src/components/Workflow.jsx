@@ -26,7 +26,7 @@ export default function Workflow() {
       data-snap-section
       className="relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-brand-teal/4 to-brand-yellow/6 dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-yellow/10" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-accent2/10 to-accent3/10 dark:from-accent/15 dark:via-accent2/15 dark:to-accent3/15" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ export default function Workflow() {
         </motion.div>
 
         <div className="relative mt-14">
-          <div className="absolute left-[22px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow md:block" aria-hidden />
+          <div className="absolute left-[22px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-accent via-accent2 to-accent3 md:block" aria-hidden />
           <div className="space-y-12">
             {steps.map((step, index) => (
               <motion.article
@@ -59,15 +59,15 @@ export default function Workflow() {
                 className="relative grid gap-5 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5 md:grid-cols-[auto_1fr]"
               >
                 <div className="relative flex h-full items-start justify-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue text-white font-semibold">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-white font-semibold">
                     0{index + 1}
                   </div>
-                  <div className="absolute left-1/2 top-12 hidden h-[calc(100%+1rem)] w-px -translate-x-1/2 bg-brand-blue/20 md:block" aria-hidden />
+                  <div className="absolute left-1/2 top-12 hidden h-[calc(100%+1rem)] w-px -translate-x-1/2 bg-accent/20 md:block" aria-hidden />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{step.title}</h3>
                   <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{step.text}</p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                     {step.deliverable}
                   </div>
                 </div>

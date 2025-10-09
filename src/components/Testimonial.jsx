@@ -9,7 +9,7 @@ export default function Testimonial() {
       data-snap-section
       className="relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/10 via-transparent to-brand-yellow/10 dark:from-brand-blue/15 dark:via-transparent dark:to-brand-yellow/15" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/10 via-transparent to-accent3/10 dark:from-accent/15 dark:via-transparent dark:to-accent3/15" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -18,7 +18,7 @@ export default function Testimonial() {
           transition={{ duration: 0.7 }}
           className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-white/10 dark:bg-white/5"
         >
-          <span className="inline-flex items-center gap-2 rounded-full bg-brand-yellow/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900">
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent3/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900">
             Klanten aan het woord
           </span>
           <motion.blockquote
@@ -28,7 +28,7 @@ export default function Testimonial() {
             transition={{ delay: 0.15, duration: 0.6 }}
             className="mt-6 space-y-4 text-neutral-700 dark:text-gray-200"
           >
-            <Quote className="text-brand-blue" size={28} />
+            <Quote className="text-accent" size={28} />
             <p className="text-lg leading-relaxed">
               “Goede communicatie en samenwerking. Duidelijke rapportages en verbeterpunten. Je voelt dat alles is doordacht vanuit de klant.”
             </p>

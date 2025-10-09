@@ -51,16 +51,16 @@ export default function Insights() {
               transition={{ delay: index * 0.1, duration: 0.6 }}
               className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
             >
-              <span className="inline-flex items-center rounded-full bg-brand-yellow/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900 dark:text-neutral-900">
+              <span className="inline-flex items-center rounded-full bg-accent3/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900 dark:text-neutral-900">
                 {item.tag}
               </span>
               <h3 className="mt-5 text-2xl font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
               <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.text}</p>
               <div className="mt-8 flex items-end gap-4">
-                <span className="text-5xl font-black text-brand-blue dark:text-brand-teal">{item.stat}</span>
+                <span className="text-5xl font-black text-accent dark:text-accent2">{item.stat}</span>
                 <p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-gray-400">{item.detail}</p>
               </div>
-              <div className="absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden />
+              <div className="absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-accent/10 blur-3xl" aria-hidden />
             </motion.article>
           ))}
         </div>

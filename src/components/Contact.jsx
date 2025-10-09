@@ -40,7 +40,7 @@ export default function Contact() {
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/5 via-brand-teal/5 to-brand-yellow/5 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
+      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-accent/10 via-accent2/10 to-accent3/10 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -48,7 +48,7 @@ export default function Contact() {
           whileInView={{ opacity: 0.25, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="mx-auto mt-10 h-[420px] w-[420px] rounded-full bg-brand-blue/30 blur-3xl"
+          className="mx-auto mt-10 h-[420px] w-[420px] rounded-full bg-accent/30 blur-3xl"
         />
       </div>
       <div className="absolute inset-0 opacity-50">
@@ -62,7 +62,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-white/70 dark:bg-white/10 text-sm font-medium text-brand-blue shadow-sm"
+            className="inline-flex items-center px-3 py-1 rounded-full bg-white/70 dark:bg-white/10 text-sm font-medium text-accent shadow-sm"
           >
             Klaar om samen te werken?
           </motion.span>
@@ -96,7 +96,7 @@ export default function Contact() {
               transition={{ delay: 0.15 * index, duration: 0.5 }}
               className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-surface-dark/80"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                 <Icon size={22} />
               </div>
               <h3 className="mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{title}</h3>
@@ -105,7 +105,7 @@ export default function Contact() {
               </p>
               <a
                 href={action.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition group-hover:translate-x-0.5"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent transition group-hover:translate-x-0.5"
               >
                 {action.label}
                 <span aria-hidden="true">→</span>
@@ -125,19 +125,19 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-semibold">Sneller schakelen?</h3>
               <p className="mt-2 text-sm text-neutral-300 lg:max-w-xl">
-                Bel direct via <a href="tel:+31612345678" className="underline decoration-brand-yellow decoration-2 underline-offset-4">+31 6 12345678</a> of stuur je Analytics-profiel mee zodat we gericht kunnen voorbereiden.
+                Bel direct via <a href="tel:+31612345678" className="underline decoration-accent3 decoration-2 underline-offset-4">+31 6 12345678</a> of stuur je Analytics-profiel mee zodat we gericht kunnen voorbereiden.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 transition hover:bg-accent3"
               >
                 info@ecommeasure.com
               </a>
               <a
                 href="https://www.linkedin.com/"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white transition hover:border-brand-yellow hover:text-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white transition hover:border-accent3 hover:text-accent3"
               >
                 Volg op LinkedIn
               </a>

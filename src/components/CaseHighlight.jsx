@@ -8,7 +8,7 @@ export default function CaseHighlight() {
       data-snap-section
       className="relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/8 via-transparent to-brand-yellow/10 dark:from-brand-blue/15 dark:via-transparent dark:to-brand-yellow/15" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/8 via-transparent to-accent3/10 dark:from-accent/15 dark:via-transparent dark:to-accent3/15" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -17,7 +17,7 @@ export default function CaseHighlight() {
           transition={{ duration: 0.7 }}
           className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-white/10 dark:bg-white/5"
         >
-          <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-blue">
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
             Case spotlight
           </span>
           <h3 className="mt-4 text-3xl font-semibold text-neutral-900 dark:text-white">
@@ -27,11 +27,11 @@ export default function CaseHighlight() {
             Door drie hoofdstukken in de journey te herschrijven – ontdekken, vergelijken en afrekenen – ontstond een verhaal dat klanten vanzelf verder liet scrollen.
           </p>
           <ul className="mt-6 space-y-4 text-sm text-neutral-600 dark:text-gray-300">
-            <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-blue" aria-hidden />Nieuwe "snelle vergelijking" module met realtime voorraad.
+            <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-accent" aria-hidden />Nieuwe "snelle vergelijking" module met realtime voorraad.
             </li>
-            <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-teal" aria-hidden />Check-out flow met microcopy die bezwaren wegneemt.
+            <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-accent2" aria-hidden />Check-out flow met microcopy die bezwaren wegneemt.
             </li>
-            <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />Dashboards die resultaten per sprint terugkoppelen.
+            <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-accent3" aria-hidden />Dashboards die resultaten per sprint terugkoppelen.
             </li>
           </ul>
           <a
@@ -69,7 +69,7 @@ export default function CaseHighlight() {
               </div>
             </div>
           </div>
-          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-brand-blue/30 blur-3xl" aria-hidden />
+          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-accent/30 blur-3xl" aria-hidden />
         </motion.div>
       </div>
     </section>

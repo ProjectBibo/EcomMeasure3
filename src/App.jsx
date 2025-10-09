@@ -2,7 +2,6 @@
 import React from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import ScrollyPortal from "./components/ScrollyPortal";
 import USP from "./components/USP";
 import Workflow from "./components/Workflow";
 import Insights from "./components/Insights";
@@ -11,6 +10,7 @@ import Testimonial from "./components/Testimonial";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SEO from "./components/SEO";
+import ThemeDock from "./components/ThemeDock";
 
 export default function App() {
   return (
@@ -20,7 +20,6 @@ export default function App() {
         <Header />
         <main className="relative flex flex-col">
           <Hero />
-          <ScrollyPortal />
           <USP />
           <Workflow />
           <Insights />
@@ -29,6 +28,7 @@ export default function App() {
           <Contact />
         </main>
         <Footer />
+        <ThemeDock />
       </div>
     </>
   );

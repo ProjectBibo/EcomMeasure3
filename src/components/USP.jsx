@@ -40,7 +40,7 @@ export default function USP() {
             transition={{ duration: 0.7 }}
             className="relative rounded-3xl border border-neutral-200/70 bg-white/80 p-8 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Kompas
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">
@@ -50,9 +50,9 @@ export default function USP() {
               Bouw aan een magnetische flow die bezoekers stap voor stap meeneemt. Wij koppelen meetpunten aan het verhaal van je merk zodat strategie, creatie en development dezelfde taal spreken.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
-              <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue" aria-hidden />Inzicht in waar bezoekers afhaken en waarom.</li>
-              <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden />Roadmaps die teams helpen focussen op impact.</li>
-              <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-yellow" aria-hidden />Visuals en copy die consistent blijven door de journey.</li>
+              <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />Inzicht in waar bezoekers afhaken en waarom.</li>
+              <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden />Roadmaps die teams helpen focussen op impact.</li>
+              <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent3" aria-hidden />Visuals en copy die consistent blijven door de journey.</li>
             </ul>
           </motion.div>
 
@@ -67,8 +67,8 @@ export default function USP() {
                 whileHover={{ y: -8 }}
                 className="group relative overflow-hidden rounded-2xl border border-white/70 bg-white/80 p-7 shadow-sm backdrop-blur transition dark:border-white/10 dark:bg-white/5"
               >
-                <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-brand-blue/10 blur-3xl transition group-hover:scale-125" aria-hidden />
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-accent/10 blur-3xl transition group-hover:scale-125" aria-hidden />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
                   <item.icon size={22} />
                 </div>
                 <h3 className="mt-6 text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>

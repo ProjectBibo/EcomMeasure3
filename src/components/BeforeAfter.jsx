@@ -20,7 +20,7 @@ export default function BeforeAfter({
         <input
           type="range" defaultValue="50" aria-label="Vergelijk voor en na"
           onInput={(e)=> e.currentTarget.parentElement.style.setProperty("--x", `${100 - e.currentTarget.value}%`)}
-          className="absolute left-1/2 -translate-x-1/2 bottom-4 w-3/4 accent-brand-blue"
+          className="absolute left-1/2 -translate-x-1/2 bottom-4 w-3/4 accent-accent"
         />
       </div>
     </section>
