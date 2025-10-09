@@ -8,6 +8,7 @@ import Workflow from "./components/Workflow";
 import Insights from "./components/Insights";
 import CaseHighlight from "./components/CaseHighlight";
 import Testimonial from "./components/Testimonial";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SEO from "./components/SEO";
 
@@ -25,6 +26,7 @@ export default function App() {
           <Insights />
           <CaseHighlight />
           <Testimonial />
+          <Contact />
         </main>
         <Footer />
       </div>
