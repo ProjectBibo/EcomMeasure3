@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const steps = [
   {
@@ -20,6 +20,8 @@ const steps = [
 ];
 
 export default function Workflow() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="workflow"
@@ -29,10 +31,10 @@ export default function Workflow() {
       <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-brand-teal/4 to-brand-yellow/6 dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-yellow/10" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+          transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
           className="max-w-2xl"
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-700 shadow-sm backdrop-blur dark:bg-white/10 dark:text-white">
@@ -52,10 +54,14 @@ export default function Workflow() {
             {steps.map((step, index) => (
               <motion.article
                 key={step.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ delay: index * 0.08, duration: 0.6 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
+                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+                transition={
+                  shouldReduceMotion
+                    ? undefined
+                    : { delay: index * 0.08, duration: 0.6 }
+                }
                 className="relative grid gap-5 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5 md:grid-cols-[auto_1fr]"
               >
                 <div className="relative flex h-full items-start justify-center">
