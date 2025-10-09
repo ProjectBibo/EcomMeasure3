@@ -139,6 +139,21 @@ body {
   scroll-snap-stop: always;
 }
 
+/* Hard-remove legacy ScrollyPortal layers if they still exist in the DOM */
+.scrolly-portal,
+.scrolly-portal .portal-layer,
+.scrolly-portal .scene,
+.scrolly-portal .progress-rail,
+.scrolly-portal .progress-bar,
+.scene,
+.portal-layer,
+.progress-rail,
+.progress-bar {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
