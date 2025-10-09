@@ -5,6 +5,34 @@
     <script>
       (function () {
         try {
+          var selectors = [
+            ".scrolly-portal",
+            ".portal-layer",
+            ".scene",
+            ".progress-rail",
+            ".progress-bar"
+          ];
+
+          for (var i = 0; i < selectors.length; i += 1) {
+            var nodes = document.querySelectorAll(selectors[i]);
+            for (var j = 0; j < nodes.length; j += 1) {
+              var node = nodes[j];
+              var section = node.closest ? node.closest("section") : null;
+              if (section && (!section.id || /portal|scrolly/i.test(section.id))) {
+                section.remove();
+              } else if (node.remove) {
+                node.remove();
+              } else if (node.parentNode) {
+                node.parentNode.removeChild(node);
+              }
+            }
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <script>
+      (function () {
+        try {
           var MODE_KEY = 'theme-mode';
           var PALETTE_KEY = 'theme-palette';
           var DEFAULT_PALETTE = 'aurora';

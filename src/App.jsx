@@ -11,18 +11,16 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SEO from "./components/SEO";
 import ThemeDock from "./components/ThemeDock";
+import { stripLegacyScrollyPortal } from "./utils/legacyPortal";
 
 export default function App() {
   useEffect(() => {
-    const portals = document.querySelectorAll(".scrolly-portal");
-    portals.forEach((node) => {
-      const parent = node.parentElement;
-      if (parent) {
-        parent.removeChild(node);
-      } else {
-        node.remove();
+    const disconnect = stripLegacyScrollyPortal();
+    return () => {
+      if (typeof disconnect === "function") {
+        disconnect();
       }
-    });
+    };
   }, []);
 
   return (
