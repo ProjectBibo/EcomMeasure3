@@ -1,28 +1,28 @@
 // src/components/Header.jsx
 import React, { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { ensureTheme, setThemeMode } from "../utils/theme";
 
 export default function Header() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
-    setIsDark(document.documentElement.classList.contains("dark"));
+    const { mode } = ensureTheme();
+    setIsDark(mode === "dark");
+
+    const handleMode = (event) => {
+      if (event?.detail?.mode) {
+        setIsDark(event.detail.mode === "dark");
+      }
+    };
+
+    window.addEventListener("theme:mode", handleMode);
+    return () => window.removeEventListener("theme:mode", handleMode);
   }, []);
 
   const toggleDark = () => {
-    if (typeof document === "undefined") return;
-    const html = document.documentElement;
-    const next = !html.classList.contains("dark");
-    html.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-    setIsDark(next);
-
-    // zachte overgang + theme-color voor adresbalk
-    html.classList.add("theme-transition");
-    window.setTimeout(() => html.classList.remove("theme-transition"), 250);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", next ? "#0f172a" : "#fafaf7");
+    const next = isDark ? "light" : "dark";
+    setThemeMode(next);
   };
 
   return (
@@ -90,7 +90,7 @@ export default function Header() {
           <div className="flex-shrink-0">
             <a
               href="#contact"
-              className="px-5 py-2 rounded-md bg-brand-blue text-white font-semibold shadow hover:shadow-lg hover-lift transition"
+              className="px-5 py-2 rounded-md bg-accent text-white font-semibold shadow hover:shadow-lg hover-lift transition"
             >
               Laten we kennismaken
             </a>
