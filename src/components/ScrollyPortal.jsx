@@ -2,6 +2,7 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useReducedMotion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,6 +31,9 @@ export default function ScrollyPortal() {
   // Video state voor placeholder/zichtbaarheid
   const [videoReady, setVideoReady] = useState(false);
   const [videoError, setVideoError] = useState(false);
+
+  const shouldReduceMotion = useReducedMotion();
+  const animationsActive = false;
 
   const splitWords = (el) => {
     if (!el) return [];
@@ -66,6 +70,9 @@ export default function ScrollyPortal() {
         };
 
   useLayoutEffect(() => {
+    if (shouldReduceMotion || !animationsActive) {
+      return undefined;
+    }
     const ctx = gsap.context(() => {
       const isDark = document.documentElement.classList.contains("dark");
       const palette = getPalette(isDark);
@@ -185,10 +192,13 @@ export default function ScrollyPortal() {
     }, root);
 
     return () => ctx.revert();
-  }, []);
+  }, [shouldReduceMotion, animationsActive]);
 
   // Live theme support (portal kleurt mee)
   useEffect(() => {
+    if (shouldReduceMotion || !animationsActive) {
+      return undefined;
+    }
     const html = document.documentElement;
     const applyTheme = () => {
       const isDark = html.classList.contains("dark");
@@ -205,7 +215,84 @@ export default function ScrollyPortal() {
     const mo = new MutationObserver(applyTheme);
     mo.observe(html, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
-  }, []);
+  }, [shouldReduceMotion, animationsActive]);
+
+  const staticStoryline = [
+    {
+      title: "Intro-video als startschot",
+      copy:
+        "Gebruik /public/about.mp4 om direct context te bieden. Een optionele poster (video-poster.jpg) zorgt voor een snelle eerste indruk.",
+      detail: "Zorg dat de call-to-action in beeld blijft voor bezoekers die rustig lezen.",
+    },
+    {
+      title: "Belofte die blijft hangen",
+      copy:
+        "Vertel in één regel wat samenwerken oplevert. De belofte \"Meer weten = minder gokken\" werkt zowel in motion als statisch.",
+      detail: "Combineer het met een subheader zoals 'Ontdek quick wins' om richting te geven.",
+    },
+    {
+      title: "Bewijs de impact",
+      copy:
+        "Gebruik data en context, bijvoorbeeld een KPI die oploopt naar 128%. Beschrijf kort welke verbeteringen dat resultaat ondersteunen.",
+      detail: "Highlight quick wins, workshops of tooling zodat de lezer het proces begrijpt.",
+    },
+    {
+      title: "Case-before & after",
+      copy:
+        "Laat een voor/na situatie zien met case-before.jpg en case-after.jpg. Benoem wat er verandert voor de klant en de conversie.",
+      detail: "Werk met overlays of captions zodat ook zonder video duidelijk is wat de uitkomst is.",
+    },
+  ];
+
+  if (shouldReduceMotion || !animationsActive) {
+    return (
+      <section
+        data-snap-section
+        className="relative overflow-hidden py-24 sm:py-32"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-brand-teal/10 to-brand-yellow/10 dark:from-brand-blue/20 dark:via-brand-teal/20 dark:to-brand-yellow/20" aria-hidden />
+        <div className="absolute -top-32 left-1/4 h-64 w-64 rounded-full bg-brand-blue/20 blur-3xl" aria-hidden />
+        <div className="absolute -bottom-40 right-1/5 h-72 w-72 rounded-full bg-brand-yellow/20 blur-3xl" aria-hidden />
+
+        <div className="relative max-w-6xl mx-auto px-6 flex flex-col gap-12">
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">
+              Magnetische scrollstory, ook zonder animaties
+            </h2>
+            <p className="mt-4 text-base text-neutral-600 dark:text-gray-300">
+              We schetsen de verhaallijn stap voor stap. Zo krijg je dezelfde inzichten als in de geanimeerde variant, maar dan in een rustig leesbare opbouw.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {staticStoryline.map((item) => (
+              <article
+                key={item.title}
+                className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
+              >
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
+                <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.copy}</p>
+                {item.detail && (
+                  <p className="mt-4 text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-gray-400">{item.detail}</p>
+                )}
+              </article>
+            ))}
+          </div>
+
+          <div className="rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-xl ring-1 ring-white/10 dark:bg-neutral-800">
+            <h3 className="text-2xl font-semibold">Klaar om de flow live te zetten?</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              Voeg je eigen video en casebeelden toe en link direct door naar je favoriete contactkanaal.
+            </p>
+            <div className="mt-5 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-semibold text-neutral-900">
+              <a href="#contact" className="hover:underline">Plan een kennismaking</a>
+              <span aria-hidden>→</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   // Reusable inline pattern voor de placeholder (geen extra CSS nodig)
   const placeholderBg = {

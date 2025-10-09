@@ -1,6 +1,6 @@
 // src/components/Hero.jsx
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 
 const heroHighlights = [
@@ -33,6 +33,8 @@ const heroStoryline = [
 ];
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="hero"
@@ -47,36 +49,44 @@ export default function Hero() {
 
       <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
         <motion.span
-          initial={{ opacity: 0, y: -12 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={
+            shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }
+          }
           className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:border-white/20 dark:bg-white/10 dark:text-white"
         >
           <Sparkles size={14} /> Datagedreven storytelling
         </motion.span>
 
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={
+            shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }
+          }
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
           Laat bezoekers meebewegen met een <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">magnetische customer journey</span>
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1 }}
+          transition={
+            shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }
+          }
           className="max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
         >
           We combineren inzichten uit UX-onderzoek, GA4 en live experimenten tot een verhalend geheel. Elke scroll geeft bezoekers een volgende reden om door te lezen — én jou meer grip op groei.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
+          transition={
+            shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }
+          }
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <motion.a
@@ -96,9 +106,11 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
+          transition={
+            shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }
+          }
           className="grid gap-6 w-full sm:grid-cols-3"
         >
           {heroHighlights.map((item) => (
@@ -115,9 +127,11 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.7 }}
+          transition={
+            shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }
+          }
           className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
         >
           <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
@@ -133,9 +147,11 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.35, duration: 0.6 }}
+          transition={
+            shouldReduceMotion ? undefined : { delay: 0.35, duration: 0.6 }
+          }
           className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-gray-400"
         >
           Scroll verder

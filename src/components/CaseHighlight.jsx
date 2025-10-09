@@ -1,7 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function CaseHighlight() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="case"
@@ -11,10 +13,10 @@ export default function CaseHighlight() {
       <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/8 via-transparent to-brand-yellow/10 dark:from-brand-blue/15 dark:via-transparent dark:to-brand-yellow/15" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, x: -40 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+          transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
           className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-white/10 dark:bg-white/5"
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-blue">
@@ -43,10 +45,12 @@ export default function CaseHighlight() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, x: 40 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
+          transition={
+            shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.1 }
+          }
           className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/50 shadow-2xl backdrop-blur"
         >
           <img
