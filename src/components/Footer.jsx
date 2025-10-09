@@ -3,13 +3,19 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-12 mt-12">
+    <footer
+      data-snap-section
+      className="relative mt-16 overflow-hidden bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-14"
+    >
       {/* Animated gradient bar */}
       <motion.div
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-[length:200%_200%]"
       />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="story-stripe" aria-hidden />
+      </div>
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>

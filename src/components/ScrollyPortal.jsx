@@ -1,5 +1,5 @@
 // src/components/ScrollyPortal.jsx
-import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -7,10 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ScrollyPortal() {
   const root = useRef(null);
-  const bgRadial = useRef(null);
-  const bgConic  = useRef(null);
-  const blobs    = useRef(null);
-
   // Scenes (volgorde: VIDEO -> CLAIM -> SUB -> KPI -> CASE -> CTA)
   const sVideoIntro = useRef(null);
   const sClaim = useRef(null);
@@ -38,38 +34,8 @@ export default function ScrollyPortal() {
     return Array.from(el.querySelectorAll(".word"));
   };
 
-  const getPalette = (isDark) =>
-    isDark
-      ? {
-          radialA: "radial-gradient(1200px 800px at 50% 50%, rgba(9,26,68,0.22), rgba(0,0,0,0) 60%)",
-          radialB: "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.18), rgba(0,0,0,0) 60%)",
-          conicA:  "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.18), rgba(14,165,165,0.16))",
-          conicB:  "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.16), rgba(249,197,19,0.14), rgba(11,95,255,0.20))",
-          blobA:   "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
-          blobB:   "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
-          blobC:   "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.16), rgba(0,0,0,0) 60%)",
-          radialOpacity: 0.48,
-          conicOpacity:  0.30,
-          blobOpacity:   [0.24, 0.22, 0.20],
-        }
-      : {
-          radialA: "radial-gradient(1200px 800px at 50% 50%, rgba(11,95,255,0.22), rgba(0,0,0,0) 60%)",
-          radialB: "radial-gradient(1200px 800px at 50% 50%, rgba(14,165,165,0.20), rgba(0,0,0,0) 60%)",
-          conicA:  "conic-gradient(from 180deg at 50% 50%, rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.18), rgba(14,165,165,0.18))",
-          conicB:  "conic-gradient(from 180deg at 50% 50%, rgba(11,95,255,0.20), rgba(14,165,165,0.18), rgba(249,197,19,0.18), rgba(11,95,255,0.20))",
-          blobA:   "radial-gradient(circle at 50% 50%, rgba(11,95,255,0.25), rgba(0,0,0,0) 60%)",
-          blobB:   "radial-gradient(circle at 50% 50%, rgba(14,165,165,0.22), rgba(0,0,0,0) 60%)",
-          blobC:   "radial-gradient(circle at 50% 50%, rgba(249,197,19,0.20), rgba(0,0,0,0) 60%)",
-          radialOpacity: 0.55,
-          conicOpacity:  0.35,
-          blobOpacity:   [0.30, 0.26, 0.24],
-        };
-
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const isDark = document.documentElement.classList.contains("dark");
-      const palette = getPalette(isDark);
-
       // Progress
       ScrollTrigger.create({
         trigger: root.current,
@@ -79,15 +45,6 @@ export default function ScrollyPortal() {
           if (progressRef.current) gsap.set(progressRef.current, { scaleY: self.progress });
         },
       });
-
-      // Portal baseline
-      const [b1, b2, b3] = blobs.current.querySelectorAll(".blob");
-      gsap.set(bgRadial.current, { opacity: palette.radialOpacity, background: palette.radialA });
-      gsap.set(bgConic.current,  { opacity: palette.conicOpacity,  background: palette.conicA, rotate: 0 });
-
-      gsap.set(b1, { xPercent: -60, yPercent: -40, scale: 1.0, opacity: palette.blobOpacity[0], background: palette.blobA });
-      gsap.set(b2, { xPercent:  40, yPercent: -30, scale: 1.2, opacity: palette.blobOpacity[1], background: palette.blobB });
-      gsap.set(b3, { xPercent: -20, yPercent:  50, scale: 1.1, opacity: palette.blobOpacity[2], background: palette.blobC });
 
       // Timeline
       const tl = gsap.timeline({
@@ -133,12 +90,6 @@ export default function ScrollyPortal() {
         tl.to(sVideoIntro.current, { autoAlpha: 0, duration: 0.4 }, "<");
         tl.set(sVideoIntro.current, { display: "none" });
 
-        // subtiele background beweging
-        tl.to(b1, { xPercent: -40, yPercent: -30, scale: 1.15, duration: 0.9 }, `INTRO${L}+0.1`);
-        tl.to(b2, { xPercent:  20, yPercent: -10, scale: 1.24, duration: 0.9 }, "<");
-        tl.to(b3, { xPercent: -10, yPercent:  40, scale: 1.18, duration: 0.9 }, "<");
-        tl.to(bgRadial.current, { background: palette.radialB, duration: 0.8 }, "<+0.1");
-        tl.to(bgConic.current,  { background: palette.conicB, rotate: "+=40", duration: 0.9 }, "<");
       }
 
       // --- Scene 2: CLAIM ---
@@ -187,26 +138,6 @@ export default function ScrollyPortal() {
     return () => ctx.revert();
   }, []);
 
-  // Live theme support (portal kleurt mee)
-  useEffect(() => {
-    const html = document.documentElement;
-    const applyTheme = () => {
-      const isDark = html.classList.contains("dark");
-      const p = getPalette(isDark);
-      const [b1, b2, b3] = blobs.current ? blobs.current.querySelectorAll(".blob") : [];
-      if (!bgRadial.current || !bgConic.current || !b1) return;
-      gsap.set(bgRadial.current, { opacity: p.radialOpacity, background: p.radialA });
-      gsap.set(bgConic.current,  { opacity: p.conicOpacity,  background: p.conicA });
-      gsap.set(b1, { background: p.blobA, opacity: p.blobOpacity[0] });
-      gsap.set(b2, { background: p.blobB, opacity: p.blobOpacity[1] });
-      gsap.set(b3, { background: p.blobC, opacity: p.blobOpacity[2] });
-    };
-    applyTheme();
-    const mo = new MutationObserver(applyTheme);
-    mo.observe(html, { attributes: true, attributeFilter: ["class"] });
-    return () => mo.disconnect();
-  }, []);
-
   // Reusable inline pattern voor de placeholder (geen extra CSS nodig)
   const placeholderBg = {
     backgroundImage: `
@@ -217,16 +148,7 @@ export default function ScrollyPortal() {
   };
 
   return (
-    <section ref={root} className="relative">
-      {/* Portal layers */}
-      <div ref={bgRadial} className="portal-layer portal-radial" />
-      <div ref={bgConic}  className="portal-layer portal-conic" />
-      <div ref={blobs}    className="portal-layer portal-blobs">
-        <div className="blob" />
-        <div className="blob" />
-        <div className="blob" />
-      </div>
-
+    <section ref={root} data-snap-section className="relative">
       {/* Progress rail */}
       <div className="progress-rail hidden md:block">
         <div ref={progressRef} className="progress-bar" />
