@@ -11,7 +11,7 @@ export default function HorizontalScrollShowcase() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end start"],
+    offset: ["center center", "end center"],
   });
 
   const maxDistance = useMemo(
@@ -19,13 +19,29 @@ export default function HorizontalScrollShowcase() {
     [t.scenes.length]
   );
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", `${maxDistance}%`]);
+  const x = useTransform(scrollYProgress, (value) => {
+    if (shouldReduceMotion) {
+      return "0%";
+    }
+
+    const startThreshold = 0.18;
+    const normalised = Math.min(
+      Math.max((value - startThreshold) / (1 - startThreshold), 0),
+      1
+    );
+
+    const distance = normalised * maxDistance;
+    return `${distance}%`;
+  });
+
+  const sectionHeight = useMemo(() => 140 + t.scenes.length * 50, [t.scenes.length]);
 
   return (
     <section
       ref={sectionRef}
       data-snap-section
-      className="relative h-[240vh] bg-gradient-to-b from-white/40 via-white/30 to-white/40 dark:from-surface-dark/80 dark:via-surface-dark/70 dark:to-surface-dark/80"
+      style={{ height: `${sectionHeight}vh` }}
+      className="relative bg-gradient-to-b from-white/40 via-white/30 to-white/40 dark:from-surface-dark/80 dark:via-surface-dark/70 dark:to-surface-dark/80"
     >
       <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-brand-blue/10 via-transparent to-transparent pointer-events-none" aria-hidden />
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-teal/10 via-transparent to-transparent pointer-events-none" aria-hidden />
