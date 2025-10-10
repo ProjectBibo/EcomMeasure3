@@ -3,7 +3,8 @@ import React, { Suspense, lazy } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SEO from "./components/SEO";
-import CustomCursor from "./components/CustomCursor";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import { translations } from "./i18n/content";
 
 const Hero = lazy(() => import("./components/Hero"));
 const USP = lazy(() => import("./components/USP"));
@@ -26,12 +27,14 @@ function SectionFallback({ label }) {
   );
 }
 
-export default function App() {
+function AppContent() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <>
-      <SEO />
-      <div className="min-h-screen overflow-x-hidden bg-surface-light dark:bg-surface-dark transition-colors">
-        <CustomCursor />
+      <SEO title={t.seo.title} description={t.seo.description} />
+      <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
         <Header />
         <main className="relative flex flex-col">
           <Suspense fallback={<SectionFallback label="Hero" />}>
@@ -62,5 +65,13 @@ export default function App() {
         <Footer />
       </div>
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }

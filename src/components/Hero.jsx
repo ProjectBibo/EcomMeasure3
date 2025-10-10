@@ -2,45 +2,16 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
-
-const heroHighlights = [
-  {
-    label: "Experimenten per jaar",
-    value: "120+",
-    helper: "Hypotheses gevalideerd met echte gebruikersdata",
-  },
-  {
-    label: "Conversiestijging",
-    value: "18%",
-    helper: "Gemiddelde uplift bij nieuwe trajecten",
-  },
-  {
-    label: "Doorlooptijd",
-    value: "30 dagen",
-    helper: "Van inzicht naar live verbeteringen",
-  },
-];
-
-const heroStoryline = [
-  {
-    title: "Begin met een scherpe vraag",
-    copy: "We onderzoeken waar klanten afhaken en koppelen die inzichten aan de juiste metrics.",
-  },
-  {
-    title: "Vertaal signalen naar experimenten",
-    copy: "Samen prioriteren we verbeteringen en testen we ze gericht op conversie én merkbeleving.",
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../i18n/content";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const { language } = useLanguage();
+  const t = translations[language].hero;
 
   return (
-    <section
-      id="hero"
-      data-snap-section
-      className="relative isolate overflow-hidden"
-    >
+    <section id="hero" data-snap-section className="relative isolate overflow-hidden">
       <div className="story-stripe" aria-hidden />
       <div className="glow-orb glow-orb--blue -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
       <div className="glow-orb glow-orb--teal top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
@@ -51,70 +22,62 @@ export default function Hero() {
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={
-            shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }
-          }
+          transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
           className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:border-white/20 dark:bg-white/10 dark:text-white"
         >
-          <Sparkles size={14} /> Datagedreven storytelling
+          <Sparkles size={14} /> {t.badge}
         </motion.span>
 
         <motion.h1
           initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={
-            shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }
-          }
+          transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
-          Laat bezoekers meebewegen met een <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">magnetische customer journey</span>
+          {t.titleLead}{" "}
+          <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">
+            {t.titleHighlight}
+          </span>
         </motion.h1>
 
         <motion.p
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={
-            shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }
-          }
+          transition={shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }}
           className="max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
         >
-          We combineren inzichten uit UX-onderzoek, GA4 en live experimenten tot een verhalend geheel. Elke scroll geeft bezoekers een volgende reden om door te lezen — én jou meer grip op groei.
+          {t.description}
         </motion.p>
 
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={
-            shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }
-          }
+          transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <motion.a
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             href="#contact"
-            data-cursor="accent"
             className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-yellow"
           >
-            Plan een kennismaking <ArrowRight size={18} />
+            {t.primaryCta} <ArrowRight size={18} />
           </motion.a>
           <a
             href="#workflow"
             className="inline-flex items-center gap-2 rounded-full border border-neutral-900/10 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_50px_rgba(2,6,23,0.55)]"
           >
-            Bekijk de aanpak
+            {t.secondaryCta}
           </a>
         </motion.div>
 
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={
-            shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }
-          }
+          transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
           className="grid gap-6 w-full sm:grid-cols-3"
         >
-          {heroHighlights.map((item) => (
+          {t.stats.map((item) => (
             <div
               key={item.label}
               className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-[12px_24px_50px_rgba(15,23,42,0.12)] backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] dark:border-white/10 dark:bg-white/10 dark:shadow-[12px_24px_55px_rgba(2,6,23,0.6)]"
@@ -139,14 +102,12 @@ export default function Hero() {
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={
-            shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }
-          }
+          transition={shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }}
           className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
           <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
-            {heroStoryline.map((story) => (
+            {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
                 <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow" aria-hidden />
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
@@ -159,12 +120,10 @@ export default function Hero() {
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={
-            shouldReduceMotion ? undefined : { delay: 0.35, duration: 0.6 }
-          }
+          transition={shouldReduceMotion ? undefined : { delay: 0.35, duration: 0.6 }}
           className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-gray-400"
         >
-          Scroll verder
+          {t.scrollLabel}
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
