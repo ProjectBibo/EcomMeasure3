@@ -122,53 +122,6 @@ body {
   transition: background-color 200ms, color 200ms, border-color 200ms, fill 200ms, stroke 200ms;
 }
 
-/* ===== Portal layers (ScrollyPortal) ===== */
-.portal-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-.portal-radial,
-.portal-conic,
-.portal-blobs {
-  mix-blend-mode: screen;
-}
-.blob {
-  position: absolute;
-  width: 55vmax;
-  height: 55vmax;
-  border-radius: 9999px;
-  will-change: transform, background, opacity;
-}
-
-/* ===== Progress rail (rechts) ===== */
-.progress-rail {
-  pointer-events: none;
-  position: fixed;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 14rem;
-  width: 0.25rem;
-  border-radius: 9999px;
-  background-color: rgba(0,0,0,0.1);
-}
-.dark .progress-rail {
-  background-color: rgba(255,255,255,0.1);
-}
-.progress-bar {
-  height: 100%;
-  width: 100%;
-  transform-origin: top;
-  border-radius: 9999px;
-  background-color: rgba(0,0,0,0.4);
-  transform: scaleY(0);
-}
-.dark .progress-bar {
-  background-color: rgba(255,255,255,0.5);
-}
-
 /* ===== Top-bar link underline animatie ===== */
 .nav-underline {
   position: relative;

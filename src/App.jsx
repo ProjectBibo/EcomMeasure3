@@ -2,7 +2,6 @@
 import React from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import ScrollyPortal from "./components/ScrollyPortal";
 import USP from "./components/USP";
 import Workflow from "./components/Workflow";
 import Insights from "./components/Insights";
@@ -20,7 +19,6 @@ export default function App() {
         <Header />
         <main className="relative flex flex-col">
           <Hero />
-          <ScrollyPortal />
           <USP />
           <Workflow />
           <Insights />
