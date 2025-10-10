@@ -145,25 +145,48 @@ export default function Header() {
           <a href="/" className="group flex items-center gap-3 relative" aria-label="EcomMeasure home">
             <span className="relative flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)]">
               <svg
-                viewBox="0 0 40 40"
-                className="h-8 w-8"
+                viewBox="0 0 48 48"
+                className="h-9 w-9"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden
               >
-                <path
-                  d="M8 28L14.5 16.5L20 24L24.5 18L32 28"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8 12.5H14M26 12.5H32"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
+                <defs>
+                  <linearGradient id="em-spark" x1="10" y1="34" x2="36" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#fff7ed" />
+                    <stop offset="1" stopColor="#fde68a" />
+                  </linearGradient>
+                  <linearGradient id="em-pillar" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stopColor="#e0f2fe" />
+                    <stop offset="1" stopColor="#f0fdf4" />
+                  </linearGradient>
+                </defs>
+                <g strokeLinecap="round" strokeLinejoin="round">
+                  <path
+                    d="M10 34h4.5c1.1 0 2-.9 2-2V24c0-1.1-.9-2-2-2H10c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2Z"
+                    fill="url(#em-pillar)"
+                    stroke="rgba(255,255,255,0.35)"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M22 34h4.5c1.1 0 2-.9 2-2V18c0-1.1-.9-2-2-2H22c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2Z"
+                    fill="url(#em-pillar)"
+                    stroke="rgba(255,255,255,0.35)"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M34 34h4.5c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2H34c-1.1 0-2 .9-2 2v20c0 1.1.9 2 2 2Z"
+                    fill="url(#em-pillar)"
+                    stroke="rgba(255,255,255,0.35)"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M8 26L18.2 20L24.5 26.8L31.4 18.2L40 24"
+                    stroke="url(#em-spark)"
+                    strokeWidth="2.8"
+                  />
+                  <circle cx="31" cy="17" r="3.2" fill="#fef9c3" stroke="rgba(255,255,255,0.65)" strokeWidth="1.4" />
+                </g>
               </svg>
               <span className="absolute -inset-1 rounded-[1.75rem] border border-white/20 opacity-40" aria-hidden />
             </span>
