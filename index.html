@@ -2,26 +2,12 @@
 <html lang="nl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var dark = stored ? stored === 'dark' : prefersDark;
-          var root = document.documentElement;
-          root.classList.toggle('dark', dark);
-
-          // Browser UI kleur (adresbalk)
-          var meta = document.querySelector('meta[name="theme-color"]');
-          if (!meta) {
-            meta = document.createElement('meta');
-            meta.name = 'theme-color';
-            document.head.appendChild(meta);
-          }
-          meta.setAttribute('content', dark ? '#0f172a' : '#fafaf7');
-        } catch (e) {}
-      })();
-    </script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script src="/theme-init.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcomMeasure – Data-gedreven website optimalisatie</title>
