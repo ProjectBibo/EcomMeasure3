@@ -59,6 +59,9 @@ export default function Testimonial() {
             height="100%"
             src="https://www.youtube.com/embed/VIDEO_ID"
             title="Klantvideo"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/40 bg-white/80 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.24em] text-neutral-800 shadow-sm backdrop-blur dark:bg-white/10 dark:text-white">

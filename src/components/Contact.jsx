@@ -77,6 +77,10 @@ export default function Contact() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {baseOptions.map(({ icon: Icon, href }, index) => {
             const content = t.options[index];
+            const isExternal = href.startsWith("http");
+            const linkProps = isExternal
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {};
             return (
               <motion.article
                 key={content.title}
@@ -92,7 +96,11 @@ export default function Contact() {
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-400">{content.description}</p>
-                <a href={href} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition group-hover:translate-x-0.5">
+                <a
+                  href={href}
+                  {...linkProps}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition group-hover:translate-x-0.5"
+                >
                   {content.actionLabel}
                   <span aria-hidden="true">→</span>
                 </a>
@@ -122,6 +130,8 @@ export default function Contact() {
               </a>
               <a
                 href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition hover:border-brand-yellow hover:text-brand-yellow"
               >
                 {t.fast.social}

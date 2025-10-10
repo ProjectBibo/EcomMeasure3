@@ -36,6 +36,22 @@ body {
   scroll-snap-stop: always;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --header-offset: 112px;
+  }
+
+  html {
+    scroll-snap-type: none;
+    scroll-padding-top: calc(var(--header-offset) + 16px);
+  }
+
+  [data-snap-section] {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

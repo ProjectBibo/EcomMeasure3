@@ -256,25 +256,27 @@ export default function LookerDashboard() {
                     <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
                       <p className="text-sm font-medium text-white">{t.report.charts.table.title}</p>
                       <p className="text-xs text-neutral-300">{t.report.charts.table.helper}</p>
-                      <div className="mt-4 space-y-3">
-                        <div className="grid grid-cols-[1.2fr_repeat(3,minmax(0,0.9fr))] gap-3 text-[11px] uppercase tracking-wide text-neutral-400">
-                          <span>{t.report.charts.table.headers.channel}</span>
-                          <span>{t.report.charts.table.headers.revenue}</span>
-                          <span>{t.report.charts.table.headers.sessions}</span>
-                          <span>{t.report.charts.table.headers.conversion}</span>
-                        </div>
-                        <div className="space-y-3 text-sm text-neutral-200">
-                          {t.report.charts.table.rows.map((row) => (
-                            <div
-                              key={row.channel}
-                              className="grid grid-cols-[1.2fr_repeat(3,minmax(0,0.9fr))] items-center gap-3 rounded-xl border border-white/5 bg-white/[0.04] px-3 py-2"
-                            >
-                              <span className="font-medium text-white">{row.channel}</span>
-                              <span>{row.revenue}</span>
-                              <span>{row.sessions}</span>
-                              <span>{row.conversion}</span>
-                            </div>
-                          ))}
+                      <div className="mt-4 overflow-x-auto pb-1">
+                        <div className="min-w-[480px] space-y-3">
+                          <div className="grid grid-cols-[1.2fr_repeat(3,minmax(0,0.9fr))] gap-3 text-[11px] uppercase tracking-wide text-neutral-400">
+                            <span>{t.report.charts.table.headers.channel}</span>
+                            <span>{t.report.charts.table.headers.revenue}</span>
+                            <span>{t.report.charts.table.headers.sessions}</span>
+                            <span>{t.report.charts.table.headers.conversion}</span>
+                          </div>
+                          <div className="space-y-3 text-sm text-neutral-200">
+                            {t.report.charts.table.rows.map((row) => (
+                              <div
+                                key={row.channel}
+                                className="grid grid-cols-[1.2fr_repeat(3,minmax(0,0.9fr))] items-center gap-3 rounded-xl border border-white/5 bg-white/[0.04] px-3 py-2"
+                              >
+                                <span className="font-medium text-white">{row.channel}</span>
+                                <span>{row.revenue}</span>
+                                <span>{row.sessions}</span>
+                                <span>{row.conversion}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>

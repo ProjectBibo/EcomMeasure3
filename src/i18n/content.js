@@ -54,6 +54,16 @@ export const translations = {
           en: "Translate the website to Dutch",
         },
       },
+      menu: {
+        label: "Menu",
+        open: "Open het hoofdmenu",
+        close: "Sluit het hoofdmenu",
+      },
+      mobileMenu: {
+        title: "Navigatie",
+        subtitle: "Kies een sectie of pas je voorkeuren aan.",
+        preferences: "Voorkeuren",
+      },
     },
     hero: {
       badge: "Measurement & CRO voor e-commerce",
@@ -431,6 +441,16 @@ export const translations = {
           nl: "Translate the website to English",
           en: "Translate the website to Dutch",
         },
+      },
+      menu: {
+        label: "Menu",
+        open: "Open main navigation",
+        close: "Close main navigation",
+      },
+      mobileMenu: {
+        title: "Navigate",
+        subtitle: "Jump to a section or adjust your preferences.",
+        preferences: "Preferences",
       },
     },
     hero: {
