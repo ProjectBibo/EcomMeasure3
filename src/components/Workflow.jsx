@@ -62,8 +62,9 @@ export default function Workflow() {
                     ? undefined
                     : { delay: index * 0.08, duration: 0.6 }
                 }
-                className="relative grid gap-5 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5 md:grid-cols-[auto_1fr]"
+                className="group relative grid gap-5 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[18px_30px_70px_rgba(15,23,42,0.16)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:shadow-[24px_40px_95px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_32px_85px_rgba(2,6,23,0.6)] md:grid-cols-[auto_1fr]"
               >
+                <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -10px -18px 28px rgba(148,163,184,0.25)" }} />
                 <div className="relative flex h-full items-start justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue text-white font-semibold">
                     0{index + 1}
@@ -73,7 +74,7 @@ export default function Workflow() {
                 <div>
                   <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{step.title}</h3>
                   <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{step.text}</p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue shadow-[0_12px_28px_rgba(59,130,246,0.2)]" data-cursor="accent">
                     {step.deliverable}
                   </div>
                 </div>

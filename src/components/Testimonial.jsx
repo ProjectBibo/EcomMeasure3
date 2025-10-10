@@ -18,8 +18,9 @@ export default function Testimonial() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
-          className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-white/10 dark:bg-white/5"
+          className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[22px_34px_85px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-transform duration-500 hover:-translate-y-1 hover:shadow-[26px_42px_110px_rgba(15,23,42,0.26)] dark:border-white/10 dark:bg-white/10 dark:shadow-[22px_34px_100px_rgba(2,6,23,0.6)]"
         >
+          <div className="pointer-events-none absolute inset-0 rounded-[2.5rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 8px rgba(255,255,255,0.5), inset -12px -20px 30px rgba(148,163,184,0.18)" }} />
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-yellow/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900">
             Klanten aan het woord
           </span>
@@ -41,13 +42,13 @@ export default function Testimonial() {
             </footer>
           </motion.blockquote>
           <div className="mt-8 grid gap-4 sm:grid-cols-3 text-xs uppercase tracking-[0.2em] text-neutral-600 dark:text-gray-400">
-            <div className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_45px_rgba(2,6,23,0.45)]">
               4.9/5 <span className="block text-[10px]">Gemiddelde reviewscore</span>
             </div>
-            <div className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_45px_rgba(2,6,23,0.45)]">
               18 <span className="block text-[10px]">UX & data trajecten</span>
             </div>
-            <div className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_45px_rgba(2,6,23,0.45)]">
               100% <span className="block text-[10px]">Aanbevelen ons door</span>
             </div>
           </div>
@@ -60,7 +61,7 @@ export default function Testimonial() {
           transition={
             shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.1 }
           }
-          className="relative aspect-video overflow-hidden rounded-3xl border border-white/50 shadow-2xl"
+          className="relative aspect-video overflow-hidden rounded-3xl border border-white/50 shadow-[28px_38px_95px_rgba(15,23,42,0.25)] backdrop-blur-xl"
         >
           <iframe
             width="100%"

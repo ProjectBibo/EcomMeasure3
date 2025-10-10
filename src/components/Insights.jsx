@@ -55,8 +55,10 @@ export default function Insights() {
                   ? undefined
                   : { delay: index * 0.1, duration: 0.6 }
               }
-              className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
+              className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[18px_28px_75px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-transform duration-500 hover:-translate-y-1 hover:shadow-[24px_36px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_85px_rgba(2,6,23,0.6)]"
             >
+              <div className="pointer-events-none absolute inset-0 rounded-[2.3rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.55), inset -12px -18px 32px rgba(148,163,184,0.2)" }} />
+              <div className="pointer-events-none absolute inset-0 rounded-[2.3rem] bg-gradient-to-br from-white/60 via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
               <span className="inline-flex items-center rounded-full bg-brand-yellow/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900 dark:text-neutral-900">
                 {item.tag}
               </span>

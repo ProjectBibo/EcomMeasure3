@@ -90,7 +90,8 @@ export default function Header() {
           <div className="flex-shrink-0">
             <a
               href="#contact"
-              className="px-5 py-2 rounded-md bg-brand-blue text-white font-semibold shadow hover:shadow-lg hover-lift transition"
+              className="px-5 py-2 rounded-md bg-brand-blue text-white font-semibold shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+              data-cursor="accent"
             >
               Laten we kennismaken
             </a>

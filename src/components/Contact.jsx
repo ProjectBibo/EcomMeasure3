@@ -110,8 +110,9 @@ export default function Contact() {
                   ? undefined
                   : { delay: 0.15 * index, duration: 0.5 }
               }
-              className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-surface-dark/80"
+              className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-[16px_26px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-transform duration-500 hover:-translate-y-1 hover:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-surface-dark/80 dark:shadow-[16px_28px_80px_rgba(2,6,23,0.55)]"
             >
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -12px -16px 28px rgba(148,163,184,0.18)" }} />
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                 <Icon size={22} />
               </div>
@@ -122,6 +123,7 @@ export default function Contact() {
               <a
                 href={action.href}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition group-hover:translate-x-0.5"
+                data-cursor="accent"
               >
                 {action.label}
                 <span aria-hidden="true">→</span>
@@ -137,7 +139,7 @@ export default function Contact() {
           transition={
             shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.6 }
           }
-          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-xl ring-1 ring-white/10 dark:bg-neutral-800"
+          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -149,13 +151,15 @@ export default function Contact() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_36px_rgba(255,255,255,0.35)] transition hover:bg-brand-yellow"
+                data-cursor="accent"
               >
                 info@ecommeasure.com
               </a>
               <a
                 href="https://www.linkedin.com/"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white transition hover:border-brand-yellow hover:text-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition hover:border-brand-yellow hover:text-brand-yellow"
+                data-cursor="accent"
               >
                 Volg op LinkedIn
               </a>
