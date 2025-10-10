@@ -7,6 +7,7 @@ export default {
       colors: {
         "brand-blue": "#0B5FFF",
         "brand-teal": "#0FAF90",
+        "brand-yellow": "#F9C513",
         surface: {
           light: "#fafaf7",
           dark: "#0f172a"
