@@ -11,6 +11,7 @@ const flags = {
 
 export default function Header() {
   const [isDark, setIsDark] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const { language, changeLanguage } = useLanguage();
   const t = translations[language].header;
   const themeTitle = language === "nl"
@@ -48,8 +49,52 @@ export default function Header() {
 
   const nextLanguage = language === "nl" ? "en" : "nl";
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 0) {
+        setIsHidden(false);
+        lastScrollY = currentScrollY;
+        ticking = false;
+        return;
+      }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 140) {
+        setIsHidden(true);
+      } else if (currentScrollY < lastScrollY) {
+        setIsHidden(false);
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header
+      className={`sticky top-0 z-50 w-full transform-gpu transition-transform duration-300 ease-out ${
+        isHidden ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
       <div className="bg-white/80 backdrop-blur border-b border-neutral-200/60 dark:bg-surface-dark/80 dark:border-neutral-800/60">
         <div className="max-w-7xl mx-auto h-12 px-6 grid grid-cols-[auto_1fr_auto] items-center gap-4">
           <div aria-hidden />
@@ -97,14 +142,37 @@ export default function Header() {
 
       <div className="relative bg-white/80 backdrop-blur border-b border-neutral-200/60 dark:bg-surface-dark/80 dark:border-neutral-800/60 overflow-visible">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
-          <a href="/" className="flex items-center gap-3 relative">
-            <img
-              src="/Logo.png"
-              alt="EcomMeasure logo"
-              className="h-16 md:h-20 lg:h-24 w-auto object-contain -my-2 md:-my-3 lg:-my-4"
-              loading="eager"
-              decoding="async"
-            />
+          <a href="/" className="group flex items-center gap-3 relative" aria-label="EcomMeasure home">
+            <span className="relative flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)]">
+              <svg
+                viewBox="0 0 40 40"
+                className="h-8 w-8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+              >
+                <path
+                  d="M8 28L14.5 16.5L20 24L24.5 18L32 28"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M8 12.5H14M26 12.5H32"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span className="absolute -inset-1 rounded-[1.75rem] border border-white/20 opacity-40" aria-hidden />
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-lg font-bold tracking-tight text-neutral-900 transition-colors dark:text-white">EcomMeasure</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.38em] text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
+                Insights
+              </span>
+            </span>
           </a>
 
           <div className="hidden md:flex items-stretch gap-8">
