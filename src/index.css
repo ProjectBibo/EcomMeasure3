@@ -21,6 +21,7 @@ body {
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 251, 0.92));
   background-attachment: fixed;
   transition: background 240ms ease, color 240ms ease;
+  backdrop-filter: saturate(130%);
 }
 
 .dark body {

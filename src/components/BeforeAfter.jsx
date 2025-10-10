@@ -13,9 +13,21 @@ export default function BeforeAfter({
         <p className="mt-2 text-neutral-600 dark:text-gray-400">{note}</p>
       </div>
       <div className="relative w-full max-w-5xl aspect-[16/9] rounded-2xl overflow-hidden shadow-xl border border-black/5 dark:border-white/10 mx-auto">
-        <img src={before} alt="Voor optimalisaties" className="absolute inset-0 w-full h-full object-cover" />
+        <img
+          src={before}
+          alt="Voor optimalisaties"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="absolute inset-0">
-          <img src={after} alt="Na optimalisaties" className="w-full h-full object-cover [clip-path:inset(0_var(--x,50%)_0_0)] transition-[clip-path] duration-150" />
+          <img
+            src={after}
+            alt="Na optimalisaties"
+            className="w-full h-full object-cover [clip-path:inset(0_var(--x,50%)_0_0)] transition-[clip-path] duration-150"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <input
           type="range" defaultValue="50" aria-label="Vergelijk voor en na"
