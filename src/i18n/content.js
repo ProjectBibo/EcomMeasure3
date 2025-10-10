@@ -36,6 +36,24 @@ export const translations = {
         nl: "Nederlands",
         en: "English",
       },
+      languageSwitch: {
+        aria: {
+          nl: "Vertaal de site naar Engels",
+          en: "Vertaal de site naar Nederlands",
+        },
+        title: {
+          nl: "Vertaal naar Engels",
+          en: "Translate to Dutch",
+        },
+        cta: {
+          nl: "Vertalen",
+          en: "Translate",
+        },
+        helper: {
+          nl: "Vertaal de website naar Engels",
+          en: "Translate the website to Dutch",
+        },
+      },
     },
     hero: {
       badge: "Measurement & CRO voor e-commerce",
@@ -193,6 +211,29 @@ export const translations = {
         },
       ],
     },
+    dashboard: {
+      badge: "Dashboard voorbeeld",
+      heading: "Bekijk hoe Looker Studio e-commerce inzichten samenbrengt",
+      description:
+        "Dit interactieve voorbeeld gebruikt de Google Merchandise Store demo-data en laat zien hoe omzet, verkeer en conversies in één overzicht samenkomen.",
+      highlights: [
+        {
+          title: "Volledige funnel",
+          text: "Van sessies tot transacties en gemiddelde orderwaarde in één dashboard.",
+        },
+        {
+          title: "Kanaalprestatie",
+          text: "Vergelijk paid, organic en referral traffic met duidelijke visualisaties.",
+        },
+        {
+          title: "Actiegerichte segmenten",
+          text: "Filter op apparaat of locatie om direct optimalisaties te ontdekken.",
+        },
+      ],
+      embedTitle: "Looker Studio dashboard voorbeeld",
+      embedSource: "https://lookerstudio.google.com/embed/reporting/cbfa4da2-4dc2-4fd8-9fee-30aea0a43d4c/page/tc1QD",
+      footnote: "Data afkomstig uit de Google Merchandise Store demo-omgeving van Google.",
+    },
     case: {
       badge: "Case spotlight",
       title: "Hoe een fashion retailer 21% meer omzet boekte",
@@ -312,6 +353,24 @@ export const translations = {
       languages: {
         nl: "Dutch",
         en: "English",
+      },
+      languageSwitch: {
+        aria: {
+          nl: "Translate the site to English",
+          en: "Translate the site to Dutch",
+        },
+        title: {
+          nl: "Translate to English",
+          en: "Translate to Dutch",
+        },
+        cta: {
+          nl: "Vertalen",
+          en: "Translate",
+        },
+        helper: {
+          nl: "Translate the website to English",
+          en: "Translate the website to Dutch",
+        },
       },
     },
     hero: {
@@ -469,6 +528,29 @@ export const translations = {
           detail: "experiments coached each year",
         },
       ],
+    },
+    dashboard: {
+      badge: "Dashboard sample",
+      heading: "Explore how Looker Studio unifies e-commerce metrics",
+      description:
+        "This interactive example uses the Google Merchandise Store demo data to highlight revenue, traffic and conversion trends in one place.",
+      highlights: [
+        {
+          title: "Full funnel view",
+          text: "Track sessions, transactions and average order value without leaving the report.",
+        },
+        {
+          title: "Channel performance",
+          text: "Compare paid, organic and referral traffic with clear visuals.",
+        },
+        {
+          title: "Actionable segments",
+          text: "Filter by device or location to spot optimisation opportunities instantly.",
+        },
+      ],
+      embedTitle: "Looker Studio dashboard sample",
+      embedSource: "https://lookerstudio.google.com/embed/reporting/cbfa4da2-4dc2-4fd8-9fee-30aea0a43d4c/page/tc1QD",
+      footnote: "Data sourced from Google's Google Merchandise Store demo environment.",
     },
     case: {
       badge: "Case spotlight",
