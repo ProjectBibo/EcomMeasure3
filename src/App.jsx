@@ -13,6 +13,7 @@ const HorizontalScrollShowcase = lazy(
   () => import("./components/HorizontalScrollShowcase")
 );
 const Insights = lazy(() => import("./components/Insights"));
+const LookerDashboard = lazy(() => import("./components/LookerDashboard"));
 const CaseHighlight = lazy(() => import("./components/CaseHighlight"));
 const Testimonial = lazy(() => import("./components/Testimonial"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -51,6 +52,9 @@ function AppContent() {
           </Suspense>
           <Suspense fallback={<SectionFallback label="Insights" />}>
             <Insights />
+          </Suspense>
+          <Suspense fallback={<SectionFallback label="Dashboard" />}>
+            <LookerDashboard />
           </Suspense>
           <Suspense fallback={<SectionFallback label="Cases" />}>
             <CaseHighlight />
