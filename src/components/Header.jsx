@@ -1,6 +1,6 @@
 // src/components/Header.jsx
-import React, { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ChevronDown, Moon, Sun } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 
@@ -11,6 +11,8 @@ const flags = {
 
 export default function Header() {
   const [isDark, setIsDark] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const languageMenuRef = useRef(null);
   const { language, changeLanguage } = useLanguage();
   const t = translations[language].header;
   const themeTitle = language === "nl"
@@ -25,6 +27,29 @@ export default function Header() {
   useEffect(() => {
     if (typeof document === "undefined") return;
     setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const handleClick = (event) => {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    const handleKeydown = (event) => {
+      if (event.key === "Escape") {
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleKeydown);
+    };
   }, []);
 
   const toggleDark = () => {
@@ -45,9 +70,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full">
       <div className="bg-white/80 backdrop-blur border-b border-neutral-200/60 dark:bg-surface-dark/80 dark:border-neutral-800/60">
         <div className="max-w-7xl mx-auto h-12 px-6 grid grid-cols-[auto_1fr_auto] items-center gap-4">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">
-            {t.languageLabel}
-          </div>
+          <div aria-hidden />
           <nav className="flex items-center justify-center gap-6 text-[15px] md:text-base lg:text-[17px] font-medium">
             <a href="#diensten" className="nav-underline text-neutral-700 dark:text-gray-200">
               {t.nav.services}
@@ -66,23 +89,53 @@ export default function Header() {
             </a>
           </nav>
           <div className="flex items-center justify-end gap-2">
-            <div className="flex rounded-full border border-neutral-200/70 bg-white/70 p-1 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10">
-              {Object.entries(t.languages).map(([code, label]) => (
-                <button
-                  key={code}
-                  type="button"
-                  onClick={() => changeLanguage(code)}
-                  className={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold transition ${
-                    language === code
-                      ? "bg-brand-blue text-white shadow"
-                      : "text-neutral-700 dark:text-gray-200"
-                  }`}
-                  aria-pressed={language === code}
-                >
-                  <span aria-hidden>{flags[code]}</span>
-                  <span className="hidden sm:inline">{label}</span>
-                </button>
-              ))}
+            <div className="relative" ref={languageMenuRef}>
+              <button
+                type="button"
+                onClick={() => setLanguageMenuOpen((open) => !open)}
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                aria-haspopup="listbox"
+                aria-expanded={languageMenuOpen}
+              >
+                <span aria-hidden>{flags[language]}</span>
+                <span className="hidden sm:inline">{t.languages[language]}</span>
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform ${languageMenuOpen ? "rotate-180" : ""}`}
+                  aria-hidden
+                />
+              </button>
+              <ul
+                role="listbox"
+                tabIndex={-1}
+                className={`absolute right-0 z-20 mt-2 min-w-[10rem] overflow-hidden rounded-2xl border border-neutral-200/80 bg-white/95 shadow-xl backdrop-blur-md transition-all duration-150 ease-out dark:border-white/10 dark:bg-surface-dark/95 ${
+                  languageMenuOpen
+                    ? "pointer-events-auto translate-y-0 opacity-100"
+                    : "pointer-events-none -translate-y-1 opacity-0"
+                }`}
+              >
+                {Object.entries(t.languages).map(([code, label]) => (
+                  <li key={code}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        changeLanguage(code);
+                        setLanguageMenuOpen(false);
+                      }}
+                      role="option"
+                      aria-selected={language === code}
+                      className={`flex w-full items-center gap-2 px-4 py-2 text-sm transition-colors ${
+                        language === code
+                          ? "bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white"
+                          : "text-neutral-700 hover:bg-neutral-100/80 dark:text-gray-200 dark:hover:bg-white/10"
+                      }`}
+                    >
+                      <span aria-hidden>{flags[code]}</span>
+                      <span>{label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
             <button
               onClick={toggleDark}

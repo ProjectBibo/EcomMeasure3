@@ -11,7 +11,7 @@ export default function HorizontalScrollShowcase() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start center", "end center"],
+    offset: ["start start", "end start"],
   });
 
   const maxDistance = useMemo(
