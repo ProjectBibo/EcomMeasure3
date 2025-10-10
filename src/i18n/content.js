@@ -215,7 +215,7 @@ export const translations = {
       badge: "Dashboard voorbeeld",
       heading: "Bekijk hoe Looker Studio e-commerce inzichten samenbrengt",
       description:
-        "Dit interactieve voorbeeld gebruikt de Google Merchandise Store demo-data en laat zien hoe omzet, verkeer en conversies in één overzicht samenkomen.",
+        "Dit interactieve voorbeeld bootst een Looker Studio rapportage na en toont hoe omzet, verkeer en conversies samenkomen zonder externe koppelingen.",
       highlights: [
         {
           title: "Volledige funnel",
@@ -230,9 +230,69 @@ export const translations = {
           text: "Filter op apparaat of locatie om direct optimalisaties te ontdekken.",
         },
       ],
-      embedTitle: "Looker Studio dashboard voorbeeld",
-      embedSource: "https://lookerstudio.google.com/embed/reporting/cbfa4da2-4dc2-4fd8-9fee-30aea0a43d4c/page/tc1QD",
-      footnote: "Data afkomstig uit de Google Merchandise Store demo-omgeving van Google.",
+      footnote: "Voorbeelddata geïnspireerd op trends uit de Google Merchandise Store demo.",
+      report: {
+        eyebrow: "E-commerce performance",
+        title: "Looker Studio replicarapport",
+        subtitle: "Google Merchandise Store demo",
+        dateRange: "Laatste 30 dagen",
+        filters: ["Alle kanalen", "Alle apparaten", "Alle regio's"],
+        actions: { share: "Delen", download: "Download" },
+        kpis: [
+          {
+            label: "Omzet",
+            value: "€128K",
+            delta: "+12%",
+            deltaLabel: "vs. vorige periode",
+          },
+          {
+            label: "Sessies",
+            value: "384K",
+            delta: "+8%",
+            deltaLabel: "Nieuwe gebruikers +5%",
+          },
+          {
+            label: "Conversieratio",
+            value: "2,1%",
+            delta: "+0,3pp",
+            deltaLabel: "Checkout geoptimaliseerd",
+          },
+          {
+            label: "Gem. orderwaarde",
+            value: "€64",
+            delta: "+6%",
+            deltaLabel: "Merch bundels populair",
+          },
+        ],
+        charts: {
+          revenue: {
+            title: "Omzet en conversieratio",
+            helper: "Dagelijkse omzet met conversieratio-overlay",
+            legend: { revenue: "Omzet", conversion: "Conversieratio" },
+          },
+          device: {
+            title: "Omzet per apparaat",
+            helper: "Laatste 30 dagen",
+            labels: { desktop: "Desktop", mobile: "Mobiel", tablet: "Tablet" },
+          },
+          table: {
+            title: "Top kanalen",
+            helper: "Op basis van omzet",
+            headers: {
+              channel: "Kanaal",
+              revenue: "Omzet",
+              sessions: "Sessies",
+              conversion: "Conversieratio",
+            },
+            rows: [
+              { channel: "Paid Search", revenue: "€48.230", sessions: "132K", conversion: "2,6%" },
+              { channel: "Organic", revenue: "€32.980", sessions: "96K", conversion: "2,1%" },
+              { channel: "Direct", revenue: "€26.410", sessions: "78K", conversion: "1,9%" },
+              { channel: "Referral", revenue: "€12.140", sessions: "45K", conversion: "1,5%" },
+            ],
+          },
+        },
+      },
     },
     case: {
       badge: "Case spotlight",
@@ -533,7 +593,7 @@ export const translations = {
       badge: "Dashboard sample",
       heading: "Explore how Looker Studio unifies e-commerce metrics",
       description:
-        "This interactive example uses the Google Merchandise Store demo data to highlight revenue, traffic and conversion trends in one place.",
+        "This interactive example mimics a Looker Studio report and surfaces revenue, traffic and conversion signals without relying on an external embed.",
       highlights: [
         {
           title: "Full funnel view",
@@ -548,9 +608,69 @@ export const translations = {
           text: "Filter by device or location to spot optimisation opportunities instantly.",
         },
       ],
-      embedTitle: "Looker Studio dashboard sample",
-      embedSource: "https://lookerstudio.google.com/embed/reporting/cbfa4da2-4dc2-4fd8-9fee-30aea0a43d4c/page/tc1QD",
-      footnote: "Data sourced from Google's Google Merchandise Store demo environment.",
+      footnote: "Sample metrics inspired by the Google Merchandise Store demo trends.",
+      report: {
+        eyebrow: "E-commerce performance",
+        title: "Looker Studio replica report",
+        subtitle: "Google Merchandise Store demo",
+        dateRange: "Last 30 days",
+        filters: ["All channels", "All devices", "All regions"],
+        actions: { share: "Share", download: "Download" },
+        kpis: [
+          {
+            label: "Revenue",
+            value: "$138K",
+            delta: "+12%",
+            deltaLabel: "vs. previous period",
+          },
+          {
+            label: "Sessions",
+            value: "384K",
+            delta: "+8%",
+            deltaLabel: "New users +5%",
+          },
+          {
+            label: "Conversion rate",
+            value: "2.1%",
+            delta: "+0.3pp",
+            deltaLabel: "Checkout improvements",
+          },
+          {
+            label: "Avg. order value",
+            value: "$69",
+            delta: "+6%",
+            deltaLabel: "Bundles driving growth",
+          },
+        ],
+        charts: {
+          revenue: {
+            title: "Revenue & conversion rate",
+            helper: "Daily revenue with conversion overlay",
+            legend: { revenue: "Revenue", conversion: "Conversion" },
+          },
+          device: {
+            title: "Revenue by device",
+            helper: "Last 30 days",
+            labels: { desktop: "Desktop", mobile: "Mobile", tablet: "Tablet" },
+          },
+          table: {
+            title: "Top channels",
+            helper: "Ranked by revenue",
+            headers: {
+              channel: "Channel",
+              revenue: "Revenue",
+              sessions: "Sessions",
+              conversion: "Conversion",
+            },
+            rows: [
+              { channel: "Paid Search", revenue: "$52,430", sessions: "132K", conversion: "2.6%" },
+              { channel: "Organic", revenue: "$34,980", sessions: "96K", conversion: "2.1%" },
+              { channel: "Direct", revenue: "$28,410", sessions: "78K", conversion: "1.9%" },
+              { channel: "Referral", revenue: "$14,240", sessions: "45K", conversion: "1.5%" },
+            ],
+          },
+        },
+      },
     },
     case: {
       badge: "Case spotlight",
