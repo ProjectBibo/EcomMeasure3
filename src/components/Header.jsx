@@ -1,9 +1,10 @@
 // src/components/Header.jsx
 import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { blogPosts } from "../data/blogPosts";
 
 const flags = {
   nl: "🇳🇱",
@@ -18,15 +19,29 @@ export default function Header() {
   const [isDark, setIsDark] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const menuId = useId();
   const location = useLocation();
 
+  const blogLinks = useMemo(
+    () =>
+      blogPosts.map((post) => ({
+        id: post.slug,
+        to: `/blog/${post.slug}`,
+        label: post.navLabel[language],
+      })),
+    [language]
+  );
+
+  const { about, blogLabel, contact } = t.nav;
+
   const navLinks = useMemo(
     () => [
-      { to: "/about", label: t.nav.about },
-      { to: "/contact", label: t.nav.contact },
+      { id: "about", type: "link", to: "/about", label: about },
+      { id: "blog", type: "dropdown", label: blogLabel, items: blogLinks },
+      { id: "contact", type: "link", to: "/contact", label: contact },
     ],
-    [t.nav]
+    [about, blogLabel, contact, blogLinks]
   );
 
   const themeTitle = language === "nl"
@@ -153,12 +168,24 @@ export default function Header() {
 
   useEffect(() => {
     setIsMenuOpen(false);
+    setOpenDropdown(null);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setOpenDropdown(null);
+    }
+  }, [isMenuOpen]);
 
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
   const navLinkClass = ({ isActive }) =>
     `nav-underline text-neutral-700 transition-colors dark:text-gray-200 ${
+      isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+    }`;
+
+  const dropdownLinkClass = ({ isActive }) =>
+    `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 dark:text-gray-100 dark:hover:bg-white/10 ${
       isActive ? "text-brand-blue dark:text-brand-yellow" : ""
     }`;
 
@@ -185,11 +212,72 @@ export default function Header() {
                 <span>{t.menu.label}</span>
               </button>
               <nav className="hidden items-center justify-center gap-6 text-[15px] font-medium md:flex lg:text-[17px]">
-                {navLinks.map((link) => (
-                  <NavLink key={link.to} to={link.to} className={navLinkClass}>
-                    {link.label}
-                  </NavLink>
-                ))}
+                {navLinks.map((link) => {
+                  if (link.type === "dropdown") {
+                    const isOpen = openDropdown === link.id;
+                    const isActive = link.items.some((item) =>
+                      location.pathname.startsWith(item.to)
+                    );
+
+                    return (
+                      <div
+                        key={link.id}
+                        className="relative"
+                        onMouseEnter={() => setOpenDropdown(link.id)}
+                        onMouseLeave={() => setOpenDropdown(null)}
+                        onFocus={() => setOpenDropdown(link.id)}
+                        onBlur={(event) => {
+                          if (!event.currentTarget.contains(event.relatedTarget)) {
+                            setOpenDropdown(null);
+                          }
+                        }}
+                      >
+                        <button
+                          type="button"
+                          className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
+                            isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+                          }`}
+                          aria-haspopup="true"
+                          aria-expanded={isOpen}
+                          onClick={() => setOpenDropdown(isOpen ? null : link.id)}
+                        >
+                          {link.label}
+                          <ChevronDown
+                            size={16}
+                            className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                            aria-hidden
+                          />
+                        </button>
+                        {isOpen && (
+                          <div className="absolute left-0 top-full mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]">
+                            <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
+                              {t.menu.label}
+                            </span>
+                            <div className="mt-2 space-y-1.5">
+                              {link.items.map((item) => (
+                                <NavLink
+                                  key={item.id}
+                                  to={item.to}
+                                  className={dropdownLinkClass}
+                                  onClick={() => setOpenDropdown(null)}
+                                >
+                                  <span>{item.label}</span>
+                                  <span aria-hidden>→</span>
+                                </NavLink>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <NavLink key={link.id} to={link.to} className={navLinkClass}>
+                      {link.label}
+                    </NavLink>
+                  );
+                })}
               </nav>
             </div>
             <div className="flex items-center gap-2">
@@ -345,21 +433,70 @@ export default function Header() {
                 <p className="mt-1 text-sm text-neutral-500 dark:text-gray-400">{t.mobileMenu.subtitle}</p>
               </div>
               <nav aria-label={t.menu.label} className="space-y-3">
-                {navLinks.map((link) => (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
-                        isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
-                      }`
-                    }
-                  >
-                    <span>{link.label}</span>
-                    <span aria-hidden>→</span>
-                  </NavLink>
-                ))}
+                {navLinks.map((link) => {
+                  if (link.type === "dropdown") {
+                    const isOpen = openDropdown === link.id;
+                    return (
+                      <div
+                        key={link.id}
+                        className="rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-white/5 dark:bg-white/10"
+                      >
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-between px-4 py-3 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:shadow-md dark:text-white"
+                          onClick={() => setOpenDropdown(isOpen ? null : link.id)}
+                          aria-expanded={isOpen}
+                          aria-controls={`${menuId}-${link.id}`}
+                        >
+                          <span>{link.label}</span>
+                          <ChevronDown
+                            size={18}
+                            className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                            aria-hidden
+                          />
+                        </button>
+                        {isOpen && (
+                          <div id={`${menuId}-${link.id}`} className="space-y-2 px-3 pb-3">
+                            {link.items.map((item) => (
+                              <NavLink
+                                key={item.id}
+                                to={item.to}
+                                onClick={() => {
+                                  setOpenDropdown(null);
+                                  setIsMenuOpen(false);
+                                }}
+                                className={({ isActive }) =>
+                                  `flex items-center justify-between rounded-xl border border-neutral-200/70 bg-white px-3 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
+                                    isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
+                                  }`
+                                }
+                              >
+                                <span>{item.label}</span>
+                                <span aria-hidden>→</span>
+                              </NavLink>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <NavLink
+                      key={link.id}
+                      to={link.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
+                          isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
+                        }`
+                      }
+                    >
+                      <span>{link.label}</span>
+                      <span aria-hidden>→</span>
+                    </NavLink>
+                  );
+                })}
               </nav>
               <div className="space-y-4">
                 <h3 className="text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
