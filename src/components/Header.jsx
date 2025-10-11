@@ -60,12 +60,11 @@ export default function Header() {
     updateThemePreference(!isDark);
   };
 
+  const nextLanguage = language === "nl" ? "en" : "nl";
+
   const toggleLanguage = () => {
-    const nextLanguage = language === "nl" ? "en" : "nl";
     changeLanguage(nextLanguage);
   };
-
-  const nextLanguage = language === "nl" ? "en" : "nl";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -170,6 +169,16 @@ export default function Header() {
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
   const handleNavClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  const handleMenuLanguage = () => {
+    toggleLanguage();
+    setIsMenuOpen(false);
+  };
+
+  const handleMenuTheme = () => {
+    toggleDark();
     setIsMenuOpen(false);
   };
 
