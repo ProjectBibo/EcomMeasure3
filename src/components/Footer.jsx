@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import BayesianAbCalculator from "./BayesianAbCalculator";
 
 export default function Footer() {
   const shouldReduceMotion = useReducedMotion();
@@ -68,6 +69,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        <BayesianAbCalculator />
       </div>
       <div className="mt-8 text-center text-neutral-500 dark:text-gray-500 text-xs">
         © {new Date().getFullYear()} EcomMeasure. {t.rights}
