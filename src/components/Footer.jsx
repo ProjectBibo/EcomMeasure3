@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="story-stripe" aria-hidden />
       </div>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid gap-8 md:grid-cols-5">
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
             <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
@@ -42,6 +42,21 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.cro.items.map((item) => (
                 <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.tools.title}</h4>
+            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+              {t.columns.tools.items.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    to={item.href}
+                    className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-yellow"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
