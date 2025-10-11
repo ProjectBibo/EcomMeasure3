@@ -376,6 +376,13 @@ export const translations = {
           title: "Conversion Rate Optimization",
           items: ["Gedragsanalyse", "Hypotheses & A/B-tests", "Implementatie"],
         },
+        tools: {
+          title: "Tools",
+          items: [
+            { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
+            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+          ],
+        },
         contact: {
           title: "Contact",
           items: ["info@ecommeasure.com", "+31 6 12345678", "Deventer, Nederland"],
@@ -761,6 +768,13 @@ export const translations = {
         cro: {
           title: "Conversion Rate Optimisation",
           items: ["Behaviour analysis", "Hypotheses & A/B tests", "Implementation"],
+        },
+        tools: {
+          title: "Tools",
+          items: [
+            { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
+            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+          ],
         },
         contact: {
           title: "Contact",
