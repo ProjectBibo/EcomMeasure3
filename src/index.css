@@ -24,6 +24,14 @@ body {
   backdrop-filter: saturate(130%);
 }
 
+.ibm-plex-sans-body {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
 .dark body {
   background-image: radial-gradient(circle at 15% 25%, rgba(11, 95, 255, 0.2), transparent 45%),
     radial-gradient(circle at 75% 15%, rgba(14, 165, 165, 0.16), transparent 55%),
