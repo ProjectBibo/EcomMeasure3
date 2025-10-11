@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import BayesianAbCalculator from "./BayesianAbCalculator";
 
 export default function Footer() {
   const shouldReduceMotion = useReducedMotion();
@@ -19,38 +20,41 @@ export default function Footer() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-        <div>
-          <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
-          <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
-          <Link to="/contact" className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 hover:opacity-90">
-            {t.cta}
-          </Link>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-4 gap-8">
+          <div>
+            <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
+            <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
+            <Link to="/contact" className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 hover:opacity-90">
+              {t.cta}
+            </Link>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>
+            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+              {t.columns.measurement.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.cro.title}</h4>
+            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+              {t.columns.cro.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.contact.title}</h4>
+            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+              {t.columns.contact.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div>
-          <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>
-          <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
-            {t.columns.measurement.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.cro.title}</h4>
-          <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
-            {t.columns.cro.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.contact.title}</h4>
-          <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
-            {t.columns.contact.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
+        <BayesianAbCalculator />
       </div>
       <div className="mt-8 text-center text-neutral-500 dark:text-gray-500 text-xs">
         © {new Date().getFullYear()} EcomMeasure. {t.rights}
