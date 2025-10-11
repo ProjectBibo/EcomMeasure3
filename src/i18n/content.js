@@ -7,27 +7,24 @@ export const translations = {
     },
     header: {
       nav: {
-        services: "Diensten",
-        process: "Aanpak",
-        cases: "Cases",
-        reviews: "Reviews",
+        about: "Over EcomMeasure",
         contact: "Contact",
       },
       cta: "Plan een kennismaking",
       columns: [
         {
           title: "Measurement",
-          href: "#diensten",
+          href: "/measurement",
           subtitle: "GA4 & GTM events",
         },
         {
           title: "Consent Mode v2",
-          href: "#diensten",
+          href: "/consent-mode",
           subtitle: "AVG/GDPR proof",
         },
         {
           title: "CRO",
-          href: "#workflow",
+          href: "/cro",
           subtitle: "A/B-tests & hypotheses",
         },
       ],
@@ -395,27 +392,24 @@ export const translations = {
     },
     header: {
       nav: {
-        services: "Services",
-        process: "Approach",
-        cases: "Cases",
-        reviews: "Reviews",
+        about: "About EcomMeasure",
         contact: "Contact",
       },
       cta: "Book an intro call",
       columns: [
         {
           title: "Measurement",
-          href: "#diensten",
+          href: "/measurement",
           subtitle: "GA4 & GTM events",
         },
         {
           title: "Consent Mode v2",
-          href: "#diensten",
+          href: "/consent-mode",
           subtitle: "GDPR compliant",
         },
         {
           title: "CRO",
-          href: "#workflow",
+          href: "/cro",
           subtitle: "A/B testing roadmap",
         },
       ],

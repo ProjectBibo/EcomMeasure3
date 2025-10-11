@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 
@@ -22,9 +23,9 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
           <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
-          <a href="#contact" className="mt-4 inline-block px-4 py-2 bg-brand-yellow text-neutral-900 rounded-md font-medium hover:opacity-90">
+          <Link to="/contact" className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 hover:opacity-90">
             {t.cta}
-          </a>
+          </Link>
         </div>
         <div>
           <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>

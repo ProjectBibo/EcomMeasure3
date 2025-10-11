@@ -1,9 +1,12 @@
 // src/components/Hero.jsx
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+
+const MotionLink = motion(Link);
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -55,20 +58,20 @@ export default function Hero() {
           transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <motion.a
+          <MotionLink
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-yellow"
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
           >
             {t.primaryCta} <ArrowRight size={18} />
-          </motion.a>
-          <a
-            href="#workflow"
+          </MotionLink>
+          <Link
+            to="/measurement"
             className="inline-flex items-center gap-2 rounded-full border border-neutral-900/10 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_50px_rgba(2,6,23,0.55)]"
           >
             {t.secondaryCta}
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div
