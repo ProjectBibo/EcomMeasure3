@@ -182,6 +182,63 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  const handleMenuLanguage = () => {
+    toggleLanguage();
+    setIsMenuOpen(false);
+  };
+
+  const handleMenuTheme = () => {
+    toggleDark();
+    setIsMenuOpen(false);
+  };
+
+  const toggleLanguage = () => {
+    const nextLanguage = language === "nl" ? "en" : "nl";
+    changeLanguage(nextLanguage);
+  };
+
+  const nextLanguage = language === "nl" ? "en" : "nl";
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 0) {
+        setIsHidden(false);
+        lastScrollY = currentScrollY;
+        ticking = false;
+        return;
+      }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 140) {
+        setIsHidden(true);
+      } else if (currentScrollY < lastScrollY) {
+        setIsHidden(false);
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
     <>
       <header
