@@ -8,6 +8,7 @@ export const translations = {
     header: {
       nav: {
         about: "Over EcomMeasure",
+        blogLabel: "Blog",
         contact: "Contact",
       },
       cta: "Plan een kennismaking",
@@ -393,6 +394,7 @@ export const translations = {
     header: {
       nav: {
         about: "About EcomMeasure",
+        blogLabel: "Blog",
         contact: "Contact",
       },
       cta: "Book an intro call",

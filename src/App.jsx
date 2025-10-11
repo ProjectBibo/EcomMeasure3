@@ -12,6 +12,7 @@ const Measurement = lazy(() => import("./pages/Measurement"));
 const ConsentMode = lazy(() => import("./pages/ConsentMode"));
 const Cro = lazy(() => import("./pages/Cro"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function AppContent() {
@@ -25,6 +26,7 @@ function AppContent() {
           <Route path="measurement" element={<Measurement />} />
           <Route path="consent-mode" element={<ConsentMode />} />
           <Route path="cro" element={<Cro />} />
+          <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
