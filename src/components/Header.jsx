@@ -436,66 +436,66 @@ export default function Header() {
           >
             <Link to="/" className="group relative flex items-center gap-3 transition-all duration-300" aria-label="EcomMeasure home">
               <span
-                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue to-brand-teal text-white shadow-[0_16px_32px_rgba(15,23,42,0.18)] ring-1 ring-white/70 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
-                  isCondensed ? "h-12 w-12" : "h-14 w-14"
+                className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-blue text-white shadow-[0_10px_20px_rgba(15,23,42,0.18)] ring-1 ring-white/60 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_16px_28px_rgba(2,6,23,0.45)] ${
+                  isCondensed ? "h-11 w-11" : "h-12 w-12"
                 }`}
               >
                 <svg
                   viewBox="0 0 48 48"
-                  className={isCondensed ? "h-8 w-8" : "h-9 w-9"}
+                  className={isCondensed ? "h-7 w-7" : "h-8 w-8"}
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden
                 >
                   <defs>
-                    <linearGradient id="em-spark" x1="10" y1="34" x2="36" y2="12" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#ffcc02" stopOpacity="0.95" />
-                      <stop offset="1" stopColor="#e6b700" stopOpacity="0.9" />
+                    <linearGradient id="em-pillars" x1="10" y1="38" x2="38" y2="12" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="#c7dcff" />
+                      <stop offset="1" stopColor="#f8fbff" />
                     </linearGradient>
-                    <linearGradient id="em-pillar" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0" stopColor="#d8e4ff" />
-                      <stop offset="1" stopColor="#c4d6ff" />
+                    <linearGradient id="em-sparkline" x1="12" y1="30" x2="36" y2="16" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="#f7c948" stopOpacity="0.95" />
+                      <stop offset="1" stopColor="#facc15" stopOpacity="0.85" />
                     </linearGradient>
                   </defs>
                   <g strokeLinecap="round" strokeLinejoin="round">
                     <path
-                      d="M10 34h4.5c1.1 0 2-.9 2-2V24c0-1.1-.9-2-2-2H10c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2Z"
-                      fill="url(#em-pillar)"
-                      stroke="rgba(255,255,255,0.35)"
-                      strokeWidth="1.5"
+                      d="M11.5 31.5c0 1.38 1.12 2.5 2.5 2.5h4c1.38 0 2.5-1.12 2.5-2.5v-8c0-1.38-1.12-2.5-2.5-2.5h-4c-1.38 0-2.5 1.12-2.5 2.5v8Z"
+                      fill="url(#em-pillars)"
+                      stroke="rgba(255,255,255,0.55)"
+                      strokeWidth="1.4"
                     />
                     <path
-                      d="M22 34h4.5c1.1 0 2-.9 2-2V18c0-1.1-.9-2-2-2H22c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2Z"
-                      fill="url(#em-pillar)"
-                      stroke="rgba(255,255,255,0.35)"
-                      strokeWidth="1.5"
+                      d="M20.5 26c0 1.38 1.12 2.5 2.5 2.5h4c1.38 0 2.5-1.12 2.5-2.5v-12c0-1.38-1.12-2.5-2.5-2.5h-4c-1.38 0-2.5 1.12-2.5 2.5V26Z"
+                      fill="url(#em-pillars)"
+                      stroke="rgba(255,255,255,0.55)"
+                      strokeWidth="1.4"
                     />
                     <path
-                      d="M34 34h4.5c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2H34c-1.1 0-2 .9-2 2v20c0 1.1.9 2 2 2Z"
-                      fill="url(#em-pillar)"
-                      stroke="rgba(255,255,255,0.35)"
-                      strokeWidth="1.5"
+                      d="M29.5 21.5c0 1.38 1.12 2.5 2.5 2.5h4c1.38 0 2.5-1.12 2.5-2.5v-8c0-1.38-1.12-2.5-2.5-2.5h-4c-1.38 0-2.5 1.12-2.5 2.5v8Z"
+                      fill="url(#em-pillars)"
+                      stroke="rgba(255,255,255,0.55)"
+                      strokeWidth="1.4"
                     />
                     <path
-                      d="M8 26L18.2 20L24.5 26.8L31.4 18.2L40 24"
-                      stroke="url(#em-spark)"
-                      strokeWidth="2.8"
+                      d="M12 27l6-3.8 4.6 3.2 4.9-6.3L36 23"
+                      stroke="url(#em-sparkline)"
+                      strokeWidth="2.6"
                     />
-                    <circle cx="31" cy="17" r="3.2" fill="#ffcc02" stroke="rgba(255,255,255,0.65)" strokeWidth="1.4" />
+                    <circle cx="32.5" cy="19" r="2.4" fill="#fde047" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" />
                   </g>
                 </svg>
-                <span className="absolute -inset-1 rounded-[1.75rem] border border-white/20 opacity-40" aria-hidden />
+                <span className="absolute inset-0 rounded-2xl border border-white/20" aria-hidden />
               </span>
               <span className="flex flex-col leading-tight">
                 <span
-                  className={`font-bold tracking-tight text-neutral-900 transition-colors dark:text-white ${
-                    isCondensed ? "text-base" : "text-lg"
+                  className={`font-semibold uppercase tracking-[0.26em] text-neutral-900 transition-colors dark:text-white ${
+                    isCondensed ? "text-[11px]" : "text-xs"
                   }`}
                 >
-                  EcomMeasure
+                  ECOMMEASURE
                 </span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.38em] text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
-                  Insights
+                <span className="text-sm font-medium tracking-tight text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
+                  Growth Insights
                 </span>
               </span>
             </Link>
