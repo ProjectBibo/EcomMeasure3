@@ -402,7 +402,7 @@ export default function Header() {
               </button>
               <button
                 onClick={toggleDark}
-                className="inline-flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-black/5 dark:hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
                 aria-label={themeTitle}
                 title={themeTitle}
                 type="button"
