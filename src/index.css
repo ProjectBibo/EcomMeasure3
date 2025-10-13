@@ -196,6 +196,115 @@ body {
   opacity: 1;
 }
 
+.easter-egg-burst {
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.easter-egg-burst__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.26), transparent 70%);
+  animation: easter-egg-pulse 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dark .easter-egg-burst__pulse {
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.35), transparent 72%);
+}
+
+.easter-egg-burst__particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(14, 116, 144, 0.9));
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+  animation: easter-egg-particle 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--particle-delay);
+  transform: translate3d(0, 0, 0) scale(0.4);
+  opacity: 0;
+}
+
+.dark .easter-egg-burst__particle {
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.55);
+}
+
+.easter-egg-burst__message {
+  position: absolute;
+  bottom: -32px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(226, 240, 255, 0.94));
+  color: #0f172a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.15);
+  animation: easter-egg-message 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dark .easter-egg-burst__message {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.78), rgba(14, 116, 144, 0.72));
+  color: #f8fafc;
+  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.55);
+}
+
+@keyframes easter-egg-particle {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.4);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--particle-x), var(--particle-y), 0) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes easter-egg-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+@keyframes easter-egg-message {
+  0% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .easter-egg-burst__particle,
+  .easter-egg-burst__pulse,
+  .easter-egg-burst__message {
+    animation: none !important;
+  }
+}
+
 /* ===== Pill links (alternatief cluster-stijl, optioneel) ===== */
 .pill-link {
   display: inline-flex;

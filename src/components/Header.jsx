@@ -39,8 +39,13 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [isEasterEggActive, setIsEasterEggActive] = useState(false);
+  const [burstSeed, setBurstSeed] = useState(0);
   const menuId = useId();
+  const easterEggStatusId = useId();
   const location = useLocation();
+  const burstTimeoutRef = useRef(null);
+  const keyBufferRef = useRef("");
 
   const blogLinks = useMemo(
     () =>
@@ -74,6 +79,99 @@ export default function Header() {
     ],
     [about, blogLabel, blogLinks, contact, toolLinks, toolsLabel]
   );
+
+  const particles = useMemo(() => {
+    const count = 7;
+    return Array.from({ length: count }, (_, index) => {
+      const angle = (Math.PI * 2 * index) / count + burstSeed * 0.18;
+      const distance = 26 + (index % 2) * 10;
+      return {
+        x: Math.cos(angle) * distance,
+        y: Math.sin(angle) * distance,
+        delay: index * 0.018,
+      };
+    });
+  }, [burstSeed]);
+
+  const dataUnlockedCopy = language === "nl" ? "Data ontgrendeld" : "Data unlocked";
+
+  const triggerEasterEgg = useCallback(() => {
+    if (shouldReduceMotion) return;
+    setBurstSeed((seed) => seed + 1);
+    setIsEasterEggActive(true);
+
+    if (typeof window !== "undefined") {
+      if (burstTimeoutRef.current) {
+        window.clearTimeout(burstTimeoutRef.current);
+      }
+      burstTimeoutRef.current = window.setTimeout(() => {
+        setIsEasterEggActive(false);
+        burstTimeoutRef.current = null;
+      }, 900);
+
+      if (window.dataLayer) {
+        window.dataLayer.push({ event: "easter_egg_triggered" });
+      }
+    }
+  }, [shouldReduceMotion]);
+
+  useEffect(
+    () => () => {
+      if (typeof window !== "undefined" && burstTimeoutRef.current) {
+        window.clearTimeout(burstTimeoutRef.current);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const targetSequence = "data";
+    const isEditableElement = (element) => {
+      if (!element) return false;
+      const tag = element.tagName;
+      return (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        element.isContentEditable ||
+        element.getAttribute?.("role") === "textbox"
+      );
+    };
+
+    const handleKeyDown = (event) => {
+      if (shouldReduceMotion) return;
+      if (event.metaKey || event.ctrlKey || event.altKey) {
+        keyBufferRef.current = "";
+        return;
+      }
+
+      const activeElement = document.activeElement;
+      if (isEditableElement(activeElement)) {
+        keyBufferRef.current = "";
+        return;
+      }
+
+      const key = event.key.toLowerCase();
+      if (key === "escape") {
+        keyBufferRef.current = "";
+        return;
+      }
+
+      if (key.length === 1 && /[a-z]/.test(key)) {
+        keyBufferRef.current = `${keyBufferRef.current}${key}`.slice(-targetSequence.length);
+        if (keyBufferRef.current === targetSequence) {
+          keyBufferRef.current = "";
+          triggerEasterEgg();
+        }
+      } else {
+        keyBufferRef.current = "";
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [shouldReduceMotion, triggerEasterEgg]);
 
   const prefetchRoute = useCallback((target) => {
     if (!target) return;
@@ -447,7 +545,29 @@ export default function Header() {
               isCondensed ? "h-14" : "h-16"
             }`}
           >
-            <Link to="/" className="group relative flex items-center gap-3 transition-all duration-300" aria-label="EcomMeasure home">
+            <Link
+              to="/"
+              className="group relative flex items-center gap-3 transition-all duration-300"
+              aria-label="EcomMeasure home"
+              aria-describedby={isEasterEggActive ? easterEggStatusId : undefined}
+            >
+              {isEasterEggActive && (
+                <span className="easter-egg-burst" aria-hidden>
+                  <span className="easter-egg-burst__pulse" />
+                  {particles.map((particle, index) => (
+                    <span
+                      key={`${burstSeed}-${index}`}
+                      className="easter-egg-burst__particle"
+                      style={{
+                        "--particle-x": `${particle.x}px`,
+                        "--particle-y": `${particle.y}px`,
+                        "--particle-delay": `${particle.delay}s`,
+                      }}
+                    />
+                  ))}
+                  <span className="easter-egg-burst__message">{dataUnlockedCopy}</span>
+                </span>
+              )}
               <span
                 className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-blue text-white shadow-[0_10px_20px_rgba(15,23,42,0.18)] ring-1 ring-white/60 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_16px_28px_rgba(2,6,23,0.45)] ${
                   isCondensed ? "h-11 w-11" : "h-12 w-12"
@@ -510,6 +630,9 @@ export default function Header() {
                 <span className="text-sm font-medium tracking-tight text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
                   Growth Insights
                 </span>
+              </span>
+              <span id={easterEggStatusId} aria-live="polite" className="sr-only">
+                {isEasterEggActive ? dataUnlockedCopy : ""}
               </span>
             </Link>
 
