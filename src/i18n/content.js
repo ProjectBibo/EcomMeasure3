@@ -16,7 +16,7 @@ export const translations = {
         ],
         contact: "Contact",
       },
-      cta: "Plan een kennismaking",
+      cta: "Plan een slimme kennismaking",
       columns: [
         {
           title: "Measurement",
@@ -41,101 +41,105 @@ export const translations = {
       },
       languageSwitch: {
         aria: {
-          nl: "Vertaal de site naar Engels",
-          en: "Vertaal de site naar Nederlands",
+          nl: "Schakel de site naar Engels",
+          en: "Schakel de site naar Nederlands",
         },
         title: {
-          nl: "Vertaal naar Engels",
-          en: "Translate to Dutch",
+          nl: "Bekijk in het Engels",
+          en: "View in Dutch",
         },
         cta: {
-          nl: "Vertalen",
-          en: "Translate",
+          nl: "Wissel",
+          en: "Switch",
         },
         helper: {
-          nl: "Vertaal de website naar Engels",
-          en: "Translate the website to Dutch",
+          nl: "Zet de website in het Engels",
+          en: "Switch the website to Dutch",
         },
       },
       menu: {
         label: "Menu",
-        open: "Open het hoofdmenu",
-        close: "Sluit het hoofdmenu",
+        open: "Open navigatie",
+        close: "Sluit navigatie",
       },
       command: {
-        aria: "Open het command palette",
-        label: "Zoek (⌘K)",
+        aria: "Open het zoek- en actiepalet",
+        label: "Zoeken & navigeren (⌘K)",
       },
       mobileMenu: {
         title: "Navigatie",
-        subtitle: "Kies een sectie of pas je voorkeuren aan.",
+        subtitle: "Spring naar een sectie of stem je voorkeuren af.",
         preferences: "Voorkeuren",
       },
     },
     commandPalette: {
-      title: "Waar wil je heen?",
-      description: "Typ om pagina's, diensten of acties te vinden.",
-      placeholder: "Zoek of typ een actie",
-      empty: "Geen resultaten gevonden",
+      title: "Waarheen vandaag?",
+      description: "Typ en spring naar pagina's, diensten of acties.",
+      placeholder: "Zoek of start een actie",
+      empty: "Geen match – probeer iets anders.",
       close: "Sluit command palette",
-      shortcutsHint: "Gebruik ↑ ↓ om te navigeren, Enter om te openen.",
+      shortcutsHint: "Gebruik ↑↓ om te bladeren, Enter om te openen.",
       resultsCount: {
         singular: "1 resultaat",
         plural: "{{count}} resultaten",
       },
       groups: {
-        primary: "Pagina's en acties",
+        primary: "Pagina's & acties",
       },
       actions: {
         home: {
           title: "Startpagina",
-          description: "Ga terug naar het overzicht van alle diensten.",
+          description: "Terug naar diensten en cases in één overzicht.",
           keywords: ["home", "start", "startpagina", "overzicht"],
         },
         about: {
           title: "Over EcomMeasure",
-          description: "Lees het verhaal en de werkwijze achter EcomMeasure.",
+          description: "Lees het verhaal achter EcomMeasure.",
           keywords: ["over", "achtergrond", "visie", "missie"],
         },
         cases: {
           title: "Cases",
-          description: "Bekijk gerealiseerde groei en learnings.",
+          description: "Bekijk groeiverhalen en learnings.",
           keywords: ["cases", "bewijzen", "social proof", "resultaten"],
         },
         measurement: {
           title: "Measurement",
-          description: "Ontdek hoe GA4, GTM en datalagen worden ingericht.",
+          description: "Zie hoe GA4, GTM en datalagen worden ingericht.",
           keywords: ["measurement", "ga4", "gtm", "tracking", "tagging"],
         },
         consentMode: {
           title: "Consent Mode v2",
-          description: "Alles over een AVG-proof Consent Mode implementatie.",
+          description: "Alles voor een AVG-proof consent setup.",
           keywords: ["consent", "privacy", "avg", "gdpr", "cmp"],
         },
         cro: {
           title: "CRO",
-          description: "Lees hoe experimenten en research conversie laten groeien.",
+          description: "Ontdek hoe research en experimenten conversie boosten.",
           keywords: ["cro", "conversie", "optimalisatie", "a/b-test", "experimenten"],
         },
         bayesianCalculator: {
           title: "Bayesiaanse A/B-test calculator",
-          description: "Bereken de kans dat een variant wint op basis van data.",
+          description: "Bereken hoe groot de kans is dat een variant wint.",
           keywords: ["bayesiaans", "calculator", "ab test", "statistiek"],
         },
         croRoiCalculator: {
           title: "CRO ROI calculator",
-          description: "Bereken het rendement van jouw CRO-traject.",
+          description: "Bereken de ROI van je CRO-traject.",
           keywords: ["roi", "calculator", "business case", "groei"],
         },
         contact: {
-          title: "Plan een kennismaking",
-          description: "Plan direct een call of afspraak.",
+          title: "Plan een slimme kennismaking",
+          description: "Plan een call en verken je groeiplan.",
           keywords: ["contact", "kennismaking", "afspraak", "plan"],
         },
       },
     },
+    errorBoundary: {
+      title: "Er ging iets mis",
+      description: "Ververs de pagina; blijft het gebeuren, check de console of logs.",
+    },
     hero: {
-      badge: "Measurement & CRO voor e-commerce",
+      badge: "Measurement & CRO voor slimme webshops",
       titleLead: "Word het volgende",
       rotatingPhrases: [
         "groeiverhaal",
@@ -147,9 +151,9 @@ export const translations = {
       ],
       titleHighlight: "GA4, Consent Mode v2 en bewezen CRO-experimenten",
       description:
-        "Ik richt je meetstack in, verbind advertentieplatformen en vertaal inzichten naar A/B-tests die omzet en klantbeleving laten groeien.",
-      primaryCta: "Plan een kennismaking",
-      secondaryCta: "Ontdek de aanpak",
+        "Ik verbind je meetstack, advertentieplatformen en experimenten zodat elke sprint omzet én inzicht oplevert.",
+      primaryCta: "Plan een slimme kennismaking",
+      secondaryCta: "Bekijk de aanpak",
       stats: [
         {
           label: "Datastacks ingericht",
@@ -170,14 +174,14 @@ export const translations = {
       storyline: [
         {
           title: "Measurement op orde",
-          copy: "Consent Mode v2, cookiebanner en events zorgen dat elke klik AVG-proof gemeten wordt.",
+          copy: "Consent Mode v2, cookiebanner en events houden elke klik AVG-proof én bruikbaar.",
         },
         {
           title: "Verbeteren met vertrouwen",
-          copy: "Hypotheses op basis van klantgedrag en dashboards maken prioriteren van experimenten eenvoudig.",
+          copy: "Gedragsinzichten en dashboards wijzen direct de experimenten met de meeste impact aan.",
         },
       ],
-      scrollLabel: "Scroll verder",
+      scrollLabel: "Blijf ontdekken",
     },
     usp: {
       badge: "Diensten",
@@ -391,7 +395,7 @@ export const translations = {
         "Google Ads en Meta Conversion API gekoppeld voor volledige attributie.",
         "CRO-sprint met drie winnende experimenten in checkout en productdetail.",
       ],
-      cta: "Bespreek jouw case",
+      cta: "Bespreek je case",
       overlay: {
         label: "Meetresultaten",
         highlight: "Realtime dashboards en funnel-verbeteringen",
@@ -411,41 +415,41 @@ export const translations = {
       videoCta: "Scroll voor meer verhalen",
     },
     contact: {
-      badge: "Klaar om samen te werken?",
-      heading: "Kies het kanaal dat bij jou past",
+      badge: "Klaar om te sparren?",
+      heading: "Kies het kanaal dat bij je past",
       intro:
-        "Je spreekt rechtstreeks met Rens. Samen bekijken we je meetstack, groeidoelen en wat er nodig is voor duurzame conversie uplift.",
+        "Je spreekt rechtstreeks met Rens. We duiken in je meetstack, groeidoelen en quick wins.",
       options: [
         {
-          title: "Plan een kennismaking",
+          title: "Plan een slimme kennismaking",
           description:
-            "Vertel kort over je webshop en ontvang binnen één werkdag een voorstel voor een call.",
-          actionLabel: "Mail direct",
+            "Tip je webshop en ontvang binnen één werkdag een voorstel voor een call.",
+          actionLabel: "Mail meteen",
         },
         {
           title: "Boek een datascan",
           description:
-            "Een strategiesessie van 45 minuten waarin we jouw analytics doornemen en quick wins aanwijzen.",
+            "Plan 45 minuten om analytics door te lichten en direct kansen te spotten.",
           actionLabel: "Kies een moment",
         },
         {
-          title: "Stel een vraag via WhatsApp",
+          title: "App je vraag",
           description:
-            "Lievere chat? Laat een bericht achter en je krijgt dezelfde dag reactie.",
+            "Lievere chat? Stuur een app en je krijgt dezelfde dag reactie.",
           actionLabel: "Open WhatsApp",
         },
       ],
       fast: {
-        title: "Sneller schakelen?",
+        title: "Direct schakelen?",
         description:
-          "Bel direct via +31 6 12345678 of stuur je GA4-toegang mee zodat we gericht kunnen voorbereiden.",
+          "Bel +31 6 12345678 of stuur je GA4-toegang mee zodat we gericht voorbereiden.",
         mail: "info@ecommeasure.com",
         social: "Volg op LinkedIn",
       },
     },
     footer: {
       intro:
-        "Samen bouwen we aan een meet- en optimalisatieprogramma dat aansluit op jouw doelen en budget.",
+        "Samen bouwen we aan een meet- en optimalisatieprogramma dat als maatwerk voelt.",
       columns: {
         measurement: {
           title: "Measurement",
@@ -475,7 +479,7 @@ export const translations = {
           items: ["info@ecommeasure.com", "+31 6 12345678", "Deventer, Nederland"],
         },
       },
-      cta: "Plan een kennismaking",
+      cta: "Plan een slimme kennismaking",
       rights: "Alle rechten voorbehouden.",
     },
   },
@@ -496,7 +500,7 @@ export const translations = {
         ],
         contact: "Contact",
       },
-      cta: "Book an intro call",
+      cta: "Book a smart intro",
       columns: [
         {
           title: "Measurement",
@@ -521,65 +525,65 @@ export const translations = {
       },
       languageSwitch: {
         aria: {
-          nl: "Translate the site to English",
-          en: "Translate the site to Dutch",
+          nl: "Switch the site to English",
+          en: "Switch the site to Dutch",
         },
         title: {
-          nl: "Translate to English",
-          en: "Translate to Dutch",
+          nl: "View in English",
+          en: "View in Dutch",
         },
         cta: {
-          nl: "Vertalen",
-          en: "Translate",
+          nl: "Wissel",
+          en: "Switch",
         },
         helper: {
-          nl: "Translate the website to English",
-          en: "Translate the website to Dutch",
+          nl: "Switch the website to English",
+          en: "Switch the website to Dutch",
         },
       },
       menu: {
         label: "Menu",
-        open: "Open main navigation",
-        close: "Close main navigation",
+        open: "Open navigation",
+        close: "Close navigation",
       },
       command: {
-        aria: "Open the command palette",
-        label: "Search (⌘K)",
+        aria: "Open the search and action palette",
+        label: "Search & navigate (⌘K)",
       },
       mobileMenu: {
         title: "Navigate",
-        subtitle: "Jump to a section or adjust your preferences.",
+        subtitle: "Jump to a section or tune your preferences.",
         preferences: "Preferences",
       },
     },
     commandPalette: {
-      title: "Where do you want to go?",
-      description: "Type to jump to pages, services or actions.",
-      placeholder: "Search or type an action",
-      empty: "No results found",
+      title: "Where to next?",
+      description: "Type and jump to pages, services or quick actions.",
+      placeholder: "Search or trigger an action",
+      empty: "No match — try again.",
       close: "Close command palette",
-      shortcutsHint: "Use ↑ ↓ to move, Enter to open.",
+      shortcutsHint: "Use ↑↓ to browse, Enter to open.",
       resultsCount: {
         singular: "1 result",
         plural: "{{count}} results",
       },
       groups: {
-        primary: "Pages and quick actions",
+        primary: "Pages & quick actions",
       },
       actions: {
         home: {
           title: "Homepage",
-          description: "Return to the main overview of services and cases.",
+          description: "Return to every service and case in one overview.",
           keywords: ["home", "start", "overview", "landing"],
         },
         about: {
           title: "About EcomMeasure",
-          description: "Learn more about the story and approach behind EcomMeasure.",
+          description: "Read the story behind EcomMeasure.",
           keywords: ["about", "team", "background", "story"],
         },
         cases: {
           title: "Cases",
-          description: "Explore proven uplift stories.",
+          description: "Explore growth stories and learnings.",
           keywords: ["cases", "proof", "social proof", "results"],
         },
         measurement: {
@@ -589,33 +593,37 @@ export const translations = {
         },
         consentMode: {
           title: "Consent Mode v2",
-          description: "Everything you need for a GDPR-proof consent setup.",
+          description: "Everything for a GDPR-proof consent setup.",
           keywords: ["consent", "privacy", "gdpr", "cmp", "compliance"],
         },
         cro: {
           title: "CRO",
-          description: "Discover how research and experiments lift conversion.",
+          description: "See how research and experiments boost conversion.",
           keywords: ["cro", "conversion", "optimisation", "ab test", "experiments"],
         },
         bayesianCalculator: {
           title: "Bayesian A/B test calculator",
-          description: "Calculate the probability that a variant wins based on your data.",
+          description: "Calculate how likely a variant is to win.",
           keywords: ["bayesian", "calculator", "ab test", "statistics"],
         },
         croRoiCalculator: {
           title: "CRO ROI calculator",
-          description: "Estimate the return on investment of your CRO roadmap.",
+          description: "Estimate the ROI of your CRO roadmap.",
           keywords: ["roi", "calculator", "business case", "growth"],
         },
         contact: {
-          title: "Book an intro call",
-          description: "Schedule a discovery session.",
+          title: "Book a smart intro",
+          description: "Plan a call to explore your growth plan.",
           keywords: ["contact", "intro", "call", "meeting"],
         },
       },
     },
+    errorBoundary: {
+      title: "Something went wrong",
+      description: "Refresh the page; if it keeps happening, review the console or logs.",
+    },
     hero: {
-      badge: "Measurement & CRO for e-commerce",
+      badge: "Measurement & CRO for ambitious shops",
       titleLead: "Become the next",
       rotatingPhrases: [
         "growth story",
@@ -627,9 +635,9 @@ export const translations = {
       ],
       titleHighlight: "GA4, Consent Mode v2 and proven CRO experiments",
       description:
-        "I align your measurement stack, connect ad platforms and translate insights into experiments that grow revenue and customer experience.",
-      primaryCta: "Book an intro call",
-      secondaryCta: "Explore the approach",
+        "I connect your measurement stack, ad platforms and experiments so every sprint delivers insight and revenue.",
+      primaryCta: "Book a smart intro",
+      secondaryCta: "See the approach",
       stats: [
         {
           label: "Measurement stacks delivered",
@@ -650,14 +658,14 @@ export const translations = {
       storyline: [
         {
           title: "Measurement foundations",
-          copy: "Consent Mode v2, cookie banner and events ensure every click is measured in a GDPR-safe way.",
+          copy: "Consent Mode v2, cookie banner and events keep every click GDPR-safe and useful.",
         },
         {
           title: "Improve with confidence",
-          copy: "Behaviour insights and dashboards make it easy to prioritise experiments that matter.",
+          copy: "Behaviour insights and dashboards spotlight the experiments with the biggest upside.",
         },
       ],
-      scrollLabel: "Keep scrolling",
+      scrollLabel: "Keep exploring",
     },
     usp: {
       badge: "Services",
@@ -892,31 +900,31 @@ export const translations = {
     },
     contact: {
       badge: "Ready to collaborate?",
-      heading: "Choose the channel that fits you",
+      heading: "Pick the channel that suits you",
       intro:
-        "You'll speak directly with Rens. Together we review your measurement stack, growth goals and the steps needed for lasting conversion uplift.",
+        "You'll speak directly with Rens. We'll dive into your measurement stack, growth goals and quick wins.",
       options: [
         {
-          title: "Book an intro call",
+          title: "Book a smart intro",
           description:
-            "Share a short briefing and receive a proposal for a call within one business day.",
+            "Share a quick brief and receive a call proposal within one business day.",
           actionLabel: "Email now",
         },
         {
           title: "Schedule a data scan",
           description:
-            "A 45-minute strategy session to review your analytics setup and identify quick wins.",
+            "Block 45 minutes to audit analytics and surface immediate opportunities.",
           actionLabel: "Pick a slot",
         },
         {
-          title: "Ask a question via WhatsApp",
+          title: "WhatsApp your question",
           description:
-            "Prefer chat? Leave a message and you'll get a same-day response.",
+            "Prefer chat? Drop a message and you'll get a same-day response.",
           actionLabel: "Open WhatsApp",
         },
       ],
       fast: {
-        title: "Need answers faster?",
+        title: "Need a fast lane?",
         description:
           "Call +31 6 12345678 or share GA4 access so we can prepare targeted advice.",
         mail: "info@ecommeasure.com",
@@ -925,7 +933,7 @@ export const translations = {
     },
     footer: {
       intro:
-        "Together we build a measurement and optimisation programme aligned with your goals and budget.",
+        "Together we build a measurement and optimisation programme that feels tailor-made for your goals.",
       columns: {
         measurement: {
           title: "Measurement",
@@ -955,7 +963,7 @@ export const translations = {
           items: ["info@ecommeasure.com", "+31 6 12345678", "Deventer, Netherlands"],
         },
       },
-      cta: "Book an intro call",
+      cta: "Book a smart intro",
       rights: "All rights reserved.",
     },
   },
