@@ -212,6 +212,45 @@ export const translations = {
         },
       ],
     },
+    aiDemo: {
+      badge: "AI demo",
+      title: "Zo ziet een snelle AI-analyse eruit",
+      description:
+        "Vul een webshop URL in en ontdek welke optimalisaties EcomMeasure zou adviseren.",
+      label: "Vul je webshop URL in",
+      placeholder: "https://www.jouwshop.nl",
+      helper: "We verzenden of bewaren geen data; dit zijn geloofwaardige voorbeeldinzichten.",
+      button: "Genereer inzichten",
+      resultLabel: "Simulatie",
+      resultTitle: "Kansen gevonden voor {{subject}}",
+      defaultSubject: "jouw webshop",
+      insights: [
+        {
+          id: "checkout-frictie",
+          text: "De checkout van {{subject}} bevat drie stappen zonder extra waarde — het schrappen ervan kan tot 9% conversie terugwinnen.",
+        },
+        {
+          id: "mobiele-snelheid",
+          text: "Mobiele conversie van {{subject}} kan 18% stijgen zodra de gemiddelde laadtijd onder 2,5 seconden komt.",
+        },
+        {
+          id: "verzend-opties",
+          text: "40% van terugkerende klanten haakt af bij de verzendopties; test een vooraf ingevulde voorkeur om wrijving te verminderen.",
+        },
+        {
+          id: "seo-copy",
+          text: "Productdetailpagina's herhalen content; copy op basis van zoekintentie kan 12% meer organische kliks opleveren.",
+        },
+        {
+          id: "safari-betaling",
+          text: "Safari-bezoekers verlaten de betaalstap 1,6× vaker; voeg Apple Pay toe om het gat te dichten.",
+        },
+        {
+          id: "bundles",
+          text: "Bundles converteren 22% beter wanneer ze boven de vouw staan — geef merchandisingmodules een hogere prioriteit.",
+        },
+      ],
+    },
     workflow: {
       badge: "Aanpak",
       heading: "Zo werken we van nulmeting naar groei",
@@ -689,6 +728,45 @@ export const translations = {
           title: "Experiment delivery",
           text: "We build, test and implement winning variants alongside your team.",
           detail: "Implementation support for developers and marketers.",
+        },
+      ],
+    },
+    aiDemo: {
+      badge: "AI insight demo",
+      title: "See what a rapid AI review looks like",
+      description:
+        "Enter a webshop URL and preview the optimisation opportunities EcomMeasure would surface.",
+      label: "Enter your webshop URL",
+      placeholder: "https://www.yourstore.com",
+      helper: "No data is sent or stored — these are credible example insights only.",
+      button: "Generate insights",
+      resultLabel: "Simulation",
+      resultTitle: "Opportunities spotted for {{subject}}",
+      defaultSubject: "your webshop",
+      insights: [
+        {
+          id: "checkout-friction",
+          text: "Checkout for {{subject}} contains three steps that add no extra value — trimming them could recover up to 9% of abandoned baskets.",
+        },
+        {
+          id: "mobile-speed",
+          text: "Mobile conversions for {{subject}} could increase by 18% by reducing average load time to under 2.5 seconds.",
+        },
+        {
+          id: "shipping-default",
+          text: "40% of returning customers drop off at the shipping selector; testing a default recommendation could remove the hesitation.",
+        },
+        {
+          id: "seo-alignment",
+          text: "Product detail pages reuse identical copy; aligning with search intent could lift organic clicks by 12%.",
+        },
+        {
+          id: "safari-payment",
+          text: "Shoppers on Safari abandon payment 1.6× more often; enabling Apple Pay would close the gap.",
+        },
+        {
+          id: "bundle-visibility",
+          text: "Bundles convert 22% better when featured above the fold — promote merchandising modules earlier in the journey.",
         },
       ],
     },
