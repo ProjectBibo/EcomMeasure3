@@ -10,7 +10,7 @@ export default function Workflow() {
 
   return (
     <section id="workflow" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-brand-teal/4 to-brand-yellow/6 dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-yellow/10" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/8 via-transparent to-brand-teal/10 dark:from-brand-blue/14 dark:via-transparent dark:to-brand-teal/16" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ export default function Workflow() {
         </motion.div>
 
         <div className="relative mt-14">
-          <div className="absolute left-[22px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow md:block" aria-hidden />
+          <div className="absolute left-[22px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-brand-blue to-brand-teal md:block" aria-hidden />
           <div className="space-y-12">
             {t.steps.map((step, index) => (
               <motion.article
@@ -48,7 +48,7 @@ export default function Workflow() {
                 <div>
                   <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{step.title}</h3>
                   <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{step.text}</p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue shadow-[0_12px_28px_rgba(59,130,246,0.2)]">
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue shadow-[0_12px_28px_rgba(10,16,26,0.18)]">
                     {step.deliverable}
                   </div>
                 </div>

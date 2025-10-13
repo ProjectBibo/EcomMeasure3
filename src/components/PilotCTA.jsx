@@ -10,8 +10,10 @@ export default function PilotCTA() {
           Jij krijgt focus en momentum — ik lever resultaat en duidelijke rapportages.
         </p>
         <div className="mt-6">
-          <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full
-             bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform">
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_18px_40px_rgba(10,16,26,0.2)] transition-transform duration-200 hover:scale-[1.02] hover:bg-brand-yellow-dark active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-surface-dark"
+          >
             Plan een gratis kennismaking
           </a>
         </div>

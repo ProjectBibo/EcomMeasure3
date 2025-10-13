@@ -84,7 +84,7 @@ export default function Cro() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-pink/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-pink/20">
+      <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/12 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/18">
         <div className="glow-orb glow-orb--yellow right-0 top-10 h-[24rem] w-[24rem] opacity-60" aria-hidden />
         <div className="grain-overlay" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6">
@@ -92,7 +92,7 @@ export default function Cro() {
             initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-pink shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-yellow"
+            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-yellow"
           >
             {copy.hero.eyebrow}
           </motion.span>
@@ -152,7 +152,7 @@ export default function Cro() {
             <ul className="mt-6 grid gap-4 text-sm leading-relaxed text-neutral-600 dark:text-gray-300 md:grid-cols-3">
               {copy.highlights.map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-pink" />
+                    <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
                   <span>{item}</span>
                 </li>
               ))}

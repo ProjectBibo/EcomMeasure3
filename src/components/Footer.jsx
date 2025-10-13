@@ -14,7 +14,7 @@ export default function Footer() {
       <motion.div
         animate={shouldReduceMotion ? { backgroundPosition: "0% 50%" } : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-[length:200%_200%]"
+        className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-brand-teal bg-[length:200%_200%]"
       />
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />

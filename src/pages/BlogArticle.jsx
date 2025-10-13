@@ -61,7 +61,7 @@ export default function BlogArticle() {
             <p className="text-neutral-600 dark:text-gray-300">{copy.body}</p>
             <Link
               to="/"
-              className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(59,130,246,0.45)]"
+              className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_16px_36px_rgba(10,16,26,0.2)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(10,16,26,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 dark:text-neutral-900 dark:hover:bg-brand-yellow-dark"
             >
               {copy.cta}
             </Link>
