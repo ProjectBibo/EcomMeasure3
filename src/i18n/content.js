@@ -57,10 +57,43 @@ export const translations = {
         open: "Open het hoofdmenu",
         close: "Sluit het hoofdmenu",
       },
+      command: {
+        aria: "Open het command palette",
+        label: "Zoek (⌘K)",
+      },
       mobileMenu: {
         title: "Navigatie",
         subtitle: "Kies een sectie of pas je voorkeuren aan.",
         preferences: "Voorkeuren",
+      },
+    },
+    commandPalette: {
+      title: "Waar wil je heen?",
+      description: "Typ om pagina's, diensten of acties te vinden.",
+      placeholder: "Zoek of typ een actie",
+      empty: "Geen resultaten gevonden",
+      close: "Sluit command palette",
+      shortcutsHint: "Gebruik ↑ ↓ om te navigeren, Enter om te openen.",
+      resultsCount: {
+        singular: "1 resultaat",
+        plural: "{{count}} resultaten",
+      },
+      groups: {
+        primary: "Acties",
+      },
+      actions: {
+        contact: {
+          title: "Plan een kennismaking",
+          description: "Plan direct een call of afspraak.",
+        },
+        cases: {
+          title: "Cases",
+          description: "Bekijk gerealiseerde groei en learnings.",
+        },
+        services: {
+          title: "Diensten",
+          description: "Verken measurement, Consent Mode en CRO.",
+        },
       },
     },
     hero: {
@@ -450,10 +483,43 @@ export const translations = {
         open: "Open main navigation",
         close: "Close main navigation",
       },
+      command: {
+        aria: "Open the command palette",
+        label: "Search (⌘K)",
+      },
       mobileMenu: {
         title: "Navigate",
         subtitle: "Jump to a section or adjust your preferences.",
         preferences: "Preferences",
+      },
+    },
+    commandPalette: {
+      title: "Where do you want to go?",
+      description: "Type to jump to pages, services or actions.",
+      placeholder: "Search or type an action",
+      empty: "No results found",
+      close: "Close command palette",
+      shortcutsHint: "Use ↑ ↓ to move, Enter to open.",
+      resultsCount: {
+        singular: "1 result",
+        plural: "{{count}} results",
+      },
+      groups: {
+        primary: "Quick actions",
+      },
+      actions: {
+        contact: {
+          title: "Book an intro call",
+          description: "Schedule a discovery session.",
+        },
+        cases: {
+          title: "Cases",
+          description: "Explore proven uplift stories.",
+        },
+        services: {
+          title: "Services",
+          description: "Dive into Measurement, Consent Mode and CRO.",
+        },
       },
     },
     hero: {
