@@ -1,17 +1,65 @@
 // src/components/Hero.jsx
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import DataFunnelScene from "./DataFunnelScene";
 
-const MotionLink = motion(Link);
+const STATIC_FUNNEL_IMAGE =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232563eb'/%3E%3Cstop offset='50%25' stop-color='%2314b8a6'/%3E%3Cstop offset='100%25' stop-color='%23facc15'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M20 40 C120 10 160 110 300 70' stroke='url(%23a)' stroke-width='6' stroke-linecap='round' fill='none' opacity='0.7'/%3E%3Cpath d='M40 130 C110 100 200 150 300 120' stroke='url(%23a)' stroke-width='6' stroke-linecap='round' fill='none' opacity='0.5'/%3E%3Ccircle cx='240' cy='120' r='26' fill='url(%23a)' opacity='0.6'/%3E%3C/svg%3E";
+
+const HERO_PREFETCHERS = {
+  contact: () => import("../pages/ContactPage"),
+  measurement: () => import("../pages/Measurement"),
+};
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const t = translations[language].hero;
+  const primaryRef = useRef(null);
+  const secondaryRef = useRef(null);
+  const prefetched = useRef(new Set());
+
+  const prefetch = useCallback((key) => {
+    const loader = HERO_PREFETCHERS[key];
+    if (!loader || prefetched.current.has(key)) return;
+    loader();
+    prefetched.current.add(key);
+  }, []);
+
+  const resetMagnet = useCallback((element) => {
+    if (!element) return;
+    element.style.setProperty("--magnet-x", "0px");
+    element.style.setProperty("--magnet-y", "0px");
+  }, []);
+
+  const applyMagnet = useCallback(
+    (element, event) => {
+      if (!element || shouldReduceMotion) return;
+      const rect = element.getBoundingClientRect();
+      const strength = 18;
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * strength;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * strength;
+      element.style.setProperty("--magnet-x", `${x}px`);
+      element.style.setProperty("--magnet-y", `${y}px`);
+    },
+    [shouldReduceMotion]
+  );
+
+  const createMagnetHandlers = useCallback(
+    (ref) => ({
+      onPointerMove: (event) => applyMagnet(ref.current, event),
+      onPointerLeave: () => resetMagnet(ref.current),
+      onBlur: () => resetMagnet(ref.current),
+    }),
+    [applyMagnet, resetMagnet]
+  );
+
+  const primaryHandlers = createMagnetHandlers(primaryRef);
+  const secondaryHandlers = createMagnetHandlers(secondaryRef);
 
   return (
     <section id="hero" data-snap-section className="relative isolate overflow-hidden">
@@ -21,7 +69,7 @@ export default function Hero() {
       <div className="glow-orb glow-orb--yellow bottom-0 left-1/4 h-[22rem] w-[22rem]" aria-hidden />
       <div className="grain-overlay" aria-hidden />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-14 px-6 py-28 text-center sm:py-32">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -31,44 +79,95 @@ export default function Hero() {
           <Sparkles size={14} /> {t.badge}
         </motion.span>
 
-        <motion.h1
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
-          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
-        >
-          {t.titleLead}{" "}
-          <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">
-            {t.titleHighlight}
-          </span>
-        </motion.h1>
+        <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-wrap justify-center gap-4 text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl">
+            {t.sequence.map((word, index) => (
+              <motion.span
+                key={word}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.6, ease: "easeOut" }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </div>
 
-        <motion.p
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          <motion.h1
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="max-w-3xl text-balance text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-[3.5rem]"
+          >
+            {t.headline}
+          </motion.h1>
+
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.35 }}
+            className="keyword-row"
+            aria-label="Technologieën"
+          >
+            {t.keywords.map((keyword) => (
+              <span key={keyword} className="keyword-token">
+                {keyword}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.p
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.45 }}
+            className="max-w-xl text-lg text-neutral-700 dark:text-gray-300"
+          >
+            {t.subheadline}
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 42 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }}
-          className="max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
+          transition={shouldReduceMotion ? undefined : { duration: 0.75, delay: 0.5, ease: "easeOut" }}
+          className="relative w-full max-w-3xl overflow-hidden rounded-[var(--radius-2xl)] border border-white/60 bg-white/70 p-6 shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
-          {t.description}
-        </motion.p>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent dark:from-white/10" aria-hidden />
+          {shouldReduceMotion ? (
+            <img
+              src={STATIC_FUNNEL_IMAGE}
+              alt={t.funnelAlt}
+              className="relative mx-auto h-56 w-full max-w-xl object-contain"
+            />
+          ) : (
+            <DataFunnelScene className="relative mx-auto h-56 w-full max-w-xl" />
+          )}
+        </motion.div>
 
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
+          transition={shouldReduceMotion ? undefined : { delay: 0.55, duration: 0.6, ease: "easeOut" }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <MotionLink
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
-          >
-            {t.primaryCta} <ArrowRight size={18} />
-          </MotionLink>
           <Link
+            ref={primaryRef}
+            to="/contact?schedule=true"
+            className="magnet-btn magnet-btn--primary"
+            {...primaryHandlers}
+            onMouseEnter={() => prefetch("contact")}
+            onFocus={() => prefetch("contact")}
+          >
+            {t.primaryCta}
+            <ArrowRight size={18} />
+          </Link>
+          <Link
+            ref={secondaryRef}
             to="/measurement"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-900/10 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_50px_rgba(2,6,23,0.55)]"
+            className="magnet-btn magnet-btn--ghost"
+            {...secondaryHandlers}
+            onMouseEnter={() => prefetch("measurement")}
+            onFocus={() => prefetch("measurement")}
           >
             {t.secondaryCta}
           </Link>
@@ -77,8 +176,8 @@ export default function Hero() {
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
-          className="grid gap-6 w-full sm:grid-cols-3"
+          transition={shouldReduceMotion ? undefined : { delay: 0.65, duration: 0.7 }}
+          className="grid w-full gap-6 sm:grid-cols-3"
         >
           {t.stats.map((item) => (
             <div
@@ -89,8 +188,7 @@ export default function Hero() {
                 className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 aria-hidden
                 style={{
-                  boxShadow:
-                    "inset 2px 2px 6px rgba(255,255,255,0.6), inset -8px -12px 24px rgba(148,163,184,0.25)",
+                  boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.6), inset -8px -12px 24px rgba(148,163,184,0.25)",
                 }}
               />
               <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/65 via-white/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
@@ -105,10 +203,10 @@ export default function Hero() {
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }}
+          transition={shouldReduceMotion ? undefined : { delay: 0.7, duration: 0.7 }}
           className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
-          <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
+          <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: shouldReduceMotion ? "none" : "pulse-ring 3.5s infinite" }} aria-hidden />
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
@@ -123,13 +221,13 @@ export default function Hero() {
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.35, duration: 0.6 }}
+          transition={shouldReduceMotion ? undefined : { delay: 0.8, duration: 0.6 }}
           className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-gray-400"
         >
           {t.scrollLabel}
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+            animate={shouldReduceMotion ? { opacity: 0.7 } : { y: [0, 8, 0] }}
+            transition={shouldReduceMotion ? undefined : { repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
             className="flex h-10 w-6 items-center justify-center rounded-full border border-neutral-400/50 bg-white/60 backdrop-blur dark:border-white/30 dark:bg-white/5"
           >
             <MoveDown size={16} />
