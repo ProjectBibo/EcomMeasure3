@@ -1,6 +1,6 @@
 // src/App.jsx
-import React, { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { Suspense, lazy, useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
@@ -22,12 +22,65 @@ const BehaviorAnalysis = lazy(() => import("./pages/BehaviorAnalysis"));
 const HypothesesAbTests = lazy(() => import("./pages/HypothesesAbTests"));
 const Implementation = lazy(() => import("./pages/Implementation"));
 
+function usePrefersReducedMotion() {
+  const [prefersReduced, setPrefersReduced] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = (event) => setPrefersReduced(event.matches);
+    setPrefersReduced(media.matches);
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  return prefersReduced;
+}
+
+function ViewTransitionRoutes({ children }) {
+  const location = useLocation();
+  const prefersReduced = usePrefersReducedMotion();
+  const [displayLocation, setDisplayLocation] = useState(location);
+
+  useEffect(() => {
+    if (location === displayLocation) return;
+
+    const supported = typeof document !== "undefined" && "startViewTransition" in document;
+    if (!supported || prefersReduced) {
+      setDisplayLocation(location);
+      return;
+    }
+
+    let transition;
+    try {
+      transition = document.startViewTransition(() => {
+        setDisplayLocation(location);
+      });
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        // eslint-disable-next-line no-console
+        console.error("View transition failed", error);
+      }
+      setDisplayLocation(location);
+    }
+
+    return () => {
+      transition?.finished?.catch(() => {});
+    };
+  }, [location, displayLocation, prefersReduced]);
+
+  return <Routes location={displayLocation}>{children}</Routes>;
+}
+
 function AppContent() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
       <Header />
       <Suspense fallback={<SectionFallback label="Pagina" />}>
-        <Routes>
+        <ViewTransitionRoutes>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="measurement" element={<Measurement />} />
@@ -43,7 +96,7 @@ function AppContent() {
           <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
+        </ViewTransitionRoutes>
       </Suspense>
       <Footer />
     </div>

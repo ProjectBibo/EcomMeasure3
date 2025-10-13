@@ -68,7 +68,7 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
-          className="typography-display text-balance text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold leading-tight text-neutral-900 tracking-tight dark:text-white"
+          className="vt-heading text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
           {shouldReduceMotion ? (
             <span className="block">{t.titleLead}</span>
@@ -145,16 +145,20 @@ export default function Hero() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <MotionLink
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+            data-magnetic
+            data-variant="primary"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition-colors duration-200"
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
           <Link
             to="/measurement"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-300/70 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.16)] dark:border-white/15 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_20px_50px_rgba(2,6,23,0.5)]"
+            data-magnetic
+            data-variant="secondary"
+            className="inline-flex items-center gap-2 rounded-full border border-neutral-300/70 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition-colors duration-200 dark:border-white/15 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_20px_50px_rgba(2,6,23,0.5)]"
           >
             {t.secondaryCta}
           </Link>
@@ -169,7 +173,8 @@ export default function Hero() {
           {t.stats.map((item) => (
             <div
               key={item.label}
-              className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-[12px_24px_50px_rgba(15,23,42,0.12)] backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] dark:border-white/10 dark:bg-white/10 dark:shadow-[12px_24px_55px_rgba(2,6,23,0.6)]"
+              data-tilt-card
+              className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-[12px_24px_50px_rgba(15,23,42,0.12)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] focus-visible:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] dark:border-white/10 dark:bg-white/10 dark:shadow-[12px_24px_55px_rgba(2,6,23,0.6)] dark:hover:shadow-[16px_28px_70px_rgba(2,6,23,0.68)]"
             >
               <div
                 className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -192,7 +197,8 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }}
-          className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
+          data-tilt-card
+          className="vt-hero-media relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 focus-visible:shadow-[26px_40px_96px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
           <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
