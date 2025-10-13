@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
@@ -20,6 +20,32 @@ const content = {
         label: "Bekijk de aanpak",
         href: "#werkwijze",
       },
+    },
+    certifications: {
+      heading: "Certificeringen & trust badges",
+      badges: [
+        {
+          name: "CXL",
+          src: "/CXL.png",
+          alt: "CXL Certified Optimizer badge",
+          href: "https://cxl.com/institute/",
+          title: "Bekijk CXL-certificering",
+        },
+        {
+          name: "BCS",
+          src: "/BCS.png",
+          alt: "BCS Certified UX Professional badge",
+          href: "https://www.bcs.org/qualifications-and-certifications/user-experience-ux/",
+          title: "Bekijk BCS UX-certificering",
+        },
+        {
+          name: "GA4",
+          src: "/GA4-Certified.png",
+          alt: "Google Analytics Certified Professional badge",
+          href: "https://skillshop.exceedlms.com/student/path/321421-google-analytics-4-certification",
+          title: "Bekijk GA4-certificering",
+        },
+      ],
     },
     metrics: [
       { value: "12+", label: "jaar ervaring in e-commerce en analytics" },
@@ -137,6 +163,32 @@ const content = {
         href: "#werkwijze",
       },
     },
+    certifications: {
+      heading: "Certifications & trust badges",
+      badges: [
+        {
+          name: "CXL",
+          src: "/CXL.png",
+          alt: "CXL Certified Optimizer badge",
+          href: "https://cxl.com/institute/",
+          title: "View CXL certification",
+        },
+        {
+          name: "BCS",
+          src: "/BCS.png",
+          alt: "BCS Certified UX Professional badge",
+          href: "https://www.bcs.org/qualifications-and-certifications/user-experience-ux/",
+          title: "View BCS UX certification",
+        },
+        {
+          name: "GA4",
+          src: "/GA4-Certified.png",
+          alt: "Google Analytics Certified Professional badge",
+          href: "https://skillshop.exceedlms.com/student/path/321421-google-analytics-4-certification",
+          title: "View Google Analytics certification",
+        },
+      ],
+    },
     metrics: [
       { value: "12+", label: "years of experience across commerce and analytics" },
       { value: "35", label: "teams supported with measurement and consent" },
@@ -242,6 +294,11 @@ export default function About() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const copy = content[language];
+  const handleBadgeClick = useCallback((label) => {
+    if (typeof window !== "undefined" && window.dataLayer) {
+      window.dataLayer.push({ event: "trust_badge_click", badge: label });
+    }
+  }, []);
 
   return (
     <>
@@ -297,6 +354,59 @@ export default function About() {
               </a>
             </motion.div>
           </header>
+
+          <section
+            aria-labelledby="trust-certifications-heading"
+            className="rounded-3xl border border-white/60 bg-white/80 px-8 py-12 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10"
+          >
+            <div className="mx-auto max-w-3xl text-center">
+              <h2
+                id="trust-certifications-heading"
+                className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-600 dark:text-gray-300"
+              >
+                {copy.certifications.heading}
+              </h2>
+            </div>
+            <div className="mx-auto mt-8 grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {copy.certifications.badges.map((badge, index) => {
+                const image = (
+                  <div className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-white/90 p-6 transition-colors duration-200 group-hover:bg-white dark:bg-slate-900/60 dark:group-hover:bg-slate-900/40">
+                    <img
+                      src={badge.src}
+                      alt={badge.alt}
+                      width={200}
+                      height={150}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      sizes="(min-width: 1024px) 18rem, (min-width: 640px) 14rem, 100vw"
+                      className="h-full w-full max-h-24 object-contain"
+                    />
+                  </div>
+                );
+
+                if (badge.href) {
+                  return (
+                    <a
+                      key={badge.name}
+                      href={badge.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={badge.alt}
+                      title={badge.title}
+                      onClick={() => handleBadgeClick(badge.name)}
+                      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                    >
+                      {image}
+                    </a>
+                  );
+                }
+
+                return (
+                  <div key={badge.name}>{image}</div>
+                );
+              })}
+            </div>
+          </section>
 
           <section className="grid gap-6 sm:grid-cols-3">
             {copy.metrics.map((metric, index) => (
