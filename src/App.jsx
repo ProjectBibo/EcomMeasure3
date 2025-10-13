@@ -16,6 +16,11 @@ const CroRoiCalculator = lazy(() => import("./pages/CroRoiCalculator"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const GA4GTM = lazy(() => import("./pages/GA4GTM"));
+const LookerStudio = lazy(() => import("./pages/LookerStudio"));
+const BehaviorAnalysis = lazy(() => import("./pages/BehaviorAnalysis"));
+const HypothesesAbTests = lazy(() => import("./pages/HypothesesAbTests"));
+const Implementation = lazy(() => import("./pages/Implementation"));
 
 function AppContent() {
   return (
@@ -26,8 +31,13 @@ function AppContent() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="measurement" element={<Measurement />} />
+          <Route path="measurement/ga4-gtm" element={<GA4GTM />} />
+          <Route path="measurement/looker-studio" element={<LookerStudio />} />
           <Route path="consent-mode" element={<ConsentMode />} />
           <Route path="cro" element={<Cro />} />
+          <Route path="cro/gedragsanalyse" element={<BehaviorAnalysis />} />
+          <Route path="cro/hypotheses-ab-tests" element={<HypothesesAbTests />} />
+          <Route path="cro/implementatie" element={<Implementation />} />
           <Route path="tools/bayesian-ab-test" element={<BayesianCalculator />} />
           <Route path="tools/cro-roi" element={<CroRoiCalculator />} />
           <Route path="blog/:slug" element={<BlogArticle />} />
