@@ -214,42 +214,269 @@ export const translations = {
     },
     aiDemo: {
       badge: "AI demo",
-      title: "Zo ziet een snelle AI-analyse eruit",
+      title: "Server-side scan voor directe inzichten",
       description:
-        "Vul een webshop URL in en ontdek welke optimalisaties EcomMeasure zou adviseren.",
-      label: "Vul je webshop URL in",
+        "Voer een publieke URL in en ontvang een HTML-audit met SEO, toegankelijkheid, performance en consent aanbevelingen.",
+      label: "Voer een URL in",
       placeholder: "https://www.jouwshop.nl",
-      helper: "We verzenden of bewaren geen data; dit zijn geloofwaardige voorbeeldinzichten.",
-      button: "Genereer inzichten",
-      resultLabel: "Simulatie",
-      resultTitle: "Kansen gevonden voor {{subject}}",
+      helper: "We volgen robots.txt, slaan geen HTML op en beperken de body tot 1 MB.",
+      button: "Start analyse",
+      resultLabel: "Resultaat",
       defaultSubject: "jouw webshop",
-      insights: [
-        {
-          id: "checkout-frictie",
-          text: "De checkout van {{subject}} bevat drie stappen zonder extra waarde — het schrappen ervan kan tot 9% conversie terugwinnen.",
+      featureFlag: {
+        label: "Rendered scan (coming soon)",
+        helper: "Server-side HTML analyse is actief. Een gerenderde SPA-scan blijft uit voor een zero-cost setup.",
+        offLabel: "Uitgeschakeld",
+      },
+      status: {
+        scanning: "Analyseren...",
+        cached: "Cache-resultaat",
+        error: "Analyse mislukt",
+        progress: "HTML wordt opgehaald en geparsed.",
+      },
+      saveReport: {
+        summaryLabel: "Geanalyseerde URL",
+        subjectLabel: "Onderwerp",
+        timestampLabel: "Tijdstempel",
+        insightsHeading: "Belangrijkste inzichten",
+      },
+      summary: {
+        heading: "HTML-analyse",
+        subject: "Kansen voor {{subject}}",
+        scannedAt: "Geanalyseerd om {{time}}",
+        robotsAllowed: "robots.txt: toegestaan",
+        robotsUnknown: "robots.txt: onbekend",
+      },
+      metrics: {
+        heading: "Gemeten signalen",
+        notAvailable: "Geen HTML-signalen beschikbaar.",
+        units: {
+          characters: "tekens",
+          percent: "%",
         },
-        {
-          id: "mobiele-snelheid",
-          text: "Mobiele conversie van {{subject}} kan 18% stijgen zodra de gemiddelde laadtijd onder 2,5 seconden komt.",
+        values: {
+          present: "Aanwezig",
+          missing: "Ontbreekt",
+          none: "Geen",
         },
-        {
-          id: "verzend-opties",
-          text: "40% van terugkerende klanten haakt af bij de verzendopties; test een vooraf ingevulde voorkeur om wrijving te verminderen.",
+        sections: {
+          seo: {
+            title: "SEO-basics",
+            items: {
+              titleLength: { label: "Titel (tekens)", helper: "Ideaal < 60 tekens" },
+              metaDescription: { label: "Meta description" },
+              h1Count: { label: "H1-koppen" },
+              canonical: { label: "Canonical link" },
+              robotsMeta: { label: "Robots meta" },
+              hreflang: { label: "Hreflang links" },
+              openGraph: { label: "Open Graph velden" },
+              sitemap: { label: "Sitemap verwijzing" },
+            },
+          },
+          accessibility: {
+            title: "Toegankelijkheid",
+            items: {
+              altRatio: { label: "Afbeeldingen met alt", helper: "Streef naar > 80%" },
+              missingAlt: { label: "Afbeeldingen zonder alt" },
+              mainLandmark: { label: "<main>-landmark" },
+              formLabels: { label: "Gelabelde velden" },
+              shortLinks: { label: "Zeer korte linkteksten" },
+            },
+          },
+          performance: {
+            title: "Performance-heuristieken",
+            items: {
+              scriptCount: { label: "Script tags" },
+              inlineScript: { label: "Inline scripts (tekens)" },
+              stylesheets: { label: "Stylesheets" },
+              inlineStyles: { label: "Inline stijl-attributen" },
+              resourceHints: { label: "Preload / preconnect" },
+              largestImageSrc: { label: "Langste afbeelding-URL" },
+            },
+          },
+          analytics: {
+            title: "Analytics & consent",
+            items: {
+              ga: { label: "GA4/gtag gedetecteerd" },
+              dataLayer: { label: "dataLayer gevonden" },
+              cmpMarkers: { label: "Consent markup" },
+              cookieLinks: { label: "Cookie-/privacy-links" },
+            },
+          },
+          cro: {
+            title: "CRO & UX",
+            items: {
+              ctaDensity: { label: "CTA's boven de vouw" },
+              heroUnique: { label: "Unieke hero-heading" },
+              modalMarkup: { label: "Modal markup bij start" },
+            },
+          },
         },
-        {
-          id: "seo-copy",
-          text: "Productdetailpagina's herhalen content; copy op basis van zoekintentie kan 12% meer organische kliks opleveren.",
+      },
+      categories: {
+        seo: "SEO",
+        accessibility: "Toegankelijkheid",
+        performance: "Performance",
+        analytics: "Analytics & consent",
+        cro: "CRO & UX",
+      },
+      severity: {
+        high: "Hoog",
+        medium: "Gemiddeld",
+        low: "Laag",
+      },
+      impact: {
+        high: "Hoog",
+        medium: "Gemiddeld",
+        low: "Laag",
+      },
+      actions: {
+        rescan: "Scan opnieuw",
+        clear: "Wis resultaat",
+        saveReport: "Kopieer rapport",
+        reportCopied: "Rapport gekopieerd naar klembord.",
+        reportFailed: "Kopiëren mislukt; gebruik Ctrl+C.",
+      },
+      errors: {
+        INVALID_URL: "Controleer de URL en probeer het opnieuw.",
+        GENERIC: "Er ging iets mis bij het ophalen van de pagina.",
+        NETWORK: "De URL kon niet worden bereikt.",
+        RATE_LIMITED: "Limiet bereikt: probeer het over een uur nogmaals.",
+        ROBOTS_DISALLOW: "Robots.txt blokkeert deze route voor onze crawler.",
+        BODY_TOO_LARGE: "De HTML is groter dan 1 MB en werd niet verwerkt.",
+        TIMEOUT: "De server reageerde te traag (timeout).",
+        UNSUPPORTED_CONTENT_TYPE: "De URL retourneerde geen HTML.",
+        PRIVATE_ADDRESS: "Private of lokale adressen worden niet gescand.",
+        METHOD_NOT_ALLOWED: "Deze actie wordt niet ondersteund.",
+        INVALID_JSON: "Ongeldige aanvraag.",
+        FETCH_FAILED: "De URL gaf een foutmelding terug.",
+      },
+      warnings: {
+        INLINE_SCRIPT_HEAVY: "Let op: grote hoeveelheid inline scripts aangetroffen.",
+      },
+      insights: {
+        heading: "Inzichten",
+        empty: "Geen aanvullende aandachtspunten gevonden.",
+        cached: "Resultaat uit cache (max. 30 minuten oud)",
+        impactLabel: "Impact",
+        library: {
+          missing_meta_description: {
+            evidence: "De meta description ontbreekt.",
+            recommendation: "Voeg een unieke meta description van 110–150 tekens toe.",
+            impact: "medium",
+          },
+          long_title: {
+            evidence: "De paginatitel telt {{value}} tekens.",
+            recommendation: "Kort de titel in tot maximaal 60 tekens voor een volledige SERP-weergave.",
+            impact: "medium",
+          },
+          missing_h1: {
+            evidence: "Er is geen H1-kop gevonden.",
+            recommendation: "Plaats een duidelijke H1 om het onderwerp van de pagina aan te geven.",
+            impact: "high",
+          },
+          multiple_h1: {
+            evidence: "Er zijn {{value}} H1-koppen gevonden.",
+            recommendation: "Beperk het aantal H1's tot één en gebruik H2/H3 voor subkoppen.",
+            impact: "medium",
+          },
+          missing_canonical: {
+            evidence: "Er is geen canonical link aanwezig.",
+            recommendation: "Voeg een canonical tag toe om duplicate content te voorkomen.",
+            impact: "medium",
+          },
+          robots_meta_warning: {
+            evidence: "Robots meta bevat: {{value}}.",
+            recommendation: "Verwijder noindex/nofollow tenzij de pagina bewust uitgesloten moet blijven.",
+            impact: "high",
+          },
+          incomplete_open_graph: {
+            evidence: "Open Graph metadata is onvolledig.",
+            recommendation: "Vul OG-titel, -beschrijving en -afbeelding in voor betere previews.",
+            impact: "medium",
+          },
+          missing_sitemap: {
+            evidence: "Geen verwijzing naar een sitemap gevonden.",
+            recommendation: "Link een sitemap.xml via HTML of robots.txt voor snellere discoverability.",
+            impact: "medium",
+          },
+          low_alt_ratio: {
+            evidence: "{{value}} afbeeldingen zonder alt-tekst.",
+            recommendation: "Beschrijf belangrijke afbeeldingen voor toegankelijkheid en SEO.",
+            impact: "high",
+          },
+          missing_main_landmark: {
+            evidence: "Er is geen <main>-landmark aangetroffen.",
+            recommendation: "Markeer de hoofdcontent met <main> voor screenreaders.",
+            impact: "medium",
+          },
+          unlabeled_form_controls: {
+            evidence: "{{value}} formuliervelden missen een label.",
+            recommendation: "Koppel inputs aan labels of aria-attributen voor betere navigatie.",
+            impact: "high",
+          },
+          short_link_text: {
+            evidence: "{{value}} links hebben zeer korte linkteksten.",
+            recommendation: "Schrijf beschrijvende linkteksten of gebruik aria-labels.",
+            impact: "low",
+          },
+          many_script_tags: {
+            evidence: "{{value}} script tags gevonden.",
+            recommendation: "Beperk externe scripts en laad niet-kritische bronnen uitgesteld.",
+            impact: "medium",
+          },
+          heavy_inline_scripts: {
+            evidence: "Inline scripts beslaan circa {{value}} tekens.",
+            recommendation: "Verplaats logica naar bundels en minimaliseer inline tracking code.",
+            impact: "medium",
+          },
+          style_organisation: {
+            evidence: "Veel stylesheets of inline styles gedetecteerd.",
+            recommendation: "Combineer stylesheets en reduceer inline styles om renderwerk te beperken.",
+            impact: "medium",
+          },
+          no_preload_hints: {
+            evidence: "Geen preload- of preconnect-hints aangetroffen.",
+            recommendation: "Voeg resource hints toe voor fonts, hero-afbeeldingen of belangrijke third-parties.",
+            impact: "low",
+          },
+          missing_analytics: {
+            evidence: "Geen GA4 of dataLayer markers gevonden.",
+            recommendation: "Controleer de implementatie van GA4/gtag of server-side tracking.",
+            impact: "high",
+          },
+          missing_cmp: {
+            evidence: "Geen consent banner markup ontdekt.",
+            recommendation: "Zorg dat een GDPR-compatibele cookiebanner bij eerste bezoek zichtbaar is.",
+            impact: "medium",
+          },
+          missing_cookie_link: {
+            evidence: "Geen link naar cookie- of privacybeleid gevonden.",
+            recommendation: "Plaats een duidelijke link naar het cookie- of privacybeleid.",
+            impact: "medium",
+          },
+          low_cta_density: {
+            evidence: "Weinig duidelijke CTA's boven de vouw.",
+            recommendation: "Introduceer een primaire CTA in de hero voor directe sturing.",
+            impact: "high",
+          },
+          repeated_headings: {
+            evidence: "Hero-headings bevatten dubbele copy.",
+            recommendation: "Varieer hero-koppen zodat elk blok een eigen waardepropositie heeft.",
+            impact: "low",
+          },
+          modal_backdrop_loaded: {
+            evidence: "Modal- of overlay-markup wordt direct meegeleverd.",
+            recommendation: "Laad modals pas na interactie om initiale ruis te beperken.",
+            impact: "medium",
+          },
+          solid_basics: {
+            evidence: "Geen kritieke HTML-issues gevonden.",
+            recommendation: "Richt je op experimenten en copy-tests voor extra groei.",
+            impact: "medium",
+          },
         },
-        {
-          id: "safari-betaling",
-          text: "Safari-bezoekers verlaten de betaalstap 1,6× vaker; voeg Apple Pay toe om het gat te dichten.",
-        },
-        {
-          id: "bundles",
-          text: "Bundles converteren 22% beter wanneer ze boven de vouw staan — geef merchandisingmodules een hogere prioriteit.",
-        },
-      ],
+      },
     },
     workflow: {
       badge: "Aanpak",
@@ -732,43 +959,270 @@ export const translations = {
       ],
     },
     aiDemo: {
-      badge: "AI insight demo",
-      title: "See what a rapid AI review looks like",
+      badge: "AI insight scanner",
+      title: "Run a zero-cost, server-side crawl",
       description:
-        "Enter a webshop URL and preview the optimisation opportunities EcomMeasure would surface.",
-      label: "Enter your webshop URL",
+        "Submit any public URL and get actionable HTML insights covering SEO, accessibility, performance and consent.",
+      label: "Enter a public URL",
       placeholder: "https://www.yourstore.com",
-      helper: "No data is sent or stored — these are credible example insights only.",
-      button: "Generate insights",
-      resultLabel: "Simulation",
-      resultTitle: "Opportunities spotted for {{subject}}",
-      defaultSubject: "your webshop",
-      insights: [
-        {
-          id: "checkout-friction",
-          text: "Checkout for {{subject}} contains three steps that add no extra value — trimming them could recover up to 9% of abandoned baskets.",
+      helper: "Robots.txt is honoured, the body is capped at 1 MB and no HTML is stored.",
+      button: "Start analysis",
+      resultLabel: "Result",
+      defaultSubject: "your site",
+      featureFlag: {
+        label: "Rendered scan (coming soon)",
+        helper: "The HTML crawler runs entirely server-side. A rendered SPA mode stays disabled to keep the tool free.",
+        offLabel: "Disabled",
+      },
+      status: {
+        scanning: "Analysing...",
+        cached: "Served from cache",
+        error: "Analysis failed",
+        progress: "Fetching HTML and computing signals.",
+      },
+      saveReport: {
+        summaryLabel: "Scanned URL",
+        subjectLabel: "Subject",
+        timestampLabel: "Timestamp",
+        insightsHeading: "Key insights",
+      },
+      summary: {
+        heading: "HTML analysis",
+        subject: "Opportunities for {{subject}}",
+        scannedAt: "Scanned at {{time}}",
+        robotsAllowed: "robots.txt: allowed",
+        robotsUnknown: "robots.txt: unknown",
+      },
+      metrics: {
+        heading: "Measured signals",
+        notAvailable: "No HTML signals available.",
+        units: {
+          characters: "chars",
+          percent: "%",
         },
-        {
-          id: "mobile-speed",
-          text: "Mobile conversions for {{subject}} could increase by 18% by reducing average load time to under 2.5 seconds.",
+        values: {
+          present: "Present",
+          missing: "Missing",
+          none: "None",
         },
-        {
-          id: "shipping-default",
-          text: "40% of returning customers drop off at the shipping selector; testing a default recommendation could remove the hesitation.",
+        sections: {
+          seo: {
+            title: "SEO basics",
+            items: {
+              titleLength: { label: "Title length", helper: "Aim for < 60 chars" },
+              metaDescription: { label: "Meta description" },
+              h1Count: { label: "H1 headings" },
+              canonical: { label: "Canonical link" },
+              robotsMeta: { label: "Robots meta" },
+              hreflang: { label: "Hreflang links" },
+              openGraph: { label: "Open Graph fields" },
+              sitemap: { label: "Sitemap reference" },
+            },
+          },
+          accessibility: {
+            title: "Accessibility",
+            items: {
+              altRatio: { label: "Images with alt text", helper: "Target > 80%" },
+              missingAlt: { label: "Images without alt" },
+              mainLandmark: { label: "<main> landmark" },
+              formLabels: { label: "Labelled form fields" },
+              shortLinks: { label: "Very short link text" },
+            },
+          },
+          performance: {
+            title: "Performance heuristics",
+            items: {
+              scriptCount: { label: "Script tags" },
+              inlineScript: { label: "Inline script length" },
+              stylesheets: { label: "Stylesheets" },
+              inlineStyles: { label: "Inline style attributes" },
+              resourceHints: { label: "Preload / preconnect" },
+              largestImageSrc: { label: "Longest image URL" },
+            },
+          },
+          analytics: {
+            title: "Analytics & consent",
+            items: {
+              ga: { label: "GA4/gtag detected" },
+              dataLayer: { label: "dataLayer found" },
+              cmpMarkers: { label: "Consent markup" },
+              cookieLinks: { label: "Cookie / privacy links" },
+            },
+          },
+          cro: {
+            title: "CRO & UX",
+            items: {
+              ctaDensity: { label: "CTAs above the fold" },
+              heroUnique: { label: "Unique hero heading" },
+              modalMarkup: { label: "Modal markup on load" },
+            },
+          },
         },
-        {
-          id: "seo-alignment",
-          text: "Product detail pages reuse identical copy; aligning with search intent could lift organic clicks by 12%.",
+      },
+      categories: {
+        seo: "SEO",
+        accessibility: "Accessibility",
+        performance: "Performance",
+        analytics: "Analytics & consent",
+        cro: "CRO & UX",
+      },
+      severity: {
+        high: "High",
+        medium: "Medium",
+        low: "Low",
+      },
+      impact: {
+        high: "High",
+        medium: "Medium",
+        low: "Low",
+      },
+      actions: {
+        rescan: "Scan again",
+        clear: "Clear result",
+        saveReport: "Copy report",
+        reportCopied: "Report copied to clipboard.",
+        reportFailed: "Copy failed, try Ctrl+C.",
+      },
+      errors: {
+        INVALID_URL: "Please enter a valid URL and try again.",
+        GENERIC: "Something went wrong while fetching the page.",
+        NETWORK: "The URL could not be reached.",
+        RATE_LIMITED: "Limit reached: please retry in about an hour.",
+        ROBOTS_DISALLOW: "robots.txt does not allow crawling this path.",
+        BODY_TOO_LARGE: "The HTML exceeded the 1 MB limit and was skipped.",
+        TIMEOUT: "The request timed out.",
+        UNSUPPORTED_CONTENT_TYPE: "The response was not HTML content.",
+        PRIVATE_ADDRESS: "Private or local addresses are not scanned.",
+        METHOD_NOT_ALLOWED: "This action is not supported.",
+        INVALID_JSON: "Invalid request payload.",
+        FETCH_FAILED: "The URL returned an error status.",
+      },
+      warnings: {
+        INLINE_SCRIPT_HEAVY: "Heads-up: substantial inline script payload detected.",
+      },
+      insights: {
+        heading: "Insights",
+        empty: "No additional findings detected.",
+        cached: "Served from cache (max 30 minutes old)",
+        impactLabel: "Impact",
+        library: {
+          missing_meta_description: {
+            evidence: "The meta description is missing.",
+            recommendation: "Add a unique meta description around 110–150 characters.",
+            impact: "medium",
+          },
+          long_title: {
+            evidence: "The page title contains {{value}} characters.",
+            recommendation: "Trim the title to stay within the visible SERP range.",
+            impact: "medium",
+          },
+          missing_h1: {
+            evidence: "No H1 heading was detected.",
+            recommendation: "Add a single descriptive H1 that clarifies the page topic.",
+            impact: "high",
+          },
+          multiple_h1: {
+            evidence: "{{value}} H1 headings were found.",
+            recommendation: "Keep one semantic H1 and demote the rest to H2/H3.",
+            impact: "medium",
+          },
+          missing_canonical: {
+            evidence: "No canonical link element present.",
+            recommendation: "Define a canonical URL to avoid duplicate content issues.",
+            impact: "medium",
+          },
+          robots_meta_warning: {
+            evidence: "Robots meta contains: {{value}}.",
+            recommendation: "Remove noindex/nofollow unless the page should stay hidden.",
+            impact: "high",
+          },
+          incomplete_open_graph: {
+            evidence: "Open Graph metadata is incomplete.",
+            recommendation: "Provide OG title, description and image for richer sharing.",
+            impact: "medium",
+          },
+          missing_sitemap: {
+            evidence: "No sitemap reference detected.",
+            recommendation: "Expose sitemap.xml via HTML or robots.txt to support discovery.",
+            impact: "medium",
+          },
+          low_alt_ratio: {
+            evidence: "{{value}} images without alt text.",
+            recommendation: "Add descriptive alt text for key visuals and product imagery.",
+            impact: "high",
+          },
+          missing_main_landmark: {
+            evidence: "No <main> landmark was found.",
+            recommendation: "Wrap primary content in a <main> element for assistive tech.",
+            impact: "medium",
+          },
+          unlabeled_form_controls: {
+            evidence: "{{value}} form fields are missing a label.",
+            recommendation: "Associate inputs with labels or aria attributes to improve accessibility.",
+            impact: "high",
+          },
+          short_link_text: {
+            evidence: "{{value}} links use very short text.",
+            recommendation: "Expand link copy or add aria-labels for clarity.",
+            impact: "low",
+          },
+          many_script_tags: {
+            evidence: "{{value}} script tags detected.",
+            recommendation: "Audit third-party scripts and defer anything non-critical.",
+            impact: "medium",
+          },
+          heavy_inline_scripts: {
+            evidence: "Inline scripts weigh roughly {{value}} characters.",
+            recommendation: "Move logic into external bundles and minimise inline tracking snippets.",
+            impact: "medium",
+          },
+          style_organisation: {
+            evidence: "High number of stylesheets or inline styles detected.",
+            recommendation: "Consolidate stylesheets and reduce inline styles to cut render work.",
+            impact: "medium",
+          },
+          no_preload_hints: {
+            evidence: "No preload or preconnect hints found.",
+            recommendation: "Add resource hints for hero assets, fonts or critical third-parties.",
+            impact: "low",
+          },
+          missing_analytics: {
+            evidence: "No GA4 or dataLayer markers detected.",
+            recommendation: "Verify GA4/gtag or server-side tracking is correctly deployed.",
+            impact: "high",
+          },
+          missing_cmp: {
+            evidence: "No consent banner markup spotted.",
+            recommendation: "Ensure a compliant consent banner renders on first load.",
+            impact: "medium",
+          },
+          missing_cookie_link: {
+            evidence: "No cookie or privacy link found.",
+            recommendation: "Link to your cookie or privacy policy from footer or consent UI.",
+            impact: "medium",
+          },
+          low_cta_density: {
+            evidence: "Few clear CTAs detected near the top of the page.",
+            recommendation: "Highlight a primary CTA in the hero to guide visitors.",
+            impact: "high",
+          },
+          repeated_headings: {
+            evidence: "Hero headings repeat similar copy.",
+            recommendation: "Differentiate hero headlines to reinforce unique value per section.",
+            impact: "low",
+          },
+          modal_backdrop_loaded: {
+            evidence: "Modal or overlay markup loads immediately.",
+            recommendation: "Lazy-load modal markup to reduce initial clutter and layout shift.",
+            impact: "medium",
+          },
+          solid_basics: {
+            evidence: "No critical HTML issues detected.",
+            recommendation: "Focus on experimentation and messaging tests for further gains.",
+            impact: "medium",
+          },
         },
-        {
-          id: "safari-payment",
-          text: "Shoppers on Safari abandon payment 1.6× more often; enabling Apple Pay would close the gap.",
-        },
-        {
-          id: "bundle-visibility",
-          text: "Bundles convert 22% better when featured above the fold — promote merchandising modules earlier in the journey.",
-        },
-      ],
+      },
     },
     workflow: {
       badge: "Approach",
