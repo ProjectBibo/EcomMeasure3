@@ -9,6 +9,7 @@ import { translations } from "../i18n/content";
 const MotionLink = motion(Link);
 
 const gradientHeadlineClass = "bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent";
+const iconStrokeWidth = 1.6;
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -46,27 +47,28 @@ export default function Hero() {
   const activePhrase = rotatingPhrases[phraseIndex] ?? "";
 
   return (
-    <section id="hero" data-snap-section className="relative isolate overflow-hidden">
+    <section id="hero" data-snap-section className="hero-surface relative isolate overflow-hidden">
+      <div className="hero-ambient" aria-hidden />
       <div className="story-stripe" aria-hidden />
       <div className="glow-orb glow-orb--primary -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
       <div className="glow-orb glow-orb--primary-soft top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
       <div className="grain-overlay" aria-hidden />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-14 px-6 py-32 text-center sm:py-40">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:border-white/20 dark:bg-white/10 dark:text-white"
+          className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/85 px-5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-neutral-700 shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur dark:border-white/20 dark:bg-white/10 dark:text-white"
         >
-          <Sparkles size={14} /> {t.badge}
+          <Sparkles size={16} strokeWidth={iconStrokeWidth} /> {t.badge}
         </motion.span>
 
         <motion.h1
           initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
-          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
+          className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
         >
           <span className="block">{t.titleLead}</span>
           <span className="relative mt-3 grid justify-items-center text-center">
@@ -103,7 +105,7 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }}
-          className="max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
+          className="max-w-2xl text-lg leading-relaxed text-neutral-600 sm:text-xl dark:text-gray-300"
         >
           {t.description}
         </motion.p>
@@ -120,7 +122,7 @@ export default function Hero() {
             to="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
           >
-            {t.primaryCta} <ArrowRight size={18} />
+            {t.primaryCta} <ArrowRight size={18} strokeWidth={iconStrokeWidth} />
           </MotionLink>
           <Link
             to="/measurement"
@@ -151,9 +153,11 @@ export default function Hero() {
               />
               <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/65 via-white/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
               <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-brand-blue/12 blur-xl transition group-hover:scale-125" aria-hidden />
-              <div className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">{item.label}</div>
-              <div className="mt-3 text-3xl font-bold text-brand-blue dark:text-brand-blue">{item.value}</div>
-              <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.helper}</p>
+              <div className="text-xs font-medium uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">{item.label}</div>
+              <div className="mt-3 text-3xl font-bold tabular-nums text-brand-blue dark:text-brand-blue md:text-[2.35rem]">
+                {item.value}
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{item.helper}</p>
             </div>
           ))}
         </motion.div>
@@ -165,12 +169,12 @@ export default function Hero() {
           className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
           <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
-          <div className="grid gap-6 md:grid-cols-2 md:gap-12">
+          <div className="grid gap-8 md:grid-cols-2 md:gap-14">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
                 <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>
             ))}
           </div>
@@ -188,7 +192,7 @@ export default function Hero() {
             transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
             className="flex h-10 w-6 items-center justify-center rounded-full border border-neutral-400/50 bg-white/60 backdrop-blur dark:border-white/30 dark:bg-white/5"
           >
-            <MoveDown size={16} />
+            <MoveDown size={18} strokeWidth={iconStrokeWidth} />
           </motion.div>
         </motion.div>
       </div>

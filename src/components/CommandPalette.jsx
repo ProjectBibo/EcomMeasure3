@@ -63,7 +63,7 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
           title: copy.title,
           description: copy.description,
           keywords: copy.keywords || [],
-          icon: <ArrowUpRight size={16} aria-hidden />,
+          icon: <ArrowUpRight size={16} strokeWidth={1.6} aria-hidden />,
         };
       })
       .filter(Boolean);
@@ -86,7 +86,7 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
           title: navLabel,
           description,
           keywords,
-          icon: <ArrowUpRight size={16} aria-hidden />,
+          icon: <ArrowUpRight size={16} strokeWidth={1.6} aria-hidden />,
         };
       })
       .sort((a, b) => a.title.localeCompare(b.title, language === "nl" ? "nl" : "en"));
@@ -255,7 +255,7 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
       >
         <div className="flex items-center justify-between border-b border-white/30 px-5 py-4 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500 dark:border-white/10 dark:text-gray-400">
           <span id={dialogId} className="flex items-center gap-2">
-            <CommandIcon size={16} aria-hidden />
+            <CommandIcon size={16} strokeWidth={1.6} aria-hidden />
             {t.title}
           </span>
           <button
@@ -265,7 +265,7 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
             aria-label={t.close}
           >
             <span aria-hidden>Esc</span>
-            <X size={14} aria-hidden />
+            <X size={14} strokeWidth={1.6} aria-hidden />
           </button>
         </div>
         <div className="space-y-5 px-5 py-5">
@@ -273,7 +273,7 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
             {t.description}
           </p>
           <div className="relative">
-            <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400" aria-hidden />
+            <Search size={18} strokeWidth={1.6} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400" aria-hidden />
             <input
               ref={inputRef}
               type="search"

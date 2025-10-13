@@ -48,7 +48,7 @@ export default function DarkModeToggle() {
       className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
       title={isDark ? "Schakel licht thema in" : "Schakel donker thema in"}
     >
-      {isDark ? <Sun size={16} /> : <Moon size={16} />}
+      {isDark ? <Sun size={16} strokeWidth={1.6} /> : <Moon size={16} strokeWidth={1.6} />}
       <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
     </button>
   );
