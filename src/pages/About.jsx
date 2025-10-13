@@ -322,7 +322,7 @@ export default function About() {
               initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.05, duration: 0.7, ease: "easeOut" }}
-              className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+              className="mt-8 vt-heading text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
             >
               {copy.hero.title}
             </motion.h1>
@@ -342,13 +342,17 @@ export default function About() {
             >
               <a
                 href={copy.hero.ctaPrimary.href}
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                data-magnetic
+                data-variant="primary"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition-colors duration-200"
               >
                 {copy.hero.ctaPrimary.label}
               </a>
               <a
                 href={copy.hero.ctaSecondary.href}
-                className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition hover:border-brand-teal hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/20 dark:text-gray-200 dark:focus-visible:ring-offset-surface-dark"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition-colors duration-200 hover:border-brand-teal hover:text-brand-teal dark:border-white/20 dark:text-gray-200"
               >
                 {copy.hero.ctaSecondary.label}
               </a>
@@ -589,7 +593,10 @@ export default function About() {
             </motion.div>
           </section>
 
-          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
+          <section
+            data-tilt-card
+            className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] focus-visible:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] dark:border-white/10"
+          >
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -597,18 +604,22 @@ export default function About() {
               transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
               className="space-y-4"
             >
-              <h2 className="text-3xl font-bold tracking-tight">{copy.cta.heading}</h2>
+              <h2 className="vt-heading text-3xl font-bold tracking-tight">{copy.cta.heading}</h2>
               <p className="max-w-2xl text-base text-white/90">{copy.cta.body}</p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <a
                   href={copy.cta.primary.href}
-                  className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-brand-blue transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/60"
+                  data-magnetic
+                  data-variant="secondary"
+                  className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:bg-white"
                 >
                   {copy.cta.primary.label}
                 </a>
                 <a
                   href={copy.cta.secondary.href}
-                  className="inline-flex items-center justify-center rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/60"
+                  data-magnetic
+                  data-variant="secondary"
+                  className="inline-flex items-center justify-center rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-white/10"
                 >
                   {copy.cta.secondary.label}
                 </a>

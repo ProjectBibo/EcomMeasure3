@@ -91,7 +91,7 @@ export default function FocusAreas() {
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
           className="mt-6 max-w-3xl"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <h2 className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
             {copy.title}
           </h2>
           <p className="mt-4 text-base text-neutral-600 dark:text-gray-400">{copy.description}</p>
@@ -104,7 +104,8 @@ export default function FocusAreas() {
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.55 }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.16)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.55)]"
+              data-tilt-card
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.16)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[24px_34px_90px_rgba(15,23,42,0.22)] focus-visible:shadow-[24px_34px_90px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.55)] dark:hover:shadow-[22px_32px_95px_rgba(2,6,23,0.65)]"
             >
               <div
                 aria-hidden
@@ -128,7 +129,9 @@ export default function FocusAreas() {
               <div className="mt-8 flex flex-1 items-end">
                 <Link
                   to={card.to}
-                  className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_50px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark"
+                  data-magnetic
+                  data-variant="primary"
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition-colors duration-200"
                 >
                   {language === "nl" ? "Bekijk de pagina" : "View details"}
                   <span aria-hidden>→</span>

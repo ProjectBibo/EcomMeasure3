@@ -4,6 +4,15 @@
 
 :root {
   --header-offset: 132px;
+  --motion-duration-short: 180ms;
+  --motion-duration-medium: 320ms;
+  --motion-duration-long: 480ms;
+  --motion-ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-emphasized: cubic-bezier(0.83, 0, 0.17, 1);
+  --focus-ring-primary: rgba(255, 204, 2, 0.65);
+  --focus-ring-secondary: rgba(31, 111, 235, 0.55);
+  --focus-ring-offset-light: rgba(255, 255, 255, 0.9);
+  --focus-ring-offset-dark: rgba(8, 15, 30, 0.92);
   color-scheme: light dark;
 }
 
@@ -22,6 +31,83 @@ body {
   background-attachment: fixed;
   transition: background 240ms ease, color 240ms ease;
   backdrop-filter: saturate(120%);
+}
+
+[data-magnetic] {
+  --btn-translate-x: 0px;
+  --btn-translate-y: 0px;
+  --btn-scale: 1;
+  --focus-ring-color: var(--focus-ring-secondary);
+  --focus-ring-offset: var(--focus-ring-offset-light);
+  transform: translate3d(var(--btn-translate-x), var(--btn-translate-y), 0) scale(var(--btn-scale));
+  transition: transform var(--motion-duration-medium) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-medium) var(--motion-ease-standard),
+    background-color var(--motion-duration-short) var(--motion-ease-standard),
+    border-color var(--motion-duration-short) var(--motion-ease-standard),
+    color var(--motion-duration-short) var(--motion-ease-standard);
+  will-change: transform;
+}
+
+[data-magnetic]:hover {
+  --btn-scale: 1.03;
+}
+
+[data-magnetic]:active {
+  --btn-scale: 0.97;
+  transition-duration: var(--motion-duration-short);
+}
+
+[data-magnetic]:focus-visible {
+  --btn-scale: 1.03;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--focus-ring-color), 0 0 0 6px var(--focus-ring-offset);
+}
+
+[data-magnetic][data-variant="primary"] {
+  --focus-ring-color: var(--focus-ring-primary);
+}
+
+[data-magnetic][data-variant="secondary"] {
+  --focus-ring-color: var(--focus-ring-secondary);
+}
+
+.dark [data-magnetic] {
+  --focus-ring-offset: var(--focus-ring-offset-dark);
+}
+
+[data-tilt-card] {
+  --card-rotate-x: 0deg;
+  --card-rotate-y: 0deg;
+  --card-translate-z: 0px;
+  transform: perspective(1200px) rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y))
+    translate3d(0, 0, var(--card-translate-z));
+  transition: transform var(--motion-duration-medium) var(--motion-ease-standard);
+  will-change: transform;
+}
+
+[data-tilt-card]:hover,
+[data-tilt-card]:focus-visible {
+  --card-translate-z: 18px;
+}
+
+[data-tilt-card]:focus-visible {
+  outline: 2px solid var(--focus-ring-secondary);
+  outline-offset: 6px;
+}
+
+@media (hover: none), (pointer: coarse) {
+  [data-tilt-card] {
+    --card-rotate-x: 0deg !important;
+    --card-rotate-y: 0deg !important;
+    transition: transform var(--motion-duration-medium) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-medium) var(--motion-ease-standard);
+  }
+
+  [data-tilt-card]:hover,
+  [data-tilt-card]:focus-visible,
+  [data-tilt-card]:active {
+    --card-translate-z: 10px;
+  }
 }
 
 .progress-rail {
@@ -98,6 +184,24 @@ body {
   .progress-rail {
     display: none;
   }
+
+  [data-magnetic],
+  [data-tilt-card] {
+    transition-duration: 0ms !important;
+    transform: none !important;
+  }
+
+  [data-tilt-card]:hover,
+  [data-tilt-card]:focus-visible {
+    --card-translate-z: 0px;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* ===== Decoratieve gradients ===== */
@@ -136,6 +240,87 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' opacity='0.2' viewBox='0 0 200 200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
   opacity: 0.45;
+}
+
+.vt-heading {
+  view-transition-name: primary-heading;
+}
+
+.vt-hero-media {
+  view-transition-name: hero-media;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(primary-heading),
+::view-transition-new(primary-heading),
+::view-transition-old(hero-media),
+::view-transition-new(hero-media) {
+  animation-duration: var(--motion-duration-long);
+  animation-timing-function: var(--motion-ease-standard);
+}
+
+@keyframes vt-heading-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vt-heading-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes vt-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes vt-hero-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.97);
+  }
+}
+
+::view-transition-new(primary-heading) {
+  animation-name: vt-heading-in;
+}
+
+::view-transition-old(primary-heading) {
+  animation-name: vt-heading-out;
+}
+
+::view-transition-new(hero-media) {
+  animation-name: vt-hero-in;
+}
+
+::view-transition-old(hero-media) {
+  animation-name: vt-hero-out;
 }
 
 @keyframes float-soft {

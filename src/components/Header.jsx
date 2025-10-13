@@ -395,7 +395,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsPaletteOpen(true)}
-                className="hidden items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 sm:inline-flex"
+                data-magnetic
+                data-variant="secondary"
+                className="hidden items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 sm:inline-flex"
                 aria-label={commandCopy.aria}
                 aria-keyshortcuts="Meta+K,Control+K"
               >
@@ -405,7 +407,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={toggleLanguage}
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
                 aria-label={t.languageSwitch.aria[language]}
                 title={t.languageSwitch.title[language]}
               >
@@ -415,7 +419,9 @@ export default function Header() {
               </button>
               <button
                 onClick={toggleDark}
-                className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors duration-200 hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
                 aria-label={themeTitle}
                 title={themeTitle}
                 type="button"
@@ -426,7 +432,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsPaletteOpen(true)}
-                className="inline-flex items-center gap-1 rounded-md p-2 text-xs font-semibold text-neutral-600 transition hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10 sm:hidden"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center gap-1 rounded-md p-2 text-xs font-semibold text-neutral-600 transition-colors duration-200 hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10 sm:hidden"
                 aria-label={commandCopy.aria}
                 aria-keyshortcuts="Meta+K,Control+K"
               >
@@ -532,7 +540,9 @@ export default function Header() {
             <div className="hidden flex-shrink-0 md:block">
               <Link
                 to="/contact"
-                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+                data-magnetic
+                data-variant="primary"
+                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
               >
@@ -560,7 +570,9 @@ export default function Header() {
               </div>
               <Link
                 to="/contact"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+                data-magnetic
+                data-variant="primary"
+                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
               >
@@ -707,7 +719,9 @@ export default function Header() {
                 <Link
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+                  data-magnetic
+                  data-variant="primary"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition-colors duration-200"
                 >
                   {t.cta}
                 </Link>
