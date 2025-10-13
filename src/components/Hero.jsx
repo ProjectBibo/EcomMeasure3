@@ -38,7 +38,7 @@ export default function Hero() {
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
           {t.titleLead}{" "}
-          <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent">
             {t.titleHighlight}
           </span>
         </motion.h1>
@@ -62,7 +62,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_18px_35px_rgba(10,16,26,0.2)] transition hover:shadow-[0_28px_55px_rgba(10,16,26,0.28)] hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-surface-dark"
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
@@ -108,11 +108,11 @@ export default function Hero() {
           transition={shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }}
           className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
-          <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
+              <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
-                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow" aria-hidden />
+                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>

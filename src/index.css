@@ -11,17 +11,14 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-offset);
   scroll-snap-type: y proximity;
-  background-color: #f5f7fb;
+  background-color: #f4f7f9;
 }
 
 body {
   min-height: 100vh;
-  background-image: radial-gradient(circle at 20% 20%, rgba(11, 95, 255, 0.12), transparent 45%),
-    radial-gradient(circle at 80% 0%, rgba(249, 197, 19, 0.12), transparent 50%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 251, 0.92));
+  background: linear-gradient(180deg, rgba(244, 247, 249, 0.98), rgba(231, 236, 240, 0.95));
   background-attachment: fixed;
   transition: background 240ms ease, color 240ms ease;
-  backdrop-filter: saturate(130%);
 }
 
 .progress-rail {
@@ -31,19 +28,19 @@ body {
   height: 3px;
   overflow: hidden;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.06));
+  background: linear-gradient(90deg, rgba(31, 51, 70, 0.12), rgba(31, 51, 70, 0.06));
   transform: translateZ(0);
 }
 
 .dark .progress-rail {
-  background: linear-gradient(90deg, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0.08));
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.08));
 }
 
 .progress-bar {
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.9) 0%, rgba(14, 165, 165, 0.9) 50%, rgba(250, 204, 21, 0.9) 100%);
+  background: linear-gradient(90deg, rgba(31, 111, 139, 0.9) 0%, rgba(24, 78, 104, 0.9) 100%);
   transform-origin: left center;
   transform: scaleX(0);
   transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -58,10 +55,8 @@ body {
 }
 
 .dark body {
-  background-image: radial-gradient(circle at 15% 25%, rgba(11, 95, 255, 0.2), transparent 45%),
-    radial-gradient(circle at 75% 15%, rgba(14, 165, 165, 0.16), transparent 55%),
-    linear-gradient(180deg, rgba(9, 16, 36, 0.95), rgba(9, 16, 36, 0.9));
-  background-color: #040816;
+  background: linear-gradient(180deg, rgba(13, 20, 31, 0.98), rgba(9, 15, 24, 0.94));
+  background-color: #080d16;
 }
 
 [data-snap-section] {
@@ -110,27 +105,27 @@ body {
 }
 
 .glow-orb--blue {
-  background: radial-gradient(circle at 50% 50%, rgba(11, 95, 255, 0.45), transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(31, 111, 139, 0.45), transparent 60%);
 }
 
 .glow-orb--teal {
-  background: radial-gradient(circle at 50% 50%, rgba(14, 165, 165, 0.4), transparent 62%);
+  background: radial-gradient(circle at 50% 50%, rgba(24, 78, 104, 0.4), transparent 62%);
 }
 
 .glow-orb--yellow {
-  background: radial-gradient(circle at 50% 50%, rgba(249, 197, 19, 0.4), transparent 65%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 204, 2, 0.35), transparent 65%);
 }
 
 .story-stripe {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(11, 95, 255, 0.08), rgba(14, 165, 165, 0.06), transparent 60%);
+  background: linear-gradient(120deg, rgba(31, 111, 139, 0.08), transparent 60%);
   mix-blend-mode: plus-lighter;
   pointer-events: none;
 }
 
 .dark .story-stripe {
-  background: linear-gradient(120deg, rgba(11, 95, 255, 0.16), rgba(14, 165, 165, 0.12), transparent 65%);
+  background: linear-gradient(120deg, rgba(31, 111, 139, 0.18), transparent 65%);
 }
 
 .grain-overlay {
@@ -184,7 +179,7 @@ body {
   bottom: -0.35rem;
   height: 2px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.95), rgba(14, 165, 165, 0.9), rgba(250, 204, 21, 0.9));
+  background: #1f6f8b;
   transform-origin: left center;
   transform: scaleX(0);
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease;

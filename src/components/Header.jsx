@@ -436,7 +436,7 @@ export default function Header() {
           >
             <Link to="/" className="group relative flex items-center gap-3 transition-all duration-300" aria-label="EcomMeasure home">
               <span
-                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
+                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue to-brand-teal text-white shadow-[0_16px_32px_rgba(15,23,42,0.18)] ring-1 ring-white/70 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
                   isCondensed ? "h-12 w-12" : "h-14 w-14"
                 }`}
               >
@@ -519,7 +519,7 @@ export default function Header() {
             <div className="hidden flex-shrink-0 md:block">
               <Link
                 to="/contact"
-                className="rounded-md bg-brand-blue px-5 py-2 font-semibold text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_16px_36px_rgba(10,16,26,0.18)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_48px_rgba(10,16,26,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-surface-dark"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
               >
@@ -547,7 +547,7 @@ export default function Header() {
               </div>
               <Link
                 to="/contact"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(59,130,246,0.45)]"
+                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_14px_32px_rgba(10,16,26,0.18)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_20px_44px_rgba(10,16,26,0.26)] focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-surface-dark"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
               >
@@ -694,7 +694,7 @@ export default function Header() {
                 <Link
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_20px_45px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_26px_55px_rgba(59,130,246,0.45)]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_20px_45px_rgba(10,16,26,0.2)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_26px_55px_rgba(10,16,26,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-surface-dark"
                 >
                   {t.cta}
                 </Link>

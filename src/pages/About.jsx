@@ -285,7 +285,7 @@ export default function About() {
             >
               <a
                 href={copy.hero.ctaPrimary.href}
-                className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-blue/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-surface-dark"
               >
                 {copy.hero.ctaPrimary.label}
               </a>
@@ -479,7 +479,7 @@ export default function About() {
             </motion.div>
           </section>
 
-          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 via-brand-teal/80 to-brand-yellow/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
+          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/85 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -492,7 +492,7 @@ export default function About() {
               <div className="flex flex-col gap-4 sm:flex-row">
                 <a
                   href={copy.cta.primary.href}
-                  className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-brand-blue transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/60"
+                  className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/50 dark:text-neutral-900 dark:hover:bg-brand-yellow-dark"
                 >
                   {copy.cta.primary.label}
                 </a>

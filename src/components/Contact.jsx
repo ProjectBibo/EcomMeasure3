@@ -28,7 +28,7 @@ export default function Contact() {
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/5 via-brand-teal/5 to-brand-yellow/5 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
+      className="relative overflow-hidden bg-gradient-to-br from-brand-blue/8 via-brand-teal/6 to-brand-teal/12 py-24 sm:py-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -114,7 +114,7 @@ export default function Contact() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.6 }}
-          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
+          className="mt-16 rounded-3xl bg-brand-blue px-6 py-10 text-white shadow-[28px_40px_110px_rgba(10,16,26,0.35)] ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[32px_48px_130px_rgba(10,16,26,0.42)] dark:bg-brand-teal dark:shadow-[28px_44px_120px_rgba(2,6,23,0.55)]"
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -124,7 +124,7 @@ export default function Contact() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_36px_rgba(255,255,255,0.35)] transition hover:bg-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_36px_rgba(10,16,26,0.22)] transition hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/30 dark:text-neutral-900 dark:hover:bg-brand-yellow-dark dark:focus-visible:ring-offset-brand-teal/30"
               >
                 {t.fast.mail}
               </a>
