@@ -75,8 +75,8 @@ export default function BlogArticle() {
     <>
       <SEO title={content.seoTitle} description={content.seoDescription} />
       <section className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark">
-        <div className="glow-orb glow-orb--blue -left-24 top-8 h-[26rem] w-[26rem] opacity-60" aria-hidden />
-        <div className="glow-orb glow-orb--teal right-0 top-1/2 h-[24rem] w-[24rem] opacity-55" aria-hidden />
+        <div className="glow-orb glow-orb--primary -left-24 top-8 h-[26rem] w-[26rem] opacity-60" aria-hidden />
+        <div className="glow-orb glow-orb--primary-soft right-0 top-1/2 h-[24rem] w-[24rem] opacity-55" aria-hidden />
         <div className="grain-overlay" aria-hidden />
 
         <div className="relative mx-auto max-w-4xl px-6">

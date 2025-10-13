@@ -48,7 +48,7 @@ export default function BayesianCalculator() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.5 }}
-            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-yellow"
+            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-teal"
           >
             {content.hero.eyebrow}
           </motion.span>

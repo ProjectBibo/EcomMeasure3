@@ -144,7 +144,7 @@ export default function Measurement() {
                 <ul className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">
                   {section.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-3">
-                      <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-gradient-to-br from-brand-blue to-brand-yellow" />
+                      <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
                       <span>{bullet}</span>
                     </li>
                   ))}

@@ -74,7 +74,7 @@ export default function HorizontalScrollShowcase() {
         <p className="text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{scene.description}</p>
       </div>
       <div className="relative mt-10">
-        <div className="inline-flex flex-col items-start gap-1 rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow px-4 py-3 text-white shadow-[0_16px_35px_rgba(15,23,42,0.18)] dark:shadow-[0_18px_40px_rgba(2,6,23,0.6)]">
+        <div className="inline-flex flex-col items-start gap-1 rounded-2xl bg-gradient-to-br from-brand-blue to-brand-teal px-4 py-3 text-white shadow-[0_16px_35px_rgba(15,23,42,0.18)] dark:shadow-[0_18px_40px_rgba(2,6,23,0.6)]">
           <span className="text-3xl font-bold">{scene.stat}</span>
           <span className="text-[11px] uppercase tracking-[0.24em] text-white/80">{scene.sub}</span>
         </div>

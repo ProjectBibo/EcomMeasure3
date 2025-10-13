@@ -257,12 +257,12 @@ export default function Header() {
 
   const navLinkClass = ({ isActive }) =>
     `nav-underline text-neutral-700 transition-colors dark:text-gray-200 ${
-      isActive ? "nav-underline--active text-brand-blue dark:text-brand-yellow" : ""
+      isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
     }`;
 
   const dropdownLinkClass = ({ isActive }) =>
     `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 dark:text-gray-100 dark:hover:bg-white/10 ${
-      isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+      isActive ? "text-brand-blue dark:text-brand-blue" : ""
     }`;
 
   return (
@@ -325,7 +325,7 @@ export default function Header() {
                         <button
                           type="button"
                           className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
-                            isActive ? "nav-underline--active text-brand-blue dark:text-brand-yellow" : ""
+                            isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
                           }`}
                           aria-haspopup="true"
                           aria-expanded={isOpen}
@@ -436,7 +436,7 @@ export default function Header() {
           >
             <Link to="/" className="group relative flex items-center gap-3 transition-all duration-300" aria-label="EcomMeasure home">
               <span
-                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
+                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue to-brand-teal text-white shadow-[0_16px_32px_rgba(15,23,42,0.18)] ring-1 ring-white/70 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
                   isCondensed ? "h-12 w-12" : "h-14 w-14"
                 }`}
               >
@@ -449,12 +449,12 @@ export default function Header() {
                 >
                   <defs>
                     <linearGradient id="em-spark" x1="10" y1="34" x2="36" y2="12" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#fff7ed" />
-                      <stop offset="1" stopColor="#fde68a" />
+                      <stop offset="0" stopColor="#ffcc02" stopOpacity="0.95" />
+                      <stop offset="1" stopColor="#e6b700" stopOpacity="0.9" />
                     </linearGradient>
                     <linearGradient id="em-pillar" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0" stopColor="#e0f2fe" />
-                      <stop offset="1" stopColor="#f0fdf4" />
+                      <stop offset="0" stopColor="#d8e4ff" />
+                      <stop offset="1" stopColor="#c4d6ff" />
                     </linearGradient>
                   </defs>
                   <g strokeLinecap="round" strokeLinejoin="round">
@@ -481,7 +481,7 @@ export default function Header() {
                       stroke="url(#em-spark)"
                       strokeWidth="2.8"
                     />
-                    <circle cx="31" cy="17" r="3.2" fill="#fef9c3" stroke="rgba(255,255,255,0.65)" strokeWidth="1.4" />
+                    <circle cx="31" cy="17" r="3.2" fill="#ffcc02" stroke="rgba(255,255,255,0.65)" strokeWidth="1.4" />
                   </g>
                 </svg>
                 <span className="absolute -inset-1 rounded-[1.75rem] border border-white/20 opacity-40" aria-hidden />
@@ -519,7 +519,7 @@ export default function Header() {
             <div className="hidden flex-shrink-0 md:block">
               <Link
                 to="/contact"
-                className="rounded-md bg-brand-blue px-5 py-2 font-semibold text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
               >
@@ -547,7 +547,7 @@ export default function Header() {
               </div>
               <Link
                 to="/contact"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(59,130,246,0.45)]"
+                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
               >
@@ -617,7 +617,7 @@ export default function Header() {
                                 onFocus={() => prefetchRoute(item.to)}
                                 className={({ isActive }) =>
                                   `flex items-center justify-between rounded-xl border border-neutral-200/70 bg-white px-3 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
-                                    isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
+                                    isActive ? "text-brand-blue dark:text-brand-blue" : "text-neutral-900"
                                   }`
                                 }
                               >
@@ -640,7 +640,7 @@ export default function Header() {
                       onFocus={() => prefetchRoute(link.to)}
                       className={({ isActive }) =>
                         `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
-                          isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
+                          isActive ? "text-brand-blue dark:text-brand-blue" : "text-neutral-900"
                         }`
                       }
                     >
@@ -694,7 +694,7 @@ export default function Header() {
                 <Link
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_20px_45px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_26px_55px_rgba(59,130,246,0.45)]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
                 >
                   {t.cta}
                 </Link>
