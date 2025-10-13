@@ -10,7 +10,7 @@ export default function Testimonial() {
   const t = translations[language].testimonial;
 
   return (
-    <section id="reviews" data-snap-section className="relative overflow-hidden">
+    <section id="reviews" data-snap-section className="section-shell relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/12 via-transparent to-brand-teal/12 dark:from-brand-blue/18 dark:via-transparent dark:to-brand-teal/15" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
@@ -31,8 +31,8 @@ export default function Testimonial() {
             transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
             className="mt-6 space-y-4 text-neutral-700 dark:text-gray-200"
           >
-            <Quote className="text-brand-blue" size={28} />
-            <p className="text-lg leading-relaxed">{t.quote}</p>
+            <Quote className="text-brand-blue" size={28} strokeWidth={1.6} />
+            <p className="text-lg leading-relaxed text-neutral-700 dark:text-gray-200">{t.quote}</p>
             <footer className="text-sm uppercase tracking-[0.2em] text-neutral-500 dark:text-gray-400">{t.author}</footer>
           </motion.blockquote>
           <div className="mt-8 grid gap-4 sm:grid-cols-3 text-xs uppercase tracking-[0.2em] text-neutral-600 dark:text-gray-400">
@@ -41,7 +41,8 @@ export default function Testimonial() {
                 key={metric.label}
                 className="rounded-xl border border-white/70 bg-white/70 p-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_45px_rgba(2,6,23,0.45)]"
               >
-                {metric.value} <span className="block text-[10px]">{metric.label}</span>
+                <span className="block text-lg font-semibold tabular-nums text-neutral-800 dark:text-white">{metric.value}</span>
+                <span className="mt-1 block text-[10px] tracking-[0.24em] text-neutral-500 dark:text-gray-400">{metric.label}</span>
               </div>
             ))}
           </div>

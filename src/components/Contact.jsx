@@ -28,7 +28,7 @@ export default function Contact() {
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/10 via-brand-teal/8 to-brand-teal/5 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
+      className="section-shell relative overflow-hidden py-24 sm:py-28"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -38,6 +38,7 @@ export default function Contact() {
           viewport={shouldReduceMotion ? undefined : { once: true }}
           className="mx-auto mt-10 h-[420px] w-[420px] rounded-full bg-brand-blue/30 blur-3xl"
         />
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/15 via-transparent to-brand-teal/10 dark:from-brand-blue/25 dark:via-transparent dark:to-brand-teal/18" aria-hidden />
       </div>
       <div className="absolute inset-0 opacity-50">
         <div className="grain-overlay" aria-hidden />
@@ -50,7 +51,7 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-white/70 dark:bg-white/10 text-sm font-medium text-brand-blue shadow-sm"
+            className="inline-flex items-center rounded-full bg-white/85 px-5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-[0_12px_30px_rgba(15,23,42,0.1)] dark:bg-white/10"
           >
             {t.badge}
           </motion.span>
@@ -59,7 +60,7 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
-            className="mt-6 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
+            className="mt-6 text-3xl font-bold leading-[1.12] tracking-tight text-neutral-900 dark:text-white sm:text-[2.5rem]"
           >
             {t.heading}
           </motion.h2>
@@ -68,7 +69,7 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { delay: 0.3, duration: 0.7 }}
-            className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-gray-400"
+            className="mt-4 text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-gray-400"
           >
             {t.intro}
           </motion.p>
@@ -92,7 +93,7 @@ export default function Contact() {
               >
                 <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -12px -16px 28px rgba(148,163,184,0.18)" }} />
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
-                  <Icon size={22} />
+                  <Icon size={24} strokeWidth={1.6} />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-400">{content.description}</p>
@@ -119,7 +120,7 @@ export default function Contact() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h3 className="text-2xl font-semibold">{t.fast.title}</h3>
-              <p className="mt-2 text-sm text-neutral-300 lg:max-w-xl">{t.fast.description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-300 lg:max-w-xl">{t.fast.description}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <a

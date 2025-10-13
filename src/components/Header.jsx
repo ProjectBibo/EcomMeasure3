@@ -553,7 +553,7 @@ export default function Header() {
                 aria-controls={menuId}
                 aria-label={menuButtonLabel}
               >
-                {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                {isMenuOpen ? <X size={18} strokeWidth={1.6} /> : <Menu size={18} strokeWidth={1.6} />}
                 <span>{t.menu.label}</span>
               </button>
               <nav className="hidden items-center justify-center gap-6 text-[15px] font-medium md:flex lg:text-[17px]">
@@ -594,6 +594,7 @@ export default function Header() {
                           {link.label}
                           <ChevronDown
                             size={16}
+                            strokeWidth={1.6}
                             className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                             aria-hidden
                           />
@@ -645,7 +646,7 @@ export default function Header() {
                 aria-label={commandCopy.aria}
                 aria-keyshortcuts="Meta+K,Control+K"
               >
-                <Command size={16} />
+                <Command size={16} strokeWidth={1.6} />
                 <span>{commandCopy.label}</span>
               </button>
               <button
@@ -666,7 +667,7 @@ export default function Header() {
                 title={themeTitle}
                 type="button"
               >
-                {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                {isDark ? <Sun size={16} strokeWidth={1.6} /> : <Moon size={16} strokeWidth={1.6} />}
                 <span className="hidden sm:inline text-sm">{themeLabel}</span>
               </button>
               <button
@@ -676,7 +677,7 @@ export default function Header() {
                 aria-label={commandCopy.aria}
                 aria-keyshortcuts="Meta+K,Control+K"
               >
-                <Command size={16} />
+                <Command size={16} strokeWidth={1.6} />
                 <span aria-hidden>⌘K</span>
               </button>
             </div>
@@ -858,6 +859,7 @@ export default function Header() {
                           <span>{link.label}</span>
                           <ChevronDown
                             size={18}
+                            strokeWidth={1.6}
                             className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                             aria-hidden
                           />
@@ -933,7 +935,7 @@ export default function Header() {
                     }}
                     className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
                   >
-                    {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                    {isDark ? <Sun size={16} strokeWidth={1.6} /> : <Moon size={16} strokeWidth={1.6} />}
                     <span>{themeLabel}</span>
                   </button>
                   <button
@@ -946,7 +948,7 @@ export default function Header() {
                     aria-label={commandCopy.aria}
                     aria-keyshortcuts="Meta+K,Control+K"
                   >
-                    <Command size={16} />
+                    <Command size={16} strokeWidth={1.6} />
                     <span>{commandCopy.label}</span>
                   </button>
                 </div>

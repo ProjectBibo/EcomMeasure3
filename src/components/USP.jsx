@@ -12,9 +12,8 @@ export default function USP() {
   const t = translations[language].usp;
 
   return (
-    <section id="diensten" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/60 to-white/80 dark:from-surface-dark/90 dark:via-surface-dark/70 dark:to-surface-dark/90" aria-hidden />
-      <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
+    <section id="diensten" data-snap-section className="section-shell relative overflow-hidden">
+      <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-28">
         <div className="grid gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.7fr)] items-start">
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, x: -30 }}
@@ -23,14 +22,14 @@ export default function USP() {
             transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
             className="relative rounded-3xl border border-neutral-200/70 bg-white/80 p-8 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+            <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-brand-blue">
               {t.badge}
             </span>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">
+            <h2 className="mt-5 text-3xl font-bold leading-[1.12] text-neutral-900 dark:text-white sm:text-[2.5rem]">
               {t.heading}
             </h2>
-            <p className="mt-4 text-base text-neutral-600 dark:text-gray-300">{t.description}</p>
-            <ul className="mt-6 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
+            <p className="mt-4 text-base leading-relaxed text-neutral-600 dark:text-gray-300">{t.description}</p>
+            <ul className="mt-6 space-y-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">
               {t.bullets.map((bullet) => (
                 <li key={bullet} className="flex items-start gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue" aria-hidden />
@@ -55,11 +54,11 @@ export default function USP() {
                 >
                   <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-brand-blue/10 blur-3xl transition group-hover:scale-125" aria-hidden />
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
-                    <Icon size={22} />
+                    <Icon size={24} strokeWidth={1.6} />
                   </div>
                   <h3 className="mt-6 text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.text}</p>
-                  <p className="mt-3 text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-gray-400">{item.detail}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{item.text}</p>
+                  <p className="mt-3 text-xs uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">{item.detail}</p>
                 </motion.article>
               );
             })}

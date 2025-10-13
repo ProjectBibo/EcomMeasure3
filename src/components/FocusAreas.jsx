@@ -70,7 +70,7 @@ export default function FocusAreas() {
   const copy = content[language];
 
   return (
-    <section className="relative overflow-hidden bg-surface-soft py-20 dark:bg-surface-dark">
+    <section className="section-shell relative overflow-hidden py-24 sm:py-28">
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>
@@ -80,7 +80,7 @@ export default function FocusAreas() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-          className="inline-flex items-center rounded-full bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-600 shadow-sm backdrop-blur dark:bg-white/10 dark:text-gray-300"
+          className="inline-flex items-center rounded-full bg-white/85 px-5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-neutral-600 shadow-[0_10px_26px_rgba(15,23,42,0.08)] backdrop-blur dark:bg-white/10 dark:text-gray-300"
         >
           {copy.badge}
         </motion.span>
@@ -91,12 +91,12 @@ export default function FocusAreas() {
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
           className="mt-6 max-w-3xl"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-[1.15] tracking-tight text-neutral-900 dark:text-white sm:text-[2.5rem]">
             {copy.title}
           </h2>
-          <p className="mt-4 text-base text-neutral-600 dark:text-gray-400">{copy.description}</p>
+          <p className="mt-4 text-base leading-relaxed text-neutral-600 dark:text-gray-400">{copy.description}</p>
         </motion.div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
           {copy.cards.map((card, index) => (
             <motion.article
               key={card.title}

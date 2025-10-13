@@ -24,7 +24,7 @@ const Implementation = lazy(() => import("./pages/Implementation"));
 
 function AppContent() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
+    <div className="page-shell overflow-x-hidden transition-colors">
       <Header />
       <Suspense fallback={<SectionFallback label="Pagina" />}>
         <Routes>
