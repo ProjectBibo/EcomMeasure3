@@ -441,11 +441,19 @@ export const translations = {
       columns: {
         measurement: {
           title: "Measurement",
-          items: ["GA4 & GTM", "Consent Mode v2", "Looker Studio"],
+          items: [
+            { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
+            { label: "Consent Mode v2", href: "/consent-mode" },
+            { label: "Looker Studio", href: "/measurement/looker-studio" },
+          ],
         },
         cro: {
           title: "Conversion Rate Optimization",
-          items: ["Gedragsanalyse", "Hypotheses & A/B-tests", "Implementatie"],
+          items: [
+            { label: "Gedragsanalyse", href: "/cro/gedragsanalyse" },
+            { label: "Hypotheses & A/B-tests", href: "/cro/hypotheses-ab-tests" },
+            { label: "Implementatie", href: "/cro/implementatie" },
+          ],
         },
         tools: {
           title: "Tools",
@@ -905,11 +913,19 @@ export const translations = {
       columns: {
         measurement: {
           title: "Measurement",
-          items: ["GA4 & GTM", "Consent Mode v2", "Looker Studio"],
+          items: [
+            { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
+            { label: "Consent Mode v2", href: "/consent-mode" },
+            { label: "Looker Studio", href: "/measurement/looker-studio" },
+          ],
         },
         cro: {
           title: "Conversion Rate Optimisation",
-          items: ["Behaviour analysis", "Hypotheses & A/B tests", "Implementation"],
+          items: [
+            { label: "Behaviour analysis", href: "/cro/gedragsanalyse" },
+            { label: "Hypotheses & A/B tests", href: "/cro/hypotheses-ab-tests" },
+            { label: "Implementation", href: "/cro/implementatie" },
+          ],
         },
         tools: {
           title: "Tools",

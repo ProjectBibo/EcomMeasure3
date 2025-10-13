@@ -35,7 +35,18 @@ export default function Footer() {
             <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.measurement.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={typeof item === "string" ? item : item.href}>
+                  {typeof item === "string" ? (
+                    item
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
               ))}
             </ul>
           </div>
@@ -43,7 +54,18 @@ export default function Footer() {
             <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.cro.title}</h4>
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.cro.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={typeof item === "string" ? item : item.href}>
+                  {typeof item === "string" ? (
+                    item
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
               ))}
             </ul>
           </div>
