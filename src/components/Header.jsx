@@ -16,6 +16,8 @@ const routePrefetchers = {
   "/cro": () => import("../pages/Cro"),
   "/contact": () => import("../pages/ContactPage"),
   "/blog": () => import("../pages/BlogArticle"),
+  "/tools/bayesian-ab-test": () => import("../pages/BayesianCalculator"),
+  "/tools/cro-roi": () => import("../pages/CroRoiCalculator"),
 };
 
 const flags = {
@@ -50,16 +52,27 @@ export default function Header() {
     [language]
   );
 
-  const { about, blogLabel, contact } = t.nav;
+  const { about, blogLabel, contact, toolsLabel, toolsItems } = t.nav;
   const commandCopy = t.command;
+
+  const toolLinks = useMemo(
+    () =>
+      toolsItems.map((item) => ({
+        id: item.href,
+        to: item.href,
+        label: item.label,
+      })),
+    [toolsItems]
+  );
 
   const navLinks = useMemo(
     () => [
       { id: "about", type: "link", to: "/about", label: about },
       { id: "blog", type: "dropdown", label: blogLabel, items: blogLinks },
+      { id: "tools", type: "dropdown", label: toolsLabel, items: toolLinks },
       { id: "contact", type: "link", to: "/contact", label: contact },
     ],
-    [about, blogLabel, contact, blogLinks]
+    [about, blogLabel, blogLinks, contact, toolLinks, toolsLabel]
   );
 
   const prefetchRoute = useCallback((target) => {
