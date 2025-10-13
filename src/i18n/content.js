@@ -9,6 +9,11 @@ export const translations = {
       nav: {
         about: "Over EcomMeasure",
         blogLabel: "Blog",
+        toolsLabel: "Tools",
+        toolsItems: [
+          { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
+          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+        ],
         contact: "Contact",
       },
       cta: "Plan een kennismaking",
@@ -435,6 +440,11 @@ export const translations = {
       nav: {
         about: "About EcomMeasure",
         blogLabel: "Blog",
+        toolsLabel: "Tools",
+        toolsItems: [
+          { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
+          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+        ],
         contact: "Contact",
       },
       cta: "Book an intro call",
