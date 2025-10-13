@@ -11,13 +11,55 @@ const flags = {
   en: "🇬🇧",
 };
 
+const routePrefetchers = new Map([
+  ["/about", () => import("../pages/About")],
+  ["/measurement", () => import("../pages/Measurement")],
+  ["/consent-mode", () => import("../pages/ConsentMode")],
+  ["/cro", () => import("../pages/Cro")],
+  ["/tools/bayesian-ab-test", () => import("../pages/BayesianCalculator")],
+  ["/tools/cro-roi", () => import("../pages/CroRoiCalculator")],
+  ["/contact", () => import("../pages/ContactPage")],
+  ["/blog/*", () => import("../pages/BlogArticle")],
+]);
+
+const prefetchedRoutes = new Set();
+const blogRoutePattern = /^\/blog\//;
+
+function prefetchRouteIntent(path) {
+  if (!path || prefetchedRoutes.has(path)) return;
+  const matchKey = routePrefetchers.has(path)
+    ? path
+    : blogRoutePattern.test(path)
+    ? "/blog/*"
+    : null;
+
+  if (!matchKey) return;
+
+  try {
+    const loader = routePrefetchers.get(matchKey);
+    if (!loader) return;
+    const promise = loader();
+    prefetchedRoutes.add(path);
+    if (promise && typeof promise.then === "function") {
+      promise.catch(() => {
+        prefetchedRoutes.delete(path);
+      });
+    }
+  } catch (error) {
+    prefetchedRoutes.delete(path);
+  }
+}
+
 export default function Header() {
   const headerRef = useRef(null);
+  const progressRef = useRef(null);
+  const condensedRef = useRef(false);
   const { language, changeLanguage } = useLanguage();
   const t = translations[language].header;
   const nextLanguage = language === "nl" ? "en" : "nl";
   const [isDark, setIsDark] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isCondensed, setIsCondensed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const menuId = useId();
@@ -180,14 +222,55 @@ export default function Header() {
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
   const navLinkClass = ({ isActive }) =>
-    `nav-underline text-neutral-700 transition-colors dark:text-gray-200 ${
-      isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+    `nav-underline text-neutral-700 transition-colors duration-200 dark:text-gray-200 ${
+      isActive ? "is-active text-brand-blue dark:text-brand-yellow" : ""
     }`;
 
   const dropdownLinkClass = ({ isActive }) =>
-    `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 dark:text-gray-100 dark:hover:bg-white/10 ${
-      isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+    `nav-underline flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 dark:text-gray-100 dark:hover:bg-white/10 ${
+      isActive ? "is-active text-brand-blue dark:text-brand-yellow" : ""
     }`;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const updateMetrics = () => {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || window.pageYOffset;
+      const maxScroll = Math.max(doc.scrollHeight - window.innerHeight, 0);
+      const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+
+      if (progressRef.current) {
+        progressRef.current.style.setProperty("--progress", progress.toString());
+      }
+
+      const shouldCondense = scrollTop > 80;
+      if (condensedRef.current !== shouldCondense) {
+        condensedRef.current = shouldCondense;
+        setIsCondensed(shouldCondense);
+      }
+    };
+
+    let frame = null;
+    const onScroll = () => {
+      if (frame !== null) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
+        updateMetrics();
+      });
+    };
+
+    updateMetrics();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -196,9 +279,22 @@ export default function Header() {
         className={`sticky top-0 z-50 w-full transform-gpu transition-transform duration-300 ease-out ${
           isHidden ? "-translate-y-full" : "translate-y-0"
         }`}
+        data-condensed={isCondensed ? "true" : undefined}
       >
-        <div className="border-b border-neutral-200/60 bg-white/80 backdrop-blur dark:border-neutral-800/60 dark:bg-surface-dark/80">
-          <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div className="progress-rail" aria-hidden>
+          <span ref={progressRef} className="progress-thumb" />
+        </div>
+
+        <div
+          className={`border-b border-neutral-200/60 bg-white/80 backdrop-blur transition-[background-color,backdrop-filter,box-shadow,border-color] duration-300 dark:border-neutral-800/60 dark:bg-surface-dark/80 ${
+            isCondensed ? "shadow-[0_20px_48px_rgba(15,23,42,0.12)] backdrop-blur-lg dark:shadow-[0_22px_60px_rgba(2,6,23,0.65)]" : ""
+          }`}
+        >
+          <div
+            className={`mx-auto flex max-w-7xl items-center justify-between px-4 transition-[height,padding] duration-300 sm:px-6 ${
+              isCondensed ? "h-10" : "h-12"
+            }`}
+          >
             <div className="flex items-center gap-4">
               <button
                 type="button"
@@ -235,11 +331,13 @@ export default function Header() {
                         <button
                           type="button"
                           className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
-                            isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+                            isActive ? "is-active text-brand-blue dark:text-brand-yellow" : ""
                           }`}
                           aria-haspopup="true"
                           aria-expanded={isOpen}
                           onClick={() => setOpenDropdown(isOpen ? null : link.id)}
+                          onMouseEnter={() => prefetchRouteIntent(link.items[0]?.to)}
+                          onFocus={() => prefetchRouteIntent(link.items[0]?.to)}
                         >
                           {link.label}
                           <ChevronDown
@@ -260,6 +358,8 @@ export default function Header() {
                                   to={item.to}
                                   className={dropdownLinkClass}
                                   onClick={() => setOpenDropdown(null)}
+                                  onMouseEnter={() => prefetchRouteIntent(item.to)}
+                                  onFocus={() => prefetchRouteIntent(item.to)}
                                 >
                                   <span>{item.label}</span>
                                   <span aria-hidden>→</span>
@@ -273,7 +373,13 @@ export default function Header() {
                   }
 
                   return (
-                    <NavLink key={link.id} to={link.to} className={navLinkClass}>
+                    <NavLink
+                      key={link.id}
+                      to={link.to}
+                      className={navLinkClass}
+                      onMouseEnter={() => prefetchRouteIntent(link.to)}
+                      onFocus={() => prefetchRouteIntent(link.to)}
+                    >
                       {link.label}
                     </NavLink>
                   );
@@ -306,10 +412,27 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="border-b border-neutral-200/60 bg-white/80 backdrop-blur dark:border-neutral-800/60 dark:bg-surface-dark/80">
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-            <Link to="/" className="group relative flex items-center gap-3" aria-label="EcomMeasure home">
-              <span className="relative flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)]">
+        <div
+          className={`border-b border-neutral-200/60 bg-white/80 backdrop-blur transition-[background-color,backdrop-filter,box-shadow,border-color] duration-300 dark:border-neutral-800/60 dark:bg-surface-dark/80 ${
+            isCondensed ? "shadow-[0_20px_48px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:shadow-[0_22px_60px_rgba(2,6,23,0.65)]" : ""
+          }`}
+        >
+          <div
+            className={`mx-auto flex max-w-7xl items-center justify-between px-4 transition-[height,padding] duration-300 sm:px-6 ${
+              isCondensed ? "h-14" : "h-16"
+            }`}
+          >
+            <Link
+              to="/"
+              className="group relative flex items-center gap-3"
+              aria-label="EcomMeasure home"
+              onMouseEnter={() => prefetchRouteIntent("/")}
+            >
+              <span
+                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-all duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
+                  isCondensed ? "h-12 w-12" : "h-14 w-14"
+                }`}
+              >
                 <svg
                   viewBox="0 0 48 48"
                   className="h-9 w-9"
@@ -369,7 +492,12 @@ export default function Header() {
             <div className="hidden items-stretch gap-8 md:flex">
               {t.columns.map((column) => (
                 <div key={column.title} className="svc-col">
-                  <Link to={column.href} className="svc-head">
+                  <Link
+                    to={column.href}
+                    className="svc-head nav-underline"
+                    onMouseEnter={() => prefetchRouteIntent(column.href)}
+                    onFocus={() => prefetchRouteIntent(column.href)}
+                  >
                     {column.title}
                   </Link>
                   <span className="svc-sub">{column.subtitle}</span>
@@ -381,6 +509,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className="rounded-md bg-brand-blue px-5 py-2 font-semibold text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+                onMouseEnter={() => prefetchRouteIntent("/contact")}
+                onFocus={() => prefetchRouteIntent("/contact")}
               >
                 {t.cta}
               </Link>
@@ -392,7 +522,12 @@ export default function Header() {
               <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
                 {t.columns.map((column) => (
                   <div key={column.title} className="svc-col-mobile">
-                    <Link to={column.href} className="svc-head">
+                    <Link
+                      to={column.href}
+                      className="svc-head nav-underline"
+                      onMouseEnter={() => prefetchRouteIntent(column.href)}
+                      onFocus={() => prefetchRouteIntent(column.href)}
+                    >
                       {column.title}
                     </Link>
                     <span className="svc-sub">{column.subtitle}</span>
@@ -402,6 +537,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className="ml-4 inline-flex items-center rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(59,130,246,0.45)]"
+                onMouseEnter={() => prefetchRouteIntent("/contact")}
+                onFocus={() => prefetchRouteIntent("/contact")}
               >
                 {t.cta}
               </Link>
@@ -447,6 +584,8 @@ export default function Header() {
                           onClick={() => setOpenDropdown(isOpen ? null : link.id)}
                           aria-expanded={isOpen}
                           aria-controls={`${menuId}-${link.id}`}
+                          onMouseEnter={() => prefetchRouteIntent(link.items[0]?.to)}
+                          onFocus={() => prefetchRouteIntent(link.items[0]?.to)}
                         >
                           <span>{link.label}</span>
                           <ChevronDown
@@ -470,6 +609,8 @@ export default function Header() {
                                     isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
                                   }`
                                 }
+                                onMouseEnter={() => prefetchRouteIntent(item.to)}
+                                onFocus={() => prefetchRouteIntent(item.to)}
                               >
                                 <span>{item.label}</span>
                                 <span aria-hidden>→</span>
@@ -491,6 +632,8 @@ export default function Header() {
                           isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
                         }`
                       }
+                      onMouseEnter={() => prefetchRouteIntent(link.to)}
+                      onFocus={() => prefetchRouteIntent(link.to)}
                     >
                       <span>{link.label}</span>
                       <span aria-hidden>→</span>
@@ -530,6 +673,8 @@ export default function Header() {
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-blue px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_20px_45px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_26px_55px_rgba(59,130,246,0.45)]"
+                  onMouseEnter={() => prefetchRouteIntent("/contact")}
+                  onFocus={() => prefetchRouteIntent("/contact")}
                 >
                   {t.cta}
                 </Link>
