@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
+import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
 
 const content = {
   nl: {
@@ -89,12 +90,18 @@ export default function FocusAreas() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
-          className="mt-6 max-w-3xl"
+          className="mt-6 max-w-3xl space-y-4"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <AnimatedHeading as="h2" className="text-balance text-3xl sm:text-4xl text-neutral-900 dark:text-white" delay={0.1}>
             {copy.title}
-          </h2>
-          <p className="mt-4 text-base text-neutral-600 dark:text-gray-400">{copy.description}</p>
+          </AnimatedHeading>
+          <AnimatedParagraph
+            text={copy.description}
+            language={language}
+            highlight
+            className="text-base text-neutral-600 dark:text-gray-400"
+            delay={0.16}
+          />
         </motion.div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {copy.cards.map((card, index) => (
@@ -119,7 +126,7 @@ export default function FocusAreas() {
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue/80 dark:text-brand-teal/80">
                     {card.subtitle}
                   </p>
-                  <h3 className="mt-2 text-2xl font-semibold text-neutral-900 transition-colors duration-300 group-hover:text-brand-blue dark:text-white">
+                  <h3 className="typography-subheading mt-2 text-2xl font-semibold text-neutral-900 transition-colors duration-300 group-hover:text-brand-blue dark:text-white">
                     {card.title}
                   </h3>
                 </div>
