@@ -2,6 +2,7 @@ import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Command as CommandIcon, Search, X } from "lucide-react";
+import { blogPosts } from "../data/blogPosts";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 
@@ -32,47 +33,91 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
   const dialogRef = useRef(null);
 
   const actions = useMemo(() => {
-    const baseActions = [
+    const staticActionDefinitions = [
+      { id: "home", to: "/", translationKey: "home" },
+      { id: "about", to: "/about", translationKey: "about" },
+      { id: "cases", to: "/#cases", translationKey: "cases" },
+      { id: "measurement", to: "/measurement", translationKey: "measurement" },
+      { id: "consent-mode", to: "/consent-mode", translationKey: "consentMode" },
+      { id: "cro", to: "/cro", translationKey: "cro" },
       {
-        id: "contact",
-        to: "/contact",
-        title: t.actions.contact.title,
-        description: t.actions.contact.description,
-        icon: <ArrowUpRight size={16} aria-hidden />,
-        keywords: ["contact", "kennismaking", "intro", "plan"],
+        id: "bayesian-calculator",
+        to: "/tools/bayesian-ab-test",
+        translationKey: "bayesianCalculator",
       },
       {
-        id: "cases",
-        to: "/#cases",
-        title: t.actions.cases.title,
-        description: t.actions.cases.description,
-        icon: <ArrowUpRight size={16} aria-hidden />,
-        keywords: ["cases", "proof", "social", "stories"],
+        id: "cro-roi-calculator",
+        to: "/tools/cro-roi",
+        translationKey: "croRoiCalculator",
       },
-      {
-        id: "services",
-        to: "/measurement",
-        title: t.actions.services.title,
-        description: t.actions.services.description,
-        icon: <ArrowUpRight size={16} aria-hidden />,
-        keywords: ["diensten", "services", "measurement", "cro", "consent"],
-      },
+      { id: "contact", to: "/contact", translationKey: "contact" },
     ];
 
-    return baseActions.map((action) => ({
-      ...action,
-      searchTokens: [action.title, action.description, ...action.keywords]
+    const staticActions = staticActionDefinitions
+      .map(({ translationKey, ...action }) => {
+        const copy = t.actions[translationKey];
+        if (!copy) return null;
+
+        return {
+          ...action,
+          title: copy.title,
+          description: copy.description,
+          keywords: copy.keywords || [],
+          icon: <ArrowUpRight size={16} aria-hidden />,
+        };
+      })
+      .filter(Boolean);
+
+    const blogActions = blogPosts
+      .map((post) => {
+        const navLabel = post.navLabel[language];
+        const description = post.seoDescription?.[language] || post.intro?.[language] || "";
+        const keywords = [
+          post.slug,
+          navLabel,
+          post.title?.[language],
+          "blog",
+          language === "nl" ? "artikel" : "article",
+        ].filter(Boolean);
+
+        return {
+          id: `blog-${post.slug}`,
+          to: `/blog/${post.slug}`,
+          title: navLabel,
+          description,
+          keywords,
+          icon: <ArrowUpRight size={16} aria-hidden />,
+        };
+      })
+      .sort((a, b) => a.title.localeCompare(b.title, language === "nl" ? "nl" : "en"));
+
+    return [...staticActions, ...blogActions].map((action) => {
+      const tokens = [action.title, action.description, ...(action.keywords || [])]
         .join(" ")
-        .toLowerCase(),
-    }));
-  }, [t.actions]);
+        .toLowerCase();
+      return {
+        ...action,
+        searchTokens: tokens,
+      };
+    });
+  }, [language, t.actions]);
 
   const filtered = useMemo(() => {
     if (!query.trim()) {
       return actions;
     }
-    const needle = query.toLowerCase();
-    return actions.filter((action) => action.searchTokens.includes(needle));
+
+    const needles = query
+      .toLowerCase()
+      .split(/\s+/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (needles.length === 0) {
+      return actions;
+    }
+
+    return actions.filter((action) => needles.every((needle) => action.searchTokens.includes(needle)));
   }, [actions, query]);
 
   useEffect(() => {
