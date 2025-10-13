@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { CalendarDays, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { useExperience } from "../context/ExperienceContext";
 
 const baseOptions = [
   {
@@ -23,6 +24,7 @@ export default function Contact() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const t = translations[language].contact;
+  const { celebrate } = useExperience();
 
   return (
     <section
@@ -99,6 +101,11 @@ export default function Contact() {
                 <a
                   href={href}
                   {...linkProps}
+                  onClick={(event) => {
+                    if (href.includes("cal.com")) {
+                      celebrate({ id: "scheduler", source: event.currentTarget });
+                    }
+                  }}
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition group-hover:translate-x-0.5"
                 >
                   {content.actionLabel}
@@ -124,7 +131,7 @@ export default function Contact() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_20px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+                className="magnetic-cta inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_20px_44px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
               >
                 {t.fast.mail}
               </a>

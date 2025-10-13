@@ -26,7 +26,7 @@ export default function Footer() {
             <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
             <Link
               to="/contact"
-              className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
+              className="magnetic-cta mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 shadow-[0_16px_32px_rgba(255,204,2,0.28)] transition-colors duration-200 hover:bg-brand-yellow-dark"
             >
               {t.cta}
             </Link>

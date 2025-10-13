@@ -128,7 +128,7 @@ export default function FocusAreas() {
               <div className="mt-8 flex flex-1 items-end">
                 <Link
                   to={card.to}
-                  className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_50px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark"
+                  className="magnetic-cta inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-brand-yellow-dark hover:shadow-[0_24px_50px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark"
                 >
                   {language === "nl" ? "Bekijk de pagina" : "View details"}
                   <span aria-hidden>→</span>

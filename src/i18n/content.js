@@ -66,6 +66,16 @@ export const translations = {
         aria: "Open het command palette",
         label: "Zoek (⌘K)",
       },
+      soundToggle: {
+        short: "Geluid",
+        enabled: "Geluidseffecten aan",
+        disabled: "Geluidseffecten uit",
+        unavailable: "Geluid uit door minder-beweging voorkeur",
+        ariaEnable: "Schakel subtiele klik- en bevestigingsgeluiden in",
+        ariaDisable: "Schakel subtiele klik- en bevestigingsgeluiden uit",
+        ariaUnavailable:
+          "Geluidseffecten zijn uitgeschakeld door je systeemvoorkeur voor minder beweging",
+      },
       mobileMenu: {
         title: "Navigatie",
         subtitle: "Kies een sectie of pas je voorkeuren aan.",
@@ -545,6 +555,15 @@ export const translations = {
       command: {
         aria: "Open the command palette",
         label: "Search (⌘K)",
+      },
+      soundToggle: {
+        short: "Sound",
+        enabled: "Interface sounds on",
+        disabled: "Interface sounds off",
+        unavailable: "Sounds off due to reduced motion",
+        ariaEnable: "Enable subtle click and confirm sounds",
+        ariaDisable: "Disable subtle click and confirm sounds",
+        ariaUnavailable: "Interface sounds follow your reduced motion preference",
       },
       mobileMenu: {
         title: "Navigate",

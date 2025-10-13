@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
 import { LanguageProvider } from "./context/LanguageContext";
+import { ExperienceProvider } from "./context/ExperienceContext";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -53,7 +54,9 @@ function AppContent() {
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <ExperienceProvider>
+        <AppContent />
+      </ExperienceProvider>
     </LanguageProvider>
   );
 }

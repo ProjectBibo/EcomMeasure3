@@ -1,11 +1,12 @@
 // src/components/Header.jsx
 import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Command, Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Command, Menu, Moon, Sun, Volume2, VolumeX, X } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
+import { useExperience } from "../context/ExperienceContext";
 import CommandPalette from "./CommandPalette";
 
 const routePrefetchers = {
@@ -30,6 +31,7 @@ export default function Header() {
   const progressRef = useRef(null);
   const prefetchedRoutes = useRef(new Set());
   const { language, changeLanguage } = useLanguage();
+  const { soundEnabled, soundToggleDisabled, toggleSound, celebrate } = useExperience();
   const t = translations[language].header;
   const shouldReduceMotion = useReducedMotion();
   const nextLanguage = language === "nl" ? "en" : "nl";
@@ -54,6 +56,36 @@ export default function Header() {
 
   const { about, blogLabel, contact, toolsLabel, toolsItems } = t.nav;
   const commandCopy = t.command;
+  const soundCopy = t.soundToggle;
+  const soundTitle = soundToggleDisabled
+    ? soundCopy.unavailable
+    : soundEnabled
+    ? soundCopy.enabled
+    : soundCopy.disabled;
+  const soundAria = soundToggleDisabled
+    ? soundCopy.ariaUnavailable
+    : soundEnabled
+    ? soundCopy.ariaDisable
+    : soundCopy.ariaEnable;
+  const SoundIcon = soundEnabled ? Volume2 : VolumeX;
+  const soundButtonClass = [
+    "inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold shadow-sm transition backdrop-blur",
+    soundEnabled
+      ? "bg-brand-yellow/25 text-brand-blue hover:bg-brand-yellow/35 dark:bg-brand-yellow/20 dark:text-neutral-900"
+      : "bg-white/80 text-neutral-700 hover:bg-white/95 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20",
+    soundToggleDisabled ? "opacity-60 cursor-not-allowed" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const mobileSoundClass = [
+    "inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold shadow-sm transition",
+    soundEnabled
+      ? "border-brand-yellow/60 bg-brand-yellow/20 text-brand-blue hover:bg-brand-yellow/25 dark:border-brand-yellow/40 dark:bg-brand-yellow/15 dark:text-neutral-900"
+      : "border-neutral-200/80 bg-white text-neutral-700 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200",
+    soundToggleDisabled ? "opacity-60 cursor-not-allowed" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const toolLinks = useMemo(
     () =>
@@ -74,6 +106,11 @@ export default function Header() {
     ],
     [about, blogLabel, blogLinks, contact, toolLinks, toolsLabel]
   );
+
+  const handleSoundToggle = useCallback(() => {
+    if (soundToggleDisabled) return;
+    toggleSound();
+  }, [soundToggleDisabled, toggleSound]);
 
   const prefetchRoute = useCallback((target) => {
     if (!target) return;
@@ -414,6 +451,18 @@ export default function Header() {
                 <span className="sr-only">{t.languageSwitch.helper[language]}</span>
               </button>
               <button
+                type="button"
+                onClick={handleSoundToggle}
+                className={soundButtonClass}
+                aria-label={soundAria}
+                title={soundTitle}
+                disabled={soundToggleDisabled}
+              >
+                <SoundIcon size={16} />
+                <span className="hidden sm:inline text-sm">{soundCopy.short}</span>
+                <span className="sr-only">{soundEnabled ? soundCopy.enabled : soundCopy.disabled}</span>
+              </button>
+              <button
                 onClick={toggleDark}
                 className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
                 aria-label={themeTitle}
@@ -532,9 +581,10 @@ export default function Header() {
             <div className="hidden flex-shrink-0 md:block">
               <Link
                 to="/contact"
-                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+                className="magnetic-cta rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
+                onClick={(event) => celebrate({ id: "header-primary-cta", source: event.currentTarget })}
               >
                 {t.cta}
               </Link>
@@ -560,9 +610,10 @@ export default function Header() {
               </div>
               <Link
                 to="/contact"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+                className="magnetic-cta ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
+                onClick={(event) => celebrate({ id: "header-secondary-cta", source: event.currentTarget })}
               >
                 {t.cta}
               </Link>
@@ -682,6 +733,22 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => {
+                      if (soundToggleDisabled) return;
+                      handleSoundToggle();
+                      setIsMenuOpen(false);
+                    }}
+                    className={mobileSoundClass}
+                    aria-label={soundAria}
+                    title={soundTitle}
+                    disabled={soundToggleDisabled}
+                  >
+                    <SoundIcon size={16} />
+                    <span>{soundCopy.short}</span>
+                    <span className="sr-only">{soundEnabled ? soundCopy.enabled : soundCopy.disabled}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
                       toggleDark();
                       setIsMenuOpen(false);
                     }}
@@ -706,8 +773,11 @@ export default function Header() {
                 </div>
                 <Link
                   to="/contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+                  onClick={(event) => {
+                    setIsMenuOpen(false);
+                    celebrate({ id: "mobile-menu-cta", source: event.currentTarget });
+                  }}
+                  className="magnetic-cta inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
                 >
                   {t.cta}
                 </Link>

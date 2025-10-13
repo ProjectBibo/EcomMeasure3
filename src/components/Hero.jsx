@@ -1,20 +1,26 @@
 // src/components/Hero.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { useExperience } from "../context/ExperienceContext";
 
 const MotionLink = motion(Link);
 
 const gradientHeadlineClass = "bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent";
 
 export default function Hero() {
-  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = useReducedMotion();
+  const { prefersReducedMotion, celebrate } = useExperience();
+  const shouldReduceMotion = reducedMotion || prefersReducedMotion;
   const { language } = useLanguage();
   const t = translations[language].hero;
   const [phraseIndex, setPhraseIndex] = useState(0);
+  const heroRef = useRef(null);
+  const primaryOrbRef = useRef(null);
+  const secondaryOrbRef = useRef(null);
   const phrasesFromLocale = t.rotatingPhrases ?? [];
   const rotatingPhrases = phrasesFromLocale.length > 0 ? phrasesFromLocale : [""];
   const longestPhrase = useMemo(
@@ -45,11 +51,104 @@ export default function Hero() {
 
   const activePhrase = rotatingPhrases[phraseIndex] ?? "";
 
+  useEffect(() => {
+    if (shouldReduceMotion) return undefined;
+    if (typeof window === "undefined") return undefined;
+    const hero = heroRef.current;
+    if (!hero) return undefined;
+    const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (!supportsFinePointer.matches) return undefined;
+
+    const layers = [primaryOrbRef.current, secondaryOrbRef.current].filter(Boolean);
+    if (layers.length === 0) return undefined;
+
+    const previousTransitions = layers.map((layer) => layer.style.transition);
+    layers.forEach((layer) => {
+      layer.style.transition = "transform 420ms cubic-bezier(0.16, 1, 0.3, 1)";
+    });
+
+    let raf = null;
+    let pointer = null;
+
+    const apply = () => {
+      if (!pointer) {
+        raf = null;
+        return;
+      }
+      const rect = hero.getBoundingClientRect();
+      const relativeX = (pointer.x - (rect.left + rect.width / 2)) / rect.width;
+      const relativeY = (pointer.y - (rect.top + rect.height / 2)) / rect.height;
+
+      layers.forEach((layer, index) => {
+        if (!layer) return;
+        const depth = index === 0 ? 24 : 16;
+        layer.style.transform = `translate3d(${relativeX * depth}px, ${relativeY * depth}px, 0)`;
+      });
+
+      pointer = null;
+      raf = null;
+    };
+
+    const reset = () => {
+      layers.forEach((layer) => {
+        if (!layer) return;
+        layer.style.transform = "translate3d(0, 0, 0)";
+      });
+    };
+
+    const onPointerMove = (event) => {
+      pointer = { x: event.clientX, y: event.clientY };
+      if (!raf) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const onPointerLeave = () => {
+      pointer = null;
+      if (raf) {
+        window.cancelAnimationFrame(raf);
+        raf = null;
+      }
+      reset();
+    };
+
+    hero.addEventListener("pointermove", onPointerMove);
+    hero.addEventListener("pointerleave", onPointerLeave);
+
+    return () => {
+      hero.removeEventListener("pointermove", onPointerMove);
+      hero.removeEventListener("pointerleave", onPointerLeave);
+      if (raf) {
+        window.cancelAnimationFrame(raf);
+      }
+      layers.forEach((layer, index) => {
+        if (!layer) return;
+        layer.style.transform = "translate3d(0, 0, 0)";
+        layer.style.transition = previousTransitions[index] ?? "";
+      });
+    };
+  }, [shouldReduceMotion]);
+
+  const handlePrimaryClick = useCallback(
+    (event) => {
+      celebrate({ id: "hero-primary-cta", source: event.currentTarget });
+    },
+    [celebrate]
+  );
+
   return (
-    <section id="hero" data-snap-section className="relative isolate overflow-hidden">
+    <section ref={heroRef} id="hero" data-snap-section className="relative isolate overflow-hidden">
       <div className="story-stripe" aria-hidden />
-      <div className="glow-orb glow-orb--primary -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
-      <div className="glow-orb glow-orb--primary-soft top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
+      <div
+        ref={primaryOrbRef}
+        className="glow-orb glow-orb--primary -top-32 -left-24 h-[36rem] w-[36rem]"
+        aria-hidden
+      />
+      <div
+        ref={secondaryOrbRef}
+        className="glow-orb glow-orb--primary-soft top-1/3 -right-20 h-[30rem] w-[30rem]"
+        aria-hidden
+      />
       <div className="grain-overlay" aria-hidden />
 
       <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
@@ -115,10 +214,9 @@ export default function Hero() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <MotionLink
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+            onClick={handlePrimaryClick}
+            className="magnetic-cta inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
