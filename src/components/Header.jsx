@@ -1,10 +1,22 @@
 // src/components/Header.jsx
-import React, { useEffect, useId, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Command, Menu, Moon, Sun, X } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
+import CommandPalette from "./CommandPalette";
+
+const routePrefetchers = {
+  "/": () => import("../pages/Home"),
+  "/about": () => import("../pages/About"),
+  "/measurement": () => import("../pages/Measurement"),
+  "/consent-mode": () => import("../pages/ConsentMode"),
+  "/cro": () => import("../pages/Cro"),
+  "/contact": () => import("../pages/ContactPage"),
+  "/blog": () => import("../pages/BlogArticle"),
+};
 
 const flags = {
   nl: "🇳🇱",
@@ -13,13 +25,18 @@ const flags = {
 
 export default function Header() {
   const headerRef = useRef(null);
+  const progressRef = useRef(null);
+  const prefetchedRoutes = useRef(new Set());
   const { language, changeLanguage } = useLanguage();
   const t = translations[language].header;
+  const shouldReduceMotion = useReducedMotion();
   const nextLanguage = language === "nl" ? "en" : "nl";
   const [isDark, setIsDark] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isCondensed, setIsCondensed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const menuId = useId();
   const location = useLocation();
 
@@ -34,6 +51,7 @@ export default function Header() {
   );
 
   const { about, blogLabel, contact } = t.nav;
+  const commandCopy = t.command;
 
   const navLinks = useMemo(
     () => [
@@ -43,6 +61,23 @@ export default function Header() {
     ],
     [about, blogLabel, contact, blogLinks]
   );
+
+  const prefetchRoute = useCallback((target) => {
+    if (!target) return;
+    const raw = typeof target === "string" ? target : String(target);
+    const withoutQuery = raw.split("?")[0];
+    const [path] = withoutQuery.split("#");
+    const key = path || "/";
+    if (prefetchedRoutes.current.has(key)) return;
+    const loader =
+      routePrefetchers[key] ||
+      (key.startsWith("/blog/") ? routePrefetchers["/blog"] : undefined) ||
+      (key === "/" ? routePrefetchers["/"] : undefined);
+    if (loader) {
+      prefetchedRoutes.current.add(key);
+      loader();
+    }
+  }, []);
 
   const themeTitle = language === "nl"
     ? isDark
@@ -83,6 +118,8 @@ export default function Header() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsCondensed(currentScrollY > 80);
+
       if (currentScrollY <= 0) {
         setIsHidden(false);
         lastScrollY = currentScrollY;
@@ -123,7 +160,46 @@ export default function Header() {
     updateOffset();
     window.addEventListener("resize", updateOffset);
     return () => window.removeEventListener("resize", updateOffset);
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isCondensed]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const bar = progressRef.current;
+    if (!bar) return undefined;
+
+    if (shouldReduceMotion) {
+      bar.style.transitionDuration = "0ms";
+    } else {
+      bar.style.transitionDuration = "160ms";
+    }
+
+    let rafId = null;
+
+    const updateProgress = () => {
+      const { scrollHeight } = document.documentElement;
+      const maxScroll = scrollHeight - window.innerHeight;
+      const progress = maxScroll <= 0 ? 0 : Math.min(window.scrollY / maxScroll, 1);
+      bar.style.transform = `scaleX(${progress})`;
+      rafId = null;
+    };
+
+    const scheduleUpdate = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, [shouldReduceMotion]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -181,7 +257,7 @@ export default function Header() {
 
   const navLinkClass = ({ isActive }) =>
     `nav-underline text-neutral-700 transition-colors dark:text-gray-200 ${
-      isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+      isActive ? "nav-underline--active text-brand-blue dark:text-brand-yellow" : ""
     }`;
 
   const dropdownLinkClass = ({ isActive }) =>
@@ -193,12 +269,26 @@ export default function Header() {
     <>
       <header
         ref={headerRef}
+        data-condensed={isCondensed}
         className={`sticky top-0 z-50 w-full transform-gpu transition-transform duration-300 ease-out ${
           isHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="border-b border-neutral-200/60 bg-white/80 backdrop-blur dark:border-neutral-800/60 dark:bg-surface-dark/80">
-          <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div className="progress-rail" aria-hidden>
+          <span ref={progressRef} className="progress-bar" />
+        </div>
+        <div
+          className={`border-b border-neutral-200/60 bg-white/75 backdrop-blur transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/75 ${
+            isCondensed
+              ? "shadow-[0_16px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:shadow-[0_20px_48px_rgba(2,6,23,0.55)]"
+              : "shadow-none"
+          }`}
+        >
+          <div
+            className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 transition-[height,padding] duration-300 ${
+              isCondensed ? "h-10" : "h-12"
+            }`}
+          >
             <div className="flex items-center gap-4">
               <button
                 type="button"
@@ -235,7 +325,7 @@ export default function Header() {
                         <button
                           type="button"
                           className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
-                            isActive ? "text-brand-blue dark:text-brand-yellow" : ""
+                            isActive ? "nav-underline--active text-brand-blue dark:text-brand-yellow" : ""
                           }`}
                           aria-haspopup="true"
                           aria-expanded={isOpen}
@@ -259,6 +349,8 @@ export default function Header() {
                                   key={item.id}
                                   to={item.to}
                                   className={dropdownLinkClass}
+                                  onMouseEnter={() => prefetchRoute(item.to)}
+                                  onFocus={() => prefetchRoute(item.to)}
                                   onClick={() => setOpenDropdown(null)}
                                 >
                                   <span>{item.label}</span>
@@ -273,7 +365,13 @@ export default function Header() {
                   }
 
                   return (
-                    <NavLink key={link.id} to={link.to} className={navLinkClass}>
+                    <NavLink
+                      key={link.id}
+                      to={link.to}
+                      className={navLinkClass}
+                      onMouseEnter={() => prefetchRoute(link.to)}
+                      onFocus={() => prefetchRoute(link.to)}
+                    >
                       {link.label}
                     </NavLink>
                   );
@@ -281,6 +379,16 @@ export default function Header() {
               </nav>
             </div>
             <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsPaletteOpen(true)}
+                className="hidden items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 sm:inline-flex"
+                aria-label={commandCopy.aria}
+                aria-keyshortcuts="Meta+K,Control+K"
+              >
+                <Command size={16} />
+                <span>{commandCopy.label}</span>
+              </button>
               <button
                 type="button"
                 onClick={toggleLanguage}
@@ -302,17 +410,39 @@ export default function Header() {
                 {isDark ? <Sun size={16} /> : <Moon size={16} />}
                 <span className="hidden sm:inline text-sm">{themeLabel}</span>
               </button>
+              <button
+                type="button"
+                onClick={() => setIsPaletteOpen(true)}
+                className="inline-flex items-center gap-1 rounded-md p-2 text-xs font-semibold text-neutral-600 transition hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10 sm:hidden"
+                aria-label={commandCopy.aria}
+                aria-keyshortcuts="Meta+K,Control+K"
+              >
+                <Command size={16} />
+                <span aria-hidden>⌘K</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="border-b border-neutral-200/60 bg-white/80 backdrop-blur dark:border-neutral-800/60 dark:bg-surface-dark/80">
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-            <Link to="/" className="group relative flex items-center gap-3" aria-label="EcomMeasure home">
-              <span className="relative flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)]">
+        <div
+          className={`border-b border-neutral-200/60 bg-white/80 backdrop-blur transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/80 ${
+            isCondensed ? "shadow-[0_18px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl" : "shadow-none"
+          }`}
+        >
+          <div
+            className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 transition-[height,padding] duration-300 ${
+              isCondensed ? "h-14" : "h-16"
+            }`}
+          >
+            <Link to="/" className="group relative flex items-center gap-3 transition-all duration-300" aria-label="EcomMeasure home">
+              <span
+                className={`relative flex items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)] ${
+                  isCondensed ? "h-12 w-12" : "h-14 w-14"
+                }`}
+              >
                 <svg
                   viewBox="0 0 48 48"
-                  className="h-9 w-9"
+                  className={isCondensed ? "h-8 w-8" : "h-9 w-9"}
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden
@@ -357,7 +487,11 @@ export default function Header() {
                 <span className="absolute -inset-1 rounded-[1.75rem] border border-white/20 opacity-40" aria-hidden />
               </span>
               <span className="flex flex-col leading-tight">
-                <span className="text-lg font-bold tracking-tight text-neutral-900 transition-colors dark:text-white">
+                <span
+                  className={`font-bold tracking-tight text-neutral-900 transition-colors dark:text-white ${
+                    isCondensed ? "text-base" : "text-lg"
+                  }`}
+                >
                   EcomMeasure
                 </span>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.38em] text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
@@ -369,7 +503,12 @@ export default function Header() {
             <div className="hidden items-stretch gap-8 md:flex">
               {t.columns.map((column) => (
                 <div key={column.title} className="svc-col">
-                  <Link to={column.href} className="svc-head">
+                  <Link
+                    to={column.href}
+                    className="svc-head"
+                    onMouseEnter={() => prefetchRoute(column.href)}
+                    onFocus={() => prefetchRoute(column.href)}
+                  >
                     {column.title}
                   </Link>
                   <span className="svc-sub">{column.subtitle}</span>
@@ -381,6 +520,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className="rounded-md bg-brand-blue px-5 py-2 font-semibold text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+                onMouseEnter={() => prefetchRoute("/contact")}
+                onFocus={() => prefetchRoute("/contact")}
               >
                 {t.cta}
               </Link>
@@ -392,7 +533,12 @@ export default function Header() {
               <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
                 {t.columns.map((column) => (
                   <div key={column.title} className="svc-col-mobile">
-                    <Link to={column.href} className="svc-head">
+                    <Link
+                      to={column.href}
+                      className="svc-head"
+                      onMouseEnter={() => prefetchRoute(column.href)}
+                      onFocus={() => prefetchRoute(column.href)}
+                    >
                       {column.title}
                     </Link>
                     <span className="svc-sub">{column.subtitle}</span>
@@ -402,6 +548,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className="ml-4 inline-flex items-center rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(59,130,246,0.45)]"
+                onMouseEnter={() => prefetchRoute("/contact")}
+                onFocus={() => prefetchRoute("/contact")}
               >
                 {t.cta}
               </Link>
@@ -465,6 +613,8 @@ export default function Header() {
                                   setOpenDropdown(null);
                                   setIsMenuOpen(false);
                                 }}
+                                onMouseEnter={() => prefetchRoute(item.to)}
+                                onFocus={() => prefetchRoute(item.to)}
                                 className={({ isActive }) =>
                                   `flex items-center justify-between rounded-xl border border-neutral-200/70 bg-white px-3 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
                                     isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
@@ -486,6 +636,8 @@ export default function Header() {
                       key={link.id}
                       to={link.to}
                       onClick={() => setIsMenuOpen(false)}
+                      onMouseEnter={() => prefetchRoute(link.to)}
+                      onFocus={() => prefetchRoute(link.to)}
                       className={({ isActive }) =>
                         `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
                           isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
@@ -525,6 +677,19 @@ export default function Header() {
                     {isDark ? <Sun size={16} /> : <Moon size={16} />}
                     <span>{themeLabel}</span>
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsPaletteOpen(true);
+                      setIsMenuOpen(false);
+                    }}
+                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                    aria-label={commandCopy.aria}
+                    aria-keyshortcuts="Meta+K,Control+K"
+                  >
+                    <Command size={16} />
+                    <span>{commandCopy.label}</span>
+                  </button>
                 </div>
                 <Link
                   to="/contact"
@@ -538,6 +703,7 @@ export default function Header() {
           </div>
         </div>
       )}
+      <CommandPalette open={isPaletteOpen} onOpenChange={setIsPaletteOpen} onIntent={prefetchRoute} />
     </>
   );
 }
