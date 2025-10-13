@@ -55,11 +55,9 @@ export default function Contact() {
           >
             {t.badge}
           </motion.span>
-          <motion.h2
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            viewport={shouldReduceMotion ? undefined : { once: true }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
+          <AnimatedHeading
+            as="h2"
+            delay={0.2}
             className="mt-6 vt-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             {t.heading}
