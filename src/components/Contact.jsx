@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { CalendarDays, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
 
 const baseOptions = [
   {
@@ -54,24 +55,20 @@ export default function Contact() {
           >
             {t.badge}
           </motion.span>
-          <motion.h2
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            viewport={shouldReduceMotion ? undefined : { once: true }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
-            className="mt-6 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
+          <AnimatedHeading
+            as="h2"
+            className="mt-6 text-balance text-3xl sm:text-4xl text-neutral-900 dark:text-white"
+            delay={0.2}
           >
             {t.heading}
-          </motion.h2>
-          <motion.p
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            viewport={shouldReduceMotion ? undefined : { once: true }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.3, duration: 0.7 }}
+          </AnimatedHeading>
+          <AnimatedParagraph
+            text={t.intro}
+            language={language}
+            highlight
             className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-gray-400"
-          >
-            {t.intro}
-          </motion.p>
+            delay={0.28}
+          />
         </div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,7 +91,7 @@ export default function Contact() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                   <Icon size={22} />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
+                <h3 className="typography-subheading mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-400">{content.description}</p>
                 <a
                   href={href}
@@ -118,7 +115,7 @@ export default function Contact() {
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h3 className="text-2xl font-semibold">{t.fast.title}</h3>
+              <h3 className="typography-subheading text-2xl font-semibold">{t.fast.title}</h3>
               <p className="mt-2 text-sm text-neutral-300 lg:max-w-xl">{t.fast.description}</p>
             </div>
             <div className="flex flex-wrap gap-3">

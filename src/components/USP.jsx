@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Gauge, ShieldCheck, Search, Rocket } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
 
 const icons = [Gauge, ShieldCheck, Search, Rocket];
 
@@ -26,10 +27,20 @@ export default function USP() {
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
               {t.badge}
             </span>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">
+            <AnimatedHeading
+              as="h2"
+              className="mt-4 text-balance text-3xl sm:text-4xl text-neutral-900 dark:text-white"
+              delay={0.15}
+            >
               {t.heading}
-            </h2>
-            <p className="mt-4 text-base text-neutral-600 dark:text-gray-300">{t.description}</p>
+            </AnimatedHeading>
+            <AnimatedParagraph
+              text={t.description}
+              language={language}
+              highlight
+              className="mt-4 text-base text-neutral-600 dark:text-gray-300"
+              delay={0.22}
+            />
             <ul className="mt-6 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
               {t.bullets.map((bullet) => (
                 <li key={bullet} className="flex items-start gap-2">
@@ -57,7 +68,7 @@ export default function USP() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                     <Icon size={22} />
                   </div>
-                  <h3 className="mt-6 text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
+                  <h3 className="typography-subheading mt-6 text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
                   <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.text}</p>
                   <p className="mt-3 text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-gray-400">{item.detail}</p>
                 </motion.article>
