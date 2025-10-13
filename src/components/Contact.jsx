@@ -63,7 +63,7 @@ export default function Contact() {
             className="mt-6 vt-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             {t.heading}
-          </AnimatedHeading>
+          </motion.h2>
           <AnimatedParagraph
             text={t.intro}
             language={language}

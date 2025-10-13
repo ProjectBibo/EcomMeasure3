@@ -97,7 +97,7 @@ export default function FocusAreas() {
         >
           <h2 className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
             {copy.title}
-          </AnimatedHeading>
+          </h2>
           <AnimatedParagraph
             text={copy.description}
             language={language}
