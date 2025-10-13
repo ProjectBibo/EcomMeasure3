@@ -352,7 +352,7 @@ export default function Header() {
                           />
                         </button>
                         {isOpen && (
-                          <div className="absolute left-0 top-full mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]">
+                          <div className="absolute left-0 top-full z-50 mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]">
                             <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
                               {t.menu.label}
                             </span>
