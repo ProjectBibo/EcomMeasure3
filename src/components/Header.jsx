@@ -1,5 +1,14 @@
 // src/components/Header.jsx
-import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Command, Menu, Moon, Sun, X } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
@@ -26,9 +35,147 @@ const flags = {
   en: "🇬🇧",
 };
 
+const focusableSelector =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), [role="menuitem"]';
+
+function DesktopDropdownLayer({
+  anchor,
+  items,
+  dropdownLinkClass,
+  menuLabel,
+  menuId,
+  onNavigate,
+  onClose,
+  registerMenuNode,
+  prefetchRoute,
+  triggerId,
+}) {
+  const menuRef = useRef(null);
+  const [left, setLeft] = useState(() => {
+    if (!anchor) return 0;
+    return anchor.rect.left + anchor.scrollX;
+  });
+
+  const top = useMemo(() => {
+    if (!anchor) return 0;
+    return anchor.rect.bottom + anchor.scrollY + 12;
+  }, [anchor]);
+
+  const updatePosition = useCallback(() => {
+    if (!anchor || !menuRef.current) return;
+    const menuRect = menuRef.current.getBoundingClientRect();
+    const viewportPadding = 16;
+    const desiredLeft = anchor.rect.left + anchor.scrollX;
+    const viewportRight = anchor.scrollX + anchor.viewportWidth - viewportPadding;
+    const maxLeft = viewportRight - menuRect.width;
+    const clampedLeft = Math.max(anchor.scrollX + viewportPadding, Math.min(desiredLeft, maxLeft));
+    setLeft(clampedLeft);
+  }, [anchor]);
+
+  const setMenuNode = useCallback(
+    (node) => {
+      menuRef.current = node;
+      registerMenuNode(node);
+    },
+    [registerMenuNode]
+  );
+
+  useLayoutEffect(() => {
+    updatePosition();
+  }, [updatePosition, anchor]);
+
+  useEffect(() => {
+    if (!menuRef.current) return;
+    const focusable = menuRef.current.querySelectorAll(focusableSelector);
+    if (focusable.length) {
+      const first = focusable[0];
+      if (first && typeof first.focus === "function") {
+        first.focus({ preventScroll: true });
+      }
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if (!anchor) return;
+    updatePosition();
+  }, [anchor, updatePosition]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      onClose({ focusTrigger: true });
+      return;
+    }
+
+    if (event.key === "Tab") {
+      const focusable = menuRef.current?.querySelectorAll(focusableSelector);
+      if (!focusable || !focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey) {
+        if (document.activeElement === first) {
+          event.preventDefault();
+          onClose({ focusTrigger: true });
+        }
+        return;
+      }
+      if (document.activeElement === last) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    }
+  };
+
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[90]" role="presentation">
+      <div
+        className="absolute inset-0"
+        aria-hidden
+        onPointerDown={() => onClose({ focusTrigger: false })}
+      />
+      <div
+        id={menuId}
+        ref={setMenuNode}
+        role="menu"
+        aria-labelledby={triggerId}
+        className="pointer-events-auto absolute w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]"
+        style={{ top, left }}
+        onKeyDown={handleKeyDown}
+      >
+        <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
+          {menuLabel}
+        </span>
+        <div className="mt-2 space-y-1.5">
+          {items.map((item) => (
+            <NavLink
+              key={item.id}
+              to={item.to}
+              role="menuitem"
+              className={dropdownLinkClass}
+              onMouseEnter={() => prefetchRoute(item.to)}
+              onFocus={() => prefetchRoute(item.to)}
+              onClick={() => {
+                onNavigate();
+              }}
+            >
+              <span>{item.label}</span>
+              <span aria-hidden>→</span>
+            </NavLink>
+          ))}
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 export default function Header() {
   const headerRef = useRef(null);
   const progressRef = useRef(null);
+  const dropdownMenuRef = useRef(null);
+  const dropdownTriggers = useRef(new Map());
   const prefetchedRoutes = useRef(new Set());
   const { language, changeLanguage } = useLanguage();
   const t = translations[language].header;
@@ -40,6 +187,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [dropdownAnchor, setDropdownAnchor] = useState(null);
   const menuId = useId();
   const location = useLocation();
   const navigateWithTransition = useViewTransitionNavigate();
@@ -284,6 +432,100 @@ export default function Header() {
     }
   }, [isMenuOpen]);
 
+  const focusDropdownTrigger = useCallback((id) => {
+    if (!id) return;
+    const trigger = dropdownTriggers.current.get(id);
+    if (!trigger) return;
+    window.requestAnimationFrame(() => {
+      if (typeof trigger.focus === "function") {
+        trigger.focus({ preventScroll: true });
+      }
+    });
+  }, []);
+
+  const registerDropdownMenu = useCallback((node) => {
+    dropdownMenuRef.current = node;
+  }, []);
+
+  useEffect(() => {
+    if (!openDropdown) {
+      setDropdownAnchor(null);
+      dropdownMenuRef.current = null;
+      return undefined;
+    }
+
+    const updateAnchor = () => {
+      if (typeof window === "undefined") return;
+      const trigger = dropdownTriggers.current.get(openDropdown);
+      if (!trigger) return;
+      const rect = trigger.getBoundingClientRect();
+      setDropdownAnchor({
+        id: openDropdown,
+        rect: {
+          top: rect.top,
+          left: rect.left,
+          right: rect.right,
+          bottom: rect.bottom,
+          width: rect.width,
+          height: rect.height,
+        },
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
+        viewportWidth: window.innerWidth,
+      });
+    };
+
+    updateAnchor();
+
+    const handleResize = () => updateAnchor();
+    const handleScroll = () => updateAnchor();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, true);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll, true);
+    };
+  }, [openDropdown]);
+
+  useEffect(() => {
+    if (!openDropdown) return undefined;
+
+    const handlePointerDown = (event) => {
+      const trigger = dropdownTriggers.current.get(openDropdown);
+      if (trigger?.contains(event.target)) return;
+      if (dropdownMenuRef.current?.contains(event.target)) return;
+      setOpenDropdown(null);
+    };
+
+    const handleFocusIn = (event) => {
+      const trigger = dropdownTriggers.current.get(openDropdown);
+      if (trigger?.contains(event.target)) return;
+      if (dropdownMenuRef.current?.contains(event.target)) return;
+      setOpenDropdown(null);
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        const currentId = openDropdown;
+        setOpenDropdown(null);
+        focusDropdownTrigger(currentId);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("focusin", handleFocusIn);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("focusin", handleFocusIn);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [focusDropdownTrigger, openDropdown]);
+
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
   const navLinkClass = ({ isActive }) =>
@@ -339,28 +581,33 @@ export default function Header() {
                     const isActive = link.items.some((item) =>
                       location.pathname.startsWith(item.to)
                     );
+                    const triggerId = `${menuId}-${link.id}-trigger`;
+                    const panelId = `${menuId}-${link.id}`;
 
                     return (
                       <div
                         key={link.id}
                         className="relative"
                         onMouseEnter={() => setOpenDropdown(link.id)}
-                        onMouseLeave={() => setOpenDropdown(null)}
                         onFocus={() => setOpenDropdown(link.id)}
-                        onBlur={(event) => {
-                          if (!event.currentTarget.contains(event.relatedTarget)) {
-                            setOpenDropdown(null);
-                          }
-                        }}
                       >
                         <button
                           type="button"
+                          id={triggerId}
                           className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
                             isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
                           }`}
                           aria-haspopup="true"
                           aria-expanded={isOpen}
+                          aria-controls={panelId}
                           onClick={() => setOpenDropdown(isOpen ? null : link.id)}
+                          ref={(node) => {
+                            if (node) {
+                              dropdownTriggers.current.set(link.id, node);
+                            } else {
+                              dropdownTriggers.current.delete(link.id);
+                            }
+                          }}
                         >
                           {link.label}
                           <ChevronDown
@@ -414,7 +661,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsPaletteOpen(true)}
-                className="hidden items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 sm:inline-flex"
+                data-magnetic
+                data-variant="secondary"
+                className="hidden items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 sm:inline-flex"
                 aria-label={commandCopy.aria}
                 aria-keyshortcuts="Meta+K,Control+K"
               >
@@ -424,7 +673,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={toggleLanguage}
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
                 aria-label={t.languageSwitch.aria[language]}
                 title={t.languageSwitch.title[language]}
               >
@@ -434,7 +685,9 @@ export default function Header() {
               </button>
               <button
                 onClick={toggleDark}
-                className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors duration-200 hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
                 aria-label={themeTitle}
                 title={themeTitle}
                 type="button"
@@ -445,7 +698,9 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsPaletteOpen(true)}
-                className="inline-flex items-center gap-1 rounded-md p-2 text-xs font-semibold text-neutral-600 transition hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10 sm:hidden"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center gap-1 rounded-md p-2 text-xs font-semibold text-neutral-600 transition-colors duration-200 hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10 sm:hidden"
                 aria-label={commandCopy.aria}
                 aria-keyshortcuts="Meta+K,Control+K"
               >
@@ -557,7 +812,9 @@ export default function Header() {
             <div className="hidden flex-shrink-0 md:block">
               <Link
                 to="/contact"
-                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+                data-magnetic
+                data-variant="primary"
+                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
                 onClick={navClickFactory("/contact")}
@@ -587,7 +844,9 @@ export default function Header() {
               </div>
               <Link
                 to="/contact"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+                data-magnetic
+                data-variant="primary"
+                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
                 onClick={navClickFactory("/contact")}

@@ -93,12 +93,18 @@ export default function FocusAreas() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
-          className="mt-6 max-w-3xl"
+          className="mt-6 max-w-3xl space-y-4"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <h2 className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
             {copy.title}
-          </h2>
-          <p className="mt-4 text-base text-neutral-600 dark:text-gray-400">{copy.description}</p>
+          </AnimatedHeading>
+          <AnimatedParagraph
+            text={copy.description}
+            language={language}
+            highlight
+            className="text-base text-neutral-600 dark:text-gray-400"
+            delay={0.16}
+          />
         </motion.div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {copy.cards.map((card, index) => (
@@ -108,7 +114,8 @@ export default function FocusAreas() {
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.55 }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.16)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.55)]"
+              data-tilt-card
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.16)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[24px_34px_90px_rgba(15,23,42,0.22)] focus-visible:shadow-[24px_34px_90px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.55)] dark:hover:shadow-[22px_32px_95px_rgba(2,6,23,0.65)]"
             >
               <div
                 aria-hidden
@@ -123,7 +130,7 @@ export default function FocusAreas() {
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue/80 dark:text-brand-teal/80">
                     {card.subtitle}
                   </p>
-                  <h3 className="mt-2 text-2xl font-semibold text-neutral-900 transition-colors duration-300 group-hover:text-brand-blue dark:text-white">
+                  <h3 className="typography-subheading mt-2 text-2xl font-semibold text-neutral-900 transition-colors duration-300 group-hover:text-brand-blue dark:text-white">
                     {card.title}
                   </h3>
                 </div>

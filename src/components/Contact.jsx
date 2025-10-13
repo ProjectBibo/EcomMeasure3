@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { CalendarDays, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
 
 const baseOptions = [
   {
@@ -59,19 +60,17 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
-            className="mt-6 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
+            className="mt-6 vt-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             {t.heading}
-          </motion.h2>
-          <motion.p
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            viewport={shouldReduceMotion ? undefined : { once: true }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.3, duration: 0.7 }}
+          </AnimatedHeading>
+          <AnimatedParagraph
+            text={t.intro}
+            language={language}
+            highlight
             className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-gray-400"
-          >
-            {t.intro}
-          </motion.p>
+            delay={0.28}
+          />
         </div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -88,18 +87,21 @@ export default function Contact() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.15 * index, duration: 0.5 }}
-                className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-[16px_26px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-transform duration-500 hover:-translate-y-1 hover:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-surface-dark/80 dark:shadow-[16px_28px_80px_rgba(2,6,23,0.55)]"
+                data-tilt-card
+                className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-[16px_26px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] focus-visible:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-surface-dark/80 dark:shadow-[16px_28px_80px_rgba(2,6,23,0.55)]"
               >
                 <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -12px -16px 28px rgba(148,163,184,0.18)" }} />
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                   <Icon size={22} />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
+                <h3 className="typography-subheading mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-400">{content.description}</p>
                 <a
                   href={href}
                   {...linkProps}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition group-hover:translate-x-0.5"
+                  data-magnetic
+                  data-variant="secondary"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition-colors duration-200"
                 >
                   {content.actionLabel}
                   <span aria-hidden="true">→</span>
@@ -114,17 +116,20 @@ export default function Contact() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.6 }}
-          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
+          data-tilt-card
+          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-[box-shadow,transform] duration-500 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] focus-visible:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h3 className="text-2xl font-semibold">{t.fast.title}</h3>
+              <h3 className="typography-subheading text-2xl font-semibold">{t.fast.title}</h3>
               <p className="mt-2 text-sm text-neutral-300 lg:max-w-xl">{t.fast.description}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_20px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+                data-magnetic
+                data-variant="primary"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_20px_44px_rgba(255,204,2,0.35)] transition-colors duration-200"
               >
                 {t.fast.mail}
               </a>
@@ -132,7 +137,9 @@ export default function Contact() {
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition hover:border-brand-yellow hover:text-brand-yellow"
+                data-magnetic
+                data-variant="secondary"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition-colors duration-200 hover:border-brand-yellow hover:text-brand-yellow"
               >
                 {t.fast.social}
               </a>

@@ -1,5 +1,5 @@
 // src/components/Hero.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
@@ -37,6 +37,7 @@ export default function Hero() {
       ),
     [rotatingPhrases]
   );
+  const leadWords = useMemo(() => t.titleLead.trim().split(/\s+/), [t.titleLead]);
 
   useEffect(() => {
     setPhraseIndex(0);
@@ -82,7 +83,36 @@ export default function Hero() {
           data-focus-target
           tabIndex={-1}
         >
-          <span className="block">{t.titleLead}</span>
+          {shouldReduceMotion ? (
+            <span className="block">{t.titleLead}</span>
+          ) : (
+            <motion.span
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.9 }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    delay: 0.1,
+                    staggerChildren: 0.08,
+                    ease: [0.33, 1, 0.68, 1],
+                  },
+                },
+              }}
+              className="block overflow-hidden"
+            >
+              {leadWords.map((word, index) => (
+                <Fragment key={`${word}-${index}`}>
+                  <motion.span className="inline-block px-0.5" variants={{ hidden: { opacity: 0, y: "100%" }, visible: { opacity: 1, y: "0%", transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } } }}>
+                    {word}
+                  </motion.span>
+                  {index < leadWords.length - 1 ? " " : null}
+                </Fragment>
+              ))}
+            </motion.span>
+          )}
           <span className="relative mt-3 grid justify-items-center text-center">
             <span aria-hidden className="pointer-events-none block select-none opacity-0">
               {longestPhrase}
@@ -113,14 +143,13 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        <motion.p
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }}
-          className="max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
-        >
-          {t.description}
-        </motion.p>
+        <AnimatedParagraph
+          text={t.description}
+          language={language}
+          highlight
+          delay={0.18}
+          className="mx-auto max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
+        />
 
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
@@ -129,8 +158,8 @@ export default function Hero() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <MotionLink
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
             to="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
             onClick={handlePrimaryCtaClick}
@@ -155,7 +184,8 @@ export default function Hero() {
           {t.stats.map((item) => (
             <div
               key={item.label}
-              className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-[12px_24px_50px_rgba(15,23,42,0.12)] backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] dark:border-white/10 dark:bg-white/10 dark:shadow-[12px_24px_55px_rgba(2,6,23,0.6)]"
+              data-tilt-card
+              className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-[12px_24px_50px_rgba(15,23,42,0.12)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] focus-visible:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] dark:border-white/10 dark:bg-white/10 dark:shadow-[12px_24px_55px_rgba(2,6,23,0.6)] dark:hover:shadow-[16px_28px_70px_rgba(2,6,23,0.68)]"
             >
               <div
                 className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -178,14 +208,15 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }}
-          className="relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
+          data-tilt-card
+          className="vt-hero-media relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 focus-visible:shadow-[26px_40px_96px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
         >
           <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
                 <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
+                <h3 className="typography-subheading text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>
             ))}

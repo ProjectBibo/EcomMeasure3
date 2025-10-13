@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import FocusAreas from "../components/FocusAreas";
+import AiInsightDemo from "../components/AiInsightDemo";
 import SectionFallback from "../components/SectionFallback";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
@@ -29,6 +30,7 @@ export default function Home() {
           <Hero />
         </Suspense>
         <FocusAreas />
+        <AiInsightDemo />
         <Suspense fallback={<SectionFallback label="USP" />}>
           <USP />
         </Suspense>
