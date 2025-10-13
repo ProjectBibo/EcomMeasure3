@@ -33,80 +33,65 @@ body {
   backdrop-filter: saturate(120%);
 }
 
-[data-magnetic] {
-  --btn-translate-x: 0px;
-  --btn-translate-y: 0px;
-  --btn-scale: 1;
-  --focus-ring-color: var(--focus-ring-secondary);
-  --focus-ring-offset: var(--focus-ring-offset-light);
-  transform: translate3d(var(--btn-translate-x), var(--btn-translate-y), 0) scale(var(--btn-scale));
-  transition: transform var(--motion-duration-medium) var(--motion-ease-standard),
-    box-shadow var(--motion-duration-medium) var(--motion-ease-standard),
-    background-color var(--motion-duration-short) var(--motion-ease-standard),
-    border-color var(--motion-duration-short) var(--motion-ease-standard),
-    color var(--motion-duration-short) var(--motion-ease-standard);
-  will-change: transform;
-}
-
-[data-magnetic]:hover {
-  --btn-scale: 1.03;
-}
-
-[data-magnetic]:active {
-  --btn-scale: 0.97;
-  transition-duration: var(--motion-duration-short);
-}
-
-[data-magnetic]:focus-visible {
-  --btn-scale: 1.03;
-  outline: none;
-  box-shadow: 0 0 0 2px var(--focus-ring-color), 0 0 0 6px var(--focus-ring-offset);
-}
-
-[data-magnetic][data-variant="primary"] {
-  --focus-ring-color: var(--focus-ring-primary);
-}
-
-[data-magnetic][data-variant="secondary"] {
-  --focus-ring-color: var(--focus-ring-secondary);
-}
-
-.dark [data-magnetic] {
-  --focus-ring-offset: var(--focus-ring-offset-dark);
-}
-
-[data-tilt-card] {
-  --card-rotate-x: 0deg;
-  --card-rotate-y: 0deg;
-  --card-translate-z: 0px;
-  transform: perspective(1200px) rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y))
-    translate3d(0, 0, var(--card-translate-z));
-  transition: transform var(--motion-duration-medium) var(--motion-ease-standard);
-  will-change: transform;
-}
-
-[data-tilt-card]:hover,
-[data-tilt-card]:focus-visible {
-  --card-translate-z: 18px;
-}
-
-[data-tilt-card]:focus-visible {
-  outline: 2px solid var(--focus-ring-secondary);
-  outline-offset: 6px;
-}
-
-@media (hover: none), (pointer: coarse) {
-  [data-tilt-card] {
-    --card-rotate-x: 0deg !important;
-    --card-rotate-y: 0deg !important;
-    transition: transform var(--motion-duration-medium) var(--motion-ease-standard),
-      box-shadow var(--motion-duration-medium) var(--motion-ease-standard);
+@supports (view-transition-name: hero-title) {
+  :root {
+    --view-transition-duration: 0.55s;
+    --view-transition-ease: cubic-bezier(0.33, 1, 0.68, 1);
   }
 
-  [data-tilt-card]:hover,
-  [data-tilt-card]:focus-visible,
-  [data-tilt-card]:active {
-    --card-translate-z: 10px;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0ms;
+  }
+
+  .vt-hero-title {
+    view-transition-name: hero-title;
+    contain: paint;
+  }
+
+  .vt-hero-visual {
+    view-transition-name: hero-visual;
+    contain: paint;
+  }
+
+  ::view-transition-group(hero-title),
+  ::view-transition-group(hero-visual) {
+    animation-duration: var(--view-transition-duration);
+    animation-timing-function: var(--view-transition-ease);
+  }
+
+  ::view-transition-old(hero-title),
+  ::view-transition-old(hero-visual) {
+    animation: vt-slide-fade-out var(--view-transition-duration) var(--view-transition-ease) both;
+  }
+
+  ::view-transition-new(hero-title),
+  ::view-transition-new(hero-visual) {
+    animation: vt-slide-fade-in var(--view-transition-duration) var(--view-transition-ease) both;
+  }
+
+  @keyframes vt-slide-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes vt-slide-fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
   }
 }
 
@@ -185,22 +170,11 @@ body {
     display: none;
   }
 
-  [data-magnetic],
-  [data-tilt-card] {
-    transition-duration: 0ms !important;
-    transform: none !important;
-  }
-
-  [data-tilt-card]:hover,
-  [data-tilt-card]:focus-visible {
-    --card-translate-z: 0px;
-  }
-
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+  @supports (view-transition-name: hero-title) {
+    .vt-hero-title,
+    .vt-hero-visual {
+      view-transition-name: none;
+    }
   }
 }
 

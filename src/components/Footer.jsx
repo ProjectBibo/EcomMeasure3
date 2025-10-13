@@ -3,11 +3,15 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import useViewTransitionNavigate, {
+  createViewTransitionClickHandler,
+} from "../hooks/useViewTransitionNavigate";
 
 export default function Footer() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const t = translations[language].footer;
+  const navigateWithTransition = useViewTransitionNavigate();
 
   return (
     <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-14">
@@ -26,9 +30,8 @@ export default function Footer() {
             <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
             <Link
               to="/contact"
-              data-magnetic
-              data-variant="primary"
-              className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition-colors duration-200"
+              className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
+              onClick={createViewTransitionClickHandler(navigateWithTransition, "/contact")}
             >
               {t.cta}
             </Link>
@@ -44,6 +47,7 @@ export default function Footer() {
                     <Link
                       to={item.href}
                       className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                      onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                     >
                       {item.label}
                     </Link>
@@ -63,6 +67,7 @@ export default function Footer() {
                     <Link
                       to={item.href}
                       className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                      onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                     >
                       {item.label}
                     </Link>
@@ -79,6 +84,7 @@ export default function Footer() {
                   <Link
                     to={item.href}
                     className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                    onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                   >
                     {item.label}
                   </Link>

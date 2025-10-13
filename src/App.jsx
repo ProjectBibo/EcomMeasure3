@@ -1,10 +1,11 @@
 // src/App.jsx
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
 import { LanguageProvider } from "./context/LanguageContext";
+import { isViewTransitionActive, resetPageView } from "./utils/viewTransition";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -76,6 +77,14 @@ function ViewTransitionRoutes({ children }) {
 }
 
 function AppContent() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) return;
+    if (isViewTransitionActive()) return;
+    resetPageView();
+  }, [location.hash, location.pathname, location.search]);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
       <Header />

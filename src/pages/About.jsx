@@ -1,7 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
+import useViewTransitionNavigate, {
+  createViewTransitionClickHandler,
+} from "../hooks/useViewTransitionNavigate";
 
 const content = {
   nl: {
@@ -294,6 +298,11 @@ export default function About() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const copy = content[language];
+  const navigateWithTransition = useViewTransitionNavigate();
+  const primaryCtaHandler = useMemo(
+    () => createViewTransitionClickHandler(navigateWithTransition, copy.hero.ctaPrimary.href),
+    [copy.hero.ctaPrimary.href, navigateWithTransition]
+  );
   const handleBadgeClick = useCallback((label) => {
     if (typeof window !== "undefined" && window.dataLayer) {
       window.dataLayer.push({ event: "trust_badge_click", badge: label });
@@ -303,13 +312,17 @@ export default function About() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark">
+      <main
+        role="main"
+        aria-labelledby="about-hero-title"
+        className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark"
+      >
         <div className="glow-orb glow-orb--primary -left-24 top-0 h-[28rem] w-[28rem] opacity-70" aria-hidden />
         <div className="glow-orb glow-orb--primary-soft right-0 top-1/3 h-[26rem] w-[26rem] opacity-60" aria-hidden />
         <div className="grain-overlay" aria-hidden />
 
         <div className="relative mx-auto flex max-w-6xl flex-col gap-20 px-6">
-          <header className="max-w-3xl">
+          <header className="max-w-3xl vt-hero-visual">
             <motion.span
               initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -322,7 +335,10 @@ export default function About() {
               initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.05, duration: 0.7, ease: "easeOut" }}
-              className="mt-8 vt-heading text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+              id="about-hero-title"
+              className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
+              data-focus-target
+              tabIndex={-1}
             >
               {copy.hero.title}
             </motion.h1>
@@ -340,14 +356,13 @@ export default function About() {
               transition={shouldReduceMotion ? undefined : { delay: 0.22, duration: 0.7, ease: "easeOut" }}
               className="mt-8 flex flex-col gap-4 sm:flex-row"
             >
-              <a
-                href={copy.hero.ctaPrimary.href}
-                data-magnetic
-                data-variant="primary"
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition-colors duration-200"
+              <Link
+                to={copy.hero.ctaPrimary.href}
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                onClick={primaryCtaHandler}
               >
                 {copy.hero.ctaPrimary.label}
-              </a>
+              </Link>
               <a
                 href={copy.hero.ctaSecondary.href}
                 data-magnetic
@@ -627,7 +642,7 @@ export default function About() {
             </motion.div>
           </section>
         </div>
-      </div>
+      </main>
     </>
   );
 }
