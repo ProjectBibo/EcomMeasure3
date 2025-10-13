@@ -41,9 +41,9 @@ export default async function handler(event) {
     });
   }
 
-  let payload;
+  let requestPayload;
   try {
-    payload = JSON.parse(event.body || "{}");
+    requestPayload = JSON.parse(event.body || "{}");
   } catch (error) {
     return jsonResponse(400, {
       success: false,
@@ -52,7 +52,7 @@ export default async function handler(event) {
     });
   }
 
-  const { url: rawUrl, locale } = payload || {};
+  const { url: rawUrl, locale } = requestPayload || {};
 
   if (!rawUrl || typeof rawUrl !== "string") {
     return jsonResponse(400, {
@@ -167,7 +167,7 @@ export default async function handler(event) {
     });
   }
 
-  const payload = {
+  const responsePayload = {
     requestedUrl: rawUrl,
     normalizedUrl,
     locale: normalizeLocale(locale),
@@ -183,13 +183,13 @@ export default async function handler(event) {
 
   cache.set(normalizedUrl, {
     timestamp: now,
-    data: payload,
+    data: responsePayload,
   });
 
   return jsonResponse(200, {
     success: true,
     fromCache: false,
-    data: payload,
+    data: responsePayload,
   });
 }
 
