@@ -260,14 +260,14 @@ export default function CommandPalette({ open, onOpenChange, onIntent }) {
                   id={`${listId}-${action.id}`}
                   role="option"
                   aria-selected={index === activeIndex}
-                  className={`group overflow-hidden rounded-2xl border border-transparent transition focus-within:border-brand-teal focus-within:ring-2 focus-within:ring-brand-teal/40 dark:focus-within:border-brand-yellow/60 dark:focus-within:ring-brand-yellow/20 ${
-                    index === activeIndex ? "border-brand-teal/80 dark:border-brand-yellow/50" : "border-neutral-200/70 dark:border-white/10"
+                  className={`group overflow-hidden rounded-2xl border border-transparent transition focus-within:border-brand-teal focus-within:ring-2 focus-within:ring-brand-teal/40 dark:focus-within:border-brand-teal/60 dark:focus-within:ring-brand-teal/30 ${
+                    index === activeIndex ? "border-brand-teal/80 dark:border-brand-teal/50" : "border-neutral-200/70 dark:border-white/10"
                   }`}
                 >
                   <button
                     type="button"
                     className={`flex w-full items-center justify-between gap-4 rounded-2xl bg-white/80 px-4 py-3 text-left shadow-[0_14px_30px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(15,23,42,0.18)] dark:bg-white/10 dark:shadow-[0_18px_40px_rgba(2,6,23,0.55)] ${
-                      index === activeIndex ? "ring-1 ring-brand-teal/50 dark:ring-brand-yellow/40" : ""
+                      index === activeIndex ? "ring-1 ring-brand-teal/50 dark:ring-brand-teal/40" : ""
                     }`}
                     onClick={() => {
                       navigate(action.to);

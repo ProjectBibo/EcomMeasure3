@@ -490,7 +490,7 @@ export default function BayesianAbCalculator() {
             </button>
             <button
               type="submit"
-              className="rounded-full bg-brand-blue px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-blue/30 transition hover:bg-brand-blue/90"
+              className="rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-lg shadow-[0_18px_36px_rgba(255,204,2,0.45)] transition hover:bg-brand-yellow-dark"
             >
               {loading ? "Berekenen..." : "Bereken resultaten"}
             </button>

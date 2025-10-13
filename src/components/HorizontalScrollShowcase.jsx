@@ -74,7 +74,7 @@ export default function HorizontalScrollShowcase() {
         <p className="text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{scene.description}</p>
       </div>
       <div className="relative mt-10">
-        <div className="inline-flex flex-col items-start gap-1 rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow px-4 py-3 text-white shadow-[0_16px_35px_rgba(15,23,42,0.18)] dark:shadow-[0_18px_40px_rgba(2,6,23,0.6)]">
+        <div className="inline-flex flex-col items-start gap-1 rounded-2xl bg-gradient-to-br from-brand-teal to-brand-blue-dark px-4 py-3 text-white shadow-[0_16px_35px_rgba(15,23,42,0.18)] dark:shadow-[0_18px_40px_rgba(2,6,23,0.6)]">
           <span className="text-3xl font-bold">{scene.stat}</span>
           <span className="text-[11px] uppercase tracking-[0.24em] text-white/80">{scene.sub}</span>
         </div>
@@ -88,10 +88,10 @@ export default function HorizontalScrollShowcase() {
       ref={sectionRef}
       data-snap-section
       style={enableHorizontalScroll ? { height: `${sectionHeight}vh` } : undefined}
-      className="relative bg-gradient-to-b from-white/40 via-white/30 to-white/40 py-20 dark:from-surface-dark/80 dark:via-surface-dark/70 dark:to-surface-dark/80 sm:py-24"
+      className="relative bg-gradient-to-b from-white/60 via-white/40 to-white/55 py-20 dark:from-surface-dark/80 dark:via-surface-dark/70 dark:to-surface-dark/80 sm:py-24"
     >
-      <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-brand-blue/10 via-transparent to-transparent pointer-events-none" aria-hidden />
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-teal/10 via-transparent to-transparent pointer-events-none" aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-brand-blue/12 via-transparent to-transparent pointer-events-none" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-blue-dark/15 via-transparent to-transparent pointer-events-none" aria-hidden />
       {enableHorizontalScroll ? (
         <div className="sticky top-[calc(var(--header-offset)/2)] flex h-[calc(100vh-6rem)] items-center">
           <div className="relative w-full overflow-hidden">

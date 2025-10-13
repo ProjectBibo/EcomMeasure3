@@ -14,7 +14,7 @@ export default function Footer() {
       <motion.div
         animate={shouldReduceMotion ? { backgroundPosition: "0% 50%" } : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-[length:200%_200%]"
+        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-blue-dark bg-[length:200%_200%]"
       />
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
@@ -24,7 +24,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
             <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
-            <Link to="/contact" className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 hover:opacity-90">
+            <Link to="/contact" className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark">
               {t.cta}
             </Link>
           </div>
@@ -51,7 +51,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     to={item.href}
-                    className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-yellow"
+                    className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
                   >
                     {item.label}
                   </Link>

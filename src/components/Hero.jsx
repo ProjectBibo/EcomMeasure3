@@ -38,7 +38,7 @@ export default function Hero() {
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
           {t.titleLead}{" "}
-          <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-blue to-brand-blue-dark bg-clip-text text-transparent">
             {t.titleHighlight}
           </span>
         </motion.h1>
@@ -62,13 +62,13 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_18px_35px_rgba(255,204,2,0.45)] transition hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(211,163,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
           <Link
             to="/measurement"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-900/10 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_50px_rgba(2,6,23,0.55)]"
+            className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-white/90 px-6 py-3 text-sm font-semibold text-brand-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_16px_36px_rgba(15,23,42,0.1)] backdrop-blur transition hover:-translate-y-0.5 hover:border-brand-blue hover:text-brand-blue-dark hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_22px_48px_rgba(15,23,42,0.18)] dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:border-white/40"
           >
             {t.secondaryCta}
           </Link>
@@ -112,7 +112,7 @@ export default function Hero() {
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
-                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow" aria-hidden />
+                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-blue-dark" aria-hidden />
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>

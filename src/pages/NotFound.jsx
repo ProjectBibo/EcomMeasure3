@@ -57,7 +57,7 @@ export default function NotFound() {
         >
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-2 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.45)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_48px_rgba(211,163,0,0.45)]"
           >
             {t.cta}
           </Link>

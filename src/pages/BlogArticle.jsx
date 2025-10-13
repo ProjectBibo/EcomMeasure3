@@ -61,7 +61,7 @@ export default function BlogArticle() {
             <p className="text-neutral-600 dark:text-gray-300">{copy.body}</p>
             <Link
               to="/"
-              className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(59,130,246,0.45)]"
+              className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_16px_36px_rgba(255,204,2,0.45)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(211,163,0,0.45)]"
             >
               {copy.cta}
             </Link>
@@ -106,13 +106,13 @@ export default function BlogArticle() {
                 ))}
                 {section.list && (
                   section.list.type === "ordered" ? (
-                    <ol className="list-decimal space-y-2 pl-5 text-neutral-700 marker:text-brand-blue dark:text-gray-300 dark:marker:text-brand-yellow">
+                    <ol className="list-decimal space-y-2 pl-5 text-neutral-700 marker:text-brand-blue dark:text-gray-300 dark:marker:text-brand-blue">
                       {section.list.items.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ol>
                   ) : (
-                    <ul className="list-disc space-y-2 pl-5 text-neutral-700 marker:text-brand-blue dark:text-gray-300 dark:marker:text-brand-yellow">
+                    <ul className="list-disc space-y-2 pl-5 text-neutral-700 marker:text-brand-blue dark:text-gray-300 dark:marker:text-brand-blue">
                       {section.list.items.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
@@ -131,7 +131,7 @@ export default function BlogArticle() {
               <ul className="mt-5 space-y-3 text-neutral-700 dark:text-gray-300">
                 {content.keyTakeaways.bullets.map((bullet) => (
                   <li key={bullet} className="flex gap-3">
-                    <span aria-hidden className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-brand-blue dark:bg-brand-yellow" />
+                    <span aria-hidden className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-brand-blue dark:bg-brand-blue" />
                     <span>{bullet}</span>
                   </li>
                 ))}

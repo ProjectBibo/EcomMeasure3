@@ -92,7 +92,7 @@ export default function ConsentMode() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-gradient-to-b from-brand-teal/10 via-white to-brand-yellow/10 pb-24 pt-28 dark:from-brand-teal/20 dark:via-surface-dark dark:to-brand-yellow/20">
+      <div className="relative overflow-hidden bg-gradient-to-b from-brand-teal/12 via-white to-brand-blue/12 pb-24 pt-28 dark:from-brand-teal/20 dark:via-surface-dark dark:to-brand-blue/20">
         <div className="story-stripe" aria-hidden />
         <div className="grain-overlay" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 text-center">
@@ -100,7 +100,7 @@ export default function ConsentMode() {
             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.85 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-yellow"
+            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-teal"
           >
             {copy.hero.eyebrow}
           </motion.span>
