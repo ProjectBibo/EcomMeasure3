@@ -84,20 +84,53 @@ export const translations = {
         plural: "{{count}} resultaten",
       },
       groups: {
-        primary: "Acties",
+        primary: "Pagina's en acties",
       },
       actions: {
-        contact: {
-          title: "Plan een kennismaking",
-          description: "Plan direct een call of afspraak.",
+        home: {
+          title: "Startpagina",
+          description: "Ga terug naar het overzicht van alle diensten.",
+          keywords: ["home", "start", "startpagina", "overzicht"],
+        },
+        about: {
+          title: "Over EcomMeasure",
+          description: "Lees het verhaal en de werkwijze achter EcomMeasure.",
+          keywords: ["over", "achtergrond", "visie", "missie"],
         },
         cases: {
           title: "Cases",
           description: "Bekijk gerealiseerde groei en learnings.",
+          keywords: ["cases", "bewijzen", "social proof", "resultaten"],
         },
-        services: {
-          title: "Diensten",
-          description: "Verken measurement, Consent Mode en CRO.",
+        measurement: {
+          title: "Measurement",
+          description: "Ontdek hoe GA4, GTM en datalagen worden ingericht.",
+          keywords: ["measurement", "ga4", "gtm", "tracking", "tagging"],
+        },
+        consentMode: {
+          title: "Consent Mode v2",
+          description: "Alles over een AVG-proof Consent Mode implementatie.",
+          keywords: ["consent", "privacy", "avg", "gdpr", "cmp"],
+        },
+        cro: {
+          title: "CRO",
+          description: "Lees hoe experimenten en research conversie laten groeien.",
+          keywords: ["cro", "conversie", "optimalisatie", "a/b-test", "experimenten"],
+        },
+        bayesianCalculator: {
+          title: "Bayesiaanse A/B-test calculator",
+          description: "Bereken de kans dat een variant wint op basis van data.",
+          keywords: ["bayesiaans", "calculator", "ab test", "statistiek"],
+        },
+        croRoiCalculator: {
+          title: "CRO ROI calculator",
+          description: "Bereken het rendement van jouw CRO-traject.",
+          keywords: ["roi", "calculator", "business case", "groei"],
+        },
+        contact: {
+          title: "Plan een kennismaking",
+          description: "Plan direct een call of afspraak.",
+          keywords: ["contact", "kennismaking", "afspraak", "plan"],
         },
       },
     },
@@ -515,20 +548,53 @@ export const translations = {
         plural: "{{count}} results",
       },
       groups: {
-        primary: "Quick actions",
+        primary: "Pages and quick actions",
       },
       actions: {
-        contact: {
-          title: "Book an intro call",
-          description: "Schedule a discovery session.",
+        home: {
+          title: "Homepage",
+          description: "Return to the main overview of services and cases.",
+          keywords: ["home", "start", "overview", "landing"],
+        },
+        about: {
+          title: "About EcomMeasure",
+          description: "Learn more about the story and approach behind EcomMeasure.",
+          keywords: ["about", "team", "background", "story"],
         },
         cases: {
           title: "Cases",
           description: "Explore proven uplift stories.",
+          keywords: ["cases", "proof", "social proof", "results"],
         },
-        services: {
-          title: "Services",
-          description: "Dive into Measurement, Consent Mode and CRO.",
+        measurement: {
+          title: "Measurement",
+          description: "See how GA4, GTM and data layers are configured end-to-end.",
+          keywords: ["measurement", "ga4", "gtm", "tracking", "tagging"],
+        },
+        consentMode: {
+          title: "Consent Mode v2",
+          description: "Everything you need for a GDPR-proof consent setup.",
+          keywords: ["consent", "privacy", "gdpr", "cmp", "compliance"],
+        },
+        cro: {
+          title: "CRO",
+          description: "Discover how research and experiments lift conversion.",
+          keywords: ["cro", "conversion", "optimisation", "ab test", "experiments"],
+        },
+        bayesianCalculator: {
+          title: "Bayesian A/B test calculator",
+          description: "Calculate the probability that a variant wins based on your data.",
+          keywords: ["bayesian", "calculator", "ab test", "statistics"],
+        },
+        croRoiCalculator: {
+          title: "CRO ROI calculator",
+          description: "Estimate the return on investment of your CRO roadmap.",
+          keywords: ["roi", "calculator", "business case", "growth"],
+        },
+        contact: {
+          title: "Book an intro call",
+          description: "Schedule a discovery session.",
+          keywords: ["contact", "intro", "call", "meeting"],
         },
       },
     },
