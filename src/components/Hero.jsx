@@ -16,9 +16,8 @@ export default function Hero() {
   return (
     <section id="hero" data-snap-section className="relative isolate overflow-hidden">
       <div className="story-stripe" aria-hidden />
-      <div className="glow-orb glow-orb--blue -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
-      <div className="glow-orb glow-orb--teal top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
-      <div className="glow-orb glow-orb--yellow bottom-0 left-1/4 h-[22rem] w-[22rem]" aria-hidden />
+      <div className="glow-orb glow-orb--primary -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
+      <div className="glow-orb glow-orb--primary-soft top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
       <div className="grain-overlay" aria-hidden />
 
       <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
@@ -38,7 +37,7 @@ export default function Hero() {
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
           {t.titleLead}{" "}
-          <span className="bg-gradient-to-r from-brand-blue via-brand-teal to-brand-yellow bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent">
             {t.titleHighlight}
           </span>
         </motion.h1>
@@ -62,13 +61,13 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_18px_35px_rgba(59,130,246,0.35)] transition hover:shadow-[0_28px_55px_rgba(59,130,246,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
           <Link
             to="/measurement"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-900/10 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_50px_rgba(2,6,23,0.55)]"
+            className="inline-flex items-center gap-2 rounded-full border border-neutral-300/70 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.16)] dark:border-white/15 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_20px_50px_rgba(2,6,23,0.5)]"
           >
             {t.secondaryCta}
           </Link>
@@ -94,9 +93,9 @@ export default function Hero() {
                 }}
               />
               <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/65 via-white/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
-              <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-brand-blue/10 blur-xl transition group-hover:scale-125" aria-hidden />
+              <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-brand-blue/12 blur-xl transition group-hover:scale-125" aria-hidden />
               <div className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">{item.label}</div>
-              <div className="mt-3 text-3xl font-bold text-brand-blue dark:text-brand-teal">{item.value}</div>
+              <div className="mt-3 text-3xl font-bold text-brand-blue dark:text-brand-blue">{item.value}</div>
               <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.helper}</p>
             </div>
           ))}
@@ -112,7 +111,7 @@ export default function Hero() {
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
-                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow" aria-hidden />
+                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>

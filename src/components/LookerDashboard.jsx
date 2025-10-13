@@ -95,7 +95,7 @@ export default function LookerDashboard() {
             className="relative"
           >
             <div
-              className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-blue/40 via-brand-teal/30 to-transparent blur-3xl"
+              className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-blue/40 to-brand-teal/25 blur-3xl"
               aria-hidden
             />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/60 shadow-[0_32px_80px_rgba(15,23,42,0.55)]">
@@ -222,7 +222,7 @@ export default function LookerDashboard() {
                                 cx={x}
                                 cy={y}
                                 r={1.6}
-                                fill="rgba(234,179,8,1)"
+                                fill="#ffcc02"
                               />
                             );
                           })}
@@ -244,7 +244,7 @@ export default function LookerDashboard() {
                             </div>
                             <div className="h-2 overflow-hidden rounded-full bg-white/5">
                               <div
-                                className="h-full rounded-full bg-gradient-to-r from-brand-teal via-brand-blue to-brand-purple"
+                                className="h-full rounded-full bg-gradient-to-r from-brand-teal to-brand-blue"
                                 style={{ width: `${device.value}%` }}
                               />
                             </div>

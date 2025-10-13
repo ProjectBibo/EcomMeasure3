@@ -37,7 +37,7 @@ export default function Insights() {
             >
               <div className="pointer-events-none absolute inset-0 rounded-[2.3rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.55), inset -12px -18px 32px rgba(148,163,184,0.2)" }} />
               <div className="pointer-events-none absolute inset-0 rounded-[2.3rem] bg-gradient-to-br from-white/60 via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
-              <span className="inline-flex items-center rounded-full bg-brand-yellow/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900 dark:text-neutral-900">
+              <span className="inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900 dark:bg-brand-yellow">
                 {item.tag}
               </span>
               <h3 className="mt-5 text-2xl font-semibold text-neutral-900 dark:text-white">{item.title}</h3>

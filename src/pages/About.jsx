@@ -247,8 +247,8 @@ export default function About() {
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <div className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark">
-        <div className="glow-orb glow-orb--blue -left-24 top-0 h-[28rem] w-[28rem] opacity-70" aria-hidden />
-        <div className="glow-orb glow-orb--teal right-0 top-1/3 h-[26rem] w-[26rem] opacity-60" aria-hidden />
+        <div className="glow-orb glow-orb--primary -left-24 top-0 h-[28rem] w-[28rem] opacity-70" aria-hidden />
+        <div className="glow-orb glow-orb--primary-soft right-0 top-1/3 h-[26rem] w-[26rem] opacity-60" aria-hidden />
         <div className="grain-overlay" aria-hidden />
 
         <div className="relative mx-auto flex max-w-6xl flex-col gap-20 px-6">
@@ -285,7 +285,7 @@ export default function About() {
             >
               <a
                 href={copy.hero.ctaPrimary.href}
-                className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-blue/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
               >
                 {copy.hero.ctaPrimary.label}
               </a>
@@ -479,7 +479,7 @@ export default function About() {
             </motion.div>
           </section>
 
-          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 via-brand-teal/80 to-brand-yellow/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
+          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}

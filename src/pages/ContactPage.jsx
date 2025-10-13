@@ -54,8 +54,8 @@ export default function ContactPage() {
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20">
-        <div className="glow-orb glow-orb--blue left-0 top-0 h-[26rem] w-[26rem] opacity-60" aria-hidden />
-        <div className="glow-orb glow-orb--teal right-0 top-1/2 h-[22rem] w-[22rem] opacity-50" aria-hidden />
+        <div className="glow-orb glow-orb--primary left-0 top-0 h-[26rem] w-[26rem] opacity-60" aria-hidden />
+        <div className="glow-orb glow-orb--primary-soft right-0 top-1/2 h-[22rem] w-[22rem] opacity-50" aria-hidden />
         <div className="grain-overlay" aria-hidden />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <motion.span
