@@ -1,10 +1,11 @@
 // src/components/Hero.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { AnimatedParagraph } from "./ExpressiveText";
 
 const MotionLink = motion(Link);
 
@@ -25,6 +26,7 @@ export default function Hero() {
       ),
     [rotatingPhrases]
   );
+  const leadWords = useMemo(() => t.titleLead.trim().split(/\s+/), [t.titleLead]);
 
   useEffect(() => {
     setPhraseIndex(0);
@@ -68,7 +70,36 @@ export default function Hero() {
           transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
           className="vt-heading text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
-          <span className="block">{t.titleLead}</span>
+          {shouldReduceMotion ? (
+            <span className="block">{t.titleLead}</span>
+          ) : (
+            <motion.span
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.9 }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    delay: 0.1,
+                    staggerChildren: 0.08,
+                    ease: [0.33, 1, 0.68, 1],
+                  },
+                },
+              }}
+              className="block overflow-hidden"
+            >
+              {leadWords.map((word, index) => (
+                <Fragment key={`${word}-${index}`}>
+                  <motion.span className="inline-block px-0.5" variants={{ hidden: { opacity: 0, y: "100%" }, visible: { opacity: 1, y: "0%", transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } } }}>
+                    {word}
+                  </motion.span>
+                  {index < leadWords.length - 1 ? " " : null}
+                </Fragment>
+              ))}
+            </motion.span>
+          )}
           <span className="relative mt-3 grid justify-items-center text-center">
             <span aria-hidden className="pointer-events-none block select-none opacity-0">
               {longestPhrase}
@@ -99,14 +130,13 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        <motion.p
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { duration: 0.9, delay: 0.1 }}
-          className="max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
-        >
-          {t.description}
-        </motion.p>
+        <AnimatedParagraph
+          text={t.description}
+          language={language}
+          highlight
+          delay={0.18}
+          className="mx-auto max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
+        />
 
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
@@ -175,7 +205,7 @@ export default function Hero() {
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
                 <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
+                <h3 className="typography-subheading text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
               </div>
             ))}
