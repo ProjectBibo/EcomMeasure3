@@ -92,7 +92,11 @@ export default function FocusAreas() {
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
           className="mt-6 max-w-3xl space-y-4"
         >
-          <h2 className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <AnimatedHeading
+            as="h2"
+            className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl"
+            delay={0.1}
+          >
             {copy.title}
           </AnimatedHeading>
           <AnimatedParagraph
