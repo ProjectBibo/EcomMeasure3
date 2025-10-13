@@ -1,6 +1,6 @@
 // src/components/Hero.jsx
-import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import React, { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
@@ -8,10 +8,39 @@ import { translations } from "../i18n/content";
 
 const MotionLink = motion(Link);
 
+const ROTATING_PHRASES = [
+  "growth story",
+  "UX-driven brand",
+  "data-powered success",
+  "digital leader",
+  "e-commerce icon",
+  "brand that understands every click",
+];
+
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const t = translations[language].hero;
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const longestPhrase = useMemo(
+    () => ROTATING_PHRASES.reduce((longest, phrase) => (phrase.length > longest.length ? phrase : longest), ""),
+    []
+  );
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setPhraseIndex(0);
+      return undefined;
+    }
+
+    const interval = setInterval(() => {
+      setPhraseIndex((current) => (current + 1) % ROTATING_PHRASES.length);
+    }, 2800);
+
+    return () => clearInterval(interval);
+  }, [shouldReduceMotion]);
+
+  const activePhrase = ROTATING_PHRASES[phraseIndex];
 
   return (
     <section id="hero" data-snap-section className="relative isolate overflow-hidden">
@@ -37,8 +66,33 @@ export default function Hero() {
           className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
         >
           {t.titleLead}{" "}
-          <span className="bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent">
-            {t.titleHighlight}
+          <span className="relative inline-flex h-[1.1em] items-baseline overflow-hidden align-baseline">
+            <span aria-hidden className="pointer-events-none select-none opacity-0">
+              {longestPhrase}
+            </span>
+            <span
+              aria-live={shouldReduceMotion ? undefined : "polite"}
+              className="absolute inset-0 flex items-baseline"
+            >
+              {shouldReduceMotion ? (
+                <span className="bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent">
+                  {ROTATING_PHRASES[0]}
+                </span>
+              ) : (
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={activePhrase}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+                    className="bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent"
+                  >
+                    {activePhrase}
+                  </motion.span>
+                </AnimatePresence>
+              )}
+            </span>
           </span>
         </motion.h1>
 

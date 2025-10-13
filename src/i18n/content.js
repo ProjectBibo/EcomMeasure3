@@ -98,7 +98,7 @@ export const translations = {
     },
     hero: {
       badge: "Measurement & CRO voor e-commerce",
-      titleLead: "Meet en optimaliseer elke stap van je funnel met",
+      titleLead: "Become the next",
       titleHighlight: "GA4, Consent Mode v2 en bewezen CRO-experimenten",
       description:
         "Ik richt je meetstack in, verbind advertentieplatformen en vertaal inzichten naar A/B-tests die omzet en klantbeleving laten groeien.",
@@ -524,7 +524,7 @@ export const translations = {
     },
     hero: {
       badge: "Measurement & CRO for e-commerce",
-      titleLead: "Measure and improve every step of your funnel with",
+      titleLead: "Become the next",
       titleHighlight: "GA4, Consent Mode v2 and proven CRO experiments",
       description:
         "I align your measurement stack, connect ad platforms and translate insights into experiments that grow revenue and customer experience.",
