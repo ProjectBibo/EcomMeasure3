@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, MoveDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import useViewTransitionNavigate, {
+  createViewTransitionClickHandler,
+} from "../hooks/useViewTransitionNavigate";
 
 const MotionLink = motion(Link);
 
@@ -15,6 +18,15 @@ export default function Hero() {
   const { language } = useLanguage();
   const t = translations[language].hero;
   const [phraseIndex, setPhraseIndex] = useState(0);
+  const navigateWithTransition = useViewTransitionNavigate();
+  const handlePrimaryCtaClick = useMemo(
+    () => createViewTransitionClickHandler(navigateWithTransition, "/contact"),
+    [navigateWithTransition]
+  );
+  const handleSecondaryCtaClick = useMemo(
+    () => createViewTransitionClickHandler(navigateWithTransition, "/measurement"),
+    [navigateWithTransition]
+  );
   const phrasesFromLocale = t.rotatingPhrases ?? [];
   const rotatingPhrases = phrasesFromLocale.length > 0 ? phrasesFromLocale : [""];
   const longestPhrase = useMemo(
@@ -52,7 +64,7 @@ export default function Hero() {
       <div className="glow-orb glow-orb--primary-soft top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
       <div className="grain-overlay" aria-hidden />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12">
+      <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12 vt-hero-visual">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -66,7 +78,9 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
-          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white"
+          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white vt-hero-title focus:outline-none"
+          data-focus-target
+          tabIndex={-1}
         >
           <span className="block">{t.titleLead}</span>
           <span className="relative mt-3 grid justify-items-center text-center">
@@ -119,12 +133,14 @@ export default function Hero() {
             whileTap={{ scale: 0.96 }}
             to="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+            onClick={handlePrimaryCtaClick}
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
           <Link
             to="/measurement"
             className="inline-flex items-center gap-2 rounded-full border border-neutral-300/70 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.16)] dark:border-white/15 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_20px_50px_rgba(2,6,23,0.5)]"
+            onClick={handleSecondaryCtaClick}
           >
             {t.secondaryCta}
           </Link>

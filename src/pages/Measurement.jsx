@@ -92,9 +92,13 @@ export default function Measurement() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20">
+      <main
+        role="main"
+        aria-labelledby="measurement-hero-title"
+        className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+      >
         <div className="grain-overlay" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6">
+        <div className="relative mx-auto max-w-5xl px-6 vt-hero-visual">
           <motion.span
             initial={shouldReduceMotion ? false : { opacity: 0, y: -16 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -107,7 +111,10 @@ export default function Measurement() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.7 }}
-            className="mt-7 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            id="measurement-hero-title"
+            className="mt-7 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
+            data-focus-target
+            tabIndex={-1}
           >
             {copy.hero.title}
           </motion.h1>
@@ -153,7 +160,7 @@ export default function Measurement() {
             ))}
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

@@ -3,6 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
 import { getBlogPostBySlug } from "../data/blogPosts";
+import useViewTransitionNavigate, {
+  createViewTransitionClickHandler,
+} from "../hooks/useViewTransitionNavigate";
 
 const fallbackCopy = {
   nl: {
@@ -22,6 +25,11 @@ export default function BlogArticle() {
   const { language } = useLanguage();
   const post = getBlogPostBySlug(slug);
   const copy = fallbackCopy[language];
+  const navigateWithTransition = useViewTransitionNavigate();
+  const homeLinkHandler = useMemo(
+    () => createViewTransitionClickHandler(navigateWithTransition, "/"),
+    [navigateWithTransition]
+  );
 
   const content = useMemo(() => {
     if (!post) return null;
@@ -55,18 +63,30 @@ export default function BlogArticle() {
     return (
       <>
         <SEO title={copy.title} description={copy.body} />
-        <section className="flex min-h-[60vh] items-center justify-center bg-surface-light px-6 py-24 text-center dark:bg-surface-dark">
+        <main
+          role="main"
+          aria-labelledby="blog-fallback-title"
+          className="flex min-h-[60vh] items-center justify-center bg-surface-light px-6 py-24 text-center dark:bg-surface-dark"
+        >
           <div className="max-w-xl space-y-6">
-            <h1 className="text-3xl font-semibold text-neutral-900 dark:text-white">{copy.title}</h1>
+            <h1
+              id="blog-fallback-title"
+              className="text-3xl font-semibold text-neutral-900 dark:text-white focus:outline-none"
+              data-focus-target
+              tabIndex={-1}
+            >
+              {copy.title}
+            </h1>
             <p className="text-neutral-600 dark:text-gray-300">{copy.body}</p>
             <Link
               to="/"
               className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(59,130,246,0.45)]"
+              onClick={homeLinkHandler}
             >
               {copy.cta}
             </Link>
           </div>
-        </section>
+        </main>
       </>
     );
   }
@@ -74,16 +94,25 @@ export default function BlogArticle() {
   return (
     <>
       <SEO title={content.seoTitle} description={content.seoDescription} />
-      <section className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark">
+      <main
+        role="main"
+        aria-labelledby="blog-hero-title"
+        className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark"
+      >
         <div className="glow-orb glow-orb--primary -left-24 top-8 h-[26rem] w-[26rem] opacity-60" aria-hidden />
         <div className="glow-orb glow-orb--primary-soft right-0 top-1/2 h-[24rem] w-[24rem] opacity-55" aria-hidden />
         <div className="grain-overlay" aria-hidden />
 
-        <div className="relative mx-auto max-w-4xl px-6">
+        <div className="relative mx-auto max-w-4xl px-6 vt-hero-visual">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-gray-200">
             Blog
           </span>
-          <h1 className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+          <h1
+            id="blog-hero-title"
+            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
+            data-focus-target
+            tabIndex={-1}
+          >
             {content.title}
           </h1>
           <p className="mt-6 text-lg text-neutral-700 dark:text-gray-300">{content.intro}</p>
@@ -139,7 +168,7 @@ export default function BlogArticle() {
             </div>
           )}
         </div>
-      </section>
+      </main>
     </>
   );
 }

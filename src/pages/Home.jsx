@@ -23,6 +23,7 @@ export default function Home() {
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
         transition={shouldReduceMotion ? undefined : { duration: 0.45, ease: "easeOut" }}
         className="relative flex min-h-screen flex-col overflow-x-hidden"
+        role="main"
       >
         <Suspense fallback={<SectionFallback label="Hero" />}>
           <Hero />

@@ -53,11 +53,15 @@ export default function ContactPage() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20">
+      <main
+        role="main"
+        aria-labelledby="contact-hero-title"
+        className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+      >
         <div className="glow-orb glow-orb--primary left-0 top-0 h-[26rem] w-[26rem] opacity-60" aria-hidden />
         <div className="glow-orb glow-orb--primary-soft right-0 top-1/2 h-[22rem] w-[22rem] opacity-50" aria-hidden />
         <div className="grain-overlay" aria-hidden />
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
+        <div className="relative mx-auto max-w-4xl px-6 text-center vt-hero-visual">
           <motion.span
             initial={shouldReduceMotion ? false : { opacity: 0, y: -16 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -70,7 +74,10 @@ export default function ContactPage() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.08, duration: 0.7 }}
-            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            id="contact-hero-title"
+            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
+            data-focus-target
+            tabIndex={-1}
           >
             {copy.hero.title}
           </motion.h1>
@@ -105,7 +112,7 @@ export default function ContactPage() {
             <Contact />
           </Suspense>
         </div>
-      </div>
+      </main>
     </>
   );
 }

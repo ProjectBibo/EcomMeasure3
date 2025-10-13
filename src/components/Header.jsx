@@ -7,6 +7,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
 import CommandPalette from "./CommandPalette";
+import useViewTransitionNavigate from "../hooks/useViewTransitionNavigate";
 
 const routePrefetchers = {
   "/": () => import("../pages/Home"),
@@ -41,6 +42,23 @@ export default function Header() {
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const menuId = useId();
   const location = useLocation();
+  const navigateWithTransition = useViewTransitionNavigate();
+
+  const navClickFactory = useCallback(
+    (to, options) => (event) => {
+      if (!event || typeof event.preventDefault !== "function") return;
+      if (event.defaultPrevented) return;
+      if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
+        return;
+      }
+
+      event.preventDefault();
+      setOpenDropdown(null);
+      setIsMenuOpen(false);
+      navigateWithTransition(to, options);
+    },
+    [navigateWithTransition]
+  );
 
   const blogLinks = useMemo(
     () =>
@@ -364,7 +382,7 @@ export default function Header() {
                                   className={dropdownLinkClass}
                                   onMouseEnter={() => prefetchRoute(item.to)}
                                   onFocus={() => prefetchRoute(item.to)}
-                                  onClick={() => setOpenDropdown(null)}
+                                  onClick={navClickFactory(item.to)}
                                 >
                                   <span>{item.label}</span>
                                   <span aria-hidden>→</span>
@@ -378,17 +396,18 @@ export default function Header() {
                   }
 
                   return (
-                    <NavLink
-                      key={link.id}
-                      to={link.to}
-                      className={navLinkClass}
-                      onMouseEnter={() => prefetchRoute(link.to)}
-                      onFocus={() => prefetchRoute(link.to)}
-                    >
-                      {link.label}
-                    </NavLink>
-                  );
-                })}
+                  <NavLink
+                    key={link.id}
+                    to={link.to}
+                    className={navLinkClass}
+                    onMouseEnter={() => prefetchRoute(link.to)}
+                    onFocus={() => prefetchRoute(link.to)}
+                    onClick={navClickFactory(link.to)}
+                  >
+                    {link.label}
+                  </NavLink>
+                );
+              })}
               </nav>
             </div>
             <div className="flex items-center gap-2">
@@ -447,7 +466,12 @@ export default function Header() {
               isCondensed ? "h-14" : "h-16"
             }`}
           >
-            <Link to="/" className="group relative flex items-center gap-3 transition-all duration-300" aria-label="EcomMeasure home">
+            <Link
+              to="/"
+              className="group relative flex items-center gap-3 transition-all duration-300"
+              aria-label="EcomMeasure home"
+              onClick={navClickFactory("/")}
+            >
               <span
                 className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-blue text-white shadow-[0_10px_20px_rgba(15,23,42,0.18)] ring-1 ring-white/60 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_16px_28px_rgba(2,6,23,0.45)] ${
                   isCondensed ? "h-11 w-11" : "h-12 w-12"
@@ -521,6 +545,7 @@ export default function Header() {
                     className="svc-head"
                     onMouseEnter={() => prefetchRoute(column.href)}
                     onFocus={() => prefetchRoute(column.href)}
+                    onClick={navClickFactory(column.href)}
                   >
                     {column.title}
                   </Link>
@@ -535,6 +560,7 @@ export default function Header() {
                 className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_55px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
+                onClick={navClickFactory("/contact")}
               >
                 {t.cta}
               </Link>
@@ -551,6 +577,7 @@ export default function Header() {
                       className="svc-head"
                       onMouseEnter={() => prefetchRoute(column.href)}
                       onFocus={() => prefetchRoute(column.href)}
+                      onClick={navClickFactory(column.href)}
                     >
                       {column.title}
                     </Link>
@@ -563,6 +590,7 @@ export default function Header() {
                 className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_22px_48px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
+                onClick={navClickFactory("/contact")}
               >
                 {t.cta}
               </Link>
@@ -622,10 +650,7 @@ export default function Header() {
                               <NavLink
                                 key={item.id}
                                 to={item.to}
-                                onClick={() => {
-                                  setOpenDropdown(null);
-                                  setIsMenuOpen(false);
-                                }}
+                                onClick={navClickFactory(item.to)}
                                 onMouseEnter={() => prefetchRoute(item.to)}
                                 onFocus={() => prefetchRoute(item.to)}
                                 className={({ isActive }) =>
@@ -645,13 +670,13 @@ export default function Header() {
                   }
 
                   return (
-                    <NavLink
-                      key={link.id}
-                      to={link.to}
-                      onClick={() => setIsMenuOpen(false)}
-                      onMouseEnter={() => prefetchRoute(link.to)}
-                      onFocus={() => prefetchRoute(link.to)}
-                      className={({ isActive }) =>
+                  <NavLink
+                    key={link.id}
+                    to={link.to}
+                    onClick={navClickFactory(link.to)}
+                    onMouseEnter={() => prefetchRoute(link.to)}
+                    onFocus={() => prefetchRoute(link.to)}
+                    className={({ isActive }) =>
                         `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
                           isActive ? "text-brand-blue dark:text-brand-blue" : "text-neutral-900"
                         }`
@@ -704,13 +729,13 @@ export default function Header() {
                     <span>{commandCopy.label}</span>
                   </button>
                 </div>
-                <Link
-                  to="/contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
-                >
-                  {t.cta}
-                </Link>
+              <Link
+                to="/contact"
+                onClick={navClickFactory("/contact")}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+              >
+                {t.cta}
+              </Link>
               </div>
             </div>
           </div>

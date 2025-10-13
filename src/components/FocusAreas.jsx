@@ -2,6 +2,9 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
+import useViewTransitionNavigate, {
+  createViewTransitionClickHandler,
+} from "../hooks/useViewTransitionNavigate";
 
 const content = {
   nl: {
@@ -68,6 +71,7 @@ export default function FocusAreas() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const copy = content[language];
+  const navigateWithTransition = useViewTransitionNavigate();
 
   return (
     <section className="relative overflow-hidden bg-surface-soft py-20 dark:bg-surface-dark">
@@ -129,6 +133,7 @@ export default function FocusAreas() {
                 <Link
                   to={card.to}
                   className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_50px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark"
+                  onClick={createViewTransitionClickHandler(navigateWithTransition, card.to)}
                 >
                   {language === "nl" ? "Bekijk de pagina" : "View details"}
                   <span aria-hidden>→</span>

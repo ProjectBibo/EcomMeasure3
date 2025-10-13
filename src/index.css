@@ -24,6 +24,68 @@ body {
   backdrop-filter: saturate(120%);
 }
 
+@supports (view-transition-name: hero-title) {
+  :root {
+    --view-transition-duration: 0.55s;
+    --view-transition-ease: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0ms;
+  }
+
+  .vt-hero-title {
+    view-transition-name: hero-title;
+    contain: paint;
+  }
+
+  .vt-hero-visual {
+    view-transition-name: hero-visual;
+    contain: paint;
+  }
+
+  ::view-transition-group(hero-title),
+  ::view-transition-group(hero-visual) {
+    animation-duration: var(--view-transition-duration);
+    animation-timing-function: var(--view-transition-ease);
+  }
+
+  ::view-transition-old(hero-title),
+  ::view-transition-old(hero-visual) {
+    animation: vt-slide-fade-out var(--view-transition-duration) var(--view-transition-ease) both;
+  }
+
+  ::view-transition-new(hero-title),
+  ::view-transition-new(hero-visual) {
+    animation: vt-slide-fade-in var(--view-transition-duration) var(--view-transition-ease) both;
+  }
+
+  @keyframes vt-slide-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes vt-slide-fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
+  }
+}
+
 .progress-rail {
   position: absolute;
   inset: 0 auto auto 0;
@@ -97,6 +159,13 @@ body {
 
   .progress-rail {
     display: none;
+  }
+
+  @supports (view-transition-name: hero-title) {
+    .vt-hero-title,
+    .vt-hero-visual {
+      view-transition-name: none;
+    }
   }
 }
 
