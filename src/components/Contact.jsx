@@ -28,7 +28,7 @@ export default function Contact() {
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/5 via-brand-teal/5 to-brand-yellow/5 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
+      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/12 via-brand-blue/6 to-transparent dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -114,7 +114,7 @@ export default function Contact() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.6 }}
-          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
+          className="mt-16 rounded-3xl bg-brand-blue-dark px-6 py-10 text-white shadow-[28px_40px_110px_rgba(10,22,36,0.55)] ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-1 hover:shadow-[32px_48px_130px_rgba(10,22,36,0.65)]"
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -124,7 +124,7 @@ export default function Contact() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_36px_rgba(255,255,255,0.35)] transition hover:bg-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.45)] transition hover:bg-brand-yellow-dark"
               >
                 {t.fast.mail}
               </a>
@@ -132,7 +132,7 @@ export default function Contact() {
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition hover:border-brand-yellow hover:text-brand-yellow"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition hover:border-white hover:text-white"
               >
                 {t.fast.social}
               </a>

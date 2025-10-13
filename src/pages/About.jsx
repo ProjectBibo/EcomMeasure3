@@ -285,13 +285,13 @@ export default function About() {
             >
               <a
                 href={copy.hero.ctaPrimary.href}
-                className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-blue/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.45)] transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
               >
                 {copy.hero.ctaPrimary.label}
               </a>
               <a
                 href={copy.hero.ctaSecondary.href}
-                className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition hover:border-brand-teal hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/20 dark:text-gray-200 dark:focus-visible:ring-offset-surface-dark"
+                className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition hover:border-brand-blue hover:text-brand-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/20 dark:text-gray-200 dark:hover:border-white/50 dark:hover:text-white dark:focus-visible:ring-offset-surface-dark"
               >
                 {copy.hero.ctaSecondary.label}
               </a>
@@ -358,7 +358,7 @@ export default function About() {
               <ul className="mt-6 space-y-4 text-sm text-neutral-600 dark:text-gray-300">
                 {copy.story.points.map((point) => (
                   <li key={point} className="flex gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-blue" aria-hidden />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -471,7 +471,7 @@ export default function About() {
               <ul className="mt-4 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
                 {copy.personal.listItems.map((item) => (
                   <li key={item} className="flex gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-blue" aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -479,7 +479,7 @@ export default function About() {
             </motion.div>
           </section>
 
-          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 via-brand-teal/80 to-brand-yellow/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
+          <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue-dark/90 via-brand-blue/80 to-brand-teal/70 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur dark:border-white/10">
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -492,7 +492,7 @@ export default function About() {
               <div className="flex flex-col gap-4 sm:flex-row">
                 <a
                   href={copy.cta.primary.href}
-                  className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-brand-blue transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/60"
+                  className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 shadow-[0_16px_36px_rgba(255,204,2,0.45)] transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue/60"
                 >
                   {copy.cta.primary.label}
                 </a>

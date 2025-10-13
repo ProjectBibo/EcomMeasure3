@@ -10,7 +10,7 @@ export default function CaseHighlight() {
 
   return (
     <section id="case" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/8 via-transparent to-brand-yellow/10 dark:from-brand-blue/15 dark:via-transparent dark:to-brand-yellow/15" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/12 via-transparent to-transparent dark:from-brand-blue/20 dark:via-transparent dark:to-transparent" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, x: -40 }}
@@ -35,7 +35,7 @@ export default function CaseHighlight() {
           </ul>
           <a
             href="#contact"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white shadow-[0_24px_55px_rgba(15,23,42,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_28px_65px_rgba(15,23,42,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-yellow dark:bg-white dark:text-neutral-900 dark:shadow-[0_24px_60px_rgba(2,6,23,0.55)]"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-neutral-900 shadow-[0_24px_55px_rgba(255,204,2,0.45)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_65px_rgba(211,163,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-blue dark:bg-brand-yellow dark:text-neutral-900"
           >
             {t.cta}
           </a>

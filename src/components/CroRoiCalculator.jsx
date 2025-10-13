@@ -701,7 +701,7 @@ export default function CroRoiCalculator() {
             </label>
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-xl bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-blue/25 transition hover:translate-y-0.5 hover:bg-brand-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+              className="inline-flex items-center justify-center rounded-xl bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 shadow-lg shadow-[0_18px_40px_rgba(255,204,2,0.45)] transition hover:translate-y-0.5 hover:bg-brand-yellow-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               {text.form.submit}
             </button>

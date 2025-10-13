@@ -10,7 +10,7 @@ export default function Workflow() {
 
   return (
     <section id="workflow" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-brand-teal/4 to-brand-yellow/6 dark:from-brand-blue/10 dark:via-brand-teal/10 dark:to-brand-yellow/10" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/12 via-brand-blue/5 to-transparent dark:from-brand-blue/20 dark:via-brand-blue-dark/10 dark:to-transparent" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ export default function Workflow() {
         </motion.div>
 
         <div className="relative mt-14">
-          <div className="absolute left-[22px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-brand-blue via-brand-teal to-brand-yellow md:block" aria-hidden />
+          <div className="absolute left-[22px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-brand-blue to-brand-blue-dark md:block" aria-hidden />
           <div className="space-y-12">
             {t.steps.map((step, index) => (
               <motion.article

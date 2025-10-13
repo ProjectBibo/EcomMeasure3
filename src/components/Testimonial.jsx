@@ -11,7 +11,7 @@ export default function Testimonial() {
 
   return (
     <section id="reviews" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/10 via-transparent to-brand-yellow/10 dark:from-brand-blue/15 dark:via-transparent dark:to-brand-yellow/15" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/12 via-transparent to-transparent dark:from-brand-blue/20 dark:via-transparent dark:to-transparent" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}

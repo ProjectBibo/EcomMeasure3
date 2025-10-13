@@ -41,10 +41,10 @@ export default function LookerDashboard() {
     <section
       id="dashboard"
       data-snap-section
-      className="relative overflow-hidden bg-neutral-950 py-24 text-white sm:py-28"
+      className="relative overflow-hidden bg-brand-blue-dark py-24 text-white sm:py-28"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.35),_transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(31,106,165,0.4),_transparent_60%)]"
         aria-hidden
       />
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6">
@@ -95,7 +95,7 @@ export default function LookerDashboard() {
             className="relative"
           >
             <div
-              className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-blue/40 via-brand-teal/30 to-transparent blur-3xl"
+              className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-blue-dark/40 via-brand-blue/20 to-transparent blur-3xl"
               aria-hidden
             />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/60 shadow-[0_32px_80px_rgba(15,23,42,0.55)]">
@@ -169,7 +169,7 @@ export default function LookerDashboard() {
                       </div>
                       <div className="flex items-center gap-4 text-xs text-neutral-300">
                         <span className="flex items-center gap-2">
-                          <span className="inline-block h-1.5 w-3 rounded-full bg-brand-blue" aria-hidden />
+                          <span className="inline-block h-1.5 w-3 rounded-full bg-brand-teal" aria-hidden />
                           {t.report.charts.revenue.legend.revenue}
                         </span>
                         <span className="flex items-center gap-2">
@@ -182,8 +182,8 @@ export default function LookerDashboard() {
                       <svg viewBox="0 0 100 60" className="h-full w-full">
                         <defs>
                           <linearGradient id="revenueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(59,130,246,0.6)" />
-                            <stop offset="100%" stopColor="rgba(59,130,246,0.05)" />
+                            <stop offset="0%" stopColor="rgba(31,106,165,0.65)" />
+                            <stop offset="100%" stopColor="rgba(31,106,165,0.12)" />
                           </linearGradient>
                         </defs>
                         <g>
@@ -207,7 +207,7 @@ export default function LookerDashboard() {
                           })}
                           <polyline
                             fill="none"
-                            stroke="rgba(234,179,8,0.85)"
+                            stroke="rgba(255,204,2,0.85)"
                             strokeWidth={1.6}
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -222,7 +222,7 @@ export default function LookerDashboard() {
                                 cx={x}
                                 cy={y}
                                 r={1.6}
-                                fill="rgba(234,179,8,1)"
+                                fill="rgba(255,204,2,1)"
                               />
                             );
                           })}
@@ -244,7 +244,7 @@ export default function LookerDashboard() {
                             </div>
                             <div className="h-2 overflow-hidden rounded-full bg-white/5">
                               <div
-                                className="h-full rounded-full bg-gradient-to-r from-brand-teal via-brand-blue to-brand-purple"
+                                className="h-full rounded-full bg-gradient-to-r from-brand-teal to-brand-blue-dark"
                                 style={{ width: `${device.value}%` }}
                               />
                             </div>
