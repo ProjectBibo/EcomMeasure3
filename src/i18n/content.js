@@ -62,13 +62,41 @@ export const translations = {
         subtitle: "Kies een sectie of pas je voorkeuren aan.",
         preferences: "Voorkeuren",
       },
+      commandPalette: {
+        openLabel: "Open de command palette",
+        buttonLabel: "Zoek of navigeer",
+        keyboardHint: "⌘K",
+        placeholder: "Zoek naar acties of pagina's…",
+        empty: "Geen resultaten. Probeer een andere term.",
+        heading: "Snelle acties",
+        results: {
+          singular: "1 resultaat",
+          plural: "{{count}} resultaten",
+        },
+        idleAnnouncement: "Typ om acties te filteren.",
+        items: {
+          plan: {
+            title: "Plan een kennismaking",
+            description: "Open de scheduler en kies een moment dat past.",
+          },
+          cases: {
+            title: "Cases",
+            description: "Bekijk projecten en meetcases.",
+          },
+          services: {
+            title: "Diensten",
+            description: "Verken measurement, consent en CRO-aanpak.",
+          },
+        },
+      },
     },
     hero: {
       badge: "Measurement & CRO voor e-commerce",
-      titleLead: "Meet en optimaliseer elke stap van je funnel met",
-      titleHighlight: "GA4, Consent Mode v2 en bewezen CRO-experimenten",
-      description:
-        "Ik richt je meetstack in, verbind advertentieplatformen en vertaal inzichten naar A/B-tests die omzet en klantbeleving laten groeien.",
+      sequence: ["Meet", "Begrijp", "Optimaliseer"],
+      headline: "datagedreven groei voor e-commerce teams",
+      subheadline: "80+ stacks live, +23% uplift, in 2 weken actief.",
+      keywords: ["GA4", "Consent Mode v2", "CRO"],
+      funnelAlt: "Visualisatie van datastromen die samenkomen in conversies",
       primaryCta: "Plan een kennismaking",
       secondaryCta: "Ontdek de aanpak",
       stats: [
@@ -455,13 +483,41 @@ export const translations = {
         subtitle: "Jump to a section or adjust your preferences.",
         preferences: "Preferences",
       },
+      commandPalette: {
+        openLabel: "Open the command palette",
+        buttonLabel: "Search or jump",
+        keyboardHint: "⌘K",
+        placeholder: "Search for actions or pages…",
+        empty: "No matches. Try a different query.",
+        heading: "Quick actions",
+        results: {
+          singular: "1 result",
+          plural: "{{count}} results",
+        },
+        idleAnnouncement: "Type to filter actions.",
+        items: {
+          plan: {
+            title: "Book an intro call",
+            description: "Open the scheduler and reserve a slot.",
+          },
+          cases: {
+            title: "Cases",
+            description: "Browse measurement and CRO projects.",
+          },
+          services: {
+            title: "Services",
+            description: "Dive into measurement, consent and CRO offering.",
+          },
+        },
+      },
     },
     hero: {
       badge: "Measurement & CRO for e-commerce",
-      titleLead: "Measure and improve every step of your funnel with",
-      titleHighlight: "GA4, Consent Mode v2 and proven CRO experiments",
-      description:
-        "I align your measurement stack, connect ad platforms and translate insights into experiments that grow revenue and customer experience.",
+      sequence: ["Measure", "Understand", "Optimise"],
+      headline: "data-led growth for commerce teams",
+      subheadline: "80+ stacks live, +23% uplift, ready within 2 weeks.",
+      keywords: ["GA4", "Consent Mode v2", "CRO"],
+      funnelAlt: "Visual of data streams converging into conversions",
       primaryCta: "Book an intro call",
       secondaryCta: "Explore the approach",
       stats: [

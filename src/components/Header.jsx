@@ -1,10 +1,21 @@
 // src/components/Header.jsx
-import React, { useEffect, useId, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Command, Menu, Moon, Sun, X } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
+import CommandPalette from "./CommandPalette";
+
+const ROUTE_PREFETCHERS = {
+  "/": () => import("../pages/Home"),
+  "/about": () => import("../pages/About"),
+  "/measurement": () => import("../pages/Measurement"),
+  "/consent-mode": () => import("../pages/ConsentMode"),
+  "/cro": () => import("../pages/Cro"),
+  "/contact": () => import("../pages/ContactPage"),
+  "/blog/:slug": () => import("../pages/BlogArticle"),
+};
 
 const flags = {
   nl: "🇳🇱",
@@ -18,10 +29,14 @@ export default function Header() {
   const nextLanguage = language === "nl" ? "en" : "nl";
   const [isDark, setIsDark] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const menuId = useId();
   const location = useLocation();
+  const prefetchedRoutes = useRef(new Set());
 
   const blogLinks = useMemo(
     () =>
@@ -34,6 +49,7 @@ export default function Header() {
   );
 
   const { about, blogLabel, contact } = t.nav;
+  const commandPaletteConfig = t.commandPalette;
 
   const navLinks = useMemo(
     () => [
@@ -43,6 +59,76 @@ export default function Header() {
     ],
     [about, blogLabel, contact, blogLinks]
   );
+
+  const normalizePrefetchKey = useCallback((path) => {
+    if (!path) return null;
+    const [withHash] = path.split("?");
+    const hashIndex = withHash.indexOf("#");
+    const cleanPath = hashIndex >= 0 ? withHash.slice(0, hashIndex) : withHash;
+    if (!cleanPath) return "/";
+    if (cleanPath.startsWith("/blog/")) return "/blog/:slug";
+    return cleanPath;
+  }, []);
+
+  const prefetchRoute = useCallback(
+    (path) => {
+      const key = normalizePrefetchKey(path);
+      if (!key || prefetchedRoutes.current.has(key)) return;
+      const loader = ROUTE_PREFETCHERS[key];
+      if (loader) {
+        loader();
+        prefetchedRoutes.current.add(key);
+      }
+    },
+    [normalizePrefetchKey]
+  );
+
+  const formatResultCount = useCallback(
+    (count) => {
+      const { singular, plural } = commandPaletteConfig.results;
+      return count === 1 ? singular : plural.replace("{{count}}", String(count));
+    },
+    [commandPaletteConfig.results]
+  );
+
+  const commandPaletteLabels = useMemo(
+    () => ({
+      heading: commandPaletteConfig.heading,
+      placeholder: commandPaletteConfig.placeholder,
+      empty: commandPaletteConfig.empty,
+      keyboardHint: commandPaletteConfig.keyboardHint,
+      idleAnnouncement: commandPaletteConfig.idleAnnouncement,
+      formatResultCount,
+    }),
+    [commandPaletteConfig, formatResultCount]
+  );
+
+  const commandItems = useMemo(() => {
+    const items = commandPaletteConfig.items;
+    return [
+      {
+        id: "plan-intro",
+        title: items.plan.title,
+        description: items.plan.description,
+        href: "/contact?schedule=true",
+        prefetch: () => prefetchRoute("/contact"),
+      },
+      {
+        id: "cases",
+        title: items.cases.title,
+        description: items.cases.description,
+        href: "/about#cases",
+        prefetch: () => prefetchRoute("/about"),
+      },
+      {
+        id: "services",
+        title: items.services.title,
+        description: items.services.description,
+        href: "/measurement",
+        prefetch: () => prefetchRoute("/measurement"),
+      },
+    ];
+  }, [commandPaletteConfig.items, prefetchRoute]);
 
   const themeTitle = language === "nl"
     ? isDark
@@ -83,12 +169,22 @@ export default function Header() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const root = document.documentElement;
+      const maxScroll = Math.max(root.scrollHeight - root.clientHeight, 1);
+      const ratio = Math.min(currentScrollY / maxScroll, 1);
+
+      setScrollProgress(ratio);
+
       if (currentScrollY <= 0) {
         setIsHidden(false);
+        setIsCompact(false);
         lastScrollY = currentScrollY;
         ticking = false;
         return;
       }
+
+      const shouldCompact = currentScrollY > 80;
+      setIsCompact((prev) => (prev === shouldCompact ? prev : shouldCompact));
 
       if (currentScrollY > lastScrollY && currentScrollY > 140) {
         setIsHidden(true);
@@ -123,7 +219,7 @@ export default function Header() {
     updateOffset();
     window.addEventListener("resize", updateOffset);
     return () => window.removeEventListener("resize", updateOffset);
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isCompact]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -169,6 +265,7 @@ export default function Header() {
   useEffect(() => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
+    setIsPaletteOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -176,6 +273,25 @@ export default function Header() {
       setOpenDropdown(null);
     }
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleKeyDown = (event) => {
+      if (!(event.metaKey || event.ctrlKey)) return;
+      if (event.key.toLowerCase() !== "k") return;
+      const target = event.target;
+      const tagName = target?.tagName?.toLowerCase();
+      const isEditable = target?.isContentEditable;
+      if (tagName === "input" || tagName === "textarea" || isEditable) {
+        return;
+      }
+      event.preventDefault();
+      setIsPaletteOpen(true);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
@@ -189,16 +305,33 @@ export default function Header() {
       isActive ? "text-brand-blue dark:text-brand-yellow" : ""
     }`;
 
+  const topBarHeightClass = isCompact ? "h-11" : "h-12";
+  const bottomBarHeightClass = isCompact ? "h-14" : "h-16";
+  const logoWrapperClass = isCompact ? "h-12 w-12" : "h-14 w-14";
+  const logoIconClass = isCompact ? "h-8 w-8" : "h-9 w-9";
+  const brandTitleClass = isCompact
+    ? "text-base"
+    : "text-lg";
+  const brandTaglineClass = isCompact ? "text-[10px]" : "text-[11px]";
+
   return (
     <>
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 w-full transform-gpu transition-transform duration-300 ease-out ${
+        className={`sticky top-0 z-50 w-full transform-gpu transition-[transform,box-shadow] duration-300 ease-out ${
           isHidden ? "-translate-y-full" : "translate-y-0"
         }`}
+        style={{ boxShadow: isCompact ? "var(--shadow-elev-1)" : "none" }}
       >
-        <div className="border-b border-neutral-200/60 bg-white/80 backdrop-blur dark:border-neutral-800/60 dark:bg-surface-dark/80">
-          <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div className="progress-rail" aria-hidden>
+          <div className="progress-bar" style={{ "--scroll-progress": `${scrollProgress}` }} />
+        </div>
+        <div
+          className={`border-b border-neutral-200/60 bg-white/80 transition-[background-color,backdrop-filter,border-color] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/80 ${
+            isCompact ? "backdrop-blur-xl" : "backdrop-blur"
+          }`}
+        >
+          <div className={`mx-auto flex ${topBarHeightClass} max-w-7xl items-center justify-between px-4 sm:px-6`}>
             <div className="flex items-center gap-4">
               <button
                 type="button"
@@ -260,6 +393,8 @@ export default function Header() {
                                   to={item.to}
                                   className={dropdownLinkClass}
                                   onClick={() => setOpenDropdown(null)}
+                                  onMouseEnter={() => prefetchRoute(item.to)}
+                                  onFocus={() => prefetchRoute(item.to)}
                                 >
                                   <span>{item.label}</span>
                                   <span aria-hidden>→</span>
@@ -273,7 +408,13 @@ export default function Header() {
                   }
 
                   return (
-                    <NavLink key={link.id} to={link.to} className={navLinkClass}>
+                    <NavLink
+                      key={link.id}
+                      to={link.to}
+                      className={navLinkClass}
+                      onMouseEnter={() => prefetchRoute(link.to)}
+                      onFocus={() => prefetchRoute(link.to)}
+                    >
                       {link.label}
                     </NavLink>
                   );
@@ -281,6 +422,20 @@ export default function Header() {
               </nav>
             </div>
             <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsPaletteOpen(true)}
+                className="hidden items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/60 dark:text-gray-200 dark:hover:bg-white/10 md:inline-flex"
+                aria-label={commandPaletteConfig.openLabel}
+                aria-haspopup="dialog"
+                title={commandPaletteConfig.buttonLabel}
+              >
+                <Command size={16} />
+                <span className="hidden lg:inline">{commandPaletteConfig.buttonLabel}</span>
+                <span className="command-shortcut" aria-hidden>
+                  {commandPaletteConfig.keyboardHint}
+                </span>
+              </button>
               <button
                 type="button"
                 onClick={toggleLanguage}
@@ -306,13 +461,19 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="border-b border-neutral-200/60 bg-white/80 backdrop-blur dark:border-neutral-800/60 dark:bg-surface-dark/80">
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div
+          className={`border-b border-neutral-200/60 bg-white/80 transition-[background-color,backdrop-filter,border-color] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/80 ${
+            isCompact ? "backdrop-blur-2xl" : "backdrop-blur"
+          }`}
+        >
+          <div className={`mx-auto flex ${bottomBarHeightClass} max-w-7xl items-center justify-between px-4 sm:px-6`}>
             <Link to="/" className="group relative flex items-center gap-3" aria-label="EcomMeasure home">
-              <span className="relative flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-transform duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)]">
+              <span
+                className={`relative flex ${logoWrapperClass} items-center justify-center rounded-3xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-yellow text-white shadow-[0_16px_32px_rgba(15,23,42,0.2)] ring-1 ring-white/70 transition-all duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_18px_36px_rgba(2,6,23,0.45)]`}
+              >
                 <svg
                   viewBox="0 0 48 48"
-                  className="h-9 w-9"
+                  className={`${logoIconClass}`}
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden
@@ -357,10 +518,10 @@ export default function Header() {
                 <span className="absolute -inset-1 rounded-[1.75rem] border border-white/20 opacity-40" aria-hidden />
               </span>
               <span className="flex flex-col leading-tight">
-                <span className="text-lg font-bold tracking-tight text-neutral-900 transition-colors dark:text-white">
+                <span className={`${brandTitleClass} font-bold tracking-tight text-neutral-900 transition-colors dark:text-white`}>
                   EcomMeasure
                 </span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.38em] text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
+                <span className={`${brandTaglineClass} font-semibold uppercase tracking-[0.38em] text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white`}>
                   Insights
                 </span>
               </span>
@@ -369,7 +530,12 @@ export default function Header() {
             <div className="hidden items-stretch gap-8 md:flex">
               {t.columns.map((column) => (
                 <div key={column.title} className="svc-col">
-                  <Link to={column.href} className="svc-head">
+                  <Link
+                    to={column.href}
+                    className="svc-head"
+                    onMouseEnter={() => prefetchRoute(column.href)}
+                    onFocus={() => prefetchRoute(column.href)}
+                  >
                     {column.title}
                   </Link>
                   <span className="svc-sub">{column.subtitle}</span>
@@ -381,6 +547,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className="rounded-md bg-brand-blue px-5 py-2 font-semibold text-white shadow-[0_16px_36px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_48px_rgba(59,130,246,0.45)]"
+                onMouseEnter={() => prefetchRoute("/contact")}
+                onFocus={() => prefetchRoute("/contact")}
               >
                 {t.cta}
               </Link>
@@ -392,7 +560,12 @@ export default function Header() {
               <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
                 {t.columns.map((column) => (
                   <div key={column.title} className="svc-col-mobile">
-                    <Link to={column.href} className="svc-head">
+                    <Link
+                      to={column.href}
+                      className="svc-head"
+                      onMouseEnter={() => prefetchRoute(column.href)}
+                      onFocus={() => prefetchRoute(column.href)}
+                    >
                       {column.title}
                     </Link>
                     <span className="svc-sub">{column.subtitle}</span>
@@ -402,6 +575,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className="ml-4 inline-flex items-center rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(59,130,246,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(59,130,246,0.45)]"
+                onMouseEnter={() => prefetchRoute("/contact")}
+                onFocus={() => prefetchRoute("/contact")}
               >
                 {t.cta}
               </Link>
@@ -465,6 +640,8 @@ export default function Header() {
                                   setOpenDropdown(null);
                                   setIsMenuOpen(false);
                                 }}
+                                onMouseEnter={() => prefetchRoute(item.to)}
+                                onFocus={() => prefetchRoute(item.to)}
                                 className={({ isActive }) =>
                                   `flex items-center justify-between rounded-xl border border-neutral-200/70 bg-white px-3 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
                                     isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
@@ -482,15 +659,17 @@ export default function Header() {
                   }
 
                   return (
-                    <NavLink
-                      key={link.id}
-                      to={link.to}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={({ isActive }) =>
-                        `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
-                          isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
-                        }`
-                      }
+                  <NavLink
+                    key={link.id}
+                    to={link.to}
+                    onClick={() => setIsMenuOpen(false)}
+                    onMouseEnter={() => prefetchRoute(link.to)}
+                    onFocus={() => prefetchRoute(link.to)}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
+                        isActive ? "text-brand-blue dark:text-brand-yellow" : "text-neutral-900"
+                      }`
+                    }
                     >
                       <span>{link.label}</span>
                       <span aria-hidden>→</span>
@@ -538,6 +717,13 @@ export default function Header() {
           </div>
         </div>
       )}
+
+      <CommandPalette
+        open={isPaletteOpen}
+        onOpenChange={setIsPaletteOpen}
+        items={commandItems}
+        labels={commandPaletteLabels}
+      />
     </>
   );
 }
