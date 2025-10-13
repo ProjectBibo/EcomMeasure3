@@ -70,7 +70,7 @@ export default function FocusAreas() {
   const copy = content[language];
 
   return (
-    <section className="relative overflow-hidden bg-surface-soft py-20 dark:bg-surface-dark">
+    <section id="services" className="relative overflow-hidden bg-surface-soft py-20 dark:bg-surface-dark">
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>

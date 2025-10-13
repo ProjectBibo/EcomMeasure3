@@ -1,9 +1,10 @@
 // src/App.jsx
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useCallback, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
+import CommandPalette from "./components/CommandPalette";
 import { LanguageProvider } from "./context/LanguageContext";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -18,9 +19,15 @@ const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function AppContent() {
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
+  const openCommandPalette = useCallback(() => setIsCommandPaletteOpen(true), []);
+  const closeCommandPalette = useCallback(() => setIsCommandPaletteOpen(false), []);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
-      <Header />
+      <Header onOpenCommandPalette={openCommandPalette} />
+      <CommandPalette isOpen={isCommandPaletteOpen} onOpenChange={setIsCommandPaletteOpen} onRequestClose={closeCommandPalette} />
       <Suspense fallback={<SectionFallback label="Pagina" />}>
         <Routes>
           <Route index element={<Home />} />
