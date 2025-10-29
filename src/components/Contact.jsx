@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { CalendarDays, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
-import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
+import { AnimatedParagraph } from "./ExpressiveText";
 
 const baseOptions = [
   {
@@ -63,7 +63,7 @@ export default function Contact() {
             className="mt-6 vt-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             {t.heading}
-          </AnimatedHeading>
+          </motion.h2>
           <AnimatedParagraph
             text={t.intro}
             language={language}
