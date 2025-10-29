@@ -8,6 +8,7 @@ import { translations } from "../i18n/content";
 import useViewTransitionNavigate, {
   createViewTransitionClickHandler,
 } from "../hooks/useViewTransitionNavigate";
+import { AnimatedParagraph } from "./ExpressiveText";
 
 const MotionLink = motion(Link);
 
