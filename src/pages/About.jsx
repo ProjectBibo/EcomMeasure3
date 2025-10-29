@@ -18,7 +18,7 @@ const content = {
       eyebrow: "Over mij",
       title: "Ik help e-commerceteams groeien met vertrouwen in hun data",
       description:
-        "Ik ben Jeroen, digital analytics consultant en oprichter van EcomMeasure. Mijn hart ligt bij het vertalen van ruwe gegevens naar een roadmap waar marketeers, developers en privacyteams samen op kunnen bouwen.",
+        "Ik ben Rowan, digital analytics consultant en oprichter van EcomMeasure. Mijn hart ligt bij het vertalen van ruwe gegevens naar een roadmap waar marketeers, developers en privacyteams samen op kunnen bouwen.",
       ctaPrimary: { label: "Plan een gesprek", href: "/contact" },
       ctaSecondary: {
         label: "Bekijk de aanpak",
