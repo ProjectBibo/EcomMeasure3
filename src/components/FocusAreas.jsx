@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
 import { useLanguage } from "../context/LanguageContext";
 import useViewTransitionNavigate, {
   createViewTransitionClickHandler,
@@ -95,7 +96,7 @@ export default function FocusAreas() {
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
           className="mt-6 max-w-3xl space-y-4"
         >
-          <h2 className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <AnimatedHeading className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
             {copy.title}
           </AnimatedHeading>
           <AnimatedParagraph
