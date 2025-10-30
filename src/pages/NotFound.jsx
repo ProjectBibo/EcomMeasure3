@@ -7,13 +7,13 @@ import { useLanguage } from "../context/LanguageContext";
 const copy = {
   nl: {
     title: "Pagina niet gevonden",
-    description: "De pagina die je zocht bestaat niet meer of is verplaatst.",
-    cta: "Terug naar home",
+    description: "Deze URL levert geen data meer op. Gebruik het menu om terug te keren naar inzichten.",
+    cta: "Terug naar start",
   },
   en: {
     title: "Page not found",
-    description: "The page you were looking for doesn’t exist or has moved.",
-    cta: "Back to home",
+    description: "This URL returns no signal. Use the menu to jump back to insights.",
+    cta: "Back to overview",
   },
 };
 
