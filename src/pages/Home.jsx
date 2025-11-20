@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import FocusAreas from "../components/FocusAreas";
 import AiInsightDemo from "../components/AiInsightDemo";
 import SectionFallback from "../components/SectionFallback";
@@ -18,6 +19,7 @@ export default function Home() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={t.seo.title} description={t.seo.description} />
       <motion.main
         initial={shouldReduceMotion ? undefined : { opacity: 0 }}

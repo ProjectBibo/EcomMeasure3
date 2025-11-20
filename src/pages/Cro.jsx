@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 
 const content = {
@@ -83,6 +84,7 @@ export default function Cro() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20">
         <div className="glow-orb glow-orb--primary-soft right-0 top-10 h-[24rem] w-[24rem] opacity-60" aria-hidden />

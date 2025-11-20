@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 
 const content = {
@@ -91,6 +92,7 @@ export default function Measurement() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <main
         role="main"

@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 import useViewTransitionNavigate, {
   createViewTransitionClickHandler,
@@ -311,6 +312,7 @@ export default function About() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <main
         role="main"

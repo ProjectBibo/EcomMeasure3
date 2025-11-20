@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 
 const copyByLocale = {
@@ -91,6 +92,7 @@ export default function Implementation() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-green/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-green/25">
         <div className="grain-overlay" aria-hidden />
