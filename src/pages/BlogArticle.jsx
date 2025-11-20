@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 import { getBlogPostBySlug } from "../data/blogPosts";
 import useViewTransitionNavigate, {
@@ -62,6 +63,7 @@ export default function BlogArticle() {
   if (!post || !content) {
     return (
       <>
+        <GoogleTag />
         <SEO title={copy.title} description={copy.body} />
         <main
           role="main"
@@ -93,6 +95,7 @@ export default function BlogArticle() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={content.seoTitle} description={content.seoDescription} />
       <main
         role="main"

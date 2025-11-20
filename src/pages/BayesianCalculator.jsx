@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 import BayesianAbCalculator from "../components/BayesianAbCalculator";
 
@@ -40,6 +41,7 @@ export default function BayesianCalculator() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={content.seo.title} description={content.seo.description} />
       <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-teal/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-teal/20">
         <div className="grain-overlay" aria-hidden />

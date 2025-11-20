@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 
 const content = {
@@ -91,6 +92,7 @@ export default function ConsentMode() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <div className="relative overflow-hidden bg-gradient-to-b from-brand-teal/12 via-white to-brand-teal/8 pb-24 pt-28 dark:from-brand-teal/22 dark:via-surface-dark dark:to-brand-teal/16">
         <div className="story-stripe" aria-hidden />

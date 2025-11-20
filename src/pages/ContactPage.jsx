@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import SectionFallback from "../components/SectionFallback";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -52,6 +53,7 @@ export default function ContactPage() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={copy.seo.title} description={copy.seo.description} />
       <main
         role="main"

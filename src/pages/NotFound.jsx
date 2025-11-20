@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import GoogleTag from "../components/GoogleTag";
 import { useLanguage } from "../context/LanguageContext";
 
 const copy = {
@@ -24,6 +25,7 @@ export default function NotFound() {
 
   return (
     <>
+      <GoogleTag />
       <SEO title={t.title} description={t.description} />
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 bg-surface-light px-6 py-20 text-center dark:bg-surface-dark">
         <motion.div
