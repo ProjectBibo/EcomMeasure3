@@ -3,141 +3,121 @@ import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
 
-const content = {
-  nl: {
-    seo: {
-      title: "Measurement – GA4 & GTM events voor e-commerce",
-      description:
-        "Bouw een schaalbare GA4 en GTM setup met server-side tagging, enhanced e-commerce events en dashboards die direct inzicht geven.",
-    },
-    hero: {
-      eyebrow: "Measurement",
-      title: "Zekerheid in elke dataset met GA4, GTM en server-side tagging",
-      description:
-        "We richten je volledige measurement stack in: van datalayer en events tot advertentiekoppelingen en Looker Studio dashboards. Zo kun je elke growth-beslissing staven met betrouwbare data.",
-    },
-    sections: [
-      {
-        title: "Enhanced e-commerce events",
-        bullets: [
-          "Volledige datalayer mapping voor product, checkout en loyalty events.",
-          "Custom dimensions & metrics afgestemd op jouw KPI-framework.",
-          "Validatie met debug views, realtime dashboards en QA-scripts.",
-        ],
-      },
-      {
-        title: "Server-side tagging & consent",
-        bullets: [
-          "Server-side GTM containers met conversie API's voor Google Ads en Meta.",
-          "Consent Mode v2 configuratie en forwarding van consent states.",
-          "Failover strategieën zodat je meetdata robuust blijft bij uitval.",
-        ],
-      },
-      {
-        title: "Dashboards die dagelijks sturen",
-        bullets: [
-          "Looker Studio templates voor omzet, funnel en kanaalbijdrage.",
-          "Automatische alerts bij afwijkingen in conversiepercentages.",
-          "Knowledge transfers en Loom-opnames zodat teams zelfstandig blijven.",
-        ],
-      },
+const services = [
+  {
+    label: "Startpakket",
+    title: "Google Analytics 4 ‘Start’ installatie en configuratie",
+    bullets: [
+      "Installatie op uw website",
+      "Configuratie van Property & datastream",
+      "Filteren van intern bezoek",
+      "Koppelen van Google Search Console & GTM",
+      "Uitleg en walk-through (0.5u)",
     ],
+    price: "Vanaf €220 (ex btw)",
   },
-  en: {
-    seo: {
-      title: "Measurement – GA4 & GTM events for commerce teams",
-      description:
-        "Set up a scalable GA4 and GTM foundation with server-side tagging, enhanced e-commerce events and dashboards that drive decisions.",
-    },
-    hero: {
-      eyebrow: "Measurement",
-      title: "Confidence in every dataset with GA4, GTM and server-side tagging",
-      description:
-        "We design your complete measurement stack: datalayer, events, ad platform connections and Looker Studio dashboards. Every growth decision is backed by reliable insights.",
-    },
-    sections: [
-      {
-        title: "Enhanced e-commerce events",
-        bullets: [
-          "Full datalayer mapping for product, checkout and loyalty events.",
-          "Custom dimensions & metrics aligned with your KPI framework.",
-          "Validation through debug views, realtime dashboards and QA scripts.",
-        ],
-      },
-      {
-        title: "Server-side tagging & consent",
-        bullets: [
-          "Server-side GTM with conversion APIs for Google Ads and Meta.",
-          "Consent Mode v2 configuration and consent state forwarding.",
-          "Failover strategies that keep your data resilient when outages happen.",
-        ],
-      },
-      {
-        title: "Dashboards that guide daily decisions",
-        bullets: [
-          "Looker Studio templates for revenue, funnel and channel contribution.",
-          "Automated alerts when conversion metrics deviate.",
-          "Knowledge transfers and Loom walkthroughs to keep teams autonomous.",
-        ],
-      },
+  {
+    label: "Start plus AVG-compatible cookiebanner",
+    title: "Google Analytics 4 ‘Start plus AVG-compatible cookiebanner’",
+    subcopy: "Alles van het Startpakket, plus:",
+    bullets: [
+      "Koppelen van uw website met Social Media en Google Ads (Facebook Ads e.a. pixels & tracking)",
+      "AVG-compatible integratie met een moderne, mobile-first cookiebanner",
     ],
+    price: "Vanaf €440 (ex btw)",
   },
-};
+  {
+    label: "Advanced",
+    title: "Google Analytics 4 ‘Advanced’ installatie en configuratie",
+    subcopy: "Alles van het Startpakket, plus:",
+    bullets: [
+      "Inrichten van nieuwe gebeurtenissen en conversies conform zakelijke doelen (leads, clicks on calls, downloads, etc.)",
+      "Personaliseren van GA4 interface",
+    ],
+    price: "Vanaf €440 (ex btw)",
+  },
+  {
+    label: "E-commerce",
+    title: "Google Analytics 4 ‘E-commerce’ installatie en configuratie",
+    subcopy: "Alles van het Startpakket, plus:",
+    bullets: [
+      "Inrichten Enhanced e-commerce conversies (i.s.m. uw developer of webbureau bij zelf ontworpen systemen)",
+      "Personaliseren van GA4 interface",
+    ],
+    price: "Vanaf €880 (ex btw)",
+  },
+];
+
+const icon = (
+  <svg
+    aria-hidden
+    className="h-10 w-10 text-brand-blue"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      x="6"
+      y="10"
+      width="36"
+      height="28"
+      rx="6"
+      className="fill-white/70 stroke-current"
+      strokeWidth="2.4"
+    />
+    <path
+      d="M16 24L21 29L32 18"
+      stroke="currentColor"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle cx="16" cy="18" r="2" className="fill-current" />
+    <circle cx="26" cy="28" r="2" className="fill-current" />
+  </svg>
+);
 
 export default function Measurement() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
-  const copy = content[language];
+  const seoTitle =
+    language === "nl"
+      ? "Measurement – Analytics diensten"
+      : "Measurement – Analytics services";
+  const seoDescription =
+    language === "nl"
+      ? "Overzicht van onze GA4 installaties, cookiebanners en e-commerce configuraties."
+      : "Overview of our GA4 setups, cookie banner support and e-commerce configurations.";
 
   return (
     <>
-      <SEO title={copy.seo.title} description={copy.seo.description} />
+      <SEO title={seoTitle} description={seoDescription} />
       <main
         role="main"
-        aria-labelledby="measurement-hero-title"
+        aria-labelledby="analytics-services-title"
         className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
       >
         <div className="grain-overlay" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6 vt-hero-visual">
-          <motion.span
-            initial={shouldReduceMotion ? false : { opacity: 0, y: -16 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-            className="inline-flex items-center rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-teal"
-          >
-            {copy.hero.eyebrow}
-          </motion.span>
+        <div className="relative mx-auto max-w-6xl px-6">
           <motion.h1
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.7 }}
-            id="measurement-hero-title"
-            className="mt-7 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
-            data-focus-target
-            tabIndex={-1}
-          >
-            {copy.hero.title}
-          </motion.h1>
-          <motion.p
             initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.18, duration: 0.7 }}
-            className="mt-6 max-w-3xl text-lg text-neutral-700 dark:text-gray-300"
+            transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
+            id="analytics-services-title"
+            className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
           >
-            {copy.hero.description}
-          </motion.p>
-        </div>
+            Analytics diensten
+          </motion.h1>
 
-        <div className="relative mx-auto mt-16 max-w-6xl px-6">
-          <div className="grid gap-8 md:grid-cols-3">
-            {copy.sections.map((section, index) => (
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
+            {services.map((service, index) => (
               <motion.article
-                key={section.title}
+                key={service.title}
                 initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
-                transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.55 }}
-                className="group relative h-full overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[20px_30px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+                transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.55 }}
+                className="group relative flex h-full flex-col rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[20px_30px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
               >
                 <div
                   aria-hidden
@@ -147,15 +127,33 @@ export default function Measurement() {
                       "inset 4px 4px 12px rgba(255,255,255,0.5), inset -14px -18px 34px rgba(148,163,184,0.18)",
                   }}
                 />
-                <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">{section.title}</h2>
-                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">
-                  {section.bullets.map((bullet) => (
+                <div className="relative flex items-center gap-3 text-sm font-semibold text-brand-blue">
+                  <span className="rounded-full bg-brand-blue/10 p-2 text-brand-blue">{icon}</span>
+                  <span className="uppercase tracking-[0.14em] text-xs">{service.label}</span>
+                </div>
+
+                <h2 className="relative mt-5 text-xl font-semibold text-neutral-900 dark:text-white">
+                  {service.title}
+                </h2>
+
+                {service.subcopy && (
+                  <p className="relative mt-3 text-sm font-medium text-neutral-700 dark:text-gray-200">
+                    {service.subcopy}
+                  </p>
+                )}
+
+                <ul className="relative mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">
+                  {service.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-3">
                       <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
                       <span>{bullet}</span>
                     </li>
                   ))}
                 </ul>
+
+                <div className="relative mt-6 pt-4 text-base font-semibold text-neutral-900 dark:text-white">
+                  {service.price}
+                </div>
               </motion.article>
             ))}
           </div>
