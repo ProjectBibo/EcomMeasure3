@@ -53,7 +53,7 @@ function VariantHistogram({ histogram }) {
 
   if (!histogram?.bins?.length) {
     return (
-      <div className="h-24 w-full rounded-md bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-xs text-neutral-500">
+      <div className="h-24 w-full rounded-md bg-neutral-100 flex items-center justify-center text-xs text-neutral-500">
         Onvoldoende data voor grafiek
       </div>
     );
@@ -73,7 +73,7 @@ function VariantHistogram({ histogram }) {
       role="img"
       aria-label="Verdeling van uplift"
       viewBox={`0 0 ${width} ${height}`}
-      className="h-24 w-full rounded-md bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 p-1"
+      className="h-24 w-full rounded-md bg-gradient-to-b from-white to-neutral-50 p-1"
     >
       <polyline
         points={points}
@@ -87,7 +87,7 @@ function VariantHistogram({ histogram }) {
         x2={width / 2}
         y1={0}
         y2={height}
-        className="stroke-neutral-200 dark:stroke-neutral-700"
+        className="stroke-neutral-200 "
         strokeDasharray="4 4"
       />
     </svg>
@@ -248,16 +248,16 @@ export default function BayesianAbCalculator() {
   }
 
   return (
-    <section className="mt-12 rounded-3xl bg-white/90 p-6 shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+    <section className="mt-12 rounded-3xl bg-white/90 p-6 shadow-lg ring-1 ring-black/5 ">
       <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-brand-blue">
             Bayesian CRO toolkit
           </p>
-          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">
+          <h2 className="text-2xl font-semibold text-neutral-900 ">
             A/B-test calculator
           </h2>
-          <p className="mt-1 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
+          <p className="mt-1 max-w-2xl text-sm text-neutral-600 ">
             Analyseer Goals of Ecommerce data met 100.000 Monte Carlo-iteraties. Ontvang direct de kans dat een variant beter is,
             credible intervals en de business case.
           </p>
@@ -269,7 +269,7 @@ export default function BayesianAbCalculator() {
             className={`rounded-full px-4 py-2 text-sm font-medium transition ${
               mode === "goals"
                 ? "bg-brand-blue text-white shadow"
-                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 "
             }`}
           >
             Goals-modus
@@ -280,7 +280,7 @@ export default function BayesianAbCalculator() {
             className={`rounded-full px-4 py-2 text-sm font-medium transition ${
               mode === "ecommerce"
                 ? "bg-brand-teal text-white shadow"
-                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 "
             }`}
           >
             Ecommerce-modus
@@ -293,10 +293,10 @@ export default function BayesianAbCalculator() {
           {variants.map((variant, index) => (
             <div
               key={variant.id}
-              className="rounded-2xl border border-neutral-200/80 bg-white/70 p-5 shadow-sm dark:border-neutral-700 dark:bg-neutral-900/60"
+              className="rounded-2xl border border-neutral-200/80 bg-white/70 p-5 shadow-sm "
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
+                <h3 className="text-lg font-semibold text-neutral-900 ">
                   {variant.name || `Variant ${index}`}
                 </h3>
                 {index > 1 && (
@@ -316,7 +316,7 @@ export default function BayesianAbCalculator() {
                     type="text"
                     value={variant.name}
                     onChange={(event) => handleVariantChange(index, "name", event.target.value)}
-                    className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                    className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                   />
                 </label>
                 <label className="block text-xs font-semibold uppercase tracking-wide text-neutral-500">
@@ -327,7 +327,7 @@ export default function BayesianAbCalculator() {
                     min="0"
                     value={variant.visitors}
                     onChange={(event) => handleVariantChange(index, "visitors", event.target.value)}
-                    className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                    className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                   />
                 </label>
                 <label className="block text-xs font-semibold uppercase tracking-wide text-neutral-500">
@@ -338,7 +338,7 @@ export default function BayesianAbCalculator() {
                     min="0"
                     value={variant.conversions}
                     onChange={(event) => handleVariantChange(index, "conversions", event.target.value)}
-                    className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                    className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                   />
                 </label>
                 {hasEcommerceFields ? (
@@ -350,7 +350,7 @@ export default function BayesianAbCalculator() {
                         min="0"
                         value={variant.transactions}
                         onChange={(event) => handleVariantChange(index, "transactions", event.target.value)}
-                        className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                        className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                       />
                     </label>
                     <label className="block text-xs font-semibold uppercase tracking-wide text-neutral-500">
@@ -360,7 +360,7 @@ export default function BayesianAbCalculator() {
                         min="0"
                         value={variant.revenue}
                         onChange={(event) => handleVariantChange(index, "revenue", event.target.value)}
-                        className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                        className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                       />
                     </label>
                     <label className="block text-xs font-semibold uppercase tracking-wide text-neutral-500">
@@ -371,7 +371,7 @@ export default function BayesianAbCalculator() {
                         step="0.1"
                         value={variant.productsPerOrder}
                         onChange={(event) => handleVariantChange(index, "productsPerOrder", event.target.value)}
-                        className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                        className="mt-1 w-full rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                       />
                     </label>
                   </>
@@ -393,12 +393,12 @@ export default function BayesianAbCalculator() {
                   min="1"
                   value={testDurationValue}
                   onChange={(event) => setTestDurationValue(event.target.value)}
-                  className="w-20 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                  className="w-20 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                 />
                 <select
                   value={testDurationUnit}
                   onChange={(event) => setTestDurationUnit(event.target.value)}
-                  className="rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                  className="rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                 >
                   {DURATION_OPTIONS.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -422,7 +422,7 @@ export default function BayesianAbCalculator() {
                     className={`rounded-full px-3 py-1 text-sm font-medium ${
                       businessPeriodMonths === period
                         ? "bg-brand-yellow text-neutral-900"
-                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300"
+                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 "
                     }`}
                   >
                     {period} mnd
@@ -441,7 +441,7 @@ export default function BayesianAbCalculator() {
                 max="100"
                 value={trafficShare}
                 onChange={(event) => setTrafficShare(event.target.value)}
-                className="mt-1 w-24 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                className="mt-1 w-24 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
               />
             </div>
 
@@ -454,7 +454,7 @@ export default function BayesianAbCalculator() {
                   <select
                     value={goalType}
                     onChange={(event) => setGoalType(event.target.value)}
-                    className="mt-1 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                    className="mt-1 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                   >
                     {GOAL_OPTIONS.map((option) => (
                       <option key={option} value={option}>
@@ -472,7 +472,7 @@ export default function BayesianAbCalculator() {
                     min="0"
                     value={averageOrderValue}
                     onChange={(event) => setAverageOrderValue(event.target.value)}
-                    className="mt-1 w-32 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-800"
+                    className="mt-1 w-32 rounded-md border border-neutral-200 px-3 py-2 text-sm shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40 "
                   />
                 </div>
               </>
@@ -511,10 +511,10 @@ export default function BayesianAbCalculator() {
               <p className="text-sm font-medium text-brand-blue">
                 Monte Carlo output ({results.iterations.toLocaleString()} iteraties)
               </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs text-neutral-500 ">
                 Baseline: {results.variants[0].name} – {formatPercentage(results.variants[0].conversionMean)} conversie
               </p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs text-neutral-500 ">
                 Modus: {mode === "goals" ? `Goals (${goalType})` : "Ecommerce"}
               </p>
             </div>
@@ -522,14 +522,14 @@ export default function BayesianAbCalculator() {
               <button
                 type="button"
                 onClick={handleExportCsv}
-                className="rounded-full border border-neutral-300 px-4 py-2 text-xs font-medium text-neutral-700 hover:border-brand-blue hover:text-brand-blue dark:border-neutral-700 dark:text-neutral-300"
+                className="rounded-full border border-neutral-300 px-4 py-2 text-xs font-medium text-neutral-700 hover:border-brand-blue hover:text-brand-blue "
               >
                 Exporteer CSV
               </button>
               <button
                 type="button"
                 onClick={handleExportPdf}
-                className="rounded-full border border-neutral-300 px-4 py-2 text-xs font-medium text-neutral-700 hover:border-brand-blue hover:text-brand-blue dark:border-neutral-700 dark:text-neutral-300"
+                className="rounded-full border border-neutral-300 px-4 py-2 text-xs font-medium text-neutral-700 hover:border-brand-blue hover:text-brand-blue "
               >
                 Exporteer PDF
               </button>
@@ -537,7 +537,7 @@ export default function BayesianAbCalculator() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-800">
+            <table className="min-w-full divide-y divide-neutral-200 ">
               <thead>
                 <tr className="text-xs uppercase tracking-wide text-neutral-500">
                   <th className="px-4 py-3 text-left">Variant</th>
@@ -548,26 +548,26 @@ export default function BayesianAbCalculator() {
                   <th className="px-4 py-3 text-left">Omzet / bezoeker</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+              <tbody className="divide-y divide-neutral-100 ">
                 {results.variants.map((variant, index) => {
                   const ptbbLabel = `${(variant.ptbb * 100).toFixed(1)}%`;
-                  const badgeTone = index === 0 ? "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300" : getPtbbTone(variant.ptbb);
+                  const badgeTone = index === 0 ? "bg-neutral-100 text-neutral-600 " : getPtbbTone(variant.ptbb);
                   const upliftDisplay = `${(variant.upliftMean * 100).toFixed(2)}%`;
                   const intervalLabel = index === 0
                     ? "0,00% – 0,00%"
                     : `${(variant.credibleInterval.low * 100).toFixed(2)}% – ${(variant.credibleInterval.high * 100).toFixed(2)}%`;
                   return (
                     <tr key={variant.id || variant.name} className="text-sm">
-                      <td className="px-4 py-3 font-medium text-neutral-900 dark:text-white">
+                      <td className="px-4 py-3 font-medium text-neutral-900 ">
                         <div>{variant.name}</div>
                         <p className="text-xs text-neutral-500">
                           {variant.conversions} conversies van {variant.visitors} bezoekers
                         </p>
                       </td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-200">
+                      <td className="px-4 py-3 text-neutral-700 ">
                         {formatPercentage(variant.conversionMean)}
                       </td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-200">
+                      <td className="px-4 py-3 text-neutral-700 ">
                         <span className={
                           variant.upliftMean > 0
                             ? "text-emerald-600"
@@ -583,10 +583,10 @@ export default function BayesianAbCalculator() {
                           {ptbbLabel}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-200">
+                      <td className="px-4 py-3 text-neutral-700 ">
                         <span title="95% credible interval voor uplift">{intervalLabel}</span>
                       </td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-200">
+                      <td className="px-4 py-3 text-neutral-700 ">
                         {formatCurrency(variant.revenuePerVisitorMean)}
                       </td>
                     </tr>
@@ -598,9 +598,9 @@ export default function BayesianAbCalculator() {
 
           <div className="grid gap-6 md:grid-cols-2">
             {results.variants.map((variant, index) => (
-              <div key={`${variant.name}-viz`} className="rounded-2xl border border-neutral-200/80 bg-white/80 p-5 shadow-sm dark:border-neutral-700 dark:bg-neutral-900/60">
+              <div key={`${variant.name}-viz`} className="rounded-2xl border border-neutral-200/80 bg-white/80 p-5 shadow-sm ">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  <h4 className="text-sm font-semibold text-neutral-900 ">
                     {variant.name}
                   </h4>
                   {index !== 0 && (
@@ -609,14 +609,14 @@ export default function BayesianAbCalculator() {
                     </span>
                   )}
                 </div>
-                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <p className="mt-1 text-xs text-neutral-500 ">
                   Uplift distributie op basis van {formatCompactNumber(results.iterations)} runs.
                 </p>
                 <div className="mt-4">
                   <VariantHistogram histogram={variant.histogram} />
                 </div>
                 {index !== 0 && (
-                  <p className="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+                  <p className="mt-3 text-xs text-neutral-500 ">
                     95% van de simulaties valt tussen <strong>{(variant.credibleInterval.low * 100).toFixed(2)}%</strong> en
                     <strong> {(variant.credibleInterval.high * 100).toFixed(2)}%</strong> uplift.
                   </p>
@@ -627,25 +627,25 @@ export default function BayesianAbCalculator() {
 
           <div className="grid gap-4 md:grid-cols-3">
             {results.variants.map((variant, index) => (
-              <div key={`${variant.name}-business`} className="rounded-2xl border border-brand-teal/30 bg-brand-teal/5 p-5 dark:border-brand-teal/20 dark:bg-brand-teal/10">
-                <h5 className="text-sm font-semibold text-neutral-900 dark:text-white">
+              <div key={`${variant.name}-business`} className="rounded-2xl border border-brand-teal/30 bg-brand-teal/5 p-5 ">
+                <h5 className="text-sm font-semibold text-neutral-900 ">
                   Business case – {variant.name}
                 </h5>
-                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-300">
+                <p className="mt-1 text-xs text-neutral-500 ">
                   Verwachte omzetimpact over {results.metadata.businessPeriodMonths} maanden.
                 </p>
                 <p className="mt-3 text-2xl font-semibold text-brand-teal">
                   {formatCurrency(variant.revenueImpact.mean)}
                 </p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                <p className="text-xs text-neutral-500 ">
                   CI95: {formatCurrency(variant.revenueImpact.low)} – {formatCurrency(variant.revenueImpact.high)}
                 </p>
                 {index === 0 ? (
-                  <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  <p className="mt-2 text-xs text-neutral-500 ">
                     Baseline referentie op basis van huidige data.
                   </p>
                 ) : (
-                  <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  <p className="mt-2 text-xs text-neutral-500 ">
                     Inclusief traffic share van {trafficShare}% en extrapolatie van testperiode ({testDurationValue} {DURATION_OPTIONS.find((option) => option.value === testDurationUnit)?.label}).
                   </p>
                 )}

@@ -3,7 +3,7 @@ export const translations = {
     seo: {
       title: "EcomMeasure – Meet en optimaliseer je e-commerce groei",
       description:
-        "EcomMeasure richt GA4, Consent Mode en CRO-experimenten in voor webshops die hun volledige funnel willen verbeteren.",
+        "EcomMeasure richt GA4 en CRO-experimenten in voor webshops die hun volledige funnel willen verbeteren.",
     },
     header: {
       nav: {
@@ -22,11 +22,6 @@ export const translations = {
           title: "Measurement",
           href: "/measurement",
           subtitle: "GA4 & GTM events",
-        },
-        {
-          title: "Consent Mode v2",
-          href: "/consent-mode",
-          subtitle: "AVG/GDPR proof",
         },
         {
           title: "CRO",
@@ -72,70 +67,8 @@ export const translations = {
         preferences: "Voorkeuren",
       },
     },
-    commandPalette: {
-      title: "Waar wil je heen?",
-      description: "Typ om pagina's, diensten of acties te vinden.",
-      placeholder: "Zoek of typ een actie",
-      empty: "Geen resultaten gevonden",
-      close: "Sluit command palette",
-      shortcutsHint: "Gebruik ↑ ↓ om te navigeren, Enter om te openen.",
-      resultsCount: {
-        singular: "1 resultaat",
-        plural: "{{count}} resultaten",
-      },
-      groups: {
-        primary: "Pagina's en acties",
-      },
-      actions: {
-        home: {
-          title: "Startpagina",
-          description: "Ga terug naar het overzicht van alle diensten.",
-          keywords: ["home", "start", "startpagina", "overzicht"],
-        },
-        about: {
-          title: "Over EcomMeasure",
-          description: "Lees het verhaal en de werkwijze achter EcomMeasure.",
-          keywords: ["over", "achtergrond", "visie", "missie"],
-        },
-        cases: {
-          title: "Cases",
-          description: "Bekijk gerealiseerde groei en learnings.",
-          keywords: ["cases", "bewijzen", "social proof", "resultaten"],
-        },
-        measurement: {
-          title: "Measurement",
-          description: "Ontdek hoe GA4, GTM en datalagen worden ingericht.",
-          keywords: ["measurement", "ga4", "gtm", "tracking", "tagging"],
-        },
-        consentMode: {
-          title: "Consent Mode v2",
-          description: "Alles over een AVG-proof Consent Mode implementatie.",
-          keywords: ["consent", "privacy", "avg", "gdpr", "cmp"],
-        },
-        cro: {
-          title: "CRO",
-          description: "Lees hoe experimenten en research conversie laten groeien.",
-          keywords: ["cro", "conversie", "optimalisatie", "a/b-test", "experimenten"],
-        },
-        bayesianCalculator: {
-          title: "Bayesiaanse A/B-test calculator",
-          description: "Bereken de kans dat een variant wint op basis van data.",
-          keywords: ["bayesiaans", "calculator", "ab test", "statistiek"],
-        },
-        croRoiCalculator: {
-          title: "CRO ROI calculator",
-          description: "Bereken het rendement van jouw CRO-traject.",
-          keywords: ["roi", "calculator", "business case", "groei"],
-        },
-        contact: {
-          title: "Plan een kennismaking",
-          description: "Plan direct een call of afspraak.",
-          keywords: ["contact", "kennismaking", "afspraak", "plan"],
-        },
-      },
-    },
-    hero: {
-      badge: "Measurement & CRO voor e-commerce",
+      hero: {
+        badge: "Measurement & CRO voor e-commerce",
       titleLead: "Word het volgende",
       rotatingPhrases: [
         "groeiverhaal",
@@ -145,7 +78,7 @@ export const translations = {
         "e-commerce icoon",
         "merk dat elke klik begrijpt",
       ],
-      titleHighlight: "GA4, Consent Mode v2 en bewezen CRO-experimenten",
+        titleHighlight: "GA4 en bewezen CRO-experimenten",
       description:
         "Ik richt je meetstack in, verbind advertentieplatformen en vertaal inzichten naar A/B-tests die omzet en klantbeleving laten groeien.",
       primaryCta: "Plan een kennismaking",
@@ -170,7 +103,7 @@ export const translations = {
       storyline: [
         {
           title: "Measurement op orde",
-          copy: "Consent Mode v2, cookiebanner en events zorgen dat elke klik AVG-proof gemeten wordt.",
+          copy: "Heldere datalagen en events zorgen dat elke klik betrouwbaar en compliant wordt gemeten.",
         },
         {
           title: "Verbeteren met vertrouwen",
@@ -186,7 +119,6 @@ export const translations = {
         "EcomMeasure combineert een waterdichte meetsetup met conversie optimalisatie. Zo weet je zeker dat verbeteringen worden onderbouwd én doorgevoerd.",
       bullets: [
         "Volledige inrichting van GA4 en GTM met e-commerce events.",
-        "Consent Mode v2 en cookiebanners conform AVG/GDPR.",
         "Advertentieplatformen gekoppeld voor volledige attributie.",
       ],
       cards: [
@@ -194,11 +126,6 @@ export const translations = {
           title: "Measurement fundamentals",
           text: "GA4, GTM en server-side tagging staan strak ingericht zodat data direct bruikbaar is.",
           detail: "Inclusief Looker Studio dashboards voor omzet, funnel en kanalen.",
-        },
-        {
-          title: "Consent Mode v2",
-          text: "Juridisch en technisch compliant: cookiebanners, CMP-integraties en documentatie in één pakket.",
-          detail: "Klaar voor audits en interne overdracht.",
         },
         {
           title: "CRO research",
@@ -256,17 +183,17 @@ export const translations = {
       heading: "Zo werken we van nulmeting naar groei",
       description:
         "Een duidelijke roadmap waarin measurement en CRO elkaar versterken. Jij houdt grip op tempo, kwaliteit en resultaten.",
-      steps: [
-        {
-          title: "Audit & nulmeting",
-          text: "Analyse van je huidige GA4, GTM en consent setup inclusief risico's en gemiste data.",
-          deliverable: "Auditrapport + prioriteiten",
-        },
-        {
-          title: "Implementatie & connecties",
-          text: "Consent Mode v2, cookiebanners en koppelingen met Google Ads en Meta Conversion API worden ingericht.",
-          deliverable: "Waterdichte meetstack",
-        },
+        steps: [
+          {
+            title: "Audit & nulmeting",
+            text: "Analyse van je huidige GA4, GTM en tagging setup inclusief risico's en gemiste data.",
+            deliverable: "Auditrapport + prioriteiten",
+          },
+          {
+            title: "Implementatie & connecties",
+            text: "Tracking, cookiebanners en koppelingen met Google Ads en Meta Conversion API worden ingericht.",
+            deliverable: "Waterdichte meetstack",
+          },
         {
           title: "CRO sprint",
           text: "Onderzoek klantgedrag, formuleer hypotheses en draai A/B-tests die funnel metrics verbeteren.",
@@ -281,15 +208,15 @@ export const translations = {
     },
     showcase: {
       eyebrow: "Scrollstory",
-      scenes: [
-        {
-          eyebrow: "Stap 1",
-          title: "Consent Mode v2 live in 48 uur",
-          description:
-            "We brengen CMP, cookiebanner en events samen zodat je direct compliant data verzamelt.",
-          stat: "100%",
-          sub: "AVG-proof tracking",
-        },
+        scenes: [
+          {
+            eyebrow: "Stap 1",
+            title: "Meetstack live in 48 uur",
+            description:
+              "We brengen CMP, cookiebanner en events samen zodat je direct betrouwbare data verzamelt.",
+            stat: "100%",
+            sub: "AVG-proof tracking",
+          },
         {
           eyebrow: "Stap 2",
           title: "Koppelingen met advertentieplatformen",
@@ -420,13 +347,13 @@ export const translations = {
         },
       },
     },
-    case: {
-      badge: "Case spotlight",
-      title: "Hoe een fashion retailer 21% meer omzet boekte",
-      description:
-        "Met een heringerichte meetstack, Consent Mode v2 en gerichte A/B-tests groeide zowel de conversie als de gemiddelde orderwaarde.",
-      bullets: [
-        "GA4 + GTM opnieuw ingericht met enhanced e-commerce events.",
+      case: {
+        badge: "Case spotlight",
+        title: "Hoe een fashion retailer 21% meer omzet boekte",
+        description:
+          "Met een heringerichte meetstack en gerichte A/B-tests groeide zowel de conversie als de gemiddelde orderwaarde.",
+        bullets: [
+          "GA4 + GTM opnieuw ingericht met enhanced e-commerce events.",
         "Google Ads en Meta Conversion API gekoppeld voor volledige attributie.",
         "CRO-sprint met drie winnende experimenten in checkout en productdetail.",
       ],
@@ -486,14 +413,13 @@ export const translations = {
       intro:
         "Samen bouwen we aan een meet- en optimalisatieprogramma dat aansluit op jouw doelen en budget.",
       columns: {
-        measurement: {
-          title: "Measurement",
-          items: [
-            { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
-            { label: "Consent Mode v2", href: "/consent-mode" },
-            { label: "Looker Studio", href: "/measurement/looker-studio" },
-          ],
-        },
+          measurement: {
+            title: "Measurement",
+            items: [
+              { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
+              { label: "Looker Studio", href: "/measurement/looker-studio" },
+            ],
+          },
         cro: {
           title: "Conversion Rate Optimization",
           items: [
@@ -522,7 +448,7 @@ export const translations = {
     seo: {
       title: "EcomMeasure – Measure and optimise your e-commerce growth",
       description:
-        "EcomMeasure configures GA4, Consent Mode and CRO experiments for online stores that want predictable growth.",
+        "EcomMeasure configures GA4 and CRO experiments for online stores that want predictable growth.",
     },
     header: {
       nav: {
@@ -536,20 +462,15 @@ export const translations = {
         contact: "Contact",
       },
       cta: "Book an intro call",
-      columns: [
-        {
-          title: "Measurement",
-          href: "/measurement",
-          subtitle: "GA4 & GTM events",
-        },
-        {
-          title: "Consent Mode v2",
-          href: "/consent-mode",
-          subtitle: "GDPR compliant",
-        },
-        {
-          title: "CRO",
-          href: "/cro",
+        columns: [
+          {
+            title: "Measurement",
+            href: "/measurement",
+            subtitle: "GA4 & GTM events",
+          },
+          {
+            title: "CRO",
+            href: "/cro",
           subtitle: "A/B testing roadmap",
         },
       ],
@@ -576,84 +497,18 @@ export const translations = {
           en: "Translate the website to Dutch",
         },
       },
-      menu: {
-        label: "Menu",
-        open: "Open main navigation",
-        close: "Close main navigation",
-      },
-      command: {
-        aria: "Open the command palette",
-        label: "Search (⌘K)",
-      },
-      mobileMenu: {
-        title: "Navigate",
-        subtitle: "Jump to a section or adjust your preferences.",
-        preferences: "Preferences",
-      },
-    },
-    commandPalette: {
-      title: "Where do you want to go?",
-      description: "Type to jump to pages, services or actions.",
-      placeholder: "Search or type an action",
-      empty: "No results found",
-      close: "Close command palette",
-      shortcutsHint: "Use ↑ ↓ to move, Enter to open.",
-      resultsCount: {
-        singular: "1 result",
-        plural: "{{count}} results",
-      },
-      groups: {
-        primary: "Pages and quick actions",
-      },
-      actions: {
-        home: {
-          title: "Homepage",
-          description: "Return to the main overview of services and cases.",
-          keywords: ["home", "start", "overview", "landing"],
+        menu: {
+          label: "Menu",
+          open: "Open main navigation",
+          close: "Close main navigation",
         },
-        about: {
-          title: "About EcomMeasure",
-          description: "Learn more about the story and approach behind EcomMeasure.",
-          keywords: ["about", "team", "background", "story"],
-        },
-        cases: {
-          title: "Cases",
-          description: "Explore proven uplift stories.",
-          keywords: ["cases", "proof", "social proof", "results"],
-        },
-        measurement: {
-          title: "Measurement",
-          description: "See how GA4, GTM and data layers are configured end-to-end.",
-          keywords: ["measurement", "ga4", "gtm", "tracking", "tagging"],
-        },
-        consentMode: {
-          title: "Consent Mode v2",
-          description: "Everything you need for a GDPR-proof consent setup.",
-          keywords: ["consent", "privacy", "gdpr", "cmp", "compliance"],
-        },
-        cro: {
-          title: "CRO",
-          description: "Discover how research and experiments lift conversion.",
-          keywords: ["cro", "conversion", "optimisation", "ab test", "experiments"],
-        },
-        bayesianCalculator: {
-          title: "Bayesian A/B test calculator",
-          description: "Calculate the probability that a variant wins based on your data.",
-          keywords: ["bayesian", "calculator", "ab test", "statistics"],
-        },
-        croRoiCalculator: {
-          title: "CRO ROI calculator",
-          description: "Estimate the return on investment of your CRO roadmap.",
-          keywords: ["roi", "calculator", "business case", "growth"],
-        },
-        contact: {
-          title: "Book an intro call",
-          description: "Schedule a discovery session.",
-          keywords: ["contact", "intro", "call", "meeting"],
+        mobileMenu: {
+          title: "Navigate",
+          subtitle: "Jump to a section or adjust your preferences.",
+          preferences: "Preferences",
         },
       },
-    },
-    hero: {
+      hero: {
       badge: "Measurement & CRO for e-commerce",
       titleLead: "Become the next",
       rotatingPhrases: [
@@ -664,7 +519,7 @@ export const translations = {
         "e-commerce icon",
         "brand that understands every click",
       ],
-      titleHighlight: "GA4, Consent Mode v2 and proven CRO experiments",
+        titleHighlight: "GA4 and proven CRO experiments",
       description:
         "I align your measurement stack, connect ad platforms and translate insights into experiments that grow revenue and customer experience.",
       primaryCta: "Book an intro call",
@@ -689,7 +544,7 @@ export const translations = {
       storyline: [
         {
           title: "Measurement foundations",
-          copy: "Consent Mode v2, cookie banner and events ensure every click is measured in a GDPR-safe way.",
+          copy: "Clear data layers, banners and events ensure every click is measured responsibly.",
         },
         {
           title: "Improve with confidence",
@@ -705,7 +560,6 @@ export const translations = {
         "EcomMeasure combines a solid measurement setup with conversion optimisation. Every improvement is backed by data and implemented with your team.",
       bullets: [
         "Full GA4 and GTM configuration with e-commerce events.",
-        "Consent Mode v2 and cookie banners fully compliant with GDPR.",
         "Ad platform integrations for complete attribution.",
       ],
       cards: [
@@ -713,11 +567,6 @@ export const translations = {
           title: "Measurement fundamentals",
           text: "GA4, GTM and server-side tagging are configured so data becomes actionable right away.",
           detail: "Includes Looker Studio dashboards for revenue, funnel and channels.",
-        },
-        {
-          title: "Consent Mode v2",
-          text: "Legal and technical alignment: CMP integrations, documentation and implementation in one package.",
-          detail: "Ready for audits and internal handover.",
         },
         {
           title: "CRO research",
@@ -775,17 +624,17 @@ export const translations = {
       heading: "How we move from baseline to growth",
       description:
         "A clear roadmap where measurement and CRO reinforce each other. You stay in control of pace, quality and outcomes.",
-      steps: [
-        {
-          title: "Audit & baseline",
-          text: "Review your current GA4, GTM and consent setup including risks and missing events.",
-          deliverable: "Audit report & priorities",
-        },
-        {
-          title: "Implementation & connections",
-          text: "Consent Mode v2, cookie banner and integrations with Google Ads and Meta Conversion API are configured.",
-          deliverable: "Reliable measurement stack",
-        },
+        steps: [
+          {
+            title: "Audit & baseline",
+            text: "Review your current GA4, GTM and tagging setup including risks and missing events.",
+            deliverable: "Audit report & priorities",
+          },
+          {
+            title: "Implementation & connections",
+            text: "Tracking, cookie banner and integrations with Google Ads and Meta Conversion API are configured.",
+            deliverable: "Reliable measurement stack",
+          },
         {
           title: "CRO sprint",
           text: "Analyse behaviour, form hypotheses and run A/B-tests that improve funnel metrics.",
@@ -800,15 +649,15 @@ export const translations = {
     },
     showcase: {
       eyebrow: "Scrollstory",
-      scenes: [
-        {
-          eyebrow: "Step 1",
-          title: "Consent Mode v2 live within 48 hours",
-          description:
-            "We align CMP, cookie banner and events so you instantly capture compliant data.",
-          stat: "100%",
-          sub: "GDPR-safe tracking",
-        },
+        scenes: [
+          {
+            eyebrow: "Step 1",
+            title: "Measurement stack live within 48 hours",
+            description:
+              "We align CMP, cookie banner and events so you instantly capture reliable data.",
+            stat: "100%",
+            sub: "GDPR-safe tracking",
+          },
         {
           eyebrow: "Step 2",
           title: "Ad platform connections",
@@ -939,13 +788,13 @@ export const translations = {
         },
       },
     },
-    case: {
-      badge: "Case spotlight",
-      title: "How a fashion retailer grew revenue by 21%",
-      description:
-        "With a redesigned measurement stack, Consent Mode v2 and focused experiments we lifted conversion rate and average order value.",
-      bullets: [
-        "Reimplemented GA4 + GTM with enhanced e-commerce events.",
+      case: {
+        badge: "Case spotlight",
+        title: "How a fashion retailer grew revenue by 21%",
+        description:
+          "With a redesigned measurement stack and focused experiments we lifted conversion rate and average order value.",
+        bullets: [
+          "Reimplemented GA4 + GTM with enhanced e-commerce events.",
         "Connected Google Ads and Meta Conversion API for full attribution.",
         "CRO sprint delivered three winning tests in checkout and product detail.",
       ],
@@ -1005,14 +854,13 @@ export const translations = {
       intro:
         "Together we build a measurement and optimisation programme aligned with your goals and budget.",
       columns: {
-        measurement: {
-          title: "Measurement",
-          items: [
-            { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
-            { label: "Consent Mode v2", href: "/consent-mode" },
-            { label: "Looker Studio", href: "/measurement/looker-studio" },
-          ],
-        },
+          measurement: {
+            title: "Measurement",
+            items: [
+              { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
+              { label: "Looker Studio", href: "/measurement/looker-studio" },
+            ],
+          },
         cro: {
           title: "Conversion Rate Optimisation",
           items: [

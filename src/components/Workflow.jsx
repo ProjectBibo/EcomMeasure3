@@ -10,7 +10,7 @@ export default function Workflow() {
 
   return (
     <section id="workflow" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/8 via-brand-teal/6 to-brand-teal/4 dark:from-brand-blue/12 dark:via-brand-teal/10 dark:to-brand-teal/8" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/8 via-brand-teal/6 to-brand-teal/4 " aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -19,11 +19,11 @@ export default function Workflow() {
           transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
           className="max-w-2xl"
         >
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-700 shadow-sm backdrop-blur dark:bg-white/10 dark:text-white">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-700 shadow-sm backdrop-blur ">
             {t.badge}
           </span>
-          <h2 className="mt-4 vt-heading text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">{t.heading}</h2>
-          <p className="mt-4 text-base text-neutral-600 dark:text-gray-300">{t.description}</p>
+          <h2 className="mt-4 vt-heading text-3xl sm:text-4xl font-bold text-neutral-900 ">{t.heading}</h2>
+          <p className="mt-4 text-base text-neutral-600 ">{t.description}</p>
         </motion.div>
 
         <div className="relative mt-14">
@@ -37,7 +37,7 @@ export default function Workflow() {
                 viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
                 transition={shouldReduceMotion ? undefined : { delay: index * 0.08, duration: 0.6 }}
                 data-tilt-card
-                className="group relative grid gap-5 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[18px_30px_70px_rgba(15,23,42,0.16)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[24px_40px_95px_rgba(15,23,42,0.25)] focus-visible:shadow-[24px_40px_95px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_32px_85px_rgba(2,6,23,0.6)] md:grid-cols-[auto_1fr]"
+                className="group relative grid gap-5 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[18px_30px_70px_rgba(15,23,42,0.16)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[24px_40px_95px_rgba(15,23,42,0.25)] focus-visible:shadow-[24px_40px_95px_rgba(15,23,42,0.25)] md:grid-cols-[auto_1fr]"
               >
                 <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -10px -18px 28px rgba(148,163,184,0.25)" }} />
                 <div className="relative flex h-full items-start justify-center">
@@ -47,8 +47,8 @@ export default function Workflow() {
                   <div className="absolute left-1/2 top-12 hidden h-[calc(100%+1rem)] w-px -translate-x-1/2 bg-brand-blue/20 md:block" aria-hidden />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{step.title}</h3>
-                  <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{step.text}</p>
+                  <h3 className="text-xl font-semibold text-neutral-900 ">{step.title}</h3>
+                  <p className="mt-3 text-sm text-neutral-600 ">{step.text}</p>
                   <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue shadow-[0_12px_28px_rgba(59,130,246,0.2)]">
                     {step.deliverable}
                   </div>

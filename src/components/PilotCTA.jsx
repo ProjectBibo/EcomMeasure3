@@ -3,9 +3,9 @@ import React from "react";
 export default function PilotCTA() {
   return (
     <section id="pilot" className="max-w-7xl mx-auto px-6 py-20">
-      <div data-tilt-card className="rounded-3xl border border-black/5 bg-gradient-to-br from-brand-blue/12 to-brand-teal/10 p-10 shadow-lg transition-[box-shadow,transform] duration-500 focus-visible:shadow-[0_26px_80px_rgba(15,23,42,0.22)] dark:border-white/10 dark:from-brand-blue/25 dark:to-brand-teal/20">
-        <h2 className="vt-heading text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white md:text-4xl">Ben jij mijn eerste pilot-klant?</h2>
-        <p className="mt-3 text-neutral-700 dark:text-gray-200 max-w-2xl">
+      <div data-tilt-card className="rounded-3xl border border-black/5 bg-gradient-to-br from-brand-blue/12 to-brand-teal/10 p-10 shadow-lg transition-[box-shadow,transform] duration-500 focus-visible:shadow-[0_26px_80px_rgba(15,23,42,0.22)] ">
+        <h2 className="vt-heading text-3xl font-extrabold tracking-tight text-neutral-900 md:text-4xl">Ben jij mijn eerste pilot-klant?</h2>
+        <p className="mt-3 text-neutral-700 max-w-2xl">
           Transparant, scherp geprijsd, en binnen 30 dagen live met betrouwbare metingen.
           Jij krijgt focus en momentum — ik lever resultaat en duidelijke rapportages.
         </p>

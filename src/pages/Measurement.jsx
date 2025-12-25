@@ -22,7 +22,6 @@ const services = {
           "Koppelen van Google Search Console & GTM",
           "Uitleg en walk-through (0.5u)",
         ],
-        price: "Vanaf €220 (ex btw)",
       },
       {
         title: "Google Analytics 4 ‘Start plus AVG-compatible cookiebanner’",
@@ -31,7 +30,6 @@ const services = {
           "Koppelen van uw website met Social Media en Google Ads (Facebook Ads e.a. pixels & tracking)",
           "AVG-compatible integratie met een moderne, mobile-first cookiebanner",
         ],
-        price: "Vanaf €440 (ex btw)",
       },
       {
         title: "Google Analytics 4 ‘Advanced’ installatie en configuratie",
@@ -40,7 +38,6 @@ const services = {
           "Inrichten van nieuwe gebeurtenissen en conversies conform zakelijke doelen (leads, clicks on calls, downloads, etc.)",
           "Personaliseren van GA4 interface",
         ],
-        price: "Vanaf €440 (ex btw)",
       },
       {
         title: "Google Analytics 4 ‘E-commerce’ installatie en configuratie",
@@ -49,7 +46,6 @@ const services = {
           "Inrichten Enhanced e-commerce conversies (i.s.m. uw developer of webbureau bij zelf ontworpen systemen)",
           "Personaliseren van GA4 interface",
         ],
-        price: "Vanaf €880 (ex btw)",
       },
     ],
   },
@@ -71,7 +67,6 @@ const services = {
           "Linking Google Search Console & GTM",
           "Walk-through and handover (0.5h)",
         ],
-        price: "From €220 (ex VAT)",
       },
       {
         title: "Google Analytics 4 ‘Start plus GDPR-ready cookie banner’",
@@ -80,7 +75,6 @@ const services = {
           "Connecting your site with social media and Google Ads (Facebook Ads and other pixels & tracking)",
           "GDPR-compatible integration with a modern, mobile-first cookie banner",
         ],
-        price: "From €440 (ex VAT)",
       },
       {
         title: "Google Analytics 4 ‘Advanced’ setup and configuration",
@@ -89,7 +83,6 @@ const services = {
           "Configuring new events and conversions aligned to business goals (leads, click-to-call, downloads, etc.)",
           "Personalising the GA4 interface",
         ],
-        price: "From €440 (ex VAT)",
       },
       {
         title: "Google Analytics 4 ‘E-commerce’ setup and configuration",
@@ -98,7 +91,6 @@ const services = {
           "Implementing enhanced e-commerce conversions (with your developer or agency for custom platforms)",
           "Personalising the GA4 interface",
         ],
-        price: "From €880 (ex VAT)",
       },
     ],
   },
@@ -139,7 +131,7 @@ export default function Measurement() {
       <main
         role="main"
         aria-labelledby="measurement-heading"
-        className="relative overflow-hidden bg-surface-soft pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+        className="relative overflow-hidden bg-surface-soft pb-24 pt-28 "
       >
         <div className="grain-overlay" aria-hidden />
         <div className="relative site-container">
@@ -148,7 +140,7 @@ export default function Measurement() {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
             id="measurement-heading"
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            className="text-balance text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl"
           >
             {copy.heading}
           </motion.h1>
@@ -174,11 +166,11 @@ export default function Measurement() {
                       {card.label}
                     </span>
                   )}
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 dark:text-white">{card.title}</h2>
+                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
                   {card.subcopy && (
-                    <p className="text-sm font-medium text-brand-blue dark:text-brand-teal">{card.subcopy}</p>
+                    <p className="text-sm font-medium text-brand-blue ">{card.subcopy}</p>
                   )}
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 dark:text-gray-300">
+                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
                     {card.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3">
                         <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
@@ -188,9 +180,7 @@ export default function Measurement() {
                   </ul>
                 </div>
 
-                <div className="relative mt-6 flex items-center justify-between border-t border-neutral-200/70 pt-4 text-sm font-semibold text-neutral-900 dark:border-white/10 dark:text-white">
-                  <span>{card.price}</span>
-                </div>
+                <div className="mt-6 h-px bg-neutral-200/70" aria-hidden />
               </motion.article>
             ))}
           </div>
