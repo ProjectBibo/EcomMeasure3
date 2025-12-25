@@ -9,8 +9,8 @@ export default function CaseHighlight() {
   const t = translations[language].case;
 
   return (
-    <section id="case" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-transparent to-brand-teal/12 dark:from-brand-blue/18 dark:via-transparent dark:to-brand-teal/14" aria-hidden />
+    <section id="case" data-snap-section className="relative overflow-hidden bg-surface-light/60">
+      <div className="absolute inset-0 bg-surface-soft" aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, x: -40 }}
@@ -18,10 +18,10 @@ export default function CaseHighlight() {
           viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
           data-tilt-card
-          className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[24px_36px_90px_rgba(15,23,42,0.2)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(15,23,42,0.26)] focus-visible:shadow-[28px_44px_110px_rgba(15,23,42,0.26)] dark:border-white/10 dark:bg-white/10 dark:shadow-[24px_36px_100px_rgba(2,6,23,0.65)]"
+          className="group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm transition-transform duration-300 hover:-translate-y-1 dark:border-white/10 dark:bg-white/5"
         >
-          <div className="pointer-events-none absolute inset-0 rounded-[2.5rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 8px rgba(255,255,255,0.55), inset -14px -20px 34px rgba(148,163,184,0.22)" }} />
-          <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-blue">
+          <div className="pointer-events-none absolute inset-0 rounded-[2.5rem] border border-neutral-100/70 dark:border-white/5" aria-hidden />
+          <span className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-800 dark:text-white">
             {t.badge}
           </span>
           <h3 className="mt-4 text-3xl font-semibold text-neutral-900 dark:text-white">{t.title}</h3>
@@ -38,7 +38,7 @@ export default function CaseHighlight() {
             href="#contact"
             data-magnetic
             data-variant="primary"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-neutral-900 shadow-[0_24px_55px_rgba(255,204,2,0.35)] transition-colors duration-200"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
           >
             {t.cta}
           </a>
@@ -50,7 +50,7 @@ export default function CaseHighlight() {
           viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.1 }}
           data-tilt-card
-          className="group relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/50 shadow-[28px_40px_95px_rgba(15,23,42,0.25)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[32px_44px_110px_rgba(15,23,42,0.3)] focus-visible:shadow-[32px_44px_110px_rgba(15,23,42,0.3)]"
+          className="group relative aspect-[4/5] overflow-hidden rounded-3xl border border-neutral-200 shadow-sm transition-transform duration-300 hover:-translate-y-1"
         >
           <img
             src="/case-after.jpg"
@@ -59,7 +59,7 @@ export default function CaseHighlight() {
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" aria-hidden />
           <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-4 text-white">
             <div>
               <p className="text-sm uppercase tracking-[0.24em] text-white/70">{t.overlay.label}</p>
@@ -67,14 +67,12 @@ export default function CaseHighlight() {
             </div>
             <div className="grid grid-cols-2 gap-3 text-xs uppercase tracking-[0.2em]">
               {t.overlay.stats.map((stat) => (
-                <div key={stat} className="rounded-xl border border-white/30 bg-white/10 p-3 text-center shadow-[0_20px_45px_rgba(15,23,42,0.35)] backdrop-blur">
+                <div key={stat} className="rounded-xl border border-white/30 bg-black/30 p-3 text-center backdrop-blur">
                   {stat.split(" ")[0]} <span className="block text-[10px]">{stat.split(" ").slice(1).join(" ")}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-brand-blue/30 blur-3xl" aria-hidden />
-          <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 8px rgba(255,255,255,0.4), inset -16px -24px 36px rgba(30,64,175,0.3)" }} />
         </motion.div>
       </div>
     </section>
