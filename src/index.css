@@ -218,6 +218,16 @@ body {
   view-transition-name: hero-media;
 }
 
+.rotating-text-wrapper {
+  --hero-rotating-line-height: 1.25;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  line-height: var(--hero-rotating-line-height);
+  height: calc(2 * var(--hero-rotating-line-height) * 1em);
+  overflow: hidden;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
