@@ -139,10 +139,9 @@ export default function Measurement() {
       <main
         role="main"
         aria-labelledby="measurement-heading"
-        className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+        className="relative overflow-hidden bg-[var(--bg)] pb-24 pt-28"
       >
-        <div className="grain-overlay" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6">
+        <div className="relative page-shell max-w-5xl">
           <motion.h1
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -154,8 +153,8 @@ export default function Measurement() {
           </motion.h1>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-6xl px-6">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+        <div className="relative page-shell mt-12 max-w-6xl">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {copy.cards.map((card, index) => (
               <motion.article
                 key={card.title}
@@ -163,19 +162,10 @@ export default function Measurement() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col rounded-3xl border border-white/70 bg-white/85 p-8 shadow-[20px_30px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+                className="card relative flex h-full flex-col p-7"
               >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    boxShadow:
-                      "inset 4px 4px 12px rgba(255,255,255,0.5), inset -14px -18px 34px rgba(148,163,184,0.18)",
-                  }}
-                />
-
                 <div className="relative flex flex-col gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/15">
                     <AnalyticsIcon />
                   </div>
                   {card.label && (
@@ -185,9 +175,9 @@ export default function Measurement() {
                   )}
                   <h2 className="text-xl font-semibold leading-tight text-neutral-900 dark:text-white">{card.title}</h2>
                   {card.subcopy && (
-                    <p className="text-sm font-medium text-brand-blue dark:text-brand-teal">{card.subcopy}</p>
+                    <p className="text-sm font-medium text-brand-blue">{card.subcopy}</p>
                   )}
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 dark:text-gray-300">
+                  <ul className="space-y-3 text-sm leading-relaxed text-[color:var(--muted)]">
                     {card.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3">
                         <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
@@ -197,7 +187,7 @@ export default function Measurement() {
                   </ul>
                 </div>
 
-                <div className="relative mt-6 flex items-center justify-between border-t border-neutral-200/70 pt-4 text-sm font-semibold text-neutral-900 dark:border-white/10 dark:text-white">
+                <div className="relative mt-6 flex items-center justify-between border-t border-[color:var(--border)] pt-4 text-sm font-semibold text-[color:var(--text)]">
                   <span>{card.price}</span>
                 </div>
               </motion.article>

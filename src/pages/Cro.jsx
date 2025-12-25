@@ -129,9 +129,8 @@ export default function Cro() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20">
-        <div className="grain-overlay" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6">
+      <main className="relative overflow-hidden bg-[var(--bg)] pb-24 pt-28">
+        <div className="relative page-shell max-w-5xl">
           <motion.h1
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -142,8 +141,8 @@ export default function Cro() {
           </motion.h1>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-6xl px-6">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="relative page-shell mt-12 max-w-6xl">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {copy.cards.map((card, index) => (
               <motion.article
                 key={card.title}
@@ -151,22 +150,14 @@ export default function Cro() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col rounded-3xl border border-white/70 bg-white/85 p-8 shadow-[20px_30px_85px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_95px_rgba(2,6,23,0.55)]"
+                className="card relative flex h-full flex-col p-7"
               >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    boxShadow:
-                      "inset 3px 3px 10px rgba(255,255,255,0.5), inset -14px -16px 34px rgba(148,163,184,0.2)",
-                  }}
-                />
                 <div className="relative flex flex-col gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/15">
                     <CroIcon />
                   </div>
                   <h2 className="text-xl font-semibold leading-tight text-neutral-900 dark:text-white">{card.title}</h2>
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 dark:text-gray-300">
+                  <ul className="space-y-3 text-sm leading-relaxed text-[color:var(--muted)]">
                     {card.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3">
                         <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
@@ -174,18 +165,18 @@ export default function Cro() {
                       </li>
                     ))}
                   </ul>
-                  <div className="space-y-2 rounded-2xl bg-neutral-50/80 p-4 text-sm leading-relaxed text-neutral-700 ring-1 ring-neutral-200/70 dark:bg-white/5 dark:text-gray-200 dark:ring-white/5">
-                    <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  <div className="space-y-2 rounded-xl bg-[color:var(--surface-muted)] p-4 text-sm leading-relaxed text-[color:var(--muted)] ring-1 ring-[color:var(--border)]">
+                    <h3 className="text-sm font-semibold text-[color:var(--text)]">
                       {language === "nl" ? "Wat we doen" : "What we do"}
                     </h3>
                     <p>{card.whatWeDo}</p>
-                    <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">
+                    <h3 className="text-sm font-semibold text-[color:var(--text)]">
                       {language === "nl" ? "Jij ontvangt" : "You receive"}
                     </h3>
                     <p>{card.deliverable}</p>
                   </div>
                 </div>
-                <div className="relative mt-6 flex items-center justify-between border-t border-neutral-200/70 pt-4 text-sm font-semibold text-neutral-900 dark:border-white/10 dark:text-white">
+                <div className="relative mt-6 flex items-center justify-between border-t border-[color:var(--border)] pt-4 text-sm font-semibold text-[color:var(--text)]">
                   <span>{card.price}</span>
                 </div>
               </motion.article>
