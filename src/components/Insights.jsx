@@ -9,9 +9,9 @@ export default function Insights() {
   const t = translations[language].insights;
 
   return (
-    <section data-snap-section className="relative overflow-hidden">
+    <section data-snap-section className="relative overflow-hidden section-padding">
       <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/60 to-white/80 dark:from-surface-dark/90 dark:via-surface-dark/70 dark:to-surface-dark/90" aria-hidden />
-      <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28">
+      <div className="section-shell relative">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <motion.h2
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -25,7 +25,7 @@ export default function Insights() {
           <p className="max-w-lg text-sm text-neutral-600 dark:text-gray-300">{t.intro}</p>
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
+        <div className="mt-12 grid gap-7 md:grid-cols-2">
           {t.items.map((item, index) => (
             <motion.article
               key={item.title}
@@ -34,11 +34,9 @@ export default function Insights() {
               viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
               transition={shouldReduceMotion ? undefined : { delay: index * 0.1, duration: 0.6 }}
               data-tilt-card
-              className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[18px_28px_75px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[24px_36px_95px_rgba(15,23,42,0.22)] focus-visible:shadow-[24px_36px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_85px_rgba(2,6,23,0.6)]"
+              className="surface-card group relative flex h-full flex-col gap-5 p-7"
             >
-              <div className="pointer-events-none absolute inset-0 rounded-[2.3rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.55), inset -12px -18px 32px rgba(148,163,184,0.2)" }} />
-              <div className="pointer-events-none absolute inset-0 rounded-[2.3rem] bg-gradient-to-br from-white/60 via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
-              <span className="inline-flex items-center rounded-full bg-brand-yellow px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-900 dark:bg-brand-yellow">
+              <span className="pill-badge text-neutral-800 dark:text-white dark:bg-white/10 dark:border-white/15">
                 {item.tag}
               </span>
               <h3 className="mt-5 text-2xl font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
@@ -47,7 +45,6 @@ export default function Insights() {
                 <span className="text-5xl font-black text-brand-blue dark:text-brand-teal">{item.stat}</span>
                 <p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-gray-400">{item.detail}</p>
               </div>
-              <div className="absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden />
             </motion.article>
           ))}
         </div>

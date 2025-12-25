@@ -560,17 +560,17 @@ export default function About() {
             <div className="grid gap-6 md:grid-cols-3">
               {copy.approach.items.map((item, index) => (
                 <motion.div
-                  key={item.title}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-                  whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                  viewport={shouldReduceMotion ? undefined : { once: true }}
-                  transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.1 * index }}
-                  className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
-                >
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-4 text-sm text-neutral-600 dark:text-gray-300">{item.description}</p>
-                </motion.div>
-              ))}
+                key={item.title}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                viewport={shouldReduceMotion ? undefined : { once: true }}
+                transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.1 * index }}
+                className="surface-card p-6"
+              >
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
+                <p className="mt-4 text-sm text-neutral-600 dark:text-gray-300">{item.description}</p>
+              </motion.div>
+            ))}
             </div>
           </section>
 
@@ -591,55 +591,55 @@ export default function About() {
             </motion.div>
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, x: 30 }}
-              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-              viewport={shouldReduceMotion ? undefined : { once: true }}
-              transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-              className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-teal">{copy.personal.listTitle}</p>
-              <ul className="mt-4 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
-                {copy.personal.listItems.map((item) => (
-                  <li key={item} className="flex gap-3">
+                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+                viewport={shouldReduceMotion ? undefined : { once: true }}
+                transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
+                className="surface-card p-8"
+              >
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-teal">{copy.personal.listTitle}</p>
+                <ul className="mt-4 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
+                  {copy.personal.listItems.map((item) => (
+                    <li key={item} className="flex gap-3">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
-          </section>
+            </section>
 
-          <section
-            data-tilt-card
-            className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] focus-visible:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] dark:border-white/10"
-          >
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              viewport={shouldReduceMotion ? undefined : { once: true }}
+            <section
+              data-tilt-card
+              className="surface-card relative overflow-hidden bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white"
+            >
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
               className="space-y-4"
             >
               <h2 className="vt-heading text-3xl font-bold tracking-tight">{copy.cta.heading}</h2>
               <p className="max-w-2xl text-base text-white/90">{copy.cta.body}</p>
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <a
-                  href={copy.cta.primary.href}
-                  data-magnetic
-                  data-variant="secondary"
-                  className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:bg-white"
-                >
-                  {copy.cta.primary.label}
-                </a>
-                <a
-                  href={copy.cta.secondary.href}
-                  data-magnetic
-                  data-variant="secondary"
-                  className="inline-flex items-center justify-center rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-white/10"
-                >
-                  {copy.cta.secondary.label}
-                </a>
-              </div>
-            </motion.div>
+                <div className="flex flex-col gap-4 sm:flex-row">
+                  <a
+                    href={copy.cta.primary.href}
+                    data-magnetic
+                    data-variant="secondary"
+                    className="primary-btn bg-white text-brand-blue"
+                  >
+                    {copy.cta.primary.label}
+                  </a>
+                  <a
+                    href={copy.cta.secondary.href}
+                    data-magnetic
+                    data-variant="secondary"
+                    className="secondary-btn border-white/80 bg-white/10 text-white"
+                  >
+                    {copy.cta.secondary.label}
+                  </a>
+                </div>
+              </motion.div>
           </section>
         </div>
       </main>
