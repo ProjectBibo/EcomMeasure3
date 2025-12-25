@@ -186,11 +186,15 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mt-10 flex justify-center lg:pointer-events-none lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:flex lg:items-center">
+        <div className="relative mt-10 flex justify-center bg-white lg:pointer-events-none lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:flex lg:items-center">
+          <div
+            className="absolute inset-y-0 right-0 hidden w-screen bg-white lg:block"
+            aria-hidden
+          />
           <img
             src="/Ik.svg"
             alt="Portret van [naam], oprichter van EcomMeasure"
-            className="max-w-none w-64 sm:w-80 md:w-96 lg:w-[520px] xl:w-[620px]"
+            className="relative z-10 max-w-none w-56 sm:w-72 md:w-[21rem] lg:w-[480px] xl:w-[560px]"
             loading="eager"
           />
         </div>
