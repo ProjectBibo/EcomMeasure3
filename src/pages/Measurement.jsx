@@ -139,10 +139,10 @@ export default function Measurement() {
       <main
         role="main"
         aria-labelledby="measurement-heading"
-        className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+        className="relative overflow-hidden section-shell"
       >
         <div className="grain-overlay" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6">
+        <div className="layout-shell max-w-5xl">
           <motion.h1
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -154,7 +154,7 @@ export default function Measurement() {
           </motion.h1>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-6xl px-6">
+        <div className="relative mx-auto mt-14 layout-shell max-w-6xl">
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
             {copy.cards.map((card, index) => (
               <motion.article
@@ -163,7 +163,7 @@ export default function Measurement() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col rounded-3xl border border-white/70 bg-white/85 p-8 shadow-[20px_30px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+                className="group relative flex h-full flex-col card-surface bg-white/95 p-8 dark:bg-white/5"
               >
                 <div
                   aria-hidden
