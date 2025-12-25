@@ -124,28 +124,30 @@ export default function Hero() {
                 <span aria-hidden className="pointer-events-none block select-none opacity-0">
                   {longestPhrase}
                 </span>
-                <span
-                  aria-live={shouldReduceMotion ? undefined : "polite"}
-                  className="col-start-1 row-start-1 flex items-start justify-start text-left"
-                >
-                  {shouldReduceMotion ? (
-                    <span className={gradientHeadlineClass}>
-                      {rotatingPhrases[0] ?? ""}
-                    </span>
-                  ) : (
-                    <AnimatePresence mode="wait" initial={false}>
-                      <motion.span
-                        key={activePhrase}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                        className={gradientHeadlineClass}
-                      >
-                        {activePhrase}
-                      </motion.span>
-                    </AnimatePresence>
-                  )}
+                <span className="col-start-1 row-start-1 flex items-start justify-start text-left">
+                  <span
+                    aria-live={shouldReduceMotion ? undefined : "polite"}
+                    className="inline-flex h-[2.6em] items-start leading-[1.05] sm:h-[2.8em] lg:h-[3.2em]"
+                  >
+                    {shouldReduceMotion ? (
+                      <span className={gradientHeadlineClass}>
+                        {rotatingPhrases[0] ?? ""}
+                      </span>
+                    ) : (
+                      <AnimatePresence mode="wait" initial={false}>
+                        <motion.span
+                          key={activePhrase}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -12 }}
+                          transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+                          className={gradientHeadlineClass}
+                        >
+                          {activePhrase}
+                        </motion.span>
+                      </AnimatePresence>
+                    )}
+                  </span>
                 </span>
               </span>
             </motion.h1>
