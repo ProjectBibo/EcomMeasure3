@@ -3,183 +3,280 @@ import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
 
-const services = {
+const cta = {
+  primary: "Plan kennismaking",
+  secondary: "Vraag Quick Scan aan",
+  primaryHref: "/contact",
+  secondaryHref: "/contact?topic=quickscan",
+};
+
+const content = {
   nl: {
     seo: {
-      title: "UX/CRO diensten – expert reviews, analyses & testing",
+      title: "CRO analyse & advies – UX, data en prioritering",
       description:
-        "Drie UX/CRO diensten: expert reviews, kwantitatieve analyses en user testing met duidelijke deliverables en prijzen.",
+        "Drie CRO-analysediensten zonder experimentuitvoering: UX & gedragsanalyse, kwantitatieve data-analyse en optimalisatie-advies met prioritering.",
     },
-    heading: "UX/CRO diensten",
-    cards: [
+    hero: {
+      title: "CRO analyse & advies",
+      intro:
+        "CRO is inzicht, richting en advies. We combineren UX-observaties en data-analyses tot een gerichte roadmap zonder experimentuitvoering. Elke dienst hieronder geeft je heldere stappen, tastbare output en duidelijke keuzes voor je team.",
+    },
+    services: [
       {
-        title: "Kwalitatieve analyse middels UX Expert review",
-        bullets: [
-          "Inspectie én analyse van het gebruikersgemak door UX- en usability expert",
-          "9 universele UX-aandachtsgebieden",
-          "Totaalbeeld met ±150 checkpoints",
+        title: "UX & gedragsanalyse",
+        intro: "Voor teams die willen weten waar gebruikers vastlopen en waarom.",
+        whatWeDo: [
+          "Heuristische review van belangrijkste flows en pagina's",
+          "Analyse van sessiereplays, scroll- en klikgedrag",
+          "Journey mapping met context per device en trafficbron",
+          "Samenvatten van de grootste fricties per stap",
         ],
-        whatWeDo:
-          "We beoordelen flows, pagina's en micro-interacties op basis van best practices en benchmarkcases voor jouw sector.",
-        deliverable: "Jij ontvangt: PDF + toelichting (bondig)",
-        price: "Prijs vanaf €860 (ex btw, afhankelijk van de website)",
+        deliverables: [
+          "Scorecard per flow met concrete bevindingen",
+          "Screenshots en voorbeelden uit replays ter onderbouwing",
+          "Toplijst van UX-blokkades met korte toelichting",
+          "Aanbevolen vervolganalyses per thema",
+        ],
+        outcomes: [
+          "Duidelijk beeld van waar en waarom gebruikers afhaken",
+          "Onderbouwde input voor product- en designbeslissingen",
+          "Snellere validatie van hypotheses zonder tests te draaien",
+        ],
       },
       {
-        title:
-          "Kwantitatieve Analyse naar groeidrivers en verbeterpunten (Google Analytics 4, Google Search e.a.)",
-        bullets: [
-          "Kwantitatieve analyse van gebruikers op je site",
-          "Aangevuld met eyetracking scans",
-          "Aangevuld met onderzoek en inzichten vanuit Google Analytics, Google Search",
+        title: "Kwantitatieve data-analyse",
+        intro: "Voor marketeers en productowners die prioriteit willen geven op basis van cijfers.",
+        whatWeDo: [
+          "Funnel-, cohort- en segmentanalyses op conversie en waarde",
+          "Diepte-analyse van landingspagina's, zoekgedrag en interne zoekresultaten",
+          "Controle op eventkwaliteit en meetdekking in GA4 en dashboarding",
+          "Detectie van afwijkingen per device, bron of campagne",
         ],
-        whatWeDo:
-          "We combineren traffic- en gedragdata met heatmaps en search insights om groeikansen en fricties scherp te krijgen.",
-        deliverable: "Jij ontvangt: presentatie + actie/prioriteitenlijst (bondig)",
-        price: "Prijs vanaf €1400 (ex btw, afhankelijk van de website)",
+        deliverables: [
+          "Analysepresentatie met grafieken en kernbevindingen",
+          "Dataset of exports per segment met uitlegbaarheid",
+          "Prioriteitenlijst met impact- en effortinschatting",
+          "Aanbevolen metriekdefinities en meetverbeteringen",
+        ],
+        outcomes: [
+          "Helder waar omzet of leads lekken in de funnel",
+          "Bewijs om roadmapkeuzes snel te onderbouwen",
+          "Betrouwbare cijfers om interne discussies te versnellen",
+        ],
       },
       {
-        title: "User Testing van de gehele customer journey",
-        bullets: [
-          "Persoonlijk, maatwerk en genormeerd testplan met meetbare doelen",
-          "Tot 5 participanten, via mobile en desktop",
-          "Remote of on-site",
+        title: "Optimalisatie-advies & prioritering",
+        intro: "Voor teams die een beslisbaar plan willen zonder experimentuitvoering.",
+        whatWeDo: [
+          "Synthetiseren van bevindingen uit UX- en dataonderzoek",
+          "Opstellen van verbetervoorstellen met aannames en randvoorwaarden",
+          "Prioriteren met een transparant model (bijv. RICE of PIE)",
+          "Afstemmen met stakeholders over scope, risico's en impact",
         ],
-        whatWeDo:
-          "We begeleiden werving, scripts en moderatie en leggen bevindingen vast in video en notities voor snelle implementatie.",
-        deliverable:
-          "Jij ontvangt: presentatie + gedetailleerde lijst met acties en prioriteiten (bondig)",
-        price: "Prijs vanaf €2500 (ex btw, afhankelijk van de website)",
+        deliverables: [
+          "90-dagen roadmap met duidelijke owners en mijlpalen",
+          "Verbeteracties inclusief rationale, vereisten en voorbeeldcopy",
+          "Risico- en afhankelijkhedenmatrix per actie",
+          "Communicatiepakket voor dev-, design- en marketingteams",
+        ],
+        outcomes: [
+          "Gefocuste backlog die direct uitvoerbaar is",
+          "Snellere besluitvorming met gedeelde prioriteiten",
+          "Minder ruis over wat wel of niet wordt opgepakt",
+        ],
       },
     ],
   },
   en: {
     seo: {
-      title: "UX/CRO services – expert reviews, analysis & testing",
+      title: "CRO analysis & advice – UX, data and prioritisation",
       description:
-        "Three UX/CRO services: expert reviews, quantitative analyses and user testing with clear deliverables and pricing.",
+        "Three CRO analysis services without experiment execution: UX & behavioural analysis, quantitative data analysis and optimisation advice with prioritisation.",
     },
-    heading: "UX/CRO services",
-    cards: [
+    hero: {
+      title: "CRO analysis & advice",
+      intro:
+        "CRO here means insight, direction and advice. We combine UX observations and data analysis into a focused roadmap without running experiments. Each service below gives you clear steps, tangible outputs and confident choices for your team.",
+    },
+    services: [
       {
-        title: "Qualitative analysis via UX expert review",
-        bullets: [
-          "Inspection and analysis of usability by a UX specialist",
-          "9 universal UX focus areas",
-          "Complete overview with roughly 150 checkpoints",
+        title: "UX & behavioural analysis",
+        intro: "For teams that need to see where users get stuck and why.",
+        whatWeDo: [
+          "Heuristic review of key flows and pages",
+          "Analysis of session replays, scroll and click patterns",
+          "Journey mapping with context by device and traffic source",
+          "Summaries of the biggest frictions per step",
         ],
-        whatWeDo:
-          "We assess flows, pages and micro-interactions using best practices and benchmark cases for your industry.",
-        deliverable: "You receive: PDF + briefing (concise)",
-        price: "Pricing from €860 (ex VAT, depending on the site)",
+        deliverables: [
+          "Scorecard per flow with concrete findings",
+          "Screenshots and replay examples as evidence",
+          "Top list of UX blockers with concise notes",
+          "Recommended follow-up analyses per theme",
+        ],
+        outcomes: [
+          "Clear picture of where and why users drop off",
+          "Evidence to inform product and design decisions",
+          "Faster validation of hypotheses without running tests",
+        ],
       },
       {
-        title:
-          "Quantitative analysis of growth drivers and improvements (Google Analytics 4, Google Search, etc.)",
-        bullets: [
-          "Quantitative analysis of user behaviour on your site",
-          "Complemented with eye-tracking scans",
-          "Enriched with research and insights from Google Analytics and Google Search",
+        title: "Quantitative data analysis",
+        intro: "For marketers and product owners who prioritise based on numbers.",
+        whatWeDo: [
+          "Funnel, cohort and segment analysis on conversion and value",
+          "Deep dive into landing pages, search behaviour and onsite search results",
+          "Quality checks on events and coverage in GA4 and dashboards",
+          "Detection of anomalies by device, source or campaign",
         ],
-        whatWeDo:
-          "We combine traffic and behaviour data with heatmaps and search insights to pinpoint opportunities and friction.",
-        deliverable: "You receive: presentation + action/priority list (concise)",
-        price: "Pricing from €1400 (ex VAT, depending on the site)",
+        deliverables: [
+          "Analysis deck with charts and key findings",
+          "Dataset or exports per segment with explanations",
+          "Priority list with impact and effort estimates",
+          "Recommended metric definitions and measurement fixes",
+        ],
+        outcomes: [
+          "Clarity on where revenue or leads leak in the funnel",
+          "Proof to back roadmap decisions quickly",
+          "Reliable numbers to speed up internal alignment",
+        ],
       },
       {
-        title: "User testing of the full customer journey",
-        bullets: [
-          "Tailored, standardised test plan with measurable objectives",
-          "Up to 5 participants on mobile and desktop",
-          "Remote or on-site",
+        title: "Optimisation advice & prioritisation",
+        intro: "For teams that want a decisive plan without executing experiments.",
+        whatWeDo: [
+          "Synthesize findings from UX and data research",
+          "Draft improvement proposals with assumptions and constraints",
+          "Prioritise with a transparent model (e.g. RICE or PIE)",
+          "Align with stakeholders on scope, risks and impact",
         ],
-        whatWeDo:
-          "We handle recruitment, scripts and moderation, documenting insights in video and notes for quick implementation.",
-        deliverable: "You receive: presentation + detailed list of actions and priorities (concise)",
-        price: "Pricing from €2500 (ex VAT, depending on the site)",
+        deliverables: [
+          "90-day roadmap with clear owners and milestones",
+          "Improvement actions including rationale, requirements and sample copy",
+          "Risk and dependency matrix per action",
+          "Communication pack for dev, design and marketing teams",
+        ],
+        outcomes: [
+          "Focused backlog that teams can act on immediately",
+          "Faster decisions with shared priorities",
+          "Less noise about what will or won't be picked up",
+        ],
       },
     ],
   },
 };
 
-const CroIcon = () => (
-  <svg
-    aria-hidden
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32"
-    className="h-10 w-10 text-brand-blue"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M6 20l4-6 5 8 5-10 6 12" />
-    <path d="M4 26h24" />
-    <path d="M8 6h3v3H8z" className="fill-current/15" />
-    <path d="M14.5 8.5h3v3h-3z" className="fill-current/15" />
-    <path d="M22 4h3v3h-3z" className="fill-current/15" />
-  </svg>
-);
-
 export default function Cro() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
-  const copy = services[language];
+  const copy = content[language];
 
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28   ">
+      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28">
         <div className="grain-overlay" aria-hidden />
         <div className="relative site-container">
           <motion.h1
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
+            id="cro-heading"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
+            className="text-balance text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl"
           >
-            {copy.heading}
+            {copy.hero.title}
           </motion.h1>
+          <motion.p
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { delay: 0.08, duration: 0.6 }}
+            className="mt-5 max-w-3xl text-lg text-neutral-700"
+          >
+            {copy.hero.intro}
+          </motion.p>
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { delay: 0.12, duration: 0.55 }}
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
+            <a href={cta.primaryHref} className="button-primary">
+              {cta.primary}
+            </a>
+            <a href={cta.secondaryHref} className="button-secondary">
+              {cta.secondary}
+            </a>
+          </motion.div>
         </div>
 
-        <div className="relative site-container mt-14">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {copy.cards.map((card, index) => (
-              <motion.article
-                key={card.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={shouldReduceMotion ? undefined : { once: true }}
-                transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col card-surface"
-              >
-                <div className="relative flex flex-col gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
-                    <CroIcon />
-                  </div>
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
+        <div className="relative site-container mt-16 space-y-8">
+          {copy.services.map((service, index) => (
+            <motion.section
+              key={service.title}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={shouldReduceMotion ? undefined : { once: true }}
+              transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
+              className="card-surface flex flex-col gap-6"
+            >
+              <div className="space-y-3">
+                <h2 className="text-2xl font-semibold text-neutral-900">{service.title}</h2>
+                <p className="text-base text-neutral-700">{service.intro}</p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-3">
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-blue">
+                    {language === "nl" ? "Wat we doen" : "What we do"}
+                  </h3>
+                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700">
+                    {service.whatWeDo.map((item) => (
+                      <li key={item} className="flex gap-3">
                         <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
-                        <span>{bullet}</span>
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="space-y-2 rounded-2xl bg-neutral-50/80 p-4 text-sm leading-relaxed text-neutral-700 ring-1 ring-neutral-200/70   ">
-                    <h3 className="text-sm font-semibold text-neutral-900 ">
-                      {language === "nl" ? "Wat we doen" : "What we do"}
-                    </h3>
-                    <p>{card.whatWeDo}</p>
-                    <h3 className="text-sm font-semibold text-neutral-900 ">
-                      {language === "nl" ? "Jij ontvangt" : "You receive"}
-                    </h3>
-                    <p>{card.deliverable}</p>
-                  </div>
                 </div>
-              </motion.article>
-            ))}
-          </div>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-blue">
+                    {language === "nl" ? "Wat je ontvangt" : "What you receive"}
+                  </h3>
+                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700">
+                    {service.deliverables.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-blue">
+                    {language === "nl" ? "Wat het oplevert" : "What it delivers"}
+                  </h3>
+                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700">
+                    {service.outcomes.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href={cta.primaryHref} className="button-primary">
+                  {cta.primary}
+                </a>
+                <a href={cta.secondaryHref} className="button-secondary">
+                  {cta.secondary}
+                </a>
+              </div>
+            </motion.section>
+          ))}
         </div>
       </main>
     </>
