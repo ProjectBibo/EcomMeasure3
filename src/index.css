@@ -380,6 +380,8 @@ body {
   gap: .2rem;
   position: relative;
   padding: .35rem 0 .65rem;
+  text-decoration: none;
+  color: inherit;
 }
 .svc-head {
   font-weight: 700;
@@ -418,6 +420,8 @@ body {
   border-radius: 6px;
   background: color-mix(in oklab, #000 3%, transparent);
   border: 1px solid color-mix(in oklab, #000 6%, transparent);
+  text-decoration: none;
+  color: inherit;
 }
 /* ===== Kleine hover lift voor CTA ===== */
 .hover-lift { transform: translateY(0); }
