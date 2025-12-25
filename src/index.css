@@ -374,27 +374,42 @@ body {
 }
 
 /* ===== Diensten-kolommen (bottom bar) ===== */
-.svc-col { 
-  display: grid; 
-  align-content: center; 
-  gap: .2rem; 
+.svc-col {
+  display: grid;
+  align-content: center;
+  gap: .2rem;
+  position: relative;
+  padding: .35rem 0 .65rem;
+  text-decoration: none;
+  color: inherit;
 }
 .svc-head {
-  font-weight: 700; 
+  font-weight: 700;
+  font-size: 1.05rem;
   letter-spacing: .2px;
   color: color-mix(in oklab, #0a0a0a 90%, transparent);
   text-decoration: none;
 }
 .svc-sub {
-  font-size: .875rem;
-  line-height: 1.15;
+  font-size: .95rem;
+  line-height: 1.2;
   text-decoration: none;
-  color: color-mix(in oklab, #0a0a0a 75%, transparent);
-  opacity: .9;
+  color: color-mix(in oklab, #0a0a0a 62%, transparent);
+  opacity: .95;
 }
-.svc-sub:hover, 
-.svc-head:hover { 
-  filter: brightness(0.98); 
+.svc-col::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #FFCC02;
+  opacity: 0;
+}
+
+.svc-col:hover::after {
+  opacity: 1;
 }
 
 /* ===== Mobile varianten (horizontale scroller) ===== */
@@ -405,6 +420,8 @@ body {
   border-radius: 6px;
   background: color-mix(in oklab, #000 3%, transparent);
   border: 1px solid color-mix(in oklab, #000 6%, transparent);
+  text-decoration: none;
+  color: inherit;
 }
 /* ===== Kleine hover lift voor CTA ===== */
 .hover-lift { transform: translateY(0); }

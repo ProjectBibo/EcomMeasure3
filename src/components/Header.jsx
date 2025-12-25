@@ -520,18 +520,17 @@ export default function Header() {
 
             <div className="hidden items-stretch gap-8 md:flex">
               {t.columns.map((column) => (
-                <div key={column.title} className="svc-col">
-                  <Link
-                    to={column.href}
-                    className="svc-head"
-                    onMouseEnter={() => prefetchRoute(column.href)}
-                    onFocus={() => prefetchRoute(column.href)}
-                    onClick={navClickFactory(column.href)}
-                  >
-                    {column.title}
-                  </Link>
+                <Link
+                  key={column.title}
+                  to={column.href}
+                  className="svc-col"
+                  onMouseEnter={() => prefetchRoute(column.href)}
+                  onFocus={() => prefetchRoute(column.href)}
+                  onClick={navClickFactory(column.href)}
+                >
+                  <span className="svc-head">{column.title}</span>
                   <span className="svc-sub">{column.subtitle}</span>
-                </div>
+                </Link>
               ))}
             </div>
 
@@ -551,23 +550,22 @@ export default function Header() {
           </div>
 
           <div className="px-4 pb-4 sm:px-6 md:hidden">
-            <div className="flex items-center justify-between">
-              <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-                {t.columns.map((column) => (
-                  <div key={column.title} className="svc-col-mobile">
+              <div className="flex items-center justify-between">
+                <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+                  {t.columns.map((column) => (
                     <Link
+                      key={column.title}
                       to={column.href}
-                      className="svc-head"
+                      className="svc-col-mobile"
                       onMouseEnter={() => prefetchRoute(column.href)}
                       onFocus={() => prefetchRoute(column.href)}
                       onClick={navClickFactory(column.href)}
                     >
-                      {column.title}
+                      <span className="svc-head">{column.title}</span>
+                      <span className="svc-sub">{column.subtitle}</span>
                     </Link>
-                    <span className="svc-sub">{column.subtitle}</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
               <Link
                 to="/contact"
                 data-magnetic

@@ -19,14 +19,14 @@ export const translations = {
       cta: "Plan een kennismaking",
       columns: [
         {
-          title: "Measurement",
+          title: "Meer meten",
           href: "/measurement",
-          subtitle: "GA4 & GTM events",
+          subtitle: "Google Analytics 4",
         },
         {
-          title: "CRO",
+          title: "Optimaliseer je website",
           href: "/cro",
-          subtitle: "A/B-tests & hypotheses",
+          subtitle: "UX / CRO",
         },
       ],
       languageLabel: "Taal",
@@ -444,14 +444,14 @@ export const translations = {
       cta: "Book an intro call",
       columns: [
         {
-          title: "Measurement",
+          title: "Measure more",
           href: "/measurement",
-          subtitle: "GA4 & GTM events",
+          subtitle: "Google Analytics 4",
         },
         {
-          title: "CRO",
+          title: "Optimize your website",
           href: "/cro",
-          subtitle: "A/B testing roadmap",
+          subtitle: "UX / CRO",
         },
       ],
       languageLabel: "Language",
