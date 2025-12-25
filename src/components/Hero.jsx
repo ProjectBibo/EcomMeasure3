@@ -72,7 +72,7 @@ export default function Hero() {
 
       <div className="relative section-shell">
         <div className="site-container relative z-10 flex flex-col gap-8 lg:gap-10 lg:min-h-[78vh] lg:pr-[28rem] xl:pr-[34rem]">
-          <div className="relative max-w-3xl flex flex-col items-start gap-8 text-left vt-hero-visual">
+          <div className="relative max-w-3xl flex flex-col items-start gap-6 md:gap-7 lg:gap-8 text-left vt-hero-visual">
             <motion.span
               initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
