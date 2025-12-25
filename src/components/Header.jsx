@@ -529,13 +529,13 @@ export default function Header() {
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
   const navLinkClass = ({ isActive }) =>
-    `nav-underline text-neutral-700 transition-colors dark:text-gray-200 ${
-      isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
+    `nav-underline text-sm font-semibold text-neutral-800 transition-colors hover:text-brand-blue dark:text-gray-100 ${
+      isActive ? "nav-underline--active text-brand-blue" : ""
     }`;
 
   const dropdownLinkClass = ({ isActive }) =>
-    `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 dark:text-gray-100 dark:hover:bg-white/10 ${
-      isActive ? "text-brand-blue dark:text-brand-blue" : ""
+    `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-800 transition hover:bg-surface-soft dark:text-gray-100 dark:hover:bg-white/10 ${
+      isActive ? "text-brand-blue" : ""
     }`;
 
   return (
@@ -551,22 +551,20 @@ export default function Header() {
           <span ref={progressRef} className="progress-bar" />
         </div>
         <div
-          className={`border-b border-neutral-200/60 bg-white/75 backdrop-blur transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/75 ${
-            isCondensed
-              ? "shadow-[0_16px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:shadow-[0_20px_48px_rgba(2,6,23,0.55)]"
-              : "shadow-none"
+          className={`border-b border-neutral-200 bg-white/90 backdrop-blur-sm transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800 dark:bg-surface dark:backdrop-blur ${
+            isCondensed ? "shadow-sm" : "shadow-none"
           }`}
         >
           <div
             className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 transition-[height,padding] duration-300 ${
-              isCondensed ? "h-10" : "h-12"
+              isCondensed ? "h-12" : "h-16"
             }`}
           >
             <div className="flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((open) => !open)}
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/90 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 md:hidden"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-semibold text-neutral-800 shadow-sm transition hover:border-neutral-300 hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-100 md:hidden"
                 aria-expanded={isMenuOpen}
                 aria-controls={menuId}
                 aria-label={menuButtonLabel}
@@ -594,8 +592,8 @@ export default function Header() {
                         <button
                           type="button"
                           id={triggerId}
-                          className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
-                            isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
+                          className={`nav-underline inline-flex items-center gap-1 text-neutral-800 transition-colors dark:text-gray-100 ${
+                            isActive ? "nav-underline--active text-brand-blue" : ""
                           }`}
                           aria-haspopup="true"
                           aria-expanded={isOpen}
@@ -617,7 +615,7 @@ export default function Header() {
                           />
                         </button>
                         {isOpen && (
-                          <div className="absolute left-0 top-full z-50 mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]">
+                          <div className="absolute left-0 top-full z-50 mt-3 w-72 rounded-xl border border-neutral-200 bg-white p-3 shadow-lg backdrop-blur-sm dark:border-neutral-700 dark:bg-neutral-900">
                             <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
                               {t.menu.label}
                             </span>
@@ -958,7 +956,7 @@ export default function Header() {
                       toggleLanguage();
                       setIsMenuOpen(false);
                     }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                    className="btn btn-secondary flex-1 min-w-[140px] justify-center text-sm"
                   >
                     <span aria-hidden>{flags[nextLanguage]}</span>
                     <span>{t.languageSwitch.cta[language]}</span>
@@ -969,7 +967,7 @@ export default function Header() {
                       toggleDark();
                       setIsMenuOpen(false);
                     }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                    className="btn btn-secondary flex-1 min-w-[140px] justify-center text-sm"
                   >
                     {isDark ? <Sun size={16} /> : <Moon size={16} />}
                     <span>{themeLabel}</span>
@@ -980,7 +978,7 @@ export default function Header() {
                       setIsPaletteOpen(true);
                       setIsMenuOpen(false);
                     }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                    className="btn btn-secondary flex-1 min-w-[140px] justify-center text-sm"
                     aria-label={commandCopy.aria}
                     aria-keyshortcuts="Meta+K,Control+K"
                   >
@@ -991,7 +989,7 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={navClickFactory("/contact")}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+                className="btn btn-primary w-full justify-center text-sm uppercase tracking-wide"
               >
                 {t.cta}
               </Link>

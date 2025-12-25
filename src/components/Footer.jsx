@@ -15,14 +15,7 @@ export default function Footer() {
 
   return (
     <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-14">
-      <motion.div
-        animate={shouldReduceMotion ? { backgroundPosition: "0% 50%" } : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-        transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-brand-teal bg-[length:200%_200%]"
-      />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="story-stripe" aria-hidden />
-      </div>
+      <div className="absolute top-0 left-0 h-px w-full bg-brand-blue/25" />
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid gap-8 md:grid-cols-5">
           <div>
@@ -30,7 +23,7 @@ export default function Footer() {
             <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
             <Link
               to="/contact"
-              className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
+              className="mt-4 inline-block btn btn-primary text-sm"
               onClick={createViewTransitionClickHandler(navigateWithTransition, "/contact")}
             >
               {t.cta}

@@ -5,14 +5,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        "brand-blue": "#1F6FEB",
-        "brand-teal": "#184F9E",
-        "brand-yellow": "#FFCC02",
-        "brand-yellow-dark": "#E6B700",
+        "brand-blue": "#304D9B",
+        "brand-teal": "#20376f",
+        "brand-yellow": "#304D9B",
+        "brand-yellow-dark": "#233a78",
         surface: {
-          light: "#f3f6fb",
-          soft: "#e6ecf5",
-          dark: "#0b1726"
+          light: "#f7f8fb",
+          soft: "#eef1f7",
+          dark: "#0c1220"
         }
       }
     }

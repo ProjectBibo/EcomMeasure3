@@ -29,21 +29,8 @@ export default function Contact() {
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/10 via-brand-teal/8 to-brand-teal/5 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
+      className="relative overflow-hidden py-24 sm:py-28 bg-surface-light dark:bg-surface-dark"
     >
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.8 }}
-          whileInView={shouldReduceMotion ? { opacity: 0.2 } : { opacity: 0.25, scale: 1 }}
-          transition={shouldReduceMotion ? undefined : { duration: 1.2, ease: "easeOut" }}
-          viewport={shouldReduceMotion ? undefined : { once: true }}
-          className="mx-auto mt-10 h-[420px] w-[420px] rounded-full bg-brand-blue/30 blur-3xl"
-        />
-      </div>
-      <div className="absolute inset-0 opacity-50">
-        <div className="grain-overlay" aria-hidden />
-      </div>
-
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
           <motion.span
@@ -51,7 +38,7 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-white/70 dark:bg-white/10 text-sm font-medium text-brand-blue shadow-sm"
+            className="eyebrow"
           >
             {t.badge}
           </motion.span>
@@ -88,9 +75,8 @@ export default function Contact() {
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.15 * index, duration: 0.5 }}
                 data-tilt-card
-                className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-[16px_26px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] focus-visible:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-surface-dark/80 dark:shadow-[16px_28px_80px_rgba(2,6,23,0.55)]"
+                className="card group relative h-full p-6 transition hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -12px -16px 28px rgba(148,163,184,0.18)" }} />
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                   <Icon size={22} />
                 </div>
@@ -117,19 +103,19 @@ export default function Contact() {
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.6 }}
           data-tilt-card
-          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-[box-shadow,transform] duration-500 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] focus-visible:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
+          className="card mt-16 bg-white px-6 py-10 text-neutral-900 dark:bg-surface dark:text-white"
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h3 className="typography-subheading text-2xl font-semibold">{t.fast.title}</h3>
-              <p className="mt-2 text-sm text-neutral-300 lg:max-w-xl">{t.fast.description}</p>
+              <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300 lg:max-w-xl">{t.fast.description}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <a
                 href="mailto:info@ecommeasure.com"
                 data-magnetic
                 data-variant="primary"
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_20px_44px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                className="btn btn-primary"
               >
                 {t.fast.mail}
               </a>
@@ -139,7 +125,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 data-magnetic
                 data-variant="secondary"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition-colors duration-200 hover:border-brand-yellow hover:text-brand-yellow"
+                className="btn btn-secondary"
               >
                 {t.fast.social}
               </a>
