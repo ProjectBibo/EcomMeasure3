@@ -26,21 +26,15 @@ const routePrefetchers = {
   "/tools/cro-roi": () => import("../pages/CroRoiCalculator"),
 };
 
-const flags = {
-  nl: "🇳🇱",
-  en: "🇬🇧",
-};
-
 export default function Header() {
   const headerRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownMenuRef = useRef(null);
   const dropdownTriggers = useRef(new Map());
   const prefetchedRoutes = useRef(new Set());
-  const { language, changeLanguage } = useLanguage();
+  const { language } = useLanguage();
   const t = translations[language].header;
   const shouldReduceMotion = useReducedMotion();
-  const nextLanguage = language === "nl" ? "en" : "nl";
   const [isHidden, setIsHidden] = useState(false);
   const [isCondensed, setIsCondensed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -113,8 +107,6 @@ export default function Header() {
       loader();
     }
   }, []);
-
-  const toggleLanguage = () => changeLanguage(nextLanguage);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -445,21 +437,6 @@ export default function Header() {
               })}
               </nav>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={toggleLanguage}
-                data-magnetic
-                data-variant="secondary"
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md"
-                aria-label={t.languageSwitch.aria[language]}
-                title={t.languageSwitch.title[language]}
-              >
-                <span aria-hidden>{flags[nextLanguage]}</span>
-                <span className="hidden sm:inline">{t.languageSwitch.cta[language]}</span>
-                <span className="sr-only">{t.languageSwitch.helper[language]}</span>
-              </button>
-            </div>
           </div>
         </div>
 
@@ -694,32 +671,16 @@ export default function Header() {
                       <span aria-hidden>→</span>
                     </NavLink>
                   );
-                })}
+              })}
               </nav>
               <div className="space-y-4">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 ">
-                {t.mobileMenu.preferences}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      toggleLanguage();
-                      setIsMenuOpen(false);
-                    }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md"
-                  >
-                    <span aria-hidden>{flags[nextLanguage]}</span>
-                    <span>{t.languageSwitch.cta[language]}</span>
-                  </button>
-                </div>
-              <Link
-                to="/contact"
-                onClick={navClickFactory("/contact")}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
-              >
-                {t.cta}
-              </Link>
+                <Link
+                  to="/contact"
+                  onClick={navClickFactory("/contact")}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+                >
+                  {t.cta}
+                </Link>
               </div>
             </div>
           </div>
