@@ -39,6 +39,7 @@ export default function Header() {
   const [isCondensed, setIsCondensed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ left: 0, width: 0 });
   const menuId = useId();
   const location = useLocation();
   const navigateWithTransition = useViewTransitionNavigate();
@@ -266,6 +267,16 @@ export default function Header() {
     dropdownMenuRef.current = node;
   }, []);
 
+  const updateDropdownPosition = useCallback((id) => {
+    if (typeof window === "undefined") return;
+    if (!id) return;
+    const trigger = dropdownTriggers.current.get(id);
+    if (!trigger) return;
+
+    const rect = trigger.getBoundingClientRect();
+    setDropdownPosition({ left: rect.left, width: rect.width });
+  }, []);
+
   useEffect(() => {
     if (!openDropdown) return undefined;
 
@@ -302,6 +313,15 @@ export default function Header() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [focusDropdownTrigger, openDropdown]);
+
+  useEffect(() => {
+    if (!openDropdown) return undefined;
+    if (typeof window === "undefined") return undefined;
+
+    const handleResize = () => updateDropdownPosition(openDropdown);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [openDropdown, updateDropdownPosition]);
 
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
@@ -365,8 +385,14 @@ export default function Header() {
                       <div
                         key={link.id}
                         className="relative overflow-visible"
-                        onMouseEnter={() => setOpenDropdown(link.id)}
-                        onFocus={() => setOpenDropdown(link.id)}
+                        onMouseEnter={() => {
+                          setOpenDropdown(link.id);
+                          updateDropdownPosition(link.id);
+                        }}
+                        onFocus={() => {
+                          setOpenDropdown(link.id);
+                          updateDropdownPosition(link.id);
+                        }}
                       >
                         <button
                           type="button"
@@ -377,7 +403,13 @@ export default function Header() {
                           aria-haspopup="true"
                           aria-expanded={isOpen}
                           aria-controls={panelId}
-                          onClick={() => setOpenDropdown(isOpen ? null : link.id)}
+                          onClick={() => {
+                            const nextId = isOpen ? null : link.id;
+                            setOpenDropdown(nextId);
+                            if (nextId) {
+                              updateDropdownPosition(nextId);
+                            }
+                          }}
                           ref={(node) => {
                             if (node) {
                               dropdownTriggers.current.set(link.id, node);
@@ -396,7 +428,12 @@ export default function Header() {
                         {isOpen && (
                           <div
                             ref={registerDropdownMenu}
-                            className="absolute left-0 top-full z-[1200] mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur pointer-events-auto"
+                            className="fixed z-[9999] w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur pointer-events-auto"
+                            style={{
+                              top: "calc(var(--header-offset) + 12px)",
+                              left: `${Math.max(dropdownPosition.left ?? 0, 0)}px`,
+                              minWidth: dropdownPosition.width ? `${dropdownPosition.width}px` : undefined,
+                            }}
                           >
                             <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 ">
                               {t.menu.label}
