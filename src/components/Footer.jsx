@@ -23,7 +23,7 @@ export default function Footer() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="content-shell px-4 sm:px-0">
         <div className="grid gap-8 md:grid-cols-5">
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>

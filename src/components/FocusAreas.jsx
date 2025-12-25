@@ -75,17 +75,17 @@ export default function FocusAreas() {
   const navigateWithTransition = useViewTransitionNavigate();
 
   return (
-    <section className="relative overflow-hidden bg-surface-soft py-20 dark:bg-surface-dark">
+    <section className="relative overflow-hidden bg-surface-soft/70 dark:bg-surface-dark section-block">
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative content-shell">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-          className="inline-flex items-center rounded-full bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-600 shadow-sm backdrop-blur dark:bg-white/10 dark:text-gray-300"
+          className="eyebrow shadow-sm backdrop-blur bg-white/90 dark:bg-white/10"
         >
           {copy.badge}
         </motion.span>
@@ -115,17 +115,8 @@ export default function FocusAreas() {
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.55 }}
-              data-tilt-card
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.16)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[24px_34px_90px_rgba(15,23,42,0.22)] focus-visible:shadow-[24px_34px_90px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/10 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.55)] dark:hover:shadow-[22px_32px_95px_rgba(2,6,23,0.65)]"
+              className="card-surface group relative flex h-full flex-col overflow-hidden"
             >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                style={{
-                  boxShadow:
-                    "inset 3px 3px 10px rgba(255,255,255,0.55), inset -14px -18px 36px rgba(148,163,184,0.2)",
-                }}
-              />
               <div className="flex flex-col gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue/80 dark:text-brand-teal/80">
@@ -140,7 +131,7 @@ export default function FocusAreas() {
               <div className="mt-8 flex flex-1 items-end">
                 <Link
                   to={card.to}
-                  className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_24px_50px_rgba(255,204,2,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark"
+                  className="btn-secondary text-sm"
                   onClick={createViewTransitionClickHandler(navigateWithTransition, card.to)}
                 >
                   {language === "nl" ? "Bekijk de pagina" : "View details"}
