@@ -315,7 +315,7 @@ export default function About() {
       <main
         role="main"
         aria-labelledby="about-hero-title"
-        className="relative overflow-hidden bg-surface-light pb-24 pt-24 dark:bg-surface-dark"
+        className="relative overflow-hidden bg-surface-light pb-24 pt-24 "
       >
         <div className="glow-orb glow-orb--primary -left-24 top-0 h-[28rem] w-[28rem] opacity-70" aria-hidden />
         <div className="glow-orb glow-orb--primary-soft right-0 top-1/3 h-[26rem] w-[26rem] opacity-60" aria-hidden />
@@ -327,7 +327,7 @@ export default function About() {
               initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+              className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-600 shadow-sm backdrop-blur   "
             >
               {copy.hero.eyebrow}
             </motion.span>
@@ -336,7 +336,7 @@ export default function About() {
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.05, duration: 0.7, ease: "easeOut" }}
               id="about-hero-title"
-              className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
+              className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl vt-hero-title focus:outline-none"
               data-focus-target
               tabIndex={-1}
             >
@@ -346,7 +346,7 @@ export default function About() {
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.7, ease: "easeOut" }}
-              className="mt-6 text-lg text-neutral-700 dark:text-gray-300"
+              className="mt-6 text-lg text-neutral-700 "
             >
               {copy.hero.description}
             </motion.p>
@@ -358,7 +358,7 @@ export default function About() {
             >
               <Link
                 to={copy.hero.ctaPrimary.href}
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white "
                 onClick={primaryCtaHandler}
               >
                 {copy.hero.ctaPrimary.label}
@@ -367,7 +367,7 @@ export default function About() {
                 href={copy.hero.ctaSecondary.href}
                 data-magnetic
                 data-variant="secondary"
-                className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition-colors duration-200 hover:border-brand-teal hover:text-brand-teal dark:border-white/20 dark:text-gray-200"
+                className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition-colors duration-200 hover:border-brand-teal hover:text-brand-teal  "
               >
                 {copy.hero.ctaSecondary.label}
               </a>
@@ -376,12 +376,12 @@ export default function About() {
 
           <section
             aria-labelledby="trust-certifications-heading"
-            className="rounded-3xl border border-white/60 bg-white/80 px-8 py-12 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10"
+            className="rounded-3xl border border-white/60 bg-white/80 px-8 py-12 shadow-sm backdrop-blur  "
           >
             <div className="mx-auto max-w-3xl text-center">
               <h2
                 id="trust-certifications-heading"
-                className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-600 dark:text-gray-300"
+                className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-600 "
               >
                 {copy.certifications.heading}
               </h2>
@@ -389,7 +389,7 @@ export default function About() {
             <div className="mx-auto mt-8 grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {copy.certifications.badges.map((badge, index) => {
                 const image = (
-                  <div className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-white/90 p-6 transition-colors duration-200 group-hover:bg-white dark:bg-slate-900/60 dark:group-hover:bg-slate-900/40">
+                  <div className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-white/90 p-6 transition-colors duration-200 group-hover:bg-white  ">
                     <img
                       src={badge.src}
                       alt={badge.alt}
@@ -413,7 +413,7 @@ export default function About() {
                       aria-label={badge.alt}
                       title={badge.title}
                       onClick={() => handleBadgeClick(badge.name)}
-                      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-dark"
+                      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white "
                     >
                       {image}
                     </a>
@@ -435,10 +435,10 @@ export default function About() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[18px_28px_70px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.6)]"
+                className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[18px_28px_70px_rgba(15,23,42,0.18)] backdrop-blur   "
               >
-                <p className="text-3xl font-bold text-neutral-900 dark:text-white">{metric.value}</p>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{metric.label}</p>
+                <p className="text-3xl font-bold text-neutral-900 ">{metric.value}</p>
+                <p className="mt-2 text-sm text-neutral-600 ">{metric.label}</p>
               </motion.div>
             ))}
           </section>
@@ -450,7 +450,7 @@ export default function About() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-                className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white"
+                className="text-3xl font-bold tracking-tight text-neutral-900 "
               >
                 {copy.story.heading}
               </motion.h2>
@@ -459,7 +459,7 @@ export default function About() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.1 }}
-                className="mt-6 text-lg text-neutral-700 dark:text-gray-300"
+                className="mt-6 text-lg text-neutral-700 "
               >
                 {copy.story.lead}
               </motion.p>
@@ -470,7 +470,7 @@ export default function About() {
                   whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                   viewport={shouldReduceMotion ? undefined : { once: true }}
                   transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.14 + index * 0.08 }}
-                  className="mt-5 text-base text-neutral-600 dark:text-gray-300"
+                  className="mt-5 text-base text-neutral-600 "
                 >
                   {paragraph}
                 </motion.p>
@@ -481,10 +481,10 @@ export default function About() {
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
               viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-              className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+              className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur   "
             >
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-teal">{copy.focus.heading}</p>
-              <ul className="mt-6 space-y-4 text-sm text-neutral-600 dark:text-gray-300">
+              <ul className="mt-6 space-y-4 text-sm text-neutral-600 ">
                 {copy.story.points.map((point) => (
                   <li key={point} className="flex gap-3">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
@@ -503,7 +503,7 @@ export default function About() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.1 * index }}
-                className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.18)] backdrop-blur transition hover:-translate-y-1 dark:border-white/10 dark:bg-white/5 dark:shadow-[18px_30px_80px_rgba(2,6,23,0.6)]"
+                className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[18px_28px_70px_rgba(15,23,42,0.18)] backdrop-blur transition hover:-translate-y-1   "
               >
                 <div
                   aria-hidden
@@ -513,13 +513,13 @@ export default function About() {
                       "inset 2px 2px 8px rgba(255,255,255,0.45), inset -12px -14px 30px rgba(148,163,184,0.22)",
                   }}
                 />
-                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{item.description}</p>
+                <h3 className="text-xl font-semibold text-neutral-900 ">{item.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-neutral-600 ">{item.description}</p>
               </motion.article>
             ))}
           </section>
 
-          <section className="space-y-6 rounded-3xl border border-white/60 bg-white/70 p-8 text-neutral-800 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]">
+          <section className="space-y-6 rounded-3xl border border-white/60 bg-white/70 p-8 text-neutral-800 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur    ">
             <motion.h2
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -537,11 +537,11 @@ export default function About() {
                   whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                   viewport={shouldReduceMotion ? undefined : { once: true }}
                   transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.08 * index }}
-                  className="rounded-2xl border border-white/50 bg-white/80 p-6 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5"
+                  className="rounded-2xl border border-white/50 bg-white/80 p-6 shadow-sm backdrop-blur  "
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">{item.period}</p>
-                  <h3 className="mt-4 text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.description}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-neutral-900 ">{item.title}</h3>
+                  <p className="mt-3 text-sm text-neutral-600 ">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -553,7 +553,7 @@ export default function About() {
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-              className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white"
+              className="text-3xl font-bold tracking-tight text-neutral-900 "
             >
               {copy.approach.heading}
             </motion.h2>
@@ -565,10 +565,10 @@ export default function About() {
                   whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                   viewport={shouldReduceMotion ? undefined : { once: true }}
                   transition={shouldReduceMotion ? undefined : { duration: 0.6, delay: 0.1 * index }}
-                  className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+                  className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur   "
                 >
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-4 text-sm text-neutral-600 dark:text-gray-300">{item.description}</p>
+                  <h3 className="text-lg font-semibold text-neutral-900 ">{item.title}</h3>
+                  <p className="mt-4 text-sm text-neutral-600 ">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -582,9 +582,9 @@ export default function About() {
               transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
               className="space-y-4"
             >
-              <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">{copy.personal.heading}</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-neutral-900 ">{copy.personal.heading}</h2>
               {copy.personal.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="text-base text-neutral-600 dark:text-gray-300">
+                <p key={paragraph} className="text-base text-neutral-600 ">
                   {paragraph}
                 </p>
               ))}
@@ -594,10 +594,10 @@ export default function About() {
               whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
               viewport={shouldReduceMotion ? undefined : { once: true }}
               transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-              className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+              className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[20px_32px_80px_rgba(15,23,42,0.18)] backdrop-blur   "
             >
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-teal">{copy.personal.listTitle}</p>
-              <ul className="mt-4 space-y-3 text-sm text-neutral-600 dark:text-gray-300">
+              <ul className="mt-4 space-y-3 text-sm text-neutral-600 ">
                 {copy.personal.listItems.map((item) => (
                   <li key={item} className="flex gap-3">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
@@ -610,7 +610,7 @@ export default function About() {
 
           <section
             data-tilt-card
-            className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] focus-visible:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] dark:border-white/10"
+            className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-r from-brand-blue/90 to-brand-teal/80 p-10 text-white shadow-[24px_36px_90px_rgba(2,6,23,0.32)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] focus-visible:shadow-[28px_44px_110px_rgba(2,6,23,0.4)] "
           >
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}

@@ -139,7 +139,7 @@ export default function Measurement() {
       <main
         role="main"
         aria-labelledby="measurement-heading"
-        className="relative overflow-hidden bg-surface-soft pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+        className="relative overflow-hidden bg-surface-soft pb-24 pt-28   "
       >
         <div className="grain-overlay" aria-hidden />
         <div className="relative site-container">
@@ -148,7 +148,7 @@ export default function Measurement() {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
             id="measurement-heading"
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            className="text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
           >
             {copy.heading}
           </motion.h1>
@@ -174,11 +174,11 @@ export default function Measurement() {
                       {card.label}
                     </span>
                   )}
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 dark:text-white">{card.title}</h2>
+                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
                   {card.subcopy && (
-                    <p className="text-sm font-medium text-brand-blue dark:text-brand-teal">{card.subcopy}</p>
+                    <p className="text-sm font-medium text-brand-blue ">{card.subcopy}</p>
                   )}
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 dark:text-gray-300">
+                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
                     {card.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3">
                         <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
@@ -188,9 +188,6 @@ export default function Measurement() {
                   </ul>
                 </div>
 
-                <div className="relative mt-6 flex items-center justify-between border-t border-neutral-200/70 pt-4 text-sm font-semibold text-neutral-900 dark:border-white/10 dark:text-white">
-                  <span>{card.price}</span>
-                </div>
               </motion.article>
             ))}
           </div>

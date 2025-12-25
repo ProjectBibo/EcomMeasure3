@@ -25,12 +25,12 @@ export default function NotFound() {
   return (
     <>
       <SEO title={t.title} description={t.description} />
-      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 bg-surface-light px-6 py-20 text-center dark:bg-surface-dark">
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 bg-surface-light px-6 py-20 text-center ">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-          className="inline-flex items-center rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-gray-300"
+          className="inline-flex items-center rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 shadow-sm backdrop-blur   "
         >
           404
         </motion.div>
@@ -38,7 +38,7 @@ export default function NotFound() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
-          className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
+          className="text-4xl font-bold tracking-tight text-neutral-900 "
         >
           {t.title}
         </motion.h1>
@@ -46,7 +46,7 @@ export default function NotFound() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.18, duration: 0.6 }}
-          className="max-w-md text-neutral-600 dark:text-gray-300"
+          className="max-w-md text-neutral-600 "
         >
           {t.description}
         </motion.p>

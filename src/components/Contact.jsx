@@ -1,151 +1,125 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { CalendarDays, Mail, MessageCircle } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
-import { AnimatedParagraph } from "./ExpressiveText";
 
-const baseOptions = [
-  {
-    icon: Mail,
-    href: "mailto:info@ecommeasure.com?subject=Kennismaken%20met%20EcomMeasure",
-  },
-  {
-    icon: CalendarDays,
-    href: "https://cal.com/",
-  },
-  {
-    icon: MessageCircle,
-    href: "https://wa.me/31612345678",
-  },
+const budgetOptions = [
+  { value: "", label: { nl: "Selecteer budget", en: "Select budget" } },
+  { value: "<5k", label: { nl: "Tot €5.000", en: "Up to €5,000" } },
+  { value: "5-15k", label: { nl: "€5.000 - €15.000", en: "€5,000 - €15,000" } },
+  { value: ">15k", label: { nl: "Meer dan €15.000", en: "Above €15,000" } },
 ];
 
 export default function Contact() {
-  const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
   const t = translations[language].contact;
+  const primaryCta = translations[language].header.cta;
+  const checklist = t.options || [];
 
   return (
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-brand-blue/10 via-brand-teal/8 to-brand-teal/5 dark:from-surface-dark dark:via-surface-dark/95 dark:to-surface-dark"
+      className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 py-20 sm:py-24"
     >
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.8 }}
-          whileInView={shouldReduceMotion ? { opacity: 0.2 } : { opacity: 0.25, scale: 1 }}
-          transition={shouldReduceMotion ? undefined : { duration: 1.2, ease: "easeOut" }}
-          viewport={shouldReduceMotion ? undefined : { once: true }}
-          className="mx-auto mt-10 h-[420px] w-[420px] rounded-full bg-brand-blue/30 blur-3xl"
-        />
-      </div>
-      <div className="absolute inset-0 opacity-50">
-        <div className="grain-overlay" aria-hidden />
-      </div>
+      <div className="grain-overlay" aria-hidden />
+      <div className="glow-orb glow-orb--primary left-0 top-0 h-64 w-64 opacity-40" aria-hidden />
 
-      <div className="relative max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto">
-          <motion.span
+      <div className="relative site-container grid gap-10 lg:grid-cols-2 lg:items-start">
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          viewport={shouldReduceMotion ? undefined : { once: true }}
+          transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
+          className="space-y-4"
+        >
+          <span className="pill-badge shadow-sm">{t.badge}</span>
+          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">{t.heading}</h2>
+          <p className="text-lg text-neutral-700">{t.intro}</p>
+        </motion.div>
+
+        <div className="grid gap-8 lg:col-span-2 lg:grid-cols-[1.05fr_0.95fr]">
+          <motion.form
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center px-3 py-1 rounded-full bg-white/70 dark:bg-white/10 text-sm font-medium text-brand-blue shadow-sm"
+            transition={shouldReduceMotion ? undefined : { duration: 0.5, delay: 0.1 }}
+            className="rounded-3xl border border-neutral-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
           >
-            {t.badge}
-          </motion.span>
-          <motion.h2
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="space-y-2 text-sm font-semibold text-neutral-800">
+                <span>{language === "nl" ? "Naam" : "Name"}</span>
+                <input
+                  type="text"
+                  name="name"
+                  className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
+                  placeholder={language === "nl" ? "Jouw naam" : "Your name"}
+                  required
+                />
+              </label>
+              <label className="space-y-2 text-sm font-semibold text-neutral-800">
+                <span>{language === "nl" ? "E-mailadres" : "Email"}</span>
+                <input
+                  type="email"
+                  name="email"
+                  className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
+                  placeholder="you@example.com"
+                  required
+                />
+              </label>
+            </div>
+            <label className="mt-4 block space-y-2 text-sm font-semibold text-neutral-800">
+              <span>{language === "nl" ? "Project of vraag (optioneel)" : "Project or question (optional)"}</span>
+              <textarea
+                name="message"
+                rows="4"
+                className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
+                placeholder={language === "nl" ? "Vertel kort over je website of vraag" : "Share a bit about your site or question"}
+              />
+            </label>
+            <label className="mt-4 block space-y-2 text-sm font-semibold text-neutral-800">
+              <span>{language === "nl" ? "Indicatief budget" : "Estimated budget"}</span>
+              <select
+                name="budget"
+                className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
+                defaultValue=""
+              >
+                {budgetOptions.map((option) => (
+                  <option key={option.value || "placeholder"} value={option.value} disabled={option.value === ""}>
+                    {option.label[language]}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button type="submit" className="button-primary mt-6 w-full justify-center">
+              {primaryCta}
+            </button>
+          </motion.form>
+
+          <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
-            className="mt-6 vt-heading text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
+            transition={shouldReduceMotion ? undefined : { duration: 0.55, delay: 0.12 }}
+            className="relative h-full rounded-3xl border border-neutral-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
           >
-            {t.heading}
-          </motion.h2>
-          <AnimatedParagraph
-            text={t.intro}
-            language={language}
-            highlight
-            className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-gray-400"
-            delay={0.28}
-          />
-        </div>
-
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {baseOptions.map(({ icon: Icon, href }, index) => {
-            const content = t.options[index];
-            const isExternal = href.startsWith("http");
-            const linkProps = isExternal
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {};
-            return (
-              <motion.article
-                key={content.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={shouldReduceMotion ? undefined : { once: true }}
-                transition={shouldReduceMotion ? undefined : { delay: 0.15 * index, duration: 0.5 }}
-                data-tilt-card
-                className="group relative h-full rounded-2xl border border-white/70 bg-white/80 p-6 shadow-[16px_26px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] focus-visible:shadow-[22px_34px_95px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-surface-dark/80 dark:shadow-[16px_28px_80px_rgba(2,6,23,0.55)]"
-              >
-                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 6px rgba(255,255,255,0.5), inset -12px -16px 28px rgba(148,163,184,0.18)" }} />
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
-                  <Icon size={22} />
+            <div className="space-y-4">
+              {checklist.slice(0, 4).map((item) => (
+                <div key={item.title} className="flex items-start gap-3">
+                  <span className="mt-1 inline-flex h-3 w-3 flex-shrink-0 rounded-full bg-brand-blue" aria-hidden />
+                  <div className="space-y-1">
+                    <p className="text-sm font-semibold text-neutral-900">{item.title}</p>
+                    <p className="text-sm text-neutral-600">{item.description}</p>
+                  </div>
                 </div>
-                <h3 className="typography-subheading mt-5 text-xl font-semibold text-neutral-900 dark:text-white">{content.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-400">{content.description}</p>
-                <a
-                  href={href}
-                  {...linkProps}
-                  data-magnetic
-                  data-variant="secondary"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition-colors duration-200"
-                >
-                  {content.actionLabel}
-                  <span aria-hidden="true">→</span>
-                </a>
-              </motion.article>
-            );
-          })}
+              ))}
+            </div>
+            <div className="absolute bottom-6 right-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-teal text-white shadow-lg ring-8 ring-white/70">
+              <span className="text-xl font-bold">R</span>
+            </div>
+          </motion.div>
         </div>
-
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
-          whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={shouldReduceMotion ? undefined : { once: true }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.6 }}
-          data-tilt-card
-          className="mt-16 rounded-3xl bg-neutral-900 px-6 py-10 text-white shadow-[28px_40px_110px_rgba(15,23,42,0.45)] ring-1 ring-white/10 transition-[box-shadow,transform] duration-500 hover:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] focus-visible:shadow-[32px_48px_130px_rgba(15,23,42,0.55)] dark:bg-neutral-800 dark:shadow-[28px_44px_120px_rgba(2,6,23,0.65)]"
-        >
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <h3 className="typography-subheading text-2xl font-semibold">{t.fast.title}</h3>
-              <p className="mt-2 text-sm text-neutral-300 lg:max-w-xl">{t.fast.description}</p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="mailto:info@ecommeasure.com"
-                data-magnetic
-                data-variant="primary"
-                className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-5 py-2 text-sm font-semibold text-neutral-900 shadow-[0_20px_44px_rgba(255,204,2,0.35)] transition-colors duration-200"
-              >
-                {t.fast.mail}
-              </a>
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-magnetic
-                data-variant="secondary"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-5 py-2 text-sm font-semibold text-white shadow-[0_16px_32px_rgba(15,23,42,0.35)] transition-colors duration-200 hover:border-brand-yellow hover:text-brand-yellow"
-              >
-                {t.fast.social}
-              </a>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

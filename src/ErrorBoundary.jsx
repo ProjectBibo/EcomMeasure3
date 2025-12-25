@@ -16,10 +16,10 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen grid place-items-center p-6 bg-surface-light dark:bg-surface-dark">
+        <div className="min-h-screen grid place-items-center p-6 bg-surface-light ">
           <div className="max-w-lg text-center">
             <h1 className="text-2xl font-bold mb-2 text-red-600">Er ging iets mis</h1>
-            <p className="text-sm text-neutral-600 dark:text-gray-300">
+            <p className="text-sm text-neutral-600 ">
               Probeer de pagina te verversen. Als dit blijft gebeuren, kijk in de console/logs.
             </p>
           </div>

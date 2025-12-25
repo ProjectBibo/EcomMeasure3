@@ -9,10 +9,10 @@ export default function BeforeAfter({
   return (
     <section id="case" className="max-w-7xl mx-auto px-6 py-20">
       <div className="mb-8">
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">{title}</h2>
-        <p className="mt-2 text-neutral-600 dark:text-gray-400">{note}</p>
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 ">{title}</h2>
+        <p className="mt-2 text-neutral-600 ">{note}</p>
       </div>
-      <div className="relative w-full max-w-5xl aspect-[16/9] rounded-2xl overflow-hidden shadow-xl border border-black/5 dark:border-white/10 mx-auto">
+      <div className="relative w-full max-w-5xl aspect-[16/9] rounded-2xl overflow-hidden shadow-xl border border-black/5  mx-auto">
         <img
           src={before}
           alt="Voor optimalisaties"
