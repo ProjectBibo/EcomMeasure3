@@ -551,10 +551,8 @@ export default function Header() {
           <span ref={progressRef} className="progress-bar" />
         </div>
         <div
-          className={`border-b border-neutral-200/60 bg-white/75 backdrop-blur transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/75 ${
-            isCondensed
-              ? "shadow-[0_16px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:shadow-[0_20px_48px_rgba(2,6,23,0.55)]"
-              : "shadow-none"
+          className={`border-b border-neutral-200 bg-white/90 backdrop-blur-sm transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/90 ${
+            isCondensed ? "shadow-sm" : "shadow-none"
           }`}
         >
           <div
@@ -814,7 +812,7 @@ export default function Header() {
                 to="/contact"
                 data-magnetic
                 data-variant="primary"
-                className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                className="btn-primary px-5 py-2"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
                 onClick={navClickFactory("/contact")}
@@ -846,7 +844,7 @@ export default function Header() {
                 to="/contact"
                 data-magnetic
                 data-variant="primary"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                className="btn-primary ml-4 px-4 py-2 text-sm"
                 onMouseEnter={() => prefetchRoute("/contact")}
                 onFocus={() => prefetchRoute("/contact")}
                 onClick={navClickFactory("/contact")}
@@ -991,7 +989,7 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={navClickFactory("/contact")}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+                className="btn-primary inline-flex w-full items-center justify-center gap-2 uppercase tracking-wide px-5 py-3 text-sm"
               >
                 {t.cta}
               </Link>
