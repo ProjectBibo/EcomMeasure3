@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
@@ -6,127 +7,213 @@ import { useLanguage } from "../context/LanguageContext";
 const services = {
   nl: {
     seo: {
-      title: "Analytics diensten – GA4 installatie & configuratie",
+      title: "Measurement – Databetrouwbare keuzes voor e-commerce",
       description:
-        "Vier GA4 pakketten: van startinstallatie tot advanced en e-commerce configuraties, inclusief AVG-compatibele cookiebanner.",
+        "Vier measurement-diensten: van GA4 & GTM setup tot dashboards en AVG-proof tracking, met concrete output per stap.",
     },
-    heading: "Analytics diensten",
-    cards: [
+    hero: {
+      title: "Measurement voor webshops die op data sturen",
+      intro:
+        "We maken elke stap in je funnel meetbaar, zorgen dat consent en AVG op orde zijn en leveren dashboards die je direct kunt gebruiken. Zo bouw je aan een betrouwbare basis voor beslissingen en campagnes.",
+    },
+    services: [
       {
-        label: "Startpakket",
-        title: "Google Analytics 4 ‘Start’ installatie en configuratie",
-        bullets: [
-          "Installatie op uw website",
-          "Configuratie van Property & datastream",
-          "Filteren van intern bezoek",
-          "Koppelen van Google Search Console & GTM",
-          "Uitleg en walk-through (0.5u)",
+        title: "GA4 & GTM setup",
+        summary:
+          "Complete inrichting van Google Analytics 4 en Tag Manager zodat je funnel, campagnes en conversies consistent worden vastgelegd.",
+        whatWeDo: [
+          "Inventariseren van kritieke events per fase: product, checkout, service",
+          "Ontwerp van datalayer en naamgeving voor developers en marketers",
+          "Configureren van GA4 property, datastreams en conversies",
+          "Opzetten van Tag Manager structuur, triggers en variabelen met QA",
         ],
-        price: "Vanaf €220 (ex btw)",
+        whatYouReceive: [
+          "Datalayer blueprint en tagging plan",
+          "Gepubliceerde GA4 property met events en conversies",
+          "GTM containers met versies en testflows",
+          "Overdrachtsdocument en korte walkthrough",
+        ],
+        outcomes: [
+          "Betrouwbare eventdata voor marketing en productteams",
+          "Snellere releases dankzij duidelijke naming en QA",
+          "Minder afhankelijkheid van individuele developers",
+        ],
       },
       {
-        title: "Google Analytics 4 ‘Start plus AVG-compatible cookiebanner’",
-        subcopy: "Alles van het Startpakket, plus:",
-        bullets: [
-          "Koppelen van uw website met Social Media en Google Ads (Facebook Ads e.a. pixels & tracking)",
-          "AVG-compatible integratie met een moderne, mobile-first cookiebanner",
+        title: "Consent- & AVG-proof tracking",
+        summary:
+          "Zorgt dat meetpunten voldoen aan AVG en consent-richtlijnen, zonder dat je zicht verliest op performance.",
+        whatWeDo: [
+          "Toetsen huidige tracking en cookies tegen AVG-vereisten",
+          "Inrichten van consent mode en koppeling met CMP",
+          "Scheiding van noodzakelijke en marketing tags in GTM",
+          "Validatie van datastromen met testscenario's",
         ],
-        price: "Vanaf €440 (ex btw)",
+        whatYouReceive: [
+          "Rapport met risico's en oplossingsplan",
+          "Geconfigureerde consent mode en tag-categorisering",
+          "Documentatie van dataverzameling per cookiestatus",
+          "Checklists voor toekomstige releases",
+        ],
+        outcomes: [
+          "Tracking die juridisch en intern te verantwoorden is",
+          "Behouden zicht op campagnes binnen consent kaders",
+          "Lagere kans op datalekken of blokkerende scripts",
+        ],
       },
       {
-        title: "Google Analytics 4 ‘Advanced’ installatie en configuratie",
-        subcopy: "Alles van het Startpakket, plus:",
-        bullets: [
-          "Inrichten van nieuwe gebeurtenissen en conversies conform zakelijke doelen (leads, clicks on calls, downloads, etc.)",
-          "Personaliseren van GA4 interface",
+        title: "E-commerce measurement",
+        summary:
+          "Enhanced e-commerce tracking voor inzicht in productprestaties, winkelmandgedrag en revenue drivers.",
+        whatWeDo: [
+          "Vertalen van e-commerce journey naar meetbare events",
+          "Inrichten van purchase-, refund- en engagementevents",
+          "Koppelen met advertentieplatformen voor conversies",
+          "Implementeren van alerts bij afwijkingen in omzetdata",
         ],
-        price: "Vanaf €440 (ex btw)",
+        whatYouReceive: [
+          "Gedetailleerd tagging plan per winkelstap",
+          "Technische implementatie in GA4 en GTM",
+          "Koppelingen met Google Ads en overige kanalen",
+          "Rapportage-sjabloon voor commerce KPI's",
+        ],
+        outcomes: [
+          "Volledig beeld van omzet per kanaal en device",
+          "Sneller signaleren van drop-offs in de funnel",
+          "Betere input voor merchandising en campagnebudgetten",
+        ],
       },
       {
-        title: "Google Analytics 4 ‘E-commerce’ installatie en configuratie",
-        subcopy: "Alles van het Startpakket, plus:",
-        bullets: [
-          "Inrichten Enhanced e-commerce conversies (i.s.m. uw developer of webbureau bij zelf ontworpen systemen)",
-          "Personaliseren van GA4 interface",
+        title: "Dashboards & databetrouwbaarheid",
+        summary:
+          "Dashboards die direct bruikbaar zijn voor marketing, product en management, plus monitoring op datakwaliteit.",
+        whatWeDo: [
+          "Inventariseren van KPI's en beslismomenten",
+          "Opzetten van Looker Studio dashboards met segmenten",
+          "Inrichten van datakwaliteitscontroles en alerts",
+          "Documenteren van definities en berekeningen",
         ],
-        price: "Vanaf €880 (ex btw)",
+        whatYouReceive: [
+          "Dashboard set-up inclusief filters en toegang",
+          "Datadefinities en uitleg per metriek",
+          "Monitoringplan met alerts en ownership",
+          "Korte training voor gebruikers",
+        ],
+        outcomes: [
+          "Eenduidige stuurinformatie voor teams en management",
+          "Snelle detectie van afwijkingen in data",
+          "Efficiëntere rapportage zonder handmatig werk",
+        ],
       },
     ],
   },
   en: {
     seo: {
-      title: "Analytics services – GA4 setup & configuration",
+      title: "Measurement – Reliable analytics for ecommerce teams",
       description:
-        "Four GA4 packages: from starter installs to advanced and e-commerce configurations, including a GDPR-friendly cookie banner.",
+        "Four measurement services: GA4 & GTM setup, GDPR-proof tracking, ecommerce measurement and dashboards with clear outputs.",
     },
-    heading: "Analytics services",
-    cards: [
+    hero: {
+      title: "Measurement for ecommerce teams that act on data",
+      intro:
+        "We capture every step in your funnel, align consent with GDPR requirements and deliver dashboards your teams can use immediately. You get a reliable foundation for decisions and campaigns.",
+    },
+    services: [
       {
-        label: "Starter package",
-        title: "Google Analytics 4 ‘Start’ setup and configuration",
-        bullets: [
-          "Installation on your website",
-          "Property & data stream configuration",
-          "Filtering internal traffic",
-          "Linking Google Search Console & GTM",
-          "Walk-through and handover (0.5h)",
+        title: "GA4 & GTM setup",
+        summary:
+          "End-to-end configuration of Google Analytics 4 and Tag Manager so funnels, campaigns and conversions are captured consistently.",
+        whatWeDo: [
+          "Map critical events per stage: product, checkout, service",
+          "Design datalayer and naming conventions for dev and marketing",
+          "Configure GA4 property, data streams and conversions",
+          "Set up Tag Manager structure, triggers and variables with QA",
         ],
-        price: "From €220 (ex VAT)",
+        whatYouReceive: [
+          "Datalayer blueprint and tagging plan",
+          "Published GA4 property with events and conversions",
+          "GTM containers with versions and testing flows",
+          "Handover notes and a short walkthrough",
+        ],
+        outcomes: [
+          "Reliable event data for marketing and product teams",
+          "Faster releases through clear naming and QA",
+          "Less dependency on individual developers",
+        ],
       },
       {
-        title: "Google Analytics 4 ‘Start plus GDPR-ready cookie banner’",
-        subcopy: "Everything in Start, plus:",
-        bullets: [
-          "Connecting your site with social media and Google Ads (Facebook Ads and other pixels & tracking)",
-          "GDPR-compatible integration with a modern, mobile-first cookie banner",
+        title: "Consent & GDPR-proof tracking",
+        summary:
+          "Makes sure tracking complies with GDPR and consent policies while preserving performance insight.",
+        whatWeDo: [
+          "Assess current tracking and cookies against GDPR requirements",
+          "Configure consent mode and integrate with the CMP",
+          "Separate necessary and marketing tags inside GTM",
+          "Validate data flows with defined test scenarios",
         ],
-        price: "From €440 (ex VAT)",
+        whatYouReceive: [
+          "Risk report with remediation plan",
+          "Configured consent mode and tag categorisation",
+          "Documentation of data collection per consent state",
+          "Release checklists for future changes",
+        ],
+        outcomes: [
+          "Tracking that is defensible legally and internally",
+          "Continued visibility on campaigns within consent rules",
+          "Lower risk of data leaks or blocking scripts",
+        ],
       },
       {
-        title: "Google Analytics 4 ‘Advanced’ setup and configuration",
-        subcopy: "Everything in Start, plus:",
-        bullets: [
-          "Configuring new events and conversions aligned to business goals (leads, click-to-call, downloads, etc.)",
-          "Personalising the GA4 interface",
+        title: "Ecommerce measurement",
+        summary:
+          "Enhanced ecommerce tracking for product performance, basket behaviour and revenue drivers.",
+        whatWeDo: [
+          "Translate the ecommerce journey into measurable events",
+          "Configure purchase, refund and engagement events",
+          "Connect conversions to ad platforms",
+          "Implement alerts when revenue data deviates",
         ],
-        price: "From €440 (ex VAT)",
+        whatYouReceive: [
+          "Detailed tagging plan for each shopping step",
+          "Technical implementation in GA4 and GTM",
+          "Connections to Google Ads and other channels",
+          "Reporting template for commerce KPIs",
+        ],
+        outcomes: [
+          "Full view of revenue by channel and device",
+          "Faster detection of funnel drop-offs",
+          "Better input for merchandising and budget decisions",
+        ],
       },
       {
-        title: "Google Analytics 4 ‘E-commerce’ setup and configuration",
-        subcopy: "Everything in Start, plus:",
-        bullets: [
-          "Implementing enhanced e-commerce conversions (with your developer or agency for custom platforms)",
-          "Personalising the GA4 interface",
+        title: "Dashboards & data reliability",
+        summary:
+          "Dashboards teams can use from day one, paired with monitoring that keeps data quality in check.",
+        whatWeDo: [
+          "Inventory of KPIs and decision moments",
+          "Build Looker Studio dashboards with segments",
+          "Set up data quality checks and alerts",
+          "Document metric definitions and calculations",
         ],
-        price: "From €880 (ex VAT)",
+        whatYouReceive: [
+          "Dashboard setup with filters and access",
+          "Metric definitions and explanations",
+          "Monitoring plan with alerts and owners",
+          "Short training for users",
+        ],
+        outcomes: [
+          "Consistent reporting for teams and leadership",
+          "Quick detection of anomalies in data",
+          "More efficient reporting without manual work",
+        ],
       },
     ],
   },
 };
 
-const AnalyticsIcon = () => (
-  <svg
-    aria-hidden
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32"
-    className="h-10 w-10 text-brand-blue"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M6 22v4" />
-    <path d="M12 16v10" />
-    <path d="M18 10v16" />
-    <path d="M24 6v20" />
-    <path d="M4 26h24" />
-    <circle cx="6" cy="14" r="2" className="fill-current/15" />
-    <circle cx="12" cy="10" r="2" className="fill-current/15" />
-    <circle cx="18" cy="14" r="2" className="fill-current/15" />
-    <circle cx="24" cy="8" r="2" className="fill-current/15" />
-  </svg>
-);
+const sectionClasses = "card-surface flex flex-col gap-4 md:gap-5";
+const subheadingClass = "text-sm font-semibold uppercase tracking-[0.18em] text-neutral-500";
+const bulletClass = "space-y-3 text-sm leading-relaxed text-neutral-700";
 
 export default function Measurement() {
   const shouldReduceMotion = useReducedMotion();
@@ -136,61 +223,102 @@ export default function Measurement() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main
-        role="main"
-        aria-labelledby="measurement-heading"
-        className="relative overflow-hidden bg-surface-soft pb-24 pt-28   "
-      >
+      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28">
         <div className="grain-overlay" aria-hidden />
-        <div className="relative site-container">
+
+        <div className="relative site-container space-y-6">
           <motion.h1
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
-            id="measurement-heading"
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
+            className="text-balance text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl"
           >
-            {copy.heading}
+            {copy.hero.title}
           </motion.h1>
+          <motion.p
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { delay: 0.08, duration: 0.6 }}
+            className="max-w-3xl text-lg text-neutral-700"
+          >
+            {copy.hero.intro}
+          </motion.p>
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { delay: 0.14, duration: 0.6 }}
+            className="flex flex-wrap items-center gap-3"
+          >
+            <Link to="/contact" className="button-primary">
+              Plan kennismaking
+            </Link>
+            <Link to="/contact" className="button-secondary">
+              Vraag Quick Scan aan
+            </Link>
+          </motion.div>
         </div>
 
-        <div className="relative site-container mt-14">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {copy.cards.map((card, index) => (
-              <motion.article
-                key={card.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={shouldReduceMotion ? undefined : { once: true }}
-                transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col card-surface"
-              >
-                <div className="relative flex flex-col gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
-                    <AnalyticsIcon />
-                  </div>
-                  {card.label && (
-                    <span className="w-fit rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-brand-blue">
-                      {card.label}
-                    </span>
-                  )}
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
-                  {card.subcopy && (
-                    <p className="text-sm font-medium text-brand-blue ">{card.subcopy}</p>
-                  )}
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
-                        <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
-                        <span>{bullet}</span>
+        <div className="relative site-container mt-14 space-y-8 md:space-y-10">
+          {copy.services.map((service, index) => (
+            <motion.section
+              key={service.title}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={shouldReduceMotion ? undefined : { once: true }}
+              transition={shouldReduceMotion ? undefined : { delay: 0.06 * index, duration: 0.55 }}
+              className={sectionClasses}
+            >
+              <div className="space-y-2">
+                <h2 className="text-2xl font-semibold text-neutral-900">{service.title}</h2>
+                <p className="text-neutral-700">{service.summary}</p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-3">
+                <div className="space-y-3">
+                  <p className={subheadingClass}>{language === "nl" ? "Wat we doen" : "What we do"}</p>
+                  <ul className={bulletClass}>
+                    {service.whatWeDo.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span aria-hidden className="mt-2 h-2 w-2 rounded-full bg-brand-blue" />
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
+                <div className="space-y-3">
+                  <p className={subheadingClass}>{language === "nl" ? "Wat je ontvangt" : "What you receive"}</p>
+                  <ul className={bulletClass}>
+                    {service.whatYouReceive.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span aria-hidden className="mt-2 h-2 w-2 rounded-full bg-brand-blue" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <p className={subheadingClass}>{language === "nl" ? "Wat het oplevert" : "What it delivers"}</p>
+                  <ul className={bulletClass}>
+                    {service.outcomes.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span aria-hidden className="mt-2 h-2 w-2 rounded-full bg-brand-blue" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
-              </motion.article>
-            ))}
-          </div>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Link to="/contact" className="button-primary">
+                  Plan kennismaking
+                </Link>
+                <Link to="/contact" className="button-secondary">
+                  Vraag Quick Scan aan
+                </Link>
+              </div>
+            </motion.section>
+          ))}
         </div>
       </main>
     </>
