@@ -129,14 +129,14 @@ export default function Cro() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20">
+      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28   ">
         <div className="grain-overlay" aria-hidden />
         <div className="relative site-container">
           <motion.h1
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            className="text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
           >
             {copy.heading}
           </motion.h1>
@@ -157,8 +157,8 @@ export default function Cro() {
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
                     <CroIcon />
                   </div>
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 dark:text-white">{card.title}</h2>
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 dark:text-gray-300">
+                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
+                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
                     {card.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3">
                         <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
@@ -166,19 +166,16 @@ export default function Cro() {
                       </li>
                     ))}
                   </ul>
-                  <div className="space-y-2 rounded-2xl bg-neutral-50/80 p-4 text-sm leading-relaxed text-neutral-700 ring-1 ring-neutral-200/70 dark:bg-white/5 dark:text-gray-200 dark:ring-white/5">
-                    <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  <div className="space-y-2 rounded-2xl bg-neutral-50/80 p-4 text-sm leading-relaxed text-neutral-700 ring-1 ring-neutral-200/70   ">
+                    <h3 className="text-sm font-semibold text-neutral-900 ">
                       {language === "nl" ? "Wat we doen" : "What we do"}
                     </h3>
                     <p>{card.whatWeDo}</p>
-                    <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">
+                    <h3 className="text-sm font-semibold text-neutral-900 ">
                       {language === "nl" ? "Jij ontvangt" : "You receive"}
                     </h3>
                     <p>{card.deliverable}</p>
                   </div>
-                </div>
-                <div className="relative mt-6 flex items-center justify-between border-t border-neutral-200/70 pt-4 text-sm font-semibold text-neutral-900 dark:border-white/10 dark:text-white">
-                  <span>{card.price}</span>
                 </div>
               </motion.article>
             ))}

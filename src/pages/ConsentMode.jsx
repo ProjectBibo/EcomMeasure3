@@ -92,7 +92,7 @@ export default function ConsentMode() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-gradient-to-b from-brand-teal/12 via-white to-brand-teal/8 pb-24 pt-28 dark:from-brand-teal/22 dark:via-surface-dark dark:to-brand-teal/16">
+      <div className="relative overflow-hidden bg-gradient-to-b from-brand-teal/12 via-white to-brand-teal/8 pb-24 pt-28   ">
         <div className="story-stripe" aria-hidden />
         <div className="grain-overlay" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 text-center">
@@ -100,7 +100,7 @@ export default function ConsentMode() {
             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.85 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-teal"
+            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal shadow-sm backdrop-blur   "
           >
             {copy.hero.eyebrow}
           </motion.span>
@@ -108,7 +108,7 @@ export default function ConsentMode() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.08, duration: 0.7 }}
-            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
           >
             {copy.hero.title}
           </motion.h1>
@@ -116,7 +116,7 @@ export default function ConsentMode() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.16, duration: 0.7 }}
-            className="mx-auto mt-6 max-w-3xl text-lg text-neutral-700 dark:text-gray-300"
+            className="mx-auto mt-6 max-w-3xl text-lg text-neutral-700 "
           >
             {copy.hero.description}
           </motion.p>
@@ -131,7 +131,7 @@ export default function ConsentMode() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.6 }}
-                className="group relative h-full overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-8 text-left shadow-[18px_28px_80px_rgba(15,23,42,0.16)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[20px_32px_90px_rgba(2,6,23,0.55)]"
+                className="group relative h-full overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-8 text-left shadow-[18px_28px_80px_rgba(15,23,42,0.16)] backdrop-blur   "
               >
                 <div
                   aria-hidden
@@ -141,8 +141,8 @@ export default function ConsentMode() {
                       "inset 3px 3px 10px rgba(255,255,255,0.5), inset -14px -16px 32px rgba(148,163,184,0.18)",
                   }}
                 />
-                <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">{card.title}</h2>
-                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">
+                <h2 className="text-2xl font-semibold text-neutral-900 ">{card.title}</h2>
+                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 ">
                   {card.items.map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-teal" />

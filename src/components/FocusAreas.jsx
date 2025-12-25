@@ -12,7 +12,7 @@ const content = {
     badge: "Expertises",
     title: "Kies de verdieping die jouw groei versnelt",
     description:
-      "Elk traject start met een heldere focus. Verken de pijlers van measurement, consent en CRO en ontdek welke stap jouw e-commerce versnelt.",
+      "Elk traject start met een heldere focus. Verken de pijlers van measurement en CRO en ontdek welke stap jouw e-commerce versnelt.",
     cards: [
       {
         title: "Measurement",
@@ -20,13 +20,6 @@ const content = {
         description:
           "Een schaalbare datastructuur met enhanced e-commerce events, server-side tagging en dashboards die dagelijks vertrouwen geven.",
         to: "/measurement",
-      },
-      {
-        title: "Consent Mode v2",
-        subtitle: "AVG/GDPR proof",
-        description:
-          "Consent Mode v2, CMP-integraties en duidelijke documentatie zodat marketing- en legalteams met zekerheid kunnen sturen.",
-        to: "/consent-mode",
       },
       {
         title: "CRO",
@@ -41,7 +34,7 @@ const content = {
     badge: "Expertise",
     title: "Pick the focus area that accelerates growth",
     description:
-      "Every engagement starts with clarity. Explore the pillars of measurement, consent and CRO to see which track unlocks your next stage.",
+      "Every engagement starts with clarity. Explore the pillars of measurement and CRO to see which track unlocks your next stage.",
     cards: [
       {
         title: "Measurement",
@@ -49,13 +42,6 @@ const content = {
         description:
           "A scalable data foundation with enhanced e-commerce events, server-side tagging and dashboards that inspire daily confidence.",
         to: "/measurement",
-      },
-      {
-        title: "Consent Mode v2",
-        subtitle: "GDPR compliant",
-        description:
-          "Consent Mode v2, CMP integrations and transparent documentation so marketing and legal teams can operate with certainty.",
-        to: "/consent-mode",
       },
       {
         title: "CRO",
@@ -75,7 +61,7 @@ export default function FocusAreas() {
   const navigateWithTransition = useViewTransitionNavigate();
 
   return (
-    <section className="relative overflow-hidden bg-surface-soft py-20 dark:bg-surface-dark section-shell">
+    <section className="relative overflow-hidden bg-surface-soft py-20  section-shell">
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>
@@ -96,14 +82,14 @@ export default function FocusAreas() {
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.6 }}
           className="space-y-4 section-heading"
         >
-          <AnimatedHeading className="vt-heading text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <AnimatedHeading className="vt-heading text-3xl font-bold tracking-tight text-neutral-900  sm:text-4xl">
             {copy.title}
           </AnimatedHeading>
           <AnimatedParagraph
             text={copy.description}
             language={language}
             highlight
-            className="text-base text-neutral-600 dark:text-gray-400"
+            className="text-base text-neutral-600 "
             delay={0.16}
           />
         </motion.div>
@@ -120,14 +106,14 @@ export default function FocusAreas() {
             >
               <div className="flex flex-col gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue/80 dark:text-brand-teal/80">
+                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue/80 ">
                     {card.subtitle}
                   </p>
-                  <h3 className="typography-subheading mt-2 text-2xl font-semibold text-neutral-900 transition-colors duration-300 group-hover:text-brand-blue dark:text-white">
+                  <h3 className="typography-subheading mt-2 text-2xl font-semibold text-neutral-900 transition-colors duration-300 group-hover:text-brand-blue ">
                     {card.title}
                   </h3>
                 </div>
-                <p className="text-sm leading-relaxed text-neutral-600 dark:text-gray-300">{card.description}</p>
+                <p className="text-sm leading-relaxed text-neutral-600 ">{card.description}</p>
               </div>
               <div className="mt-8 flex flex-1 items-end">
                 <Link
