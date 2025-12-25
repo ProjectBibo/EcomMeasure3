@@ -30,14 +30,6 @@ export default function Hero() {
   );
   const phrasesFromLocale = t.rotatingPhrases ?? [];
   const rotatingPhrases = phrasesFromLocale.length > 0 ? phrasesFromLocale : [""];
-  const longestPhrase = useMemo(
-    () =>
-      rotatingPhrases.reduce(
-        (longest, phrase) => (phrase.length > longest.length ? phrase : longest),
-        ""
-      ),
-    [rotatingPhrases]
-  );
   const leadWords = useMemo(() => t.titleLead.trim().split(/\s+/), [t.titleLead]);
 
   useEffect(() => {
@@ -71,7 +63,7 @@ export default function Hero() {
       <div className="grain-overlay" aria-hidden />
 
       <div className="relative section-shell">
-        <div className="site-container relative z-10 flex flex-col gap-8 lg:gap-10 lg:min-h-[78vh] lg:pr-[28rem] xl:pr-[34rem]">
+        <div className="site-container relative z-10 flex flex-col gap-6 lg:gap-9 min-h-[78vh] lg:min-h-[82vh] lg:pr-[28rem] xl:pr-[34rem]">
           <div className="relative max-w-3xl flex flex-col items-start gap-8 text-left vt-hero-visual">
             <motion.span
               initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
@@ -121,31 +113,30 @@ export default function Hero() {
                 </motion.span>
               )}
               <span className="relative mt-3 grid justify-items-start text-left">
-                <span aria-hidden className="pointer-events-none block select-none opacity-0">
-                  {longestPhrase}
-                </span>
                 <span
                   aria-live={shouldReduceMotion ? undefined : "polite"}
                   className="col-start-1 row-start-1 flex items-start justify-start text-left"
                 >
-                  {shouldReduceMotion ? (
-                    <span className={gradientHeadlineClass}>
-                      {rotatingPhrases[0] ?? ""}
-                    </span>
-                  ) : (
-                    <AnimatePresence mode="wait" initial={false}>
-                      <motion.span
-                        key={activePhrase}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                        className={gradientHeadlineClass}
-                      >
-                        {activePhrase}
-                      </motion.span>
-                    </AnimatePresence>
-                  )}
+                  <span className="rotating-text-wrapper">
+                    {shouldReduceMotion ? (
+                      <span className={gradientHeadlineClass}>
+                        {rotatingPhrases[0] ?? ""}
+                      </span>
+                    ) : (
+                      <AnimatePresence mode="wait" initial={false}>
+                        <motion.span
+                          key={activePhrase}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -12 }}
+                          transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+                          className={gradientHeadlineClass}
+                        >
+                          {activePhrase}
+                        </motion.span>
+                      </AnimatePresence>
+                    )}
+                  </span>
                 </span>
               </span>
             </motion.h1>
