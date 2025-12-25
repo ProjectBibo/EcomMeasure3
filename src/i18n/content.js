@@ -416,7 +416,7 @@ export const translations = {
         },
         contact: {
           title: "Contact",
-          items: ["info@ecommeasure.com", "+31 6 12345678", "Deventer, Nederland"],
+          items: ["info@ecommeasure.com", "+31 6 82523260", "Deventer, Nederland"],
         },
       },
       cta: "Plan een kennismaking",
