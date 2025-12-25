@@ -12,8 +12,6 @@ import { AnimatedParagraph } from "./ExpressiveText";
 
 const MotionLink = motion(Link);
 
-const gradientHeadlineClass = "bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent";
-
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
@@ -61,17 +59,12 @@ export default function Hero() {
 
   return (
     <section id="hero" data-snap-section className="relative isolate overflow-hidden">
-      <div className="story-stripe" aria-hidden />
-      <div className="glow-orb glow-orb--primary -top-32 -left-24 h-[36rem] w-[36rem]" aria-hidden />
-      <div className="glow-orb glow-orb--primary-soft top-1/3 -right-20 h-[30rem] w-[30rem]" aria-hidden />
-      <div className="grain-overlay" aria-hidden />
-
-      <div className="relative max-w-6xl mx-auto px-6 py-28 sm:py-32 flex flex-col items-center text-center gap-12 vt-hero-visual">
+      <div className="relative page-shell section-shell flex flex-col items-center text-center gap-10 vt-hero-visual">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:border-white/20 dark:bg-white/10 dark:text-white"
+          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)] shadow-sm"
         >
           <Sparkles size={14} /> {t.badge}
         </motion.span>
@@ -80,7 +73,7 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
-          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white vt-hero-title focus:outline-none"
+          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-[color:var(--text)] vt-hero-title focus:outline-none"
           data-focus-target
           tabIndex={-1}
         >
@@ -123,7 +116,7 @@ export default function Hero() {
               className="col-start-1 row-start-1 flex items-start justify-center text-center"
             >
               {shouldReduceMotion ? (
-                <span className={gradientHeadlineClass}>
+                <span className="text-[color:var(--primary)]">
                   {rotatingPhrases[0] ?? ""}
                 </span>
               ) : (
@@ -134,7 +127,7 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                    className={gradientHeadlineClass}
+                    className="text-[color:var(--primary)]"
                   >
                     {activePhrase}
                   </motion.span>
@@ -149,7 +142,7 @@ export default function Hero() {
           language={language}
           highlight
           delay={0.18}
-          className="mx-auto max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300"
+          className="mx-auto max-w-2xl text-lg sm:text-xl text-[color:var(--muted)]"
         />
 
         <motion.div
@@ -162,14 +155,14 @@ export default function Hero() {
             whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_22px_44px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2"
+            className="btn-primary"
             onClick={handlePrimaryCtaClick}
           >
             {t.primaryCta} <ArrowRight size={18} />
           </MotionLink>
           <Link
             to="/measurement"
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-300/70 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_55px_rgba(15,23,42,0.16)] dark:border-white/15 dark:bg-white/10 dark:text-gray-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_20px_50px_rgba(2,6,23,0.5)]"
+            className="btn-secondary"
             onClick={handleSecondaryCtaClick}
           >
             {t.secondaryCta}
@@ -180,27 +173,23 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.2, duration: 0.7 }}
-          className="grid gap-6 w-full sm:grid-cols-3"
+          className="grid w-full gap-6 sm:grid-cols-3"
         >
           {t.stats.map((item) => (
             <div
               key={item.label}
-              data-tilt-card
-              className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 px-6 py-6 text-left shadow-[12px_24px_50px_rgba(15,23,42,0.12)] backdrop-blur transition-[box-shadow,transform] duration-500 hover:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] focus-visible:shadow-[18px_32px_70px_rgba(15,23,42,0.24)] dark:border-white/10 dark:bg-white/10 dark:shadow-[12px_24px_55px_rgba(2,6,23,0.6)] dark:hover:shadow-[16px_28px_70px_rgba(2,6,23,0.68)]"
+              className="card relative flex h-full flex-col gap-2 px-6 py-6 text-left"
             >
-              <div
-                className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                aria-hidden
-                style={{
-                  boxShadow:
-                    "inset 2px 2px 6px rgba(255,255,255,0.6), inset -8px -12px 24px rgba(148,163,184,0.25)",
-                }}
-              />
-              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/65 via-white/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-white/15 dark:via-transparent dark:to-transparent" aria-hidden />
-              <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-brand-blue/12 blur-xl transition group-hover:scale-125" aria-hidden />
-              <div className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">{item.label}</div>
-              <div className="mt-3 text-3xl font-bold text-brand-blue dark:text-brand-blue">{item.value}</div>
-              <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.helper}</p>
+              <div className="flex items-center justify-between">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">{item.label}</div>
+                {item.badge ? (
+                  <div className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-blue">
+                    {item.badge}
+                  </div>
+                ) : null}
+              </div>
+              <div className="text-3xl font-bold text-[color:var(--text)]">{item.value}</div>
+              <p className="text-sm leading-relaxed text-[color:var(--muted)]">{item.helper}</p>
             </div>
           ))}
         </motion.div>
@@ -209,16 +198,14 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.25, duration: 0.7 }}
-          data-tilt-card
-          className="vt-hero-media relative w-full rounded-3xl border border-white/60 bg-white/70 px-6 py-8 text-left shadow-[24px_38px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 focus-visible:shadow-[26px_40px_96px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-white/5 dark:shadow-[24px_40px_90px_rgba(2,6,23,0.55)]"
+          className="vt-hero-media card w-full text-left p-8 md:p-10"
         >
-          <div className="absolute -left-10 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand-blue/30 md:block" style={{ animation: "pulse-ring 3.5s infinite" }} aria-hidden />
-          <div className="grid gap-6 md:grid-cols-2 md:gap-12">
+          <div className="grid gap-6 md:grid-cols-2 md:gap-10">
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
-                <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
-                <h3 className="typography-subheading text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
+                <span className="absolute left-0 top-1 h-10 w-px rounded-full bg-brand-blue/70" aria-hidden />
+                <h3 className="text-lg font-semibold text-[color:var(--text)]">{story.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[color:var(--muted)]">{story.copy}</p>
               </div>
             ))}
           </div>
@@ -228,13 +215,13 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.35, duration: 0.6 }}
-          className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-gray-400"
+          className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.24em] text-[color:var(--muted)]"
         >
           {t.scrollLabel}
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-            className="flex h-10 w-6 items-center justify-center rounded-full border border-neutral-400/50 bg-white/60 backdrop-blur dark:border-white/30 dark:bg-white/5"
+            className="flex h-10 w-6 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)]"
           >
             <MoveDown size={16} />
           </motion.div>

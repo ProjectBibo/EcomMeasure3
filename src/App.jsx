@@ -86,7 +86,7 @@ function AppContent() {
   }, [location.hash, location.pathname, location.search]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
+    <div className="min-h-screen overflow-x-hidden bg-[var(--bg)] text-[var(--text)] transition-colors">
       <Header />
       <Suspense fallback={<SectionFallback label="Pagina" />}>
         <ViewTransitionRoutes>
