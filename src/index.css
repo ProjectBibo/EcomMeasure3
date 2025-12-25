@@ -374,15 +374,22 @@ body {
 }
 
 /* ===== Diensten-kolommen (bottom bar) ===== */
-.svc-col { 
-  display: grid; 
-  align-content: center; 
-  gap: .2rem; 
+.svc-col {
+  display: grid;
+  align-content: center;
+  gap: .2rem;
 }
 .svc-head {
-  font-weight: 700; 
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .4rem .75rem;
+  border-radius: 10px;
+  font-weight: 720;
   letter-spacing: .2px;
   color: color-mix(in oklab, #0a0a0a 90%, transparent);
+  background: color-mix(in oklab, #0b69ff 6%, transparent 94%);
+  border: 1px solid color-mix(in oklab, #0a0a0a 7%, transparent);
   text-decoration: none;
 }
 .svc-sub {
