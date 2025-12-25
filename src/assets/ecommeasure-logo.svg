@@ -1,0 +1,10 @@
+<svg width="1100" height="500" viewBox="0 0 1100 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="240" width="100" height="200" rx="18" fill="#111111" />
+  <rect x="170" y="200" width="100" height="240" rx="18" fill="#111111" />
+  <rect x="300" y="150" width="100" height="290" rx="18" fill="#111111" />
+  <rect x="430" y="100" width="100" height="340" rx="18" fill="#111111" />
+  <path d="M80 220L220 140L310 200L420 90L540 170" stroke="#111111" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M540 170L520 140" stroke="#111111" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M540 170L500 190" stroke="#111111" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="620" y="320" fill="#111111" font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="110" font-weight="700">EcomMeasure</text>
+</svg>
