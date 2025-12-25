@@ -11,22 +11,22 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
+          { label: "A/B-test calculator", href: "/tools/bayesian-ab-test" },
           { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
       },
-      cta: "Plan een kennismaking",
+      cta: "Laten we kennismaken",
       columns: [
         {
-          title: "Measurement",
+          title: "Meer meten",
           href: "/measurement",
-          subtitle: "GA4 & GTM events",
+          subtitle: "Google Analytics 4",
         },
         {
-          title: "CRO",
+          title: "Optimaliseer je website",
           href: "/cro",
-          subtitle: "A/B-tests & hypotheses",
+          subtitle: "UX/CRO",
         },
       ],
       languageLabel: "Taal",
