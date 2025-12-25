@@ -15,17 +15,17 @@ const content = {
       "Elk traject start met een heldere focus. Verken de pijlers van measurement en CRO en ontdek welke stap jouw e-commerce versnelt.",
     cards: [
       {
-        title: "Measurement",
-        subtitle: "GA4 & GTM events",
+        title: "Google Analytics 4",
+        subtitle: "Meer meten",
         description:
-          "Een schaalbare datastructuur met enhanced e-commerce events, server-side tagging en dashboards die dagelijks vertrouwen geven.",
+          "Ontdek of je Google Analytics 4 goed meet en vindt groeikansen of issues",
         to: "/measurement",
       },
       {
-        title: "CRO",
-        subtitle: "A/B-tests & hypotheses",
+        title: "UX/CRO",
+        subtitle: "Optimaliseer je website",
         description:
-          "Onderzoek, experimenteer en leer sneller met een strak proces voor hypotheses, validatie en implementatie.",
+          "Ontdek of –en waar– jouw website mensen en omzet lekt",
         to: "/cro",
       },
     ],
