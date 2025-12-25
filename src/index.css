@@ -9,28 +9,39 @@
   --motion-duration-long: 480ms;
   --motion-ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
   --motion-ease-emphasized: cubic-bezier(0.83, 0, 0.17, 1);
-  --focus-ring-primary: rgba(255, 204, 2, 0.65);
-  --focus-ring-secondary: rgba(31, 111, 235, 0.55);
-  --focus-ring-offset-light: rgba(255, 255, 255, 0.9);
-  --focus-ring-offset-dark: rgba(8, 15, 30, 0.92);
-  color-scheme: light dark;
+  --focus-ring-primary: rgba(58, 89, 255, 0.45);
+  --focus-ring-secondary: rgba(58, 89, 255, 0.25);
+  --focus-ring-offset-light: rgba(255, 255, 255, 0.96);
+  --focus-ring-offset-dark: rgba(12, 19, 35, 0.95);
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --primary: #3a59ff;
+  --surface-soft: #f0f2f8;
+  --radius: 12px;
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-offset);
   scroll-snap-type: y proximity;
-  background-color: #f3f6fb;
+  background-color: var(--bg);
 }
 
 body {
   min-height: 100vh;
-  background-image: radial-gradient(circle at 20% 20%, rgba(31, 111, 235, 0.12), transparent 55%),
-    radial-gradient(circle at 80% 0%, rgba(24, 79, 158, 0.08), transparent 60%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(238, 242, 248, 0.96));
-  background-attachment: fixed;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.7;
   transition: background 240ms ease, color 240ms ease;
-  backdrop-filter: saturate(120%);
+}
+
+body p {
+  max-width: 72ch;
 }
 
 @supports (view-transition-name: hero-title) {
@@ -95,6 +106,7 @@ body {
   }
 }
 
+
 .progress-rail {
   position: absolute;
   inset: 0 auto auto 0;
@@ -102,19 +114,19 @@ body {
   height: 3px;
   overflow: hidden;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.06));
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.02));
   transform: translateZ(0);
 }
 
 .dark .progress-rail {
-  background: linear-gradient(90deg, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0.08));
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.18), rgba(148, 163, 184, 0.08));
 }
 
 .progress-bar {
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(31, 111, 235, 0.9) 0%, rgba(24, 79, 158, 0.9) 100%);
+  background: linear-gradient(90deg, rgba(58, 89, 255, 0.9) 0%, rgba(58, 89, 255, 0.65) 100%);
   transform-origin: left center;
   transform: scaleX(0);
   transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -129,10 +141,8 @@ body {
 }
 
 .dark body {
-  background-image: radial-gradient(circle at 15% 25%, rgba(31, 111, 235, 0.22), transparent 55%),
-    radial-gradient(circle at 75% 15%, rgba(24, 79, 158, 0.18), transparent 60%),
-    linear-gradient(180deg, rgba(7, 16, 31, 0.97), rgba(5, 12, 24, 0.94));
-  background-color: #050b16;
+  background: #0f162a;
+  color: #e2e8f0;
 }
 
 [data-snap-section] {
@@ -180,31 +190,24 @@ body {
 
 /* ===== Decoratieve gradients ===== */
 .glow-orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.7;
-  transform: translate3d(0, 0, 0);
+  display: none;
 }
 
-.glow-orb--primary {
-  background: radial-gradient(circle at 50% 50%, rgba(31, 111, 235, 0.42), transparent 60%);
-}
-
+.glow-orb--primary,
 .glow-orb--primary-soft {
-  background: radial-gradient(circle at 50% 50%, rgba(24, 79, 158, 0.38), transparent 62%);
+  display: none;
 }
 
 .story-stripe {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(31, 111, 235, 0.08), rgba(24, 79, 158, 0.08), transparent 62%);
-  mix-blend-mode: plus-lighter;
+  background: linear-gradient(120deg, rgba(58, 89, 255, 0.05), transparent 68%);
+  mix-blend-mode: normal;
   pointer-events: none;
 }
 
 .dark .story-stripe {
-  background: linear-gradient(120deg, rgba(31, 111, 235, 0.18), rgba(24, 79, 158, 0.16), transparent 65%);
+  background: linear-gradient(120deg, rgba(58, 89, 255, 0.1), transparent 70%);
 }
 
 .grain-overlay {
@@ -213,7 +216,7 @@ body {
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' opacity='0.2' viewBox='0 0 200 200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
-  opacity: 0.45;
+  opacity: 0.06;
 }
 
 .vt-heading {

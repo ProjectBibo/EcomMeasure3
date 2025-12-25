@@ -16,9 +16,9 @@ export default function Footer() {
   return (
     <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-14">
       <motion.div
-        animate={shouldReduceMotion ? { backgroundPosition: "0% 50%" } : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-        transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-brand-teal bg-[length:200%_200%]"
+        animate={shouldReduceMotion ? { opacity: 0.8 } : { opacity: [0.9, 1, 0.9] }}
+        transition={shouldReduceMotion ? undefined : { duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 left-0 h-1 w-full bg-brand-blue/40"
       />
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
@@ -26,18 +26,18 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid gap-8 md:grid-cols-5">
           <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
+            <h4 className="font-semibold mb-3 text-neutral-900 dark:text-white">EcomMeasure</h4>
             <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
             <Link
               to="/contact"
-              className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
+              className="mt-4 inline-block rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
               onClick={createViewTransitionClickHandler(navigateWithTransition, "/contact")}
             >
               {t.cta}
             </Link>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>
+            <h4 className="font-semibold mb-3 text-neutral-900 dark:text-white">{t.columns.measurement.title}</h4>
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.measurement.items.map((item) => (
                 <li key={typeof item === "string" ? item : item.href}>
@@ -57,7 +57,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.cro.title}</h4>
+            <h4 className="font-semibold mb-3 text-neutral-900 dark:text-white">{t.columns.cro.title}</h4>
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.cro.items.map((item) => (
                 <li key={typeof item === "string" ? item : item.href}>
@@ -77,7 +77,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.tools.title}</h4>
+            <h4 className="font-semibold mb-3 text-neutral-900 dark:text-white">{t.columns.tools.title}</h4>
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.tools.items.map((item) => (
                 <li key={item.href}>
@@ -93,7 +93,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.contact.title}</h4>
+            <h4 className="font-semibold mb-3 text-neutral-900 dark:text-white">{t.columns.contact.title}</h4>
             <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
               {t.columns.contact.items.map((item) => (
                 <li key={item}>{item}</li>
