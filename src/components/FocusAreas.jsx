@@ -65,7 +65,7 @@ export default function FocusAreas() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="story-stripe" aria-hidden />
       </div>
-      <div className="relative site-container space-y-10">
+      <div className="relative site-container mx-auto max-w-5xl space-y-10">
         <motion.span
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
@@ -93,7 +93,7 @@ export default function FocusAreas() {
             delay={0.16}
           />
         </motion.div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:mx-auto lg:max-w-4xl">
           {copy.cards.map((card, index) => (
             <motion.article
               key={card.title}
