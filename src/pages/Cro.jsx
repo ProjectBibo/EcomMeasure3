@@ -1,185 +1,308 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
+import {
+  AlternatingSections,
+  FinalCTA,
+  HeroSplit,
+  ServicesList,
+  TrustStrip,
+  VideoAnalysisSection,
+} from "../components/ServicePageSections";
 
-const services = {
+const content = {
   nl: {
     seo: {
-      title: "UX/CRO diensten – expert reviews, analyses & testing",
+      title: "Inzicht in gedrag → betere keuzes → betere conversie",
       description:
-        "Drie UX/CRO diensten: expert reviews, kwantitatieve analyses en user testing met duidelijke deliverables en prijzen.",
+        "CRO zonder testfabriek: scherpe analyses, UX expert reviews en roadmap die conversie verbetert waar het telt.",
     },
-    heading: "UX/CRO diensten",
-    cards: [
+    hero: {
+      title: "Inzicht in gedrag → betere keuzes → betere conversie",
+      intro: [
+        "Wij ontleden gedrag en fricties zodat je keuzes kunt onderbouwen zonder eindeloze experiment-fabriek.",
+        "Pragmatische CRO met duidelijke prioriteiten, kwalitatief én kwantitatief.",
+      ],
+    },
+    trustBullets: [
+      "Analyse binnen 10 werkdagen",
+      "Focus op gedragsinzichten",
+      "Geen A/B-test factory",
+      "Roadmap met prioriteiten",
+    ],
+    helpSections: [
       {
-        title: "Kwalitatieve analyse middels UX Expert review",
+        title: "Kwalitatieve scherpte",
+        description:
+          "Een UX expert review die flows, microcopy en interacties ontleedt. Geen checklist, wel context en sectorkennis.",
         bullets: [
-          "Inspectie én analyse van het gebruikersgemak door UX- en usability expert",
-          "9 universele UX-aandachtsgebieden",
-          "Totaalbeeld met ±150 checkpoints",
+          "Inspectie van cruciale journeys en schermen",
+          "Heldere onderbouwing per bevinding",
+          "Directe suggesties voor verbetering",
         ],
-        whatWeDo:
-          "We beoordelen flows, pagina's en micro-interacties op basis van best practices en benchmarkcases voor jouw sector.",
-        deliverable: "Jij ontvangt: PDF + toelichting (bondig)",
-        price: "Prijs vanaf €860 (ex btw, afhankelijk van de website)",
+        imageAlt: "UX expert review visual",
       },
       {
-        title:
-          "Kwantitatieve Analyse naar groeidrivers en verbeterpunten (Google Analytics 4, Google Search e.a.)",
+        title: "Kwantitatieve diepgang",
+        description:
+          "We koppelen GA4, Search Console en gedragstools aan UX bevindingen. Dat maakt prioriteiten glashelder.",
         bullets: [
-          "Kwantitatieve analyse van gebruikers op je site",
-          "Aangevuld met eyetracking scans",
-          "Aangevuld met onderzoek en inzichten vanuit Google Analytics, Google Search",
+          "Segmentanalyses op device, kanaal en intent",
+          "Zoek- en funneldata naast heatmaps en journey inzichten",
+          "Prioritering met impact/effort en risico's",
         ],
-        whatWeDo:
-          "We combineren traffic- en gedragdata met heatmaps en search insights om groeikansen en fricties scherp te krijgen.",
-        deliverable: "Jij ontvangt: presentatie + actie/prioriteitenlijst (bondig)",
-        price: "Prijs vanaf €1400 (ex btw, afhankelijk van de website)",
-      },
-      {
-        title: "User Testing van de gehele customer journey",
-        bullets: [
-          "Persoonlijk, maatwerk en genormeerd testplan met meetbare doelen",
-          "Tot 5 participanten, via mobile en desktop",
-          "Remote of on-site",
-        ],
-        whatWeDo:
-          "We begeleiden werving, scripts en moderatie en leggen bevindingen vast in video en notities voor snelle implementatie.",
-        deliverable:
-          "Jij ontvangt: presentatie + gedetailleerde lijst met acties en prioriteiten (bondig)",
-        price: "Prijs vanaf €2500 (ex btw, afhankelijk van de website)",
+        imageAlt: "Data analyse visual",
       },
     ],
+    services: {
+      title: "Onze CRO-aanpak",
+      intro: "Geen experimentfabriek, wel rigoureuze inzichten en een roadmap die uitvoerbaar is.",
+      ctaLabel: "Plan een kennismaking",
+      rows: [
+        {
+          title: "UX expert review",
+          description:
+            "Diepgaande beoordeling van flows, microcopy en states met sector-benchmarks. Gericht op overtuiging én frictie.",
+          deliverables: [
+            "Toelichting per bevinding met bewijs",
+            "Prioriteitenlijst met quick wins",
+            "Opnames of voorbeelden ter illustratie",
+          ],
+          outcomes: [
+            "Direct zicht op UX-issues die conversie remmen",
+            "Input voor design- en dev-team zonder ruis",
+          ],
+        },
+        {
+          title: "Kwantitatieve analyse",
+          description:
+            "Gedragsdata uit GA4 en Search Console gekoppeld aan on-site gedragsmetingen. We zoeken bewijs, geen aannames.",
+          deliverables: [
+            "Segmentaties per device/kanaal",
+            "Funnel- en zoekanalyse gekoppeld aan sessiegedrag",
+            "Rapport met bevindingen en datapunten",
+          ],
+          outcomes: [
+            "Helder waar de grootste verliezen zitten",
+            "Keuzes kunnen staven met data",
+          ],
+        },
+        {
+          title: "User testing & journey inzichten (optioneel)",
+          description:
+            "Gerichte user tests of interviews om hypotheses te valideren en kansen te vinden die data niet toont.",
+          deliverables: [
+            "Testscript en werving (remote of on-site)",
+            "Notities, clips en patronen per sessie",
+            "Samenvatting met acties per journey",
+          ],
+          outcomes: [
+            "Menselijke context naast je cijfers",
+            "Sneller draagvlak voor beslissingen",
+          ],
+        },
+        {
+          title: "Prioritering en roadmap",
+          description:
+            "We vertalen bevindingen naar een heldere roadmap. Geen featurespread, wel gefocuste sprints.",
+          deliverables: [
+            "Impact/effort-matrix met risicoschatting",
+            "Backlog-items die klaar zijn voor refinement",
+            "Korte briefing voor design/dev",
+          ],
+          outcomes: [
+            "Weten wat eerst moet voor maximale conversiestap",
+            "Teams kunnen direct starten zonder uitzoekwerk",
+          ],
+        },
+      ],
+    },
+    video: {
+      title: "Vraag een gratis video-analyse aan",
+      description:
+        "We nemen een persoonlijke video op waarin we je UX/CRO-kansen aanwijzen en vervolgstappen delen.",
+      labels: {
+        website: "Website URL",
+        email: "Zakelijk e-mailadres",
+        message: "Optioneel bericht",
+        messagePlaceholder: "Waar moeten we op inzoomen?",
+        required: "Dit veld is verplicht.",
+        validEmail: "Voer een geldig e-mailadres in.",
+        loading: "Verzenden...",
+        submit: "Vraag video-analyse aan",
+        success: "Dank je! We nemen je aanvraag in behandeling en sturen binnen 2 werkdagen een video.",
+      },
+    },
+    finalCta: {
+      title: "Klaar voor conversie zonder testfabriek?",
+      description: "Plan een korte call. We laten zien hoe we gedrag vertalen naar keuzes die opleveren.",
+      cta: { href: "/contact", label: "Plan een kennismaking" },
+    },
   },
   en: {
     seo: {
-      title: "UX/CRO services – expert reviews, analysis & testing",
+      title: "Behaviour insight → better choices → better conversion",
       description:
-        "Three UX/CRO services: expert reviews, quantitative analyses and user testing with clear deliverables and pricing.",
+        "CRO without an experiment factory: sharp analysis, UX expert reviews and a roadmap that improves conversion where it matters.",
     },
-    heading: "UX/CRO services",
-    cards: [
+    hero: {
+      title: "Behaviour insight → better choices → better conversion",
+      intro: [
+        "We dissect behaviour and friction so you can make informed choices—no endless test factory.",
+        "Pragmatic CRO with clear priorities, both qualitative and quantitative.",
+      ],
+    },
+    trustBullets: [
+      "Analysis within 10 business days",
+      "Behaviour-first insights",
+      "No A/B-test factory",
+      "Priority-led roadmap",
+    ],
+    helpSections: [
       {
-        title: "Qualitative analysis via UX expert review",
+        title: "Qualitative sharpness",
+        description:
+          "A UX expert review of flows, microcopy and interactions. Not a checklist—context and sector knowledge included.",
         bullets: [
-          "Inspection and analysis of usability by a UX specialist",
-          "9 universal UX focus areas",
-          "Complete overview with roughly 150 checkpoints",
+          "Review of critical journeys and states",
+          "Evidence and reasoning per finding",
+          "Actionable improvement suggestions",
         ],
-        whatWeDo:
-          "We assess flows, pages and micro-interactions using best practices and benchmark cases for your industry.",
-        deliverable: "You receive: PDF + briefing (concise)",
-        price: "Pricing from €860 (ex VAT, depending on the site)",
+        imageAlt: "UX expert review visual",
       },
       {
-        title:
-          "Quantitative analysis of growth drivers and improvements (Google Analytics 4, Google Search, etc.)",
+        title: "Quantitative depth",
+        description:
+          "We combine GA4, Search Console and behaviour tools with UX findings to make priorities obvious.",
         bullets: [
-          "Quantitative analysis of user behaviour on your site",
-          "Complemented with eye-tracking scans",
-          "Enriched with research and insights from Google Analytics and Google Search",
+          "Segmentation by device, channel and intent",
+          "Search and funnel data alongside heatmaps",
+          "Prioritisation with impact/effort and risks",
         ],
-        whatWeDo:
-          "We combine traffic and behaviour data with heatmaps and search insights to pinpoint opportunities and friction.",
-        deliverable: "You receive: presentation + action/priority list (concise)",
-        price: "Pricing from €1400 (ex VAT, depending on the site)",
-      },
-      {
-        title: "User testing of the full customer journey",
-        bullets: [
-          "Tailored, standardised test plan with measurable objectives",
-          "Up to 5 participants on mobile and desktop",
-          "Remote or on-site",
-        ],
-        whatWeDo:
-          "We handle recruitment, scripts and moderation, documenting insights in video and notes for quick implementation.",
-        deliverable: "You receive: presentation + detailed list of actions and priorities (concise)",
-        price: "Pricing from €2500 (ex VAT, depending on the site)",
+        imageAlt: "Data analysis visual",
       },
     ],
+    services: {
+      title: "Our CRO approach",
+      intro: "Not an experiment factory—rigorous insights and a roadmap teams can ship.",
+      ctaLabel: "Schedule an intro call",
+      rows: [
+        {
+          title: "UX expert review",
+          description:
+            "In-depth assessment of flows, microcopy and states with industry benchmarks. Focused on persuasion and friction.",
+          deliverables: [
+            "Context and evidence for each finding",
+            "Prioritised list with quick wins",
+            "Clips or examples to illustrate",
+          ],
+          outcomes: [
+            "Immediate view of UX issues blocking conversion",
+            "Clear input for design and engineering",
+          ],
+        },
+        {
+          title: "Quantitative analysis",
+          description:
+            "Behavioural data from GA4 and Search Console tied to on-site behaviour tools. We look for proof, not guesses.",
+          deliverables: [
+            "Segmentations by device/channel",
+            "Funnel and search analysis linked to sessions",
+            "Report with findings and datapoints",
+          ],
+          outcomes: [
+            "Clarity on where losses are biggest",
+            "Decisions backed by data",
+          ],
+        },
+        {
+          title: "User testing & journey insights (optional)",
+          description:
+            "Targeted user tests or interviews to validate hypotheses and uncover opportunities data won't show.",
+          deliverables: [
+            "Test script and recruitment (remote or on-site)",
+            "Notes, clips and patterns per session",
+            "Summary with actions per journey",
+          ],
+          outcomes: [
+            "Human context alongside your numbers",
+            "Faster buy-in for decisions",
+          ],
+        },
+        {
+          title: "Prioritisation and roadmap",
+          description: "We translate insights into a clear roadmap. No feature sprawl—focused sprints instead.",
+          deliverables: [
+            "Impact/effort matrix with risk assessment",
+            "Backlog items ready for refinement",
+            "Short briefing for design/dev",
+          ],
+          outcomes: [
+            "Knowing what to tackle first for conversion lift",
+            "Teams can start immediately without guesswork",
+          ],
+        },
+      ],
+    },
+    video: {
+      title: "Request a free video analysis",
+      description:
+        "We'll record a personal video highlighting your CRO opportunities and next steps.",
+      labels: {
+        website: "Website URL",
+        email: "Business email",
+        message: "Optional message",
+        messagePlaceholder: "What should we zoom in on?",
+        required: "This field is required.",
+        validEmail: "Enter a valid email address.",
+        loading: "Sending...",
+        submit: "Request video analysis",
+        success: "Thank you! We'll review your request and send a video within two business days.",
+      },
+    },
+    finalCta: {
+      title: "Ready for conversion without the test factory?",
+      description: "Book a short call. We'll show how we translate behaviour into choices that pay off.",
+      cta: { href: "/contact", label: "Schedule an intro" },
+    },
   },
 };
 
-const CroIcon = () => (
-  <svg
-    aria-hidden
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32"
-    className="h-10 w-10 text-brand-blue"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M6 20l4-6 5 8 5-10 6 12" />
-    <path d="M4 26h24" />
-    <path d="M8 6h3v3H8z" className="fill-current/15" />
-    <path d="M14.5 8.5h3v3h-3z" className="fill-current/15" />
-    <path d="M22 4h3v3h-3z" className="fill-current/15" />
-  </svg>
-);
-
 export default function Cro() {
-  const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
-  const copy = services[language];
+  const copy = content[language];
 
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28   ">
-        <div className="grain-overlay" aria-hidden />
-        <div className="relative site-container">
-          <motion.h1
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
-          >
-            {copy.heading}
-          </motion.h1>
+      <main className="bg-white text-neutral-900">
+        <HeroSplit
+          title={copy.hero.title}
+          intro={copy.hero.intro}
+          primaryCta={{ href: "/contact", label: language === "nl" ? "Plan een kennismaking" : "Book a call" }}
+          secondaryCta={{
+            href: "#video-analyse",
+            label: language === "nl" ? "Vraag video-analyse aan" : "Request video analysis",
+          }}
+          imageAlt={language === "nl" ? "Voorbeeld van CRO visual" : "CRO visual placeholder"}
+        />
+        <TrustStrip bullets={copy.trustBullets} />
+        <AlternatingSections sections={copy.helpSections} />
+        <ServicesList
+          title={copy.services.title}
+          intro={copy.services.intro}
+          services={copy.services.rows}
+          ctaLabel={copy.services.ctaLabel}
+        />
+        <div id="video-analyse">
+          <VideoAnalysisSection
+            title={copy.video.title}
+            description={copy.video.description}
+            labels={copy.video.labels}
+          />
         </div>
-
-        <div className="relative site-container mt-14">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {copy.cards.map((card, index) => (
-              <motion.article
-                key={card.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={shouldReduceMotion ? undefined : { once: true }}
-                transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col card-surface"
-              >
-                <div className="relative flex flex-col gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
-                    <CroIcon />
-                  </div>
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
-                        <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="space-y-2 rounded-2xl bg-neutral-50/80 p-4 text-sm leading-relaxed text-neutral-700 ring-1 ring-neutral-200/70   ">
-                    <h3 className="text-sm font-semibold text-neutral-900 ">
-                      {language === "nl" ? "Wat we doen" : "What we do"}
-                    </h3>
-                    <p>{card.whatWeDo}</p>
-                    <h3 className="text-sm font-semibold text-neutral-900 ">
-                      {language === "nl" ? "Jij ontvangt" : "You receive"}
-                    </h3>
-                    <p>{card.deliverable}</p>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+        <div id="contact">
+          <FinalCTA title={copy.finalCta.title} description={copy.finalCta.description} cta={copy.finalCta.cta} />
         </div>
       </main>
     </>
