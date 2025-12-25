@@ -108,30 +108,31 @@ export const translations = {
       scrollLabel: "Scroll verder",
     },
     usp: {
-      badge: "Diensten",
-      heading: "Van meetstrategie naar conversie uplift",
+      badge: "DIENSTEN",
+      heading: "Van betrouwbare metingen naar gerichte optimalisatie",
       description:
-        "EcomMeasure combineert een waterdichte meetsetup met conversie optimalisatie. Zo weet je zeker dat verbeteringen worden onderbouwd én doorgevoerd.",
+        "EcomMeasure helpt e-commerce teams grip te krijgen op hun data. We zorgen dat je meet wat ertoe doet, begrijpt wat er gebeurt en onderbouwde keuzes maakt voor optimalisatie. Goede optimalisatie begint bij betrouwbare data. Wij richten je meetstack zo in dat je exact weet hoe bezoekers, kanalen en funnels bijdragen aan omzet en groei. Geen aannames. Geen ruis. Alleen data die klopt.",
       bullets: [
-        "Volledige inrichting van GA4 en GTM met e-commerce events.",
-        "Cookiebanners conform AVG/GDPR.",
-        "Advertentieplatformen gekoppeld voor volledige attributie.",
+        "GA4 & GTM inrichting voor e-commerce",
+        "Consent Mode & cookiebanners (AVG-proof)",
+        "Advertentieplatformen correct gemeten",
+        "Inzicht in funnels, gedrag en omzet",
       ],
       cards: [
         {
-          title: "Measurement fundamentals",
-          text: "GA4, GTM en server-side tagging staan strak ingericht zodat data direct bruikbaar is.",
-          detail: "Inclusief Looker Studio dashboards voor omzet, funnel en kanalen.",
+          title: "Measurement & tracking",
+          text: "Technisch correcte en schaalbare metingen die inzicht geven in wat er écht gebeurt op je website.",
+          detail: "",
         },
         {
-          title: "CRO research",
-          text: "Analyseer klantgedrag, stel hypotheses op en prioriteer A/B-tests die het meeste opleveren.",
-          detail: "Van sessie-opnames tot klantinterviews.",
+          title: "Analyse & inzichten",
+          text: "We vertalen data naar duidelijke inzichten: waar haken gebruikers af, waar liggen kansen en wat verdient focus.",
+          detail: "",
         },
         {
-          title: "Experiment delivery",
-          text: "We bouwen, testen en implementeren winnende varianten samen met jouw team.",
-          detail: "Implementatiebegeleiding voor developers en marketeers.",
+          title: "CRO-advies & optimalisatierichting",
+          text: "Op basis van inzichten adviseren we concrete verbeteringen voor je website en funnel — onderbouwd, haalbaar en prioriteerd.",
+          detail: "",
         },
       ],
     },
@@ -534,30 +535,31 @@ export const translations = {
     },
     usp: {
       badge: "Services",
-      heading: "From measurement strategy to conversion uplift",
+      heading: "From reliable measurement to focused optimisation",
       description:
-        "EcomMeasure combines a solid measurement setup with conversion optimisation. Every improvement is backed by data and implemented with your team.",
+        "EcomMeasure helps e-commerce teams gain control over their data. We make sure you measure what matters, understand what’s happening and make informed optimisation decisions. Strong optimisation starts with trustworthy data. We set up your measurement stack so you know exactly how visitors, channels and funnels drive revenue and growth. No assumptions. No noise. Just data you can trust.",
       bullets: [
-        "Full GA4 and GTM configuration with e-commerce events.",
-        "Cookie banners fully compliant with GDPR.",
-        "Ad platform integrations for complete attribution.",
+        "GA4 & GTM setup for e-commerce",
+        "Consent Mode & cookie banners (GDPR compliant)",
+        "Ad platforms measured accurately",
+        "Insight into funnels, behaviour and revenue",
       ],
       cards: [
         {
-          title: "Measurement fundamentals",
-          text: "GA4, GTM and server-side tagging are configured so data becomes actionable right away.",
-          detail: "Includes Looker Studio dashboards for revenue, funnel and channels.",
+          title: "Measurement & tracking",
+          text: "Technically correct and scalable tracking that reveals what really happens on your site.",
+          detail: "",
         },
-        
+
         {
-          title: "CRO research",
-          text: "Analyse behaviour, create hypotheses and prioritise high-impact experiments.",
-          detail: "From session recordings to customer interviews.",
+          title: "Analysis & insights",
+          text: "We turn data into clear insights: where users drop off, where opportunities sit and what deserves focus.",
+          detail: "",
         },
         {
-          title: "Experiment delivery",
-          text: "We build, test and implement winning variants alongside your team.",
-          detail: "Implementation support for developers and marketers.",
+          title: "CRO advice & optimisation direction",
+          text: "Based on insights, we recommend concrete improvements for your site and funnel — evidence-based, feasible and prioritised.",
+          detail: "",
         },
       ],
     },
