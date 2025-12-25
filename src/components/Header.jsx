@@ -558,7 +558,7 @@ export default function Header() {
           }`}
         >
           <div
-            className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 transition-[height,padding] duration-300 ${
+            className={`content-shell flex items-center justify-between px-4 sm:px-0 transition-[height,padding] duration-300 ${
               isCondensed ? "h-10" : "h-12"
             }`}
           >
@@ -717,7 +717,7 @@ export default function Header() {
           }`}
         >
           <div
-            className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 transition-[height,padding] duration-300 ${
+            className={`content-shell flex items-center justify-between px-4 sm:px-0 transition-[height,padding] duration-300 ${
               isCondensed ? "h-14" : "h-16"
             }`}
           >

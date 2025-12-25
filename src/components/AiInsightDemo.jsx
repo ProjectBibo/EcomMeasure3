@@ -69,12 +69,12 @@ export default function AiInsightDemo() {
   };
 
   return (
-    <section className="relative w-full px-4 py-16 sm:px-6 lg:px-8">
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-slate-200/70 bg-white/85 p-8 shadow-xl backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/70 md:p-10">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-teal/70 via-brand-blue to-brand-yellow dark:via-brand-blue/90" aria-hidden="true" />
+    <section className="relative w-full section-block px-4">
+      <div className="section-surface relative mx-auto flex w-full max-w-5xl flex-col overflow-hidden p-8 md:p-10">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-teal/60 via-brand-blue to-brand-yellow dark:via-brand-blue/90" aria-hidden="true" />
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-blue dark:border-brand-blue/30 dark:bg-brand-blue/15 dark:text-brand-yellow">
+            <span className="eyebrow shadow-sm">
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
               {copy.badge}
             </span>
@@ -106,7 +106,7 @@ export default function AiInsightDemo() {
           <div className="md:self-end">
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-blue px-5 py-3 text-base font-semibold text-white shadow-lg shadow-brand-blue/25 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue hover:bg-brand-teal hover:shadow-brand-teal/30 dark:bg-brand-teal dark:hover:bg-brand-blue"
+              className="btn-primary w-full justify-center text-base"
             >
               {copy.button}
             </button>
@@ -121,7 +121,7 @@ export default function AiInsightDemo() {
             <div
               ref={resultsRef}
               tabIndex={-1}
-              className="rounded-2xl border border-slate-200/70 bg-white/95 p-6 shadow-sm outline-none dark:border-slate-700/70 dark:bg-slate-900/70"
+              className="card-surface outline-none"
             >
               <p className="text-sm font-semibold uppercase tracking-wider text-brand-blue dark:text-brand-yellow">
                 {copy.resultLabel}
@@ -138,7 +138,7 @@ export default function AiInsightDemo() {
                   return (
                     <motion.li
                       key={insight.id}
-                      className="relative overflow-hidden rounded-xl border border-slate-200/70 bg-surface-light/70 px-5 py-4 text-base text-slate-700 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/60 dark:text-slate-200"
+                      className="relative overflow-hidden rounded-xl border border-slate-200/70 bg-white/80 px-5 py-4 text-base text-slate-700 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/60 dark:text-slate-200"
                       {...(shouldReduceMotion ? { initial: false } : shimmerAnimation)}
                       transition={transition}
                     >
