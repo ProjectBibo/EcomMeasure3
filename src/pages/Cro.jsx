@@ -1,185 +1,354 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
 
-const services = {
+const copyByLocale = {
   nl: {
     seo: {
-      title: "UX/CRO diensten – expert reviews, analyses & testing",
+      title: "CRO – Van inzicht naar gerichte optimalisatie",
       description:
-        "Drie UX/CRO diensten: expert reviews, kwantitatieve analyses en user testing met duidelijke deliverables en prijzen.",
+        "CRO-diensten met focus op inzicht, duidelijke deliverables en impactvolle aanbevelingen zonder testfetisjisme.",
     },
-    heading: "UX/CRO diensten",
-    cards: [
-      {
-        title: "Kwalitatieve analyse middels UX Expert review",
-        bullets: [
-          "Inspectie én analyse van het gebruikersgemak door UX- en usability expert",
-          "9 universele UX-aandachtsgebieden",
-          "Totaalbeeld met ±150 checkpoints",
-        ],
-        whatWeDo:
-          "We beoordelen flows, pagina's en micro-interacties op basis van best practices en benchmarkcases voor jouw sector.",
-        deliverable: "Jij ontvangt: PDF + toelichting (bondig)",
-        price: "Prijs vanaf €860 (ex btw, afhankelijk van de website)",
-      },
-      {
-        title:
-          "Kwantitatieve Analyse naar groeidrivers en verbeterpunten (Google Analytics 4, Google Search e.a.)",
-        bullets: [
-          "Kwantitatieve analyse van gebruikers op je site",
-          "Aangevuld met eyetracking scans",
-          "Aangevuld met onderzoek en inzichten vanuit Google Analytics, Google Search",
-        ],
-        whatWeDo:
-          "We combineren traffic- en gedragdata met heatmaps en search insights om groeikansen en fricties scherp te krijgen.",
-        deliverable: "Jij ontvangt: presentatie + actie/prioriteitenlijst (bondig)",
-        price: "Prijs vanaf €1400 (ex btw, afhankelijk van de website)",
-      },
-      {
-        title: "User Testing van de gehele customer journey",
-        bullets: [
-          "Persoonlijk, maatwerk en genormeerd testplan met meetbare doelen",
-          "Tot 5 participanten, via mobile en desktop",
-          "Remote of on-site",
-        ],
-        whatWeDo:
-          "We begeleiden werving, scripts en moderatie en leggen bevindingen vast in video en notities voor snelle implementatie.",
-        deliverable:
-          "Jij ontvangt: presentatie + gedetailleerde lijst met acties en prioriteiten (bondig)",
-        price: "Prijs vanaf €2500 (ex btw, afhankelijk van de website)",
-      },
-    ],
+    hero: {
+      title: "Van inzicht naar gerichte optimalisatie",
+      description: "CRO begint bij begrijpen wat gebruikers doen — en waarom.",
+      primaryCta: "Plan kennismaking",
+      secondaryCta: "Vraag QuickScan aan",
+    },
+    approach: {
+      title: "Hoe wij CRO benaderen",
+      text: [
+        "Wij doen geen testen om te testen.",
+        "We analyseren gedrag, signaleren knelpunten en adviseren verbeteringen die écht impact hebben.",
+      ],
+    },
+    services: {
+      title: "Diensten",
+      cards: [
+        {
+          title: "UX Expert Review (kwalitatief)",
+          intro: "Scherpe blik op flows, pagina's en micro-interacties.",
+          research: [
+            "Analyse op 9 UX-aandachtsgebieden",
+            "Heuristiek + best practices per branche",
+            "Heldere prioritering van bevindingen",
+          ],
+          deliverables: [
+            "Bondig rapport met screenshots",
+            "Live walkthrough van de belangrijkste issues",
+          ],
+          outcomes: [
+            "Direct toepasbare verbeterpunten",
+            "Minder frictie in cruciale journeys",
+            "Eenduidige lijst voor design & dev",
+          ],
+        },
+        {
+          title: "Kwantitatieve analyse",
+          intro: "Data-gedreven inzicht in gedrag en groeidrivers.",
+          research: [
+            "Analyse van funnel, devices en contentperformantie",
+            "Heatmaps en scrollmaps als context",
+            "Signalering van kansen per segment",
+          ],
+          deliverables: [
+            "Presentatie met bevindingen en grafieken",
+            "Actie- en prioriteitenlijst afgestemd op businessdoel",
+          ],
+          outcomes: [
+            "Feitelijke basis voor keuzes",
+            "Helder waar je omzet lekt",
+            "Onderbouwing richting stakeholders",
+          ],
+        },
+        {
+          title: "User testing customer journey",
+          intro: "Realistische tests die laten zien waar klanten afhaken.",
+          research: [
+            "Testplan met meetbare scenario’s",
+            "Remote of on-site, mobiel en desktop",
+            "Observaties vastgelegd in video en notities",
+          ],
+          deliverables: [
+            "Presentatie met key learnings",
+            "Lijst met acties en implementatiesuggesties",
+          ],
+          outcomes: [
+            "Bewijs voor wat wel/niet werkt",
+            "Sneller beslissen over roadmap",
+            "Betere ervaring over de hele journey",
+          ],
+        },
+      ],
+    },
+    results: {
+      title: "Resultaat & vertrouwen",
+      bullets: [
+        "Duidelijke prioriteiten",
+        "Onderbouwde keuzes",
+        "Minder discussie, meer richting",
+        "Betere conversie-basis",
+      ],
+      cta: "Plan kennismaking",
+    },
   },
   en: {
     seo: {
-      title: "UX/CRO services – expert reviews, analysis & testing",
+      title: "CRO – From insight to targeted optimisation",
       description:
-        "Three UX/CRO services: expert reviews, quantitative analyses and user testing with clear deliverables and pricing.",
+        "CRO services focused on insight, clear deliverables and impactful recommendations without test-for-test's-sake.",
     },
-    heading: "UX/CRO services",
-    cards: [
-      {
-        title: "Qualitative analysis via UX expert review",
-        bullets: [
-          "Inspection and analysis of usability by a UX specialist",
-          "9 universal UX focus areas",
-          "Complete overview with roughly 150 checkpoints",
-        ],
-        whatWeDo:
-          "We assess flows, pages and micro-interactions using best practices and benchmark cases for your industry.",
-        deliverable: "You receive: PDF + briefing (concise)",
-        price: "Pricing from €860 (ex VAT, depending on the site)",
-      },
-      {
-        title:
-          "Quantitative analysis of growth drivers and improvements (Google Analytics 4, Google Search, etc.)",
-        bullets: [
-          "Quantitative analysis of user behaviour on your site",
-          "Complemented with eye-tracking scans",
-          "Enriched with research and insights from Google Analytics and Google Search",
-        ],
-        whatWeDo:
-          "We combine traffic and behaviour data with heatmaps and search insights to pinpoint opportunities and friction.",
-        deliverable: "You receive: presentation + action/priority list (concise)",
-        price: "Pricing from €1400 (ex VAT, depending on the site)",
-      },
-      {
-        title: "User testing of the full customer journey",
-        bullets: [
-          "Tailored, standardised test plan with measurable objectives",
-          "Up to 5 participants on mobile and desktop",
-          "Remote or on-site",
-        ],
-        whatWeDo:
-          "We handle recruitment, scripts and moderation, documenting insights in video and notes for quick implementation.",
-        deliverable: "You receive: presentation + detailed list of actions and priorities (concise)",
-        price: "Pricing from €2500 (ex VAT, depending on the site)",
-      },
-    ],
+    hero: {
+      title: "From insight to targeted optimisation",
+      description: "CRO starts with understanding what users do — and why.",
+      primaryCta: "Schedule introduction",
+      secondaryCta: "Request QuickScan",
+    },
+    approach: {
+      title: "How we approach CRO",
+      text: [
+        "We don’t run tests for the sake of testing.",
+        "We analyse behaviour, spot bottlenecks and advise improvements that actually move the needle.",
+      ],
+    },
+    services: {
+      title: "Services",
+      cards: [
+        {
+          title: "UX Expert Review (qualitative)",
+          intro: "A sharp look at flows, pages and micro-interactions.",
+          research: [
+            "Analysis across 9 UX focus areas",
+            "Heuristics plus industry best practices",
+            "Clear prioritisation of findings",
+          ],
+          deliverables: [
+            "Concise report with screenshots",
+            "Live walkthrough of the main issues",
+          ],
+          outcomes: [
+            "Immediately actionable improvements",
+            "Less friction in crucial journeys",
+            "Aligned list for design & dev",
+          ],
+        },
+        {
+          title: "Quantitative analysis",
+          intro: "Data-driven insight into behaviour and growth drivers.",
+          research: [
+            "Analysis of funnel, devices and content performance",
+            "Heatmaps and scrollmaps for context",
+            "Signals per segment to find opportunities",
+          ],
+          deliverables: [
+            "Presentation with findings and visuals",
+            "Action and priority list aligned to business goals",
+          ],
+          outcomes: [
+            "Factual basis for decisions",
+            "Clarity on where revenue leaks",
+            "Evidence stakeholders can rally behind",
+          ],
+        },
+        {
+          title: "User testing customer journey",
+          intro: "Realistic tests showing where customers drop off.",
+          research: [
+            "Test plan with measurable scenarios",
+            "Remote or on-site, mobile and desktop",
+            "Observations captured in video and notes",
+          ],
+          deliverables: [
+            "Presentation with key learnings",
+            "Action list with implementation suggestions",
+          ],
+          outcomes: [
+            "Proof of what works and what doesn’t",
+            "Faster decisions on the roadmap",
+            "Better experience across the journey",
+          ],
+        },
+      ],
+    },
+    results: {
+      title: "Outcome & trust",
+      bullets: [
+        "Clear priorities",
+        "Evidence-based decisions",
+        "Less debate, more direction",
+        "Better conversion foundation",
+      ],
+      cta: "Schedule introduction",
+    },
   },
 };
 
-const CroIcon = () => (
-  <svg
-    aria-hidden
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32"
-    className="h-10 w-10 text-brand-blue"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+const primaryCtaClass =
+  "inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+
+const secondaryCtaClass =
+  "inline-flex items-center justify-center rounded-full bg-white/80 px-5 py-3 text-sm font-semibold text-brand-blue ring-1 ring-brand-blue/20 transition hover:-translate-y-0.5 hover:ring-brand-blue/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+
+const ServiceCard = ({ title, intro, research, deliverables, outcomes, index, shouldReduceMotion, language }) => (
+  <motion.article
+    initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+    whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+    viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.2 }}
+    transition={shouldReduceMotion ? undefined : { delay: 0.06 * index, duration: 0.55 }}
+    className="flex h-full flex-col gap-4 rounded-3xl bg-white/85 p-6 shadow-[0_26px_65px_rgba(15,23,42,0.08)] ring-1 ring-neutral-200/80 backdrop-blur"
   >
-    <path d="M6 20l4-6 5 8 5-10 6 12" />
-    <path d="M4 26h24" />
-    <path d="M8 6h3v3H8z" className="fill-current/15" />
-    <path d="M14.5 8.5h3v3h-3z" className="fill-current/15" />
-    <path d="M22 4h3v3h-3z" className="fill-current/15" />
-  </svg>
+    <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
+      <span className="text-sm font-semibold">{index + 1}</span>
+    </div>
+    <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
+    <p className="text-sm text-neutral-700">{intro}</p>
+
+    <div className="space-y-2 rounded-2xl bg-surface-soft px-4 py-3 ring-1 ring-neutral-200/70">
+      <h4 className="text-sm font-semibold text-neutral-900">{language === "nl" ? "Wat we onderzoeken" : "What we research"}</h4>
+      <ul className="space-y-2 text-sm text-neutral-700">
+        {research.map((item) => (
+          <li key={item} className="flex gap-3">
+            <span className="mt-1 h-2 w-2 rounded-full bg-brand-blue" aria-hidden />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div className="space-y-2 rounded-2xl bg-white px-4 py-3 ring-1 ring-neutral-200/80">
+      <h4 className="text-sm font-semibold text-neutral-900">{language === "nl" ? "Wat je ontvangt" : "What you receive"}</h4>
+      <ul className="space-y-2 text-sm text-neutral-700">
+        {deliverables.map((item) => (
+          <li key={item} className="flex gap-3">
+            <span className="mt-1 h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div className="space-y-2 rounded-2xl bg-surface-soft px-4 py-3 ring-1 ring-neutral-200/70">
+      <h4 className="text-sm font-semibold text-neutral-900">{language === "nl" ? "Wat het oplevert" : "What it delivers"}</h4>
+      <ul className="space-y-2 text-sm text-neutral-700">
+        {outcomes.map((item) => (
+          <li key={item} className="flex gap-3">
+            <span className="mt-1 h-2 w-2 rounded-full bg-brand-blue" aria-hidden />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div className="mt-auto pt-2">
+      <Link to="/contact" className={secondaryCtaClass}>
+        {language === "nl" ? "Plan kennismaking" : "Schedule introduction"}
+      </Link>
+    </div>
+  </motion.article>
 );
 
 export default function Cro() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
-  const copy = services[language];
+  const copy = copyByLocale[language];
 
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28   ">
+      <main className="relative overflow-hidden bg-surface-soft pb-24 pt-28">
         <div className="grain-overlay" aria-hidden />
         <div className="relative site-container">
-          <motion.h1
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
+          <motion.section
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 26 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={shouldReduceMotion ? undefined : { duration: 0.65 }}
-            className="text-balance text-4xl font-bold tracking-tight text-neutral-900  sm:text-5xl"
+            transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
+            className="flex flex-col gap-6 rounded-3xl bg-white/85 p-8 shadow-[0_28px_70px_rgba(15,23,42,0.08)] ring-1 ring-neutral-200/80 backdrop-blur lg:p-12"
           >
-            {copy.heading}
-          </motion.h1>
-        </div>
+            <div className="space-y-4">
+              <p className="inline-flex items-center rounded-full bg-brand-blue/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-blue ring-1 ring-brand-blue/20">
+                CRO
+              </p>
+              <h1 className="text-balance text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">{copy.hero.title}</h1>
+              <p className="max-w-3xl text-lg text-neutral-700">{copy.hero.description}</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link to="/contact" className={primaryCtaClass}>
+                {copy.hero.primaryCta}
+              </Link>
+              <Link to="/contact" className={secondaryCtaClass}>
+                {copy.hero.secondaryCta}
+              </Link>
+            </div>
+          </motion.section>
 
-        <div className="relative site-container mt-14">
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {copy.cards.map((card, index) => (
-              <motion.article
-                key={card.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-                whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={shouldReduceMotion ? undefined : { once: true }}
-                transition={shouldReduceMotion ? undefined : { delay: 0.08 * index, duration: 0.6 }}
-                className="group relative flex h-full flex-col card-surface"
-              >
-                <div className="relative flex flex-col gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/20">
-                    <CroIcon />
-                  </div>
-                  <h2 className="text-xl font-semibold leading-tight text-neutral-900 ">{card.title}</h2>
-                  <ul className="space-y-3 text-sm leading-relaxed text-neutral-700 ">
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
-                        <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="space-y-2 rounded-2xl bg-neutral-50/80 p-4 text-sm leading-relaxed text-neutral-700 ring-1 ring-neutral-200/70   ">
-                    <h3 className="text-sm font-semibold text-neutral-900 ">
-                      {language === "nl" ? "Wat we doen" : "What we do"}
-                    </h3>
-                    <p>{card.whatWeDo}</p>
-                    <h3 className="text-sm font-semibold text-neutral-900 ">
-                      {language === "nl" ? "Jij ontvangt" : "You receive"}
-                    </h3>
-                    <p>{card.deliverable}</p>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+          <section className="mt-16 grid gap-6 rounded-3xl bg-white/80 p-8 ring-1 ring-neutral-200/80 backdrop-blur md:grid-cols-[1fr_1.6fr] md:items-center">
+            <div className="space-y-3">
+              <h2 className="text-2xl font-semibold text-neutral-900">{copy.approach.title}</h2>
+              {copy.approach.text.map((line) => (
+                <p key={line} className="text-neutral-700">
+                  {line}
+                </p>
+              ))}
+            </div>
+            <div className="rounded-2xl bg-surface-soft p-6 ring-1 ring-neutral-200/70">
+              <div className="flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-brand-yellow" aria-hidden />
+                <p className="text-sm text-neutral-800">
+                  {language === "nl"
+                    ? "Geen A/B-test bureau positionering. Altijd eerst de juiste vraag, dan het beste middel."
+                    : "Not positioned as an A/B test shop. We start with the right question, then choose the best method."}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-16 space-y-8">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-2xl font-semibold text-neutral-900">{copy.services.title}</h2>
+              <p className="max-w-3xl text-neutral-600">
+                {language === "nl"
+                  ? "Alle CRO-diensten blijven, maar met focus op wat we onderzoeken, wat je ontvangt en welk resultaat je mag verwachten."
+                  : "All CRO services remain, now framed around what we research, what you receive and the outcomes you can expect."}
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+              {copy.services.cards.map((card, index) => (
+                <ServiceCard
+                  key={card.title}
+                  index={index}
+                  shouldReduceMotion={shouldReduceMotion}
+                  language={language}
+                  {...card}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-16 grid gap-8 rounded-3xl bg-white/85 p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)] ring-1 ring-neutral-200/80 backdrop-blur md:grid-cols-[1.2fr_1fr] md:items-center">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold text-neutral-900">{copy.results.title}</h2>
+              <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {copy.results.bullets.map((item) => (
+                  <li key={item} className="flex items-start gap-3 rounded-2xl bg-surface-soft px-4 py-3 ring-1 ring-neutral-200/70">
+                    <span className="mt-1 h-2.5 w-2.5 rounded-full bg-brand-blue" aria-hidden />
+                    <span className="text-sm text-neutral-800">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-4 md:items-end">
+              <p className="text-neutral-700">
+                {language === "nl"
+                  ? "Binnen 10 seconden duidelijk: dit levert richting én rust op."
+                  : "Within seconds it’s clear: this brings direction and calm."}
+              </p>
+              <Link to="/contact" className={primaryCtaClass}>
+                {copy.results.cta}
+              </Link>
+            </div>
+          </section>
         </div>
       </main>
     </>
