@@ -64,20 +64,19 @@ export const translations = {
       },
     },
     hero: {
-      badge: "Measurement & CRO voor e-commerce",
-      titleLead: "Word het volgende",
+      badge: "Eerst goed meten, dan verbeteren.",
+      titleLead: "Wij helpen je",
       rotatingPhrases: [
-        "groeiverhaal",
-        "UX-gedreven merk",
-        "data-gedreven succes",
-        "digitale koploper",
-        "e-commerce icoon",
-        "merk dat elke klik begrijpt",
+        "beter meten",
+        "slimmer optimaliseren",
+        "beslissen op data",
+        "conversiegericht verbeteren",
+        "je website laten presteren",
       ],
       titleHighlight: "GA4 en bewezen CRO-experimenten",
       description:
-        "Ik richt je meetstack in, verbind advertentieplatformen en vertaal inzichten naar A/B-tests die omzet en klantbeleving laten groeien.",
-      primaryCta: "Plan een kennismaking",
+        "Wij zorgen dat je weet wat er écht gebeurt op je website en helpen je die inzichten te vertalen naar gerichte CRO verbeteringen",
+      primaryCta: "Zijn wij een goede match?",
       secondaryCta: "Ontdek de aanpak",
       stats: [
         {
