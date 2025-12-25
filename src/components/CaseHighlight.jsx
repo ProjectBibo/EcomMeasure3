@@ -10,7 +10,7 @@ export default function CaseHighlight() {
 
   return (
     <section id="case" data-snap-section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-transparent to-brand-teal/12 dark:from-brand-blue/18 dark:via-transparent dark:to-brand-teal/14" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-transparent to-brand-teal/12 " aria-hidden />
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-28 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, x: -40 }}
@@ -18,15 +18,15 @@ export default function CaseHighlight() {
           viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.4 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.7 }}
           data-tilt-card
-          className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[24px_36px_90px_rgba(15,23,42,0.2)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(15,23,42,0.26)] focus-visible:shadow-[28px_44px_110px_rgba(15,23,42,0.26)] dark:border-white/10 dark:bg-white/10 dark:shadow-[24px_36px_100px_rgba(2,6,23,0.65)]"
+          className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[24px_36px_90px_rgba(15,23,42,0.2)] backdrop-blur-xl transition-[box-shadow,transform] duration-500 hover:shadow-[28px_44px_110px_rgba(15,23,42,0.26)] focus-visible:shadow-[28px_44px_110px_rgba(15,23,42,0.26)] "
         >
           <div className="pointer-events-none absolute inset-0 rounded-[2.5rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden style={{ boxShadow: "inset 2px 2px 8px rgba(255,255,255,0.55), inset -14px -20px 34px rgba(148,163,184,0.22)" }} />
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-brand-blue">
             {t.badge}
           </span>
-          <h3 className="mt-4 text-3xl font-semibold text-neutral-900 dark:text-white">{t.title}</h3>
-          <p className="mt-4 text-base text-neutral-600 dark:text-gray-300">{t.description}</p>
-          <ul className="mt-6 space-y-4 text-sm text-neutral-600 dark:text-gray-300">
+          <h3 className="mt-4 text-3xl font-semibold text-neutral-900 ">{t.title}</h3>
+          <p className="mt-4 text-base text-neutral-600 ">{t.description}</p>
+          <ul className="mt-6 space-y-4 text-sm text-neutral-600 ">
             {t.bullets.map((bullet) => (
               <li key={bullet} className="flex items-start gap-3">
                 <span className="mt-1 h-2 w-2 rounded-full bg-brand-blue" aria-hidden />

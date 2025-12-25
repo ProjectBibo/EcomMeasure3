@@ -80,7 +80,7 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { duration: 0.8, ease: "easeOut" }}
-          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white vt-hero-title focus:outline-none"
+          className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-neutral-900 vt-hero-title focus:outline-none"
           data-focus-target
           tabIndex={-1}
         >
@@ -149,7 +149,7 @@ export default function Hero() {
           language={language}
           highlight
           delay={0.18}
-          className="mx-auto max-w-2xl text-lg sm:text-xl text-neutral-700 dark:text-gray-300 text-max-width"
+          className="mx-auto max-w-2xl text-lg sm:text-xl text-neutral-700 text-max-width"
         />
 
         <motion.div
@@ -188,9 +188,9 @@ export default function Hero() {
               data-tilt-card
               className="group relative overflow-hidden card-surface px-6 py-6 text-left"
             >
-              <div className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-gray-400">{item.label}</div>
-              <div className="mt-3 text-3xl font-bold text-brand-blue dark:text-brand-blue">{item.value}</div>
-              <p className="mt-3 text-sm text-neutral-600 dark:text-gray-300">{item.helper}</p>
+              <div className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 ">{item.label}</div>
+              <div className="mt-3 text-3xl font-bold text-brand-blue ">{item.value}</div>
+              <p className="mt-3 text-sm text-neutral-600 ">{item.helper}</p>
             </div>
           ))}
         </motion.div>
@@ -207,8 +207,8 @@ export default function Hero() {
             {t.storyline.map((story) => (
               <div key={story.title} className="relative pl-5">
                 <span className="absolute left-0 top-1 h-8 w-0.5 rounded-full bg-gradient-to-b from-brand-blue to-brand-teal" aria-hidden />
-                <h3 className="typography-subheading text-lg font-semibold text-neutral-900 dark:text-white">{story.title}</h3>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-gray-300">{story.copy}</p>
+                <h3 className="typography-subheading text-lg font-semibold text-neutral-900 ">{story.title}</h3>
+                <p className="mt-2 text-sm text-neutral-600 ">{story.copy}</p>
               </div>
             ))}
           </div>
@@ -218,13 +218,13 @@ export default function Hero() {
           initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.35, duration: 0.6 }}
-          className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-gray-400"
+          className="flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-neutral-500 "
         >
           {t.scrollLabel}
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-            className="flex h-10 w-6 items-center justify-center rounded-full border border-neutral-400/50 bg-white/60 backdrop-blur dark:border-white/30 dark:bg-white/5"
+            className="flex h-10 w-6 items-center justify-center rounded-full border border-neutral-400/50 bg-white/60 backdrop-blur "
           >
             <MoveDown size={16} />
           </motion.div>

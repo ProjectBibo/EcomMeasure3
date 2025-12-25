@@ -56,7 +56,7 @@ export default function ContactPage() {
       <main
         role="main"
         aria-labelledby="contact-hero-title"
-        className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-blue/20"
+        className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 pb-24 pt-28 "
       >
         <div className="glow-orb glow-orb--primary left-0 top-0 h-[26rem] w-[26rem] opacity-60" aria-hidden />
         <div className="glow-orb glow-orb--primary-soft right-0 top-1/2 h-[22rem] w-[22rem] opacity-50" aria-hidden />
@@ -66,7 +66,7 @@ export default function ContactPage() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: -16 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-teal"
+            className="inline-flex items-center rounded-full border border-white/60 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-sm backdrop-blur "
           >
             {copy.hero.eyebrow}
           </motion.span>
@@ -75,7 +75,7 @@ export default function ContactPage() {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.08, duration: 0.7 }}
             id="contact-hero-title"
-            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl vt-hero-title focus:outline-none"
+            className="mt-8 text-balance text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl vt-hero-title focus:outline-none"
             data-focus-target
             tabIndex={-1}
           >
@@ -85,7 +85,7 @@ export default function ContactPage() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.16, duration: 0.7 }}
-            className="mx-auto mt-6 max-w-2xl text-lg text-neutral-700 dark:text-gray-300"
+            className="mx-auto mt-6 max-w-2xl text-lg text-neutral-700 "
           >
             {copy.hero.description}
           </motion.p>
@@ -93,12 +93,12 @@ export default function ContactPage() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.24, duration: 0.7 }}
-            className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-3 text-sm text-neutral-600 dark:text-gray-300"
+            className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-3 text-sm text-neutral-600 "
           >
             {copy.hero.highlights.map((item) => (
               <li
                 key={item}
-                className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-2 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-2 shadow-sm backdrop-blur "
               >
                 <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
                 {item}

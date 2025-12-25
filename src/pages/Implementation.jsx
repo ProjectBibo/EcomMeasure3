@@ -92,14 +92,14 @@ export default function Implementation() {
   return (
     <>
       <SEO title={copy.seo.title} description={copy.seo.description} />
-      <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-green/10 pb-24 pt-28 dark:from-surface-dark dark:via-surface-dark/95 dark:to-brand-green/25">
+      <div className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-green/10 pb-24 pt-28 ">
         <div className="grain-overlay" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6">
           <motion.span
             initial={shouldReduceMotion ? false : { opacity: 0, y: -16 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.6 }}
-            className="inline-flex items-center rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-brand-green"
+            className="inline-flex items-center rounded-full border border-white/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-brand-blue shadow-sm backdrop-blur "
           >
             {copy.hero.eyebrow}
           </motion.span>
@@ -107,7 +107,7 @@ export default function Implementation() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.7 }}
-            className="mt-7 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+            className="mt-7 text-balance text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl"
           >
             {copy.hero.title}
           </motion.h1>
@@ -115,7 +115,7 @@ export default function Implementation() {
             initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? undefined : { delay: 0.18, duration: 0.7 }}
-            className="mt-6 max-w-3xl text-lg text-neutral-700 dark:text-gray-300"
+            className="mt-6 max-w-3xl text-lg text-neutral-700 "
           >
             {copy.hero.description}
           </motion.p>
@@ -130,7 +130,7 @@ export default function Implementation() {
                 whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 viewport={shouldReduceMotion ? undefined : { once: true }}
                 transition={shouldReduceMotion ? undefined : { delay: 0.12 * index, duration: 0.55 }}
-                className="group relative h-full overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[20px_30px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[22px_34px_90px_rgba(2,6,23,0.6)]"
+                className="group relative h-full overflow-hidden rounded-3xl border border-white/70 bg-white/80 p-8 shadow-[20px_30px_80px_rgba(15,23,42,0.18)] backdrop-blur "
               >
                 <div
                   aria-hidden
@@ -140,8 +140,8 @@ export default function Implementation() {
                       "inset 4px 4px 12px rgba(255,255,255,0.5), inset -14px -18px 34px rgba(148,163,184,0.18)",
                   }}
                 />
-                <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">{section.title}</h2>
-                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 dark:text-gray-300">
+                <h2 className="text-2xl font-semibold text-neutral-900 ">{section.title}</h2>
+                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-600 ">
                   {section.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-3">
                       <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-brand-blue" />

@@ -14,7 +14,7 @@ export default function Footer() {
   const navigateWithTransition = useViewTransitionNavigate();
 
   return (
-    <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft dark:bg-surface-dark border-t border-neutral-200 dark:border-neutral-700 py-14">
+    <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft border-t border-neutral-200 py-14">
       <motion.div
         animate={shouldReduceMotion ? { backgroundPosition: "0% 50%" } : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-5">
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
-            <p className="text-neutral-600 dark:text-gray-400 text-sm">{t.intro}</p>
+            <p className="text-neutral-600 text-sm">{t.intro}</p>
             <Link
               to="/contact"
               className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+            <ul className="space-y-2 text-sm text-neutral-600 ">
               {t.columns.measurement.items.map((item) => (
                 <li key={typeof item === "string" ? item : item.href}>
                   {typeof item === "string" ? (
@@ -46,7 +46,7 @@ export default function Footer() {
                   ) : (
                     <Link
                       to={item.href}
-                      className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                      className="text-neutral-600 transition-colors hover:text-brand-blue "
                       onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                     >
                       {item.label}
@@ -58,7 +58,7 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.cro.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+            <ul className="space-y-2 text-sm text-neutral-600 ">
               {t.columns.cro.items.map((item) => (
                 <li key={typeof item === "string" ? item : item.href}>
                   {typeof item === "string" ? (
@@ -66,7 +66,7 @@ export default function Footer() {
                   ) : (
                     <Link
                       to={item.href}
-                      className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                      className="text-neutral-600 transition-colors hover:text-brand-blue "
                       onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                     >
                       {item.label}
@@ -78,12 +78,12 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.tools.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+            <ul className="space-y-2 text-sm text-neutral-600 ">
               {t.columns.tools.items.map((item) => (
                 <li key={item.href}>
                   <Link
                     to={item.href}
-                    className="text-neutral-600 transition-colors hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-blue"
+                    className="text-neutral-600 transition-colors hover:text-brand-blue "
                     onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                   >
                     {item.label}
@@ -94,7 +94,7 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.contact.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 dark:text-gray-400">
+            <ul className="space-y-2 text-sm text-neutral-600 ">
               {t.columns.contact.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -102,7 +102,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="mt-8 text-center text-neutral-500 dark:text-gray-500 text-xs">
+      <div className="mt-8 text-center text-neutral-500 text-xs">
         © {new Date().getFullYear()} EcomMeasure. {t.rights}
       </div>
     </footer>

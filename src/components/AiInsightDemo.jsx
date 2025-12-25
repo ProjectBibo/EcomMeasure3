@@ -70,21 +70,21 @@ export default function AiInsightDemo() {
 
   return (
     <section className="relative w-full px-4 py-16 sm:px-6 lg:px-8">
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-slate-200/70 bg-white/85 p-8 shadow-xl backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/70 md:p-10">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-teal/70 via-brand-blue to-brand-yellow dark:via-brand-blue/90" aria-hidden="true" />
+      <div className="relative mx-auto flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-slate-200/70 bg-white/85 p-8 shadow-xl backdrop-blur md:p-10">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-teal/70 via-brand-blue to-brand-yellow " aria-hidden="true" />
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-blue dark:border-brand-blue/30 dark:bg-brand-blue/15 dark:text-brand-yellow">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-blue ">
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
               {copy.badge}
             </span>
-            <h2 className="mt-4 text-2xl font-semibold text-slate-900 dark:text-slate-100 sm:text-3xl">{copy.title}</h2>
-            <p className="mt-2 max-w-2xl text-base text-slate-600 dark:text-slate-300">{copy.description}</p>
+            <h2 className="mt-4 text-2xl font-semibold text-slate-900 sm:text-3xl">{copy.title}</h2>
+            <p className="mt-2 max-w-2xl text-base text-slate-600 ">{copy.description}</p>
           </div>
         </div>
         <form className="flex flex-col gap-4 md:flex-row" onSubmit={handleSubmit}>
           <div className="flex-1">
-            <label htmlFor="ai-demo-url" className="text-sm font-medium text-slate-800 dark:text-slate-200">
+            <label htmlFor="ai-demo-url" className="text-sm font-medium text-slate-800 ">
               {copy.label}
             </label>
             <input
@@ -96,17 +96,17 @@ export default function AiInsightDemo() {
               placeholder={copy.placeholder}
               value={inputValue}
               onChange={(event) => setInputValue(event.target.value)}
-              className="mt-2 w-full rounded-xl border border-slate-300/60 bg-white/90 px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 dark:border-slate-600 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-brand-blue/70 dark:focus:ring-brand-blue/50"
+              className="mt-2 w-full rounded-xl border border-slate-300/60 bg-white/90 px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 "
               aria-describedby="ai-demo-helper"
             />
-            <p id="ai-demo-helper" className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            <p id="ai-demo-helper" className="mt-2 text-sm text-slate-500 ">
               {copy.helper}
             </p>
           </div>
           <div className="md:self-end">
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-blue px-5 py-3 text-base font-semibold text-white shadow-lg shadow-brand-blue/25 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue hover:bg-brand-teal hover:shadow-brand-teal/30 dark:bg-brand-teal dark:hover:bg-brand-blue"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-blue px-5 py-3 text-base font-semibold text-white shadow-lg shadow-brand-blue/25 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue hover:bg-brand-teal hover:shadow-brand-teal/30 "
             >
               {copy.button}
             </button>
@@ -121,12 +121,12 @@ export default function AiInsightDemo() {
             <div
               ref={resultsRef}
               tabIndex={-1}
-              className="rounded-2xl border border-slate-200/70 bg-white/95 p-6 shadow-sm outline-none dark:border-slate-700/70 dark:bg-slate-900/70"
+              className="rounded-2xl border border-slate-200/70 bg-white/95 p-6 shadow-sm outline-none "
             >
-              <p className="text-sm font-semibold uppercase tracking-wider text-brand-blue dark:text-brand-yellow">
+              <p className="text-sm font-semibold uppercase tracking-wider text-brand-blue ">
                 {copy.resultLabel}
               </p>
-              <h3 className="mt-2 text-xl font-semibold text-slate-900 dark:text-white">
+              <h3 className="mt-2 text-xl font-semibold text-slate-900 ">
                 {copy.resultTitle.replace("{{subject}}", subject || copy.defaultSubject)}
               </h3>
               <ul className="mt-6 space-y-4">
@@ -138,7 +138,7 @@ export default function AiInsightDemo() {
                   return (
                     <motion.li
                       key={insight.id}
-                      className="relative overflow-hidden rounded-xl border border-slate-200/70 bg-surface-light/70 px-5 py-4 text-base text-slate-700 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/60 dark:text-slate-200"
+                      className="relative overflow-hidden rounded-xl border border-slate-200/70 bg-surface-light/70 px-5 py-4 text-base text-slate-700 shadow-sm "
                       {...(shouldReduceMotion ? { initial: false } : shimmerAnimation)}
                       transition={transition}
                     >

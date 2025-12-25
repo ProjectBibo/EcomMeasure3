@@ -303,11 +303,11 @@ function ResultBadge({ label, value, description, ariaLabel }) {
     <div
       role="listitem"
       aria-label={ariaLabel}
-      className="rounded-2xl border border-white/60 bg-white/80 px-5 py-4 shadow-[14px_20px_60px_rgba(15,23,42,0.16)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[18px_26px_80px_rgba(2,6,23,0.55)]"
+      className="rounded-2xl border border-white/60 bg-white/80 px-5 py-4 shadow-[14px_20px_60px_rgba(15,23,42,0.16)] backdrop-blur "
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500 dark:text-gray-400">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-neutral-900 dark:text-white">{value}</p>
-      {description ? <p className="mt-1 text-xs text-neutral-500 dark:text-gray-400">{description}</p> : null}
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500 ">{label}</p>
+      <p className="mt-2 text-2xl font-semibold text-neutral-900 ">{value}</p>
+      {description ? <p className="mt-1 text-xs text-neutral-500 ">{description}</p> : null}
     </div>
   );
 }
@@ -317,11 +317,11 @@ function ScenarioBarChart({ title, valueKey, data, formatter, fallbackLabel, ari
 
   return (
     <div
-      className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[20px_28px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/10"
+      className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[20px_28px_80px_rgba(15,23,42,0.18)] backdrop-blur "
       role="group"
       aria-label={ariaLabel}
     >
-      <h4 className="text-sm font-semibold text-neutral-700 dark:text-gray-200">{title}</h4>
+      <h4 className="text-sm font-semibold text-neutral-700 ">{title}</h4>
       {maxValue > 0 ? (
         <div className="mt-5 space-y-4">
           {data.map((scenario) => {
@@ -329,13 +329,13 @@ function ScenarioBarChart({ title, valueKey, data, formatter, fallbackLabel, ari
             const width = maxValue > 0 && value > 0 ? Math.max(6, Math.round((value / maxValue) * 100)) : 0;
             return (
               <div key={scenario.key} className="space-y-1">
-                <div className="flex items-center justify-between text-xs font-medium text-neutral-500 dark:text-gray-400">
+                <div className="flex items-center justify-between text-xs font-medium text-neutral-500 ">
                   <span>{scenario.title}</span>
                   <span>{formatter(value)}</span>
                 </div>
-                <div className="h-2 rounded-full bg-neutral-200/70 dark:bg-neutral-700/60" aria-hidden>
+                <div className="h-2 rounded-full bg-neutral-200/70 " aria-hidden>
                   <div
-                    className="h-2 rounded-full bg-brand-blue/70 dark:bg-brand-teal"
+                    className="h-2 rounded-full bg-brand-blue/70 "
                     style={{ width: `${width}%` }}
                   />
                 </div>
@@ -344,7 +344,7 @@ function ScenarioBarChart({ title, valueKey, data, formatter, fallbackLabel, ari
           })}
         </div>
       ) : (
-        <p className="mt-6 text-sm text-neutral-500 dark:text-gray-400">{fallbackLabel}</p>
+        <p className="mt-6 text-sm text-neutral-500 ">{fallbackLabel}</p>
       )}
     </div>
   );
@@ -352,15 +352,15 @@ function ScenarioBarChart({ title, valueKey, data, formatter, fallbackLabel, ari
 
 function getRoiTone(roiPercent) {
   if (roiPercent === null) {
-    return "text-neutral-500 dark:text-gray-400";
+    return "text-neutral-500 ";
   }
   if (roiPercent < -5) {
-    return "text-red-600 dark:text-red-400";
+    return "text-red-600 ";
   }
   if (roiPercent <= 5) {
-    return "text-neutral-500 dark:text-gray-400";
+    return "text-neutral-500 ";
   }
-  return "text-brand-teal dark:text-brand-teal";
+  return "text-brand-teal ";
 }
 
 export default function CroRoiCalculator() {
@@ -572,7 +572,7 @@ export default function CroRoiCalculator() {
   const badgesAriaLabel = language === "nl" ? "Belangrijkste kengetallen" : "Key metrics";
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[28px_38px_110px_rgba(15,23,42,0.16)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[28px_42px_120px_rgba(2,6,23,0.6)]">
+    <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[28px_38px_110px_rgba(15,23,42,0.16)] backdrop-blur ">
       <div className="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_rgba(56,189,248,0))]" aria-hidden />
       <div className="relative">
         <motion.span
@@ -587,7 +587,7 @@ export default function CroRoiCalculator() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.06, duration: 0.55 }}
-          className="mt-6 text-3xl font-semibold tracking-tight text-neutral-900 dark:text-white"
+          className="mt-6 text-3xl font-semibold tracking-tight text-neutral-900 "
         >
           {text.title}
         </motion.h2>
@@ -595,7 +595,7 @@ export default function CroRoiCalculator() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.55 }}
-          className="mt-4 max-w-2xl text-sm text-neutral-600 dark:text-gray-300"
+          className="mt-4 max-w-2xl text-sm text-neutral-600 "
         >
           {text.intro}
         </motion.p>
@@ -603,7 +603,7 @@ export default function CroRoiCalculator() {
         <form onSubmit={handleSubmit} className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="space-y-6">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="flex flex-col text-sm font-medium text-neutral-700 dark:text-gray-200">
+              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
                 {text.form.visitors}
                 <input
                   type="number"
@@ -613,11 +613,11 @@ export default function CroRoiCalculator() {
                   value={formState.visitors}
                   onChange={handleInputChange}
                   placeholder={text.placeholders.visitors}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 "
                   required
                 />
               </label>
-              <label className="flex flex-col text-sm font-medium text-neutral-700 dark:text-gray-200">
+              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
                 {text.form.transactions}
                 <input
                   type="number"
@@ -627,13 +627,13 @@ export default function CroRoiCalculator() {
                   value={formState.transactions}
                   onChange={handleInputChange}
                   placeholder={text.placeholders.transactions}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 "
                   required
                 />
               </label>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="flex flex-col text-sm font-medium text-neutral-700 dark:text-gray-200">
+              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
                 {text.form.aov}
                 <input
                   type="number"
@@ -643,11 +643,11 @@ export default function CroRoiCalculator() {
                   value={formState.aov}
                   onChange={handleInputChange}
                   placeholder={text.placeholders.aov}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 "
                   required
                 />
               </label>
-              <label className="flex flex-col text-sm font-medium text-neutral-700 dark:text-gray-200">
+              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
                 {text.form.margin}
                 <input
                   type="number"
@@ -658,18 +658,18 @@ export default function CroRoiCalculator() {
                   value={formState.margin}
                   onChange={handleInputChange}
                   placeholder={text.placeholders.margin}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 "
                   required
                 />
               </label>
             </div>
-            <label className="flex flex-col text-sm font-medium text-neutral-700 dark:text-gray-200">
+            <label className="flex flex-col text-sm font-medium text-neutral-700 ">
               {text.form.activity}
               <select
                 name="activity"
                 value={formState.activity}
                 onChange={handleInputChange}
-                className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 "
               >
                 {ACTIVITY_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -677,17 +677,17 @@ export default function CroRoiCalculator() {
                   </option>
                 ))}
               </select>
-              <p className="mt-2 text-xs text-neutral-500 dark:text-gray-400">
+              <p className="mt-2 text-xs text-neutral-500 ">
                 {selectedActivity.description[language]}
               </p>
             </label>
-            <label className="flex flex-col text-sm font-medium text-neutral-700 dark:text-gray-200">
+            <label className="flex flex-col text-sm font-medium text-neutral-700 ">
               {text.form.investment}
               <select
                 name="investment"
                 value={formState.investment}
                 onChange={handleInputChange}
-                className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40 "
               >
                 {INVESTMENT_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -695,7 +695,7 @@ export default function CroRoiCalculator() {
                   </option>
                 ))}
               </select>
-              <p className="mt-2 text-xs text-neutral-500 dark:text-gray-400">
+              <p className="mt-2 text-xs text-neutral-500 ">
                 {selectedInvestment.description[language]}
               </p>
             </label>
@@ -712,9 +712,9 @@ export default function CroRoiCalculator() {
               initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.12, duration: 0.6 }}
-              className="rounded-3xl border border-white/60 bg-white/70 p-6 shadow-[20px_28px_80px_rgba(15,23,42,0.18)] backdrop-blur dark:border-white/10 dark:bg-white/10 dark:shadow-[24px_34px_90px_rgba(2,6,23,0.55)]"
+              className="rounded-3xl border border-white/60 bg-white/70 p-6 shadow-[20px_28px_80px_rgba(15,23,42,0.18)] backdrop-blur "
             >
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{text.results.headline}</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 ">{text.results.headline}</h3>
               {hasCalculated ? (
                 <div className="mt-6 space-y-6">
                   <div className="grid gap-4 md:grid-cols-3" role="list" aria-label={badgesAriaLabel}>
@@ -758,35 +758,35 @@ export default function CroRoiCalculator() {
 
                   {results?.valid ? (
                     <>
-                      <div className="overflow-hidden rounded-3xl border border-white/50 bg-white/80 shadow-inner backdrop-blur dark:border-white/10 dark:bg-white/10">
+                      <div className="overflow-hidden rounded-3xl border border-white/50 bg-white/80 shadow-inner backdrop-blur ">
                         <div className="overflow-x-auto">
                           <table
-                            className="min-w-full divide-y divide-white/60 text-left text-sm dark:divide-white/10"
+                            className="min-w-full divide-y divide-white/60 text-left text-sm "
                             aria-label={text.results.table.ariaLabel}
                           >
-                            <thead className="bg-white/70 dark:bg-white/5">
+                            <thead className="bg-white/70 ">
                               <tr>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 dark:text-gray-300">
+                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
                                   {text.results.table.scenario}
                                 </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 dark:text-gray-300">
+                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
                                   {text.results.table.newRate}
                                 </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 dark:text-gray-300">
+                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
                                   {text.results.table.extraTransactions}
                                 </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 dark:text-gray-300">
+                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
                                   {text.results.table.extraRevenue}
                                 </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 dark:text-gray-300">
+                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
                                   {text.results.table.extraProfit}
                                 </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 dark:text-gray-300">
+                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
                                   {text.results.table.roi}
                                 </th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/40 dark:divide-white/5">
+                            <tbody className="divide-y divide-white/40 ">
                               {results.scenarioResults.map((scenario) => {
                                 const roiPercent = scenario.roi === null ? null : scenario.roi * 100;
                                 return (
@@ -794,33 +794,33 @@ export default function CroRoiCalculator() {
                                     key={scenario.key}
                                     className={
                                       scenario.expected
-                                        ? "bg-brand-blue/5 dark:bg-brand-teal/10"
+                                        ? "bg-brand-blue/5 "
                                         : ""
                                     }
                                   >
-                                    <th scope="row" className="px-6 py-4 text-sm font-semibold text-neutral-800 dark:text-white">
+                                    <th scope="row" className="px-6 py-4 text-sm font-semibold text-neutral-800 ">
                                       <div className="space-y-1">
                                         <span>{scenario.title}</span>
-                                        <p className="text-xs font-normal text-neutral-500 dark:text-gray-400">
+                                        <p className="text-xs font-normal text-neutral-500 ">
                                           {scenario.subtitle}
                                         </p>
                                         {scenario.expected ? (
-                                          <span className="inline-flex items-center rounded-full bg-brand-blue/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-blue dark:bg-brand-teal/20 dark:text-brand-teal">
+                                          <span className="inline-flex items-center rounded-full bg-brand-blue/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-blue ">
                                             {text.results.table.expectedTag}
                                           </span>
                                         ) : null}
                                       </div>
                                     </th>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 dark:text-gray-200">
+                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
                                       {percentFormatter.format(scenario.newConversionRate)}
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 dark:text-gray-200">
+                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
                                       +{integerFormatter.format(scenario.extraTransactionsMonthly)}
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 dark:text-gray-200">
+                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
                                       {currencyFormatter.format(scenario.extraRevenueYear)}
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 dark:text-gray-200">
+                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
                                       {currencyFormatter.format(scenario.extraProfitYear)}
                                     </td>
                                     <td className={`px-6 py-4 text-sm font-semibold ${getRoiTone(roiPercent)}`}>
@@ -856,21 +856,21 @@ export default function CroRoiCalculator() {
                       </div>
 
                       <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500 dark:text-gray-400">
+                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500 ">
                           {text.results.download.label}
                         </p>
                         <div className="flex flex-wrap gap-3" role="group" aria-label={text.results.download.label}>
                           <button
                             type="button"
                             onClick={handleDownloadCsv}
-                            className="inline-flex items-center justify-center rounded-xl border border-brand-blue/30 bg-white px-5 py-2.5 text-sm font-semibold text-brand-blue shadow-sm transition hover:border-brand-blue hover:bg-brand-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue dark:bg-transparent dark:text-brand-teal"
+                            className="inline-flex items-center justify-center rounded-xl border border-brand-blue/30 bg-white px-5 py-2.5 text-sm font-semibold text-brand-blue shadow-sm transition hover:border-brand-blue hover:bg-brand-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue "
                           >
                             {text.results.download.csv}
                           </button>
                           <button
                             type="button"
                             onClick={handleDownloadPdf}
-                            className="inline-flex items-center justify-center rounded-xl border border-brand-blue/30 bg-white px-5 py-2.5 text-sm font-semibold text-brand-blue shadow-sm transition hover:border-brand-blue hover:bg-brand-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue dark:bg-transparent dark:text-brand-teal"
+                            className="inline-flex items-center justify-center rounded-xl border border-brand-blue/30 bg-white px-5 py-2.5 text-sm font-semibold text-brand-blue shadow-sm transition hover:border-brand-blue hover:bg-brand-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue "
                           >
                             {text.results.download.pdf}
                           </button>
@@ -878,14 +878,14 @@ export default function CroRoiCalculator() {
                       </div>
                     </>
                   ) : (
-                    <div className="rounded-2xl border border-dashed border-neutral-300/60 bg-white/60 p-6 text-sm text-neutral-600 dark:border-neutral-700 dark:bg-white/5 dark:text-gray-300">
-                      <p className="font-semibold text-neutral-800 dark:text-white">{text.results.invalidTitle}</p>
+                    <div className="rounded-2xl border border-dashed border-neutral-300/60 bg-white/60 p-6 text-sm text-neutral-600 ">
+                      <p className="font-semibold text-neutral-800 ">{text.results.invalidTitle}</p>
                       <p className="mt-2 text-sm">{text.results.invalidDescription}</p>
                     </div>
                   )}
                 </div>
               ) : (
-                <p className="mt-4 text-sm text-neutral-600 dark:text-gray-300">
+                <p className="mt-4 text-sm text-neutral-600 ">
                   {language === "nl"
                     ? "Vul je cijfers in en klik op bereken om de ROI-scenario's te zien."
                     : "Enter your figures and calculate to reveal the ROI scenarios."}

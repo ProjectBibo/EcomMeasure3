@@ -10,7 +10,6 @@ import { isViewTransitionActive, resetPageView } from "./utils/viewTransition";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Measurement = lazy(() => import("./pages/Measurement"));
-const ConsentMode = lazy(() => import("./pages/ConsentMode"));
 const Cro = lazy(() => import("./pages/Cro"));
 const BayesianCalculator = lazy(() => import("./pages/BayesianCalculator"));
 const CroRoiCalculator = lazy(() => import("./pages/CroRoiCalculator"));
@@ -86,7 +85,7 @@ function AppContent() {
   }, [location.hash, location.pathname, location.search]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors dark:bg-surface-dark">
+    <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors ">
       <Header />
       <Suspense fallback={<SectionFallback label="Pagina" />}>
         <ViewTransitionRoutes>
@@ -95,7 +94,6 @@ function AppContent() {
           <Route path="measurement" element={<Measurement />} />
           <Route path="measurement/ga4-gtm" element={<GA4GTM />} />
           <Route path="measurement/looker-studio" element={<LookerStudio />} />
-          <Route path="consent-mode" element={<ConsentMode />} />
           <Route path="cro" element={<Cro />} />
           <Route path="cro/gedragsanalyse" element={<BehaviorAnalysis />} />
           <Route path="cro/hypotheses-ab-tests" element={<HypothesesAbTests />} />

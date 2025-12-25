@@ -10,19 +10,17 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Command, Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
-import CommandPalette from "./CommandPalette";
 import useViewTransitionNavigate from "../hooks/useViewTransitionNavigate";
 
 const routePrefetchers = {
   "/": () => import("../pages/Home"),
   "/about": () => import("../pages/About"),
   "/measurement": () => import("../pages/Measurement"),
-  "/consent-mode": () => import("../pages/ConsentMode"),
   "/cro": () => import("../pages/Cro"),
   "/contact": () => import("../pages/ContactPage"),
   "/blog": () => import("../pages/BlogArticle"),
@@ -129,9 +127,9 @@ function DesktopDropdownLayer({
   if (typeof document === "undefined") return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[90]" role="presentation">
+    <div className="fixed inset-0 z-[120] pointer-events-none" role="presentation">
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-auto"
         aria-hidden
         onPointerDown={() => onClose({ focusTrigger: false })}
       />
@@ -140,11 +138,11 @@ function DesktopDropdownLayer({
         ref={setMenuNode}
         role="menu"
         aria-labelledby={triggerId}
-        className="pointer-events-auto absolute w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]"
+        className="pointer-events-auto absolute z-[130] w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur "
         style={{ top, left }}
         onKeyDown={handleKeyDown}
       >
-        <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
+        <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 ">
           {menuLabel}
         </span>
         <div className="mt-2 space-y-1.5">
@@ -181,12 +179,10 @@ export default function Header() {
   const t = translations[language].header;
   const shouldReduceMotion = useReducedMotion();
   const nextLanguage = language === "nl" ? "en" : "nl";
-  const [isDark, setIsDark] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isCondensed, setIsCondensed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const [dropdownAnchor, setDropdownAnchor] = useState(null);
   const menuId = useId();
   const location = useLocation();
@@ -219,7 +215,6 @@ export default function Header() {
   );
 
   const { about, blogLabel, contact, toolsLabel, toolsItems } = t.nav;
-  const commandCopy = t.command;
 
   const toolLinks = useMemo(
     () =>
@@ -258,35 +253,6 @@ export default function Header() {
     }
   }, []);
 
-  const themeTitle = language === "nl"
-    ? isDark
-      ? "Schakel naar licht thema"
-      : "Schakel naar donker thema"
-    : isDark
-    ? "Switch to light theme"
-    : "Switch to dark theme";
-
-  const themeLabel = language === "nl" ? (isDark ? "Licht" : "Donker") : isDark ? "Light" : "Dark";
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const updateThemePreference = (next) => {
-    if (typeof document === "undefined") return;
-    const html = document.documentElement;
-    html.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-    setIsDark(next);
-
-    html.classList.add("theme-transition");
-    window.setTimeout(() => html.classList.remove("theme-transition"), 250);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", next ? "#0f172a" : "#fafaf7");
-  };
-
-  const toggleDark = () => updateThemePreference(!isDark);
   const toggleLanguage = () => changeLanguage(nextLanguage);
 
   useEffect(() => {
@@ -529,13 +495,13 @@ export default function Header() {
   const menuButtonLabel = isMenuOpen ? t.menu.close : t.menu.open;
 
   const navLinkClass = ({ isActive }) =>
-    `nav-underline text-neutral-700 transition-colors dark:text-gray-200 ${
-      isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
+    `nav-underline text-neutral-700 transition-colors ${
+      isActive ? "nav-underline--active text-brand-blue " : ""
     }`;
 
   const dropdownLinkClass = ({ isActive }) =>
-    `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 dark:text-gray-100 dark:hover:bg-white/10 ${
-      isActive ? "text-brand-blue dark:text-brand-blue" : ""
+    `flex items-start justify-between rounded-xl px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100/80 ${
+      isActive ? "text-brand-blue " : ""
     }`;
 
   return (
@@ -551,9 +517,9 @@ export default function Header() {
           <span ref={progressRef} className="progress-bar" />
         </div>
         <div
-          className={`border-b border-neutral-200/60 bg-white/75 backdrop-blur transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/75 ${
+          className={`border-b border-neutral-200/60 bg-white/75 backdrop-blur transition-[background,box-shadow] duration-300 ease-out ${
             isCondensed
-              ? "shadow-[0_16px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:shadow-[0_20px_48px_rgba(2,6,23,0.55)]"
+              ? "shadow-[0_16px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl "
               : "shadow-none"
           }`}
         >
@@ -566,7 +532,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((open) => !open)}
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/90 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 md:hidden"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/90 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition hover:border-neutral-300 hover:shadow-md md:hidden"
                 aria-expanded={isMenuOpen}
                 aria-controls={menuId}
                 aria-label={menuButtonLabel}
@@ -594,8 +560,8 @@ export default function Header() {
                         <button
                           type="button"
                           id={triggerId}
-                          className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors dark:text-gray-200 ${
-                            isActive ? "nav-underline--active text-brand-blue dark:text-brand-blue" : ""
+                          className={`nav-underline inline-flex items-center gap-1 text-neutral-700 transition-colors ${
+                            isActive ? "nav-underline--active text-brand-blue " : ""
                           }`}
                           aria-haspopup="true"
                           aria-expanded={isOpen}
@@ -617,8 +583,8 @@ export default function Header() {
                           />
                         </button>
                         {isOpen && (
-                          <div className="absolute left-0 top-full z-50 mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_44px_rgba(2,6,23,0.45)]">
-                            <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
+                          <div className="absolute left-0 top-full z-50 mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur ">
+                            <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 ">
                               {t.menu.label}
                             </span>
                             <div className="mt-2 space-y-1.5">
@@ -660,22 +626,10 @@ export default function Header() {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={() => setIsPaletteOpen(true)}
-                data-magnetic
-                data-variant="secondary"
-                className="hidden items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200 sm:inline-flex"
-                aria-label={commandCopy.aria}
-                aria-keyshortcuts="Meta+K,Control+K"
-              >
-                <Command size={16} />
-                <span>{commandCopy.label}</span>
-              </button>
-              <button
-                type="button"
                 onClick={toggleLanguage}
                 data-magnetic
                 data-variant="secondary"
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200/70 bg-white/80 px-3 py-1.5 text-sm font-semibold text-neutral-700 shadow-sm backdrop-blur transition-colors duration-200 hover:border-neutral-300 hover:shadow-md"
                 aria-label={t.languageSwitch.aria[language]}
                 title={t.languageSwitch.title[language]}
               >
@@ -683,36 +637,12 @@ export default function Header() {
                 <span className="hidden sm:inline">{t.languageSwitch.cta[language]}</span>
                 <span className="sr-only">{t.languageSwitch.helper[language]}</span>
               </button>
-              <button
-                onClick={toggleDark}
-                data-magnetic
-                data-variant="secondary"
-                className="inline-flex items-center gap-2 rounded-md bg-neutral-900/90 p-2 text-white transition-colors duration-200 hover:bg-neutral-800 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
-                aria-label={themeTitle}
-                title={themeTitle}
-                type="button"
-              >
-                {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                <span className="hidden sm:inline text-sm">{themeLabel}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsPaletteOpen(true)}
-                data-magnetic
-                data-variant="secondary"
-                className="inline-flex items-center gap-1 rounded-md p-2 text-xs font-semibold text-neutral-600 transition-colors duration-200 hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10 sm:hidden"
-                aria-label={commandCopy.aria}
-                aria-keyshortcuts="Meta+K,Control+K"
-              >
-                <Command size={16} />
-                <span aria-hidden>⌘K</span>
-              </button>
             </div>
           </div>
         </div>
 
         <div
-          className={`border-b border-neutral-200/60 bg-white/80 backdrop-blur transition-[background,box-shadow] duration-300 ease-out dark:border-neutral-800/60 dark:bg-surface-dark/80 ${
+          className={`border-b border-neutral-200/60 bg-white/80 backdrop-blur transition-[background,box-shadow] duration-300 ease-out ${
             isCondensed ? "shadow-[0_18px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl" : "shadow-none"
           }`}
         >
@@ -728,7 +658,7 @@ export default function Header() {
               onClick={navClickFactory("/")}
             >
               <span
-                className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-blue text-white shadow-[0_10px_20px_rgba(15,23,42,0.18)] ring-1 ring-white/60 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 dark:ring-white/10 dark:shadow-[0_16px_28px_rgba(2,6,23,0.45)] ${
+                className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-blue text-white shadow-[0_10px_20px_rgba(15,23,42,0.18)] ring-1 ring-white/60 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5 ${
                   isCondensed ? "h-11 w-11" : "h-12 w-12"
                 }`}
               >
@@ -780,14 +710,11 @@ export default function Header() {
               </span>
               <span className="flex flex-col leading-tight">
                 <span
-                  className={`font-semibold uppercase tracking-[0.26em] text-neutral-900 transition-colors dark:text-white ${
+                  className={`font-semibold uppercase tracking-[0.26em] text-neutral-900 transition-colors ${
                     isCondensed ? "text-[11px]" : "text-xs"
                   }`}
                 >
                   ECOMMEASURE
-                </span>
-                <span className="text-sm font-medium tracking-tight text-neutral-500 transition-colors group-hover:text-neutral-700 dark:text-gray-300 dark:group-hover:text-white">
-                  Growth Insights
                 </span>
               </span>
             </Link>
@@ -871,14 +798,14 @@ export default function Header() {
             role="dialog"
             aria-modal="true"
             aria-labelledby={`${menuId}-title`}
-            className="absolute top-[calc(var(--header-offset))] left-0 right-0 max-h-[calc(100vh-var(--header-offset))] overflow-auto rounded-t-3xl border-t border-neutral-200/80 bg-white shadow-[0_-18px_45px_rgba(15,23,42,0.2)] dark:border-neutral-800/80 dark:bg-surface-dark dark:shadow-[0_-20px_55px_rgba(2,6,23,0.65)]"
+            className="absolute top-[calc(var(--header-offset))] left-0 right-0 max-h-[calc(100vh-var(--header-offset))] overflow-auto rounded-t-3xl border-t border-neutral-200/80 bg-white shadow-[0_-18px_45px_rgba(15,23,42,0.2)] "
           >
             <div className="space-y-6 px-6 pt-6 pb-10">
               <div>
-                <h2 id={`${menuId}-title`} className="text-lg font-semibold text-neutral-900 dark:text-white">
+                <h2 id={`${menuId}-title`} className="text-lg font-semibold text-neutral-900 ">
                   {t.mobileMenu.title}
                 </h2>
-                <p className="mt-1 text-sm text-neutral-500 dark:text-gray-400">{t.mobileMenu.subtitle}</p>
+                <p className="mt-1 text-sm text-neutral-500 ">{t.mobileMenu.subtitle}</p>
               </div>
               <nav aria-label={t.menu.label} className="space-y-3">
                 {navLinks.map((link) => {
@@ -887,11 +814,11 @@ export default function Header() {
                     return (
                       <div
                         key={link.id}
-                        className="rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-white/5 dark:bg-white/10"
+                        className="rounded-2xl border border-neutral-200/80 bg-white shadow-sm "
                       >
                         <button
                           type="button"
-                          className="flex w-full items-center justify-between px-4 py-3 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:shadow-md dark:text-white"
+                          className="flex w-full items-center justify-between px-4 py-3 text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:shadow-md "
                           onClick={() => setOpenDropdown(isOpen ? null : link.id)}
                           aria-expanded={isOpen}
                           aria-controls={`${menuId}-${link.id}`}
@@ -913,8 +840,8 @@ export default function Header() {
                                 onMouseEnter={() => prefetchRoute(item.to)}
                                 onFocus={() => prefetchRoute(item.to)}
                                 className={({ isActive }) =>
-                                  `flex items-center justify-between rounded-xl border border-neutral-200/70 bg-white px-3 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
-                                    isActive ? "text-brand-blue dark:text-brand-blue" : "text-neutral-900"
+                                  `flex items-center justify-between rounded-xl border border-neutral-200/70 bg-white px-3 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
+                                    isActive ? "text-brand-blue " : "text-neutral-900"
                                   }`
                                 }
                               >
@@ -936,8 +863,8 @@ export default function Header() {
                     onMouseEnter={() => prefetchRoute(link.to)}
                     onFocus={() => prefetchRoute(link.to)}
                     className={({ isActive }) =>
-                        `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-white/10 dark:text-white ${
-                          isActive ? "text-brand-blue dark:text-brand-blue" : "text-neutral-900"
+                        `flex items-center justify-between rounded-2xl border border-neutral-200/80 bg-white px-4 py-3 text-base font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
+                          isActive ? "text-brand-blue " : "text-neutral-900"
                         }`
                       }
                     >
@@ -948,7 +875,7 @@ export default function Header() {
                 })}
               </nav>
               <div className="space-y-4">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 dark:text-gray-400">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 ">
                   {t.mobileMenu.preferences}
                 </h3>
                 <div className="flex flex-wrap gap-3">
@@ -958,34 +885,10 @@ export default function Header() {
                       toggleLanguage();
                       setIsMenuOpen(false);
                     }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md "
                   >
                     <span aria-hidden>{flags[nextLanguage]}</span>
                     <span>{t.languageSwitch.cta[language]}</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      toggleDark();
-                      setIsMenuOpen(false);
-                    }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
-                  >
-                    {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                    <span>{themeLabel}</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsPaletteOpen(true);
-                      setIsMenuOpen(false);
-                    }}
-                    className="inline-flex flex-1 min-w-[140px] items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
-                    aria-label={commandCopy.aria}
-                    aria-keyshortcuts="Meta+K,Control+K"
-                  >
-                    <Command size={16} />
-                    <span>{commandCopy.label}</span>
                   </button>
                 </div>
               <Link
@@ -996,11 +899,10 @@ export default function Header() {
                 {t.cta}
               </Link>
               </div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <CommandPalette open={isPaletteOpen} onOpenChange={setIsPaletteOpen} onIntent={prefetchRoute} />
-    </>
-  );
-}
+        )}
+      </>
+    );
+  }
