@@ -75,8 +75,7 @@ export const translations = {
       ],
       titleHighlight: "GA4 en bewezen CRO-experimenten",
       description:
-        "Wij zorgen dat je weet wat er écht gebeurt op je website en helpen je die inzichten te vertalen naar gerichte CRO verbeteringen",
-      primaryCta: "Zijn wij een goede match?",
+        "We kijken samen hoe we jouw website kunnen optimaliseren om het volledige potentieel te benutten",
       secondaryCta: "Ontdek de aanpak",
       stats: [
         {
