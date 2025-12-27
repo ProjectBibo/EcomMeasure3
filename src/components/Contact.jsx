@@ -20,7 +20,8 @@ export default function Contact() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     try {
       const response = await fetch("https://formspree.io/f/mpqzpevp", {
@@ -30,7 +31,7 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        event.target.reset();
+        form.reset();
         setStatus("success");
       }
     } catch (error) {
