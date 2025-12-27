@@ -8,20 +8,16 @@ import useViewTransitionNavigate, {
 } from "../hooks/useViewTransitionNavigate";
 
 const content = {
-  nl: {
-    seo: {
-      title: "Over EcomMeasure – Het gezicht achter de meetoplossingen",
-      description:
-        "Maak kennis met Jeroen, de consultant achter EcomMeasure. Lees hoe strategie, consent en CRO samenkomen in zijn manier van werken.",
-    },
-    hero: {
-      eyebrow: "Over ons",
-      title: "Wij helpen meer van uw bezoekers om te zetten in klanten",
-      description:
-        "Het verbeteren van websites en digitale besluitvorming begint bij betrouwbare data.
-Bij EcomMeasure help ik organisaties inzicht te krijgen in hun gebruikersgedrag door middel van sterke measurement en web analytics. Niet alleen door te kijken naar wat er in tools als GA4 staat, maar door data te combineren met de kennis en ervaring die al aanwezig is binnen het team. Zo ontstaan inzichten die aansluiten op de praktijk van de organisatie — of dat nu een e-commercebedrijf, scale-up of publieke organisatie is.
-",
-    },
+    nl: {
+      seo: {
+        title: "Over EcomMeasure – Het gezicht achter de meetoplossingen",
+        description: `Maak kennis met Jeroen, de consultant achter EcomMeasure. Lees hoe strategie, consent en CRO samenkomen in zijn manier van werken.`,
+      },
+      hero: {
+        eyebrow: "Over ons",
+        title: "Wij helpen meer van uw bezoekers om te zetten in klanten",
+        description: `Het verbeteren van websites en digitale besluitvorming begint bij betrouwbare data. Bij EcomMeasure help ik organisaties inzicht te krijgen in hun gebruikersgedrag door middel van sterke measurement en web analytics. Niet alleen door te kijken naar wat er in tools als GA4 staat, maar door data te combineren met de kennis en ervaring die al aanwezig is binnen het team. Zo ontstaan inzichten die aansluiten op de praktijk van de organisatie — of dat nu een e-commercebedrijf, scale-up of publieke organisatie is.`,
+      },
     certifications: {
       heading: "Certificeringen & trust badges",
       badges: [
@@ -53,14 +49,13 @@ Bij EcomMeasure help ik organisaties inzicht te krijgen in hun gebruikersgedrag 
       { value: "35", label: "teams begeleid met measurement en consent" },
       { value: "400+", label: "experimenten en analyses afgerond" },
     ],
-    story: {
-      heading: "Van ruwe data naar gedragen beslissingen",
-      lead:
-        "Ik ben opgegroeid in marketingteams waar dashboards vooral vragen opriepen. Door marketing, development en legal aan dezelfde tafel te brengen, ontdekte ik dat de echte waarde ontstaat als iedere discipline dezelfde cijfers vertrouwt.",
-      paragraphs: [
-        "Daarom richtte ik EcomMeasure op: een boutique consultancy die measurement, consent en CRO structureel verbindt. Ik help scale-ups en retailers om experimenten te draaien die zowel compliant als impactvol zijn.",
-        "Samen bouwen we aan een fundament dat jouw organisatie zelf kan doorontwikkelen. Ik zorg voor de structuur, tooling en overdracht waarmee jouw team zelfstandig keuzes kan maken – sprint na sprint.",
-      ],
+      story: {
+        heading: "Van ruwe data naar gedragen beslissingen",
+        lead: `Ik ben opgegroeid in marketingteams waar dashboards vooral vragen opriepen. Door marketing, development en legal aan dezelfde tafel te brengen, ontdekte ik dat de echte waarde ontstaat als iedere discipline dezelfde cijfers vertrouwt.`,
+        paragraphs: [
+          `Daarom richtte ik EcomMeasure op: een boutique consultancy die measurement, consent en CRO structureel verbindt. Ik help scale-ups en retailers om experimenten te draaien die zowel compliant als impactvol zijn.`,
+          `Samen bouwen we aan een fundament dat jouw organisatie zelf kan doorontwikkelen. Ik zorg voor de structuur, tooling en overdracht waarmee jouw team zelfstandig keuzes kan maken – sprint na sprint.`,
+        ],
       points: [
         "Sterk in stakeholdermanagement tussen marketing, product, IT en legal",
         "Hands-on ervaring met Consent Mode v2, server-side tagging en GTM",
@@ -69,75 +64,66 @@ Bij EcomMeasure help ik organisaties inzicht te krijgen in hun gebruikersgedrag 
     },
     focus: {
       heading: "Waar ik je mee help",
-      items: [
-        {
-          title: "Measurement foundations",
-          description:
-            "Van audit tot implementatie. We leggen een datalaag en trackingstructuur vast die future-proof is, inclusief documentatie voor jouw team.",
-        },
-        {
-          title: "Consent & governance",
-          description:
-            "Ik verbind marketingdoelen met privacywetgeving. Denk aan Consent Mode v2, server-side tagging en samenwerking met legal.",
-        },
-        {
-          title: "Experimentation & CRO",
-          description:
-            "Samen vertalen we inzichten naar hypotheses en experimenten. Resultaten worden gedeeld in begrijpelijke learnings en playbooks.",
-        },
-      ],
-    },
+        items: [
+          {
+            title: "Measurement foundations",
+            description: `Van audit tot implementatie. We leggen een datalaag en trackingstructuur vast die future-proof is, inclusief documentatie voor jouw team.`,
+          },
+          {
+            title: "Consent & governance",
+            description: `Ik verbind marketingdoelen met privacywetgeving. Denk aan Consent Mode v2, server-side tagging en samenwerking met legal.`,
+          },
+          {
+            title: "Experimentation & CRO",
+            description: `Samen vertalen we inzichten naar hypotheses en experimenten. Resultaten worden gedeeld in begrijpelijke learnings en playbooks.`,
+          },
+        ],
+      },
     timeline: {
       heading: "Loopbaan in vogelvlucht",
       items: [
-        {
-          period: "2012 – 2016",
-          title: "Performance marketeer",
-          description:
-            "Startte mijn carrière bij e-commerce bureaus. Leerde er hoe advertenties, data en UX elkaar versterken – en waar het vaak misgaat.",
-        },
-        {
-          period: "2016 – 2021",
-          title: "Lead analytics bij scale-ups",
-          description:
-            "Bouwde analytics teams op bij snelgroeiende webshops. Introduceerde server-side tagging, heldere experimentprocessen en dashboards die teams dagelijks gebruiken.",
-        },
-        {
-          period: "2021 – heden",
-          title: "Oprichter EcomMeasure",
-          description:
-            "Werk als zelfstandig consultant voor retailers en D2C-merken. Combineer measurement, consent en CRO om groei te versnellen zonder concessies aan privacy.",
-        },
+          {
+            period: "2012 – 2016",
+            title: "Performance marketeer",
+            description: `Startte mijn carrière bij e-commerce bureaus. Leerde er hoe advertenties, data en UX elkaar versterken – en waar het vaak misgaat.`,
+          },
+          {
+            period: "2016 – 2021",
+            title: "Lead analytics bij scale-ups",
+            description: `Bouwde analytics teams op bij snelgroeiende webshops. Introduceerde server-side tagging, heldere experimentprocessen en dashboards die teams dagelijks gebruiken.`,
+          },
+          {
+            period: "2021 – heden",
+            title: "Oprichter EcomMeasure",
+            description: `Werk als zelfstandig consultant voor retailers en D2C-merken. Combineer measurement, consent en CRO om groei te versnellen zonder concessies aan privacy.`,
+          },
       ],
     },
     approach: {
       heading: "Werkwijze",
       id: "werkwijze",
       items: [
-        {
-          title: "1. Luisteren en doorvragen",
-          description:
-            "We starten met interviews en audits om doelen, datastromen en risico's scherp te krijgen. Geen standaard templates, wel context.",
-        },
-        {
-          title: "2. Bouwen met jouw team",
-          description:
-            "Implementaties doe ik samen met developers, marketeers en legal. Ik schrijf documentatie, review code en zorg dat iedereen het waarom begrijpt.",
-        },
-        {
-          title: "3. Overdragen en opschalen",
-          description:
-            "Na oplevering begeleid ik het team om zelfstandig verder te kunnen. Denk aan playbooks, trainingsessies en sparringmomenten.",
-        },
+          {
+            title: "1. Luisteren en doorvragen",
+            description: `We starten met interviews en audits om doelen, datastromen en risico's scherp te krijgen. Geen standaard templates, wel context.`,
+          },
+          {
+            title: "2. Bouwen met jouw team",
+            description: `Implementaties doe ik samen met developers, marketeers en legal. Ik schrijf documentatie, review code en zorg dat iedereen het waarom begrijpt.`,
+          },
+          {
+            title: "3. Overdragen en opschalen",
+            description: `Na oplevering begeleid ik het team om zelfstandig verder te kunnen. Denk aan playbooks, trainingsessies en sparringmomenten.`,
+          },
       ],
     },
-    personal: {
-      heading: "Meer over mij",
-      paragraphs: [
-        "Ik geloof dat data pas waarde heeft als het teams dichter bij elkaar brengt. Daarom werk ik graag op locatie mee, organiseer ik gezamenlijke reviews en maak ik complexe materie visueel.",
-        "Buiten het werk ben ik vaak te vinden op de racefiets of in de keuken. Die combinatie van focus en creativiteit neem ik ook mee in projecten.",
-      ],
-      listTitle: "Fun fact",
+      personal: {
+        heading: "Meer over mij",
+        paragraphs: [
+          `Ik geloof dat data pas waarde heeft als het teams dichter bij elkaar brengt. Daarom werk ik graag op locatie mee, organiseer ik gezamenlijke reviews en maak ik complexe materie visueel.`,
+          `Buiten het werk ben ik vaak te vinden op de racefiets of in de keuken. Die combinatie van focus en creativiteit neem ik ook mee in projecten.`,
+        ],
+        listTitle: "Fun fact",
       listItems: ["Gecertificeerd in GA4, Mixpanel en CXL experimentation"],
     },
     cta: {
