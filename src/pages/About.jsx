@@ -15,15 +15,12 @@ const content = {
         "Maak kennis met Jeroen, de consultant achter EcomMeasure. Lees hoe strategie, consent en CRO samenkomen in zijn manier van werken.",
     },
     hero: {
-      eyebrow: "Over mij",
-      title: "Ik help e-commerceteams groeien met vertrouwen in hun data",
+      eyebrow: "Over ons",
+      title: "Wij helpen meer van uw bezoekers om te zetten in klanten",
       description:
-        "Ik ben Rowan, digital analytics consultant en oprichter van EcomMeasure. Mijn hart ligt bij het vertalen van ruwe gegevens naar een roadmap waar marketeers, developers en privacyteams samen op kunnen bouwen.",
-      ctaPrimary: { label: "Plan een gesprek", href: "/contact" },
-      ctaSecondary: {
-        label: "Bekijk de aanpak",
-        href: "#werkwijze",
-      },
+        "Het verbeteren van websites en digitale besluitvorming begint bij betrouwbare data.
+Bij EcomMeasure help ik organisaties inzicht te krijgen in hun gebruikersgedrag door middel van sterke measurement en web analytics. Niet alleen door te kijken naar wat er in tools als GA4 staat, maar door data te combineren met de kennis en ervaring die al aanwezig is binnen het team. Zo ontstaan inzichten die aansluiten op de praktijk van de organisatie — of dat nu een e-commercebedrijf, scale-up of publieke organisatie is.
+",
     },
     certifications: {
       heading: "Certificeringen & trust badges",
