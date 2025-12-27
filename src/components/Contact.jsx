@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
@@ -16,6 +16,28 @@ export default function Contact() {
   const t = translations[language].contact;
   const primaryCta = translations[language].header.cta;
   const checklist = t.options || [];
+  const [status, setStatus] = useState("idle");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mpqzpevp", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+
+      if (response.ok) {
+        form.reset();
+        setStatus("success");
+      }
+    } catch (error) {
+      console.error("Form submission failed", error);
+    }
+  };
 
   return (
     <section
@@ -46,6 +68,9 @@ export default function Contact() {
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.5, delay: 0.1 }}
             className="rounded-3xl border border-neutral-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
+            action="https://formspree.io/f/mpqzpevp"
+            method="POST"
+            onSubmit={handleSubmit}
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="space-y-2 text-sm font-semibold text-neutral-800">
@@ -95,6 +120,9 @@ export default function Contact() {
             <button type="submit" className="button-primary mt-6 w-full justify-center">
               {primaryCta}
             </button>
+            {status === "success" && (
+              <p className="mt-4 text-sm text-neutral-800">Bedankt, we nemen contact met je op.</p>
+            )}
           </motion.form>
 
           <motion.div
