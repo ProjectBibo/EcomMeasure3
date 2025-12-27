@@ -10,20 +10,20 @@ import useViewTransitionNavigate, {
 const content = {
   nl: {
     badge: "Expertises",
-    title: "Kies de verdieping die jouw groei versnelt",
+    title: "Maar hoe doen jullie dat precies?",
     description:
-      "Elk traject start met een heldere focus. Verken de pijlers van measurement en CRO en ontdek welke stap jouw e-commerce versnelt.",
+      "Onze aanpak is volledig afgestemd op jou. We helpen niet alleen je website groeien, maar ook jou. We nemen je mee in elke stap en documenteren alles terwijl we samen bouwen aan jouw online succes.",
     cards: [
       {
-        title: "Measurement",
-        subtitle: "GA4 & GTM events",
+        title: "Meer meten",
+        subtitle: "Google Analytics 4",
         description:
-          "Een schaalbare datastructuur met enhanced e-commerce events, server-side tagging en dashboards die dagelijks vertrouwen geven.",
+          "Ontdek wat werkt, waar kansen liggen en hoe je meer rendement haalt, met betrouwbare metingen binnen de AVG-regels",
         to: "/measurement",
       },
       {
-        title: "CRO",
-        subtitle: "A/B-tests & hypotheses",
+        title: "Optimaliseer je website",
+        subtitle: "UX/CRO",
         description:
           "Onderzoek, experimenteer en leer sneller met een strak proces voor hypotheses, validatie en implementatie.",
         to: "/cro",
