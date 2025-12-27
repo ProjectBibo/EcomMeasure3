@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from "react";
 
 export default function VideoAnalysisSection({ copy }) {
-  const [formValues, setFormValues] = useState({ url: "", email: "", message: "" });
+  const [formValues, setFormValues] = useState({ website: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
 
   const placeholders = useMemo(
     () => ({
-      url: "https://",
+      website: "https://",
       email: copy.emailPlaceholder || "jij@bedrijf.nl",
       message: copy.messagePlaceholder || copy.optional,
     }),
@@ -16,8 +16,8 @@ export default function VideoAnalysisSection({ copy }) {
 
   const validate = () => {
     const nextErrors = {};
-    if (!formValues.url.trim()) {
-      nextErrors.url = copy.errors.urlRequired;
+    if (!formValues.website.trim()) {
+      nextErrors.website = copy.errors.urlRequired;
     }
     if (!formValues.email.trim()) {
       nextErrors.email = copy.errors.emailRequired;
@@ -27,16 +27,35 @@ export default function VideoAnalysisSection({ copy }) {
     return nextErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validation = validate();
     setErrors(validation);
     if (Object.keys(validation).length > 0) return;
 
     setStatus("loading");
-    setTimeout(() => {
-      setStatus("success");
-    }, 700);
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
+
+    try {
+      const response = await fetch(formElement.action, {
+        method: formElement.method,
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormValues({ website: "", email: "", message: "" });
+        formElement.reset();
+      } else {
+        setStatus("idle");
+      }
+    } catch {
+      setStatus("idle");
+    }
   };
 
   const onChange = (field) => (event) => {
@@ -59,22 +78,28 @@ export default function VideoAnalysisSection({ copy }) {
         </div>
 
         <div className="space-y-4 rounded-[6px] border border-neutral-200 bg-neutral-50/40 p-6 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
-          <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+          <form
+            className="space-y-4"
+            onSubmit={handleSubmit}
+            action="https://formspree.io/f/xjgvydnj"
+            method="POST"
+            noValidate
+          >
             <div className="space-y-2">
-              <label htmlFor="url" className="text-sm font-semibold text-neutral-900">
+              <label htmlFor="website" className="text-sm font-semibold text-neutral-900">
                 {copy.fields.url.label}
               </label>
               <input
-                id="url"
-                name="url"
+                id="website"
+                name="website"
                 type="url"
                 required
-                placeholder={placeholders.url}
-                value={formValues.url}
-                onChange={onChange("url")}
+                placeholder={placeholders.website}
+                value={formValues.website}
+                onChange={onChange("website")}
                 className="w-full rounded-[4px] border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500"
               />
-              {errors.url && <p className="text-sm text-red-600">{errors.url}</p>}
+              {errors.website && <p className="text-sm text-red-600">{errors.website}</p>}
             </div>
 
             <div className="space-y-2">
@@ -120,7 +145,7 @@ export default function VideoAnalysisSection({ copy }) {
 
             {status === "success" && (
               <div className="rounded-[4px] border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800">
-                {copy.success}
+                Aanvraag ontvangen. Je krijgt een video-analyse.
               </div>
             )}
           </form>
