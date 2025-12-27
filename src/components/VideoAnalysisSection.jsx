@@ -27,33 +27,35 @@ export default function VideoAnalysisSection({ copy }) {
     return nextErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validation = validate();
     setErrors(validation);
     if (Object.keys(validation).length > 0) return;
 
     setStatus("loading");
-    const formData = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
 
-    fetch(event.currentTarget.action, {
-      method: event.currentTarget.method,
-      body: formData,
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          setStatus("success");
-          setFormValues({ website: "", email: "", message: "" });
-        } else {
-          return response.json().then(() => Promise.reject());
-        }
-      })
-      .catch(() => {
-        setStatus("idle");
+    try {
+      const response = await fetch(formElement.action, {
+        method: formElement.method,
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
       });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormValues({ website: "", email: "", message: "" });
+        formElement.reset();
+      } else {
+        setStatus("idle");
+      }
+    } catch {
+      setStatus("idle");
+    }
   };
 
   const onChange = (field) => (event) => {
