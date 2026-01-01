@@ -64,7 +64,7 @@ export const translations = {
       },
     },
     hero: {
-      badge: "Eerst goed meten, dan verbeteren.",
+      badge: "Meetbaar maken wat er gebeurd, helder maken wat je kunt verbeteren",
       titleLead: "Wij helpen je",
       rotatingPhrases: [
         "beter meten",
