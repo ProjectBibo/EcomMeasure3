@@ -456,66 +456,12 @@ export default function Header() {
               aria-label="EcomMeasure home"
               onClick={navClickFactory("/")}
             >
-              <span
-                className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue via-brand-teal to-brand-blue text-white shadow-[0_10px_20px_rgba(15,23,42,0.18)] ring-1 ring-white/60 transition-[transform,height,width,box-shadow] duration-300 group-hover:-translate-y-0.5   ${
-                  isCondensed ? "h-11 w-11" : "h-12 w-12"
-                }`}
-              >
-                <svg
-                  viewBox="0 0 48 48"
-                  className={isCondensed ? "h-7 w-7" : "h-8 w-8"}
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden
-                >
-                  <defs>
-                    <linearGradient id="em-pillars" x1="10" y1="38" x2="38" y2="12" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#c7dcff" />
-                      <stop offset="1" stopColor="#f8fbff" />
-                    </linearGradient>
-                    <linearGradient id="em-sparkline" x1="12" y1="30" x2="36" y2="16" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#f7c948" stopOpacity="0.95" />
-                      <stop offset="1" stopColor="#facc15" stopOpacity="0.85" />
-                    </linearGradient>
-                  </defs>
-                  <g strokeLinecap="round" strokeLinejoin="round">
-                    <path
-                      d="M11.5 31.5c0 1.38 1.12 2.5 2.5 2.5h4c1.38 0 2.5-1.12 2.5-2.5v-8c0-1.38-1.12-2.5-2.5-2.5h-4c-1.38 0-2.5 1.12-2.5 2.5v8Z"
-                      fill="url(#em-pillars)"
-                      stroke="rgba(255,255,255,0.55)"
-                      strokeWidth="1.4"
-                    />
-                    <path
-                      d="M20.5 26c0 1.38 1.12 2.5 2.5 2.5h4c1.38 0 2.5-1.12 2.5-2.5v-12c0-1.38-1.12-2.5-2.5-2.5h-4c-1.38 0-2.5 1.12-2.5 2.5V26Z"
-                      fill="url(#em-pillars)"
-                      stroke="rgba(255,255,255,0.55)"
-                      strokeWidth="1.4"
-                    />
-                    <path
-                      d="M29.5 21.5c0 1.38 1.12 2.5 2.5 2.5h4c1.38 0 2.5-1.12 2.5-2.5v-8c0-1.38-1.12-2.5-2.5-2.5h-4c-1.38 0-2.5 1.12-2.5 2.5v8Z"
-                      fill="url(#em-pillars)"
-                      stroke="rgba(255,255,255,0.55)"
-                      strokeWidth="1.4"
-                    />
-                    <path
-                      d="M12 27l6-3.8 4.6 3.2 4.9-6.3L36 23"
-                      stroke="url(#em-sparkline)"
-                      strokeWidth="2.6"
-                    />
-                    <circle cx="32.5" cy="19" r="2.4" fill="#fde047" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" />
-                  </g>
-                </svg>
-                <span className="absolute inset-0 rounded-2xl border border-white/20" aria-hidden />
-              </span>
-              <span className="flex flex-col leading-tight">
-                <span
-                  className={`font-semibold uppercase tracking-[0.26em] text-neutral-900 transition-colors  ${
-                    isCondensed ? "text-[11px]" : "text-xs"
-                  }`}
-                >
-                  ECOMMEASURE
-                </span>
-              </span>
+              <img
+                src="/Nieuwe logo 2.svg"
+                alt="EcomMeasure logo"
+                className={`w-auto transition-[height,width] duration-300 ${isCondensed ? "h-10" : "h-12"}`}
+                loading="lazy"
+              />
             </Link>
 
             <div className="hidden items-stretch gap-8 md:flex">
