@@ -15,12 +15,14 @@ export default function QuickScanRequest() {
   const [status] = useState("idle");
   const [errors] = useState({});
   const [pagePath, setPagePath] = useState("/");
+  const [redirectUrl, setRedirectUrl] = useState("/confirmation");
   const emailRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setPagePath(window.location.pathname || "/");
+      setRedirectUrl(`${window.location.origin}/confirmation`);
     }
   }, []);
 
@@ -79,6 +81,7 @@ export default function QuickScanRequest() {
           <input type="hidden" name="form-name" value="quickscan" />
           <input type="hidden" name="source" value="quickscan" />
           <input type="hidden" name="page_path" value={pagePath} />
+          <input type="hidden" name="_redirect" value={redirectUrl} />
           <p className="hidden">
             <label>
               Don’t fill this out if you’re human: <input name="bot-field" onChange={() => {}} />

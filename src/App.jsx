@@ -21,6 +21,7 @@ const LookerStudio = lazy(() => import("./pages/LookerStudio"));
 const BehaviorAnalysis = lazy(() => import("./pages/BehaviorAnalysis"));
 const HypothesesAbTests = lazy(() => import("./pages/HypothesesAbTests"));
 const Implementation = lazy(() => import("./pages/Implementation"));
+const Confirmation = lazy(() => import("./pages/Confirmation"));
 
 function usePrefersReducedMotion() {
   const [prefersReduced, setPrefersReduced] = useState(() => {
@@ -102,6 +103,7 @@ function AppContent() {
           <Route path="tools/cro-roi" element={<CroRoiCalculator />} />
           <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="confirmation" element={<Confirmation />} />
           <Route path="*" element={<NotFound />} />
         </ViewTransitionRoutes>
       </Suspense>
