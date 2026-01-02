@@ -85,6 +85,7 @@ export default function VideoAnalysisSection({ copy }) {
             method="POST"
             noValidate
           >
+            <input type="hidden" name="_redirect" value="/bevestiging-video-analyse" />
             <div className="space-y-2">
               <label htmlFor="website" className="text-sm font-semibold text-neutral-900">
                 {copy.fields.url.label}
