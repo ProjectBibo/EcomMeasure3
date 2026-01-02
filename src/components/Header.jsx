@@ -457,7 +457,7 @@ export default function Header() {
               onClick={navClickFactory("/")}
             >
               <img
-                src="/nieuwe%20logo%202.svg"
+                src="/Nieuwe%20logo%202.svg"
                 alt="EcomMeasure logo"
                 className={`h-auto transition-all duration-300 ${isCondensed ? "w-32" : "w-36"}`}
                 loading="eager"
