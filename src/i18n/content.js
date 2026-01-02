@@ -106,6 +106,17 @@ export const translations = {
       ],
       scrollLabel: "Scroll verder",
     },
+    problemSolution: {
+      headline: "Veel data, weinig richting",
+      pains: [
+        "Dashboards laten prestaties zien, maar niet welke stap prioriteit heeft.",
+        "Kanalen meten anders, waardoor besluiten op onderbuikgevoel worden genomen.",
+        "Optimalisaties starten laat omdat niemand eigenaar is van de volgende stap.",
+      ],
+      solution:
+        "EcomMeasure vertaalt je bestaande data naar actie. We controleren de metingen, verbinden kanalen en maken scherpe dashboards die laten zien welke verbeteringen nu het meeste opleveren.",
+      ctaHelper: "Zelfde CTA als in de hero, geen extra actie.",
+    },
     usp: {
       badge: "DIENSTEN",
       heading: "Van betrouwbare metingen naar gerichte optimalisatie",
@@ -531,6 +542,17 @@ export const translations = {
         },
       ],
       scrollLabel: "Keep scrolling",
+    },
+    problemSolution: {
+      headline: "Plenty of data, unclear next steps",
+      pains: [
+        "Dashboards show results but not which move should happen first.",
+        "Channels report different numbers, so decisions fall back to gut feeling.",
+        "Optimisation waits because no one owns the next experiment or fix.",
+      ],
+      solution:
+        "EcomMeasure turns the data you already collect into direction. We validate tracking, align platforms and build focused dashboards that highlight the improvements most likely to lift revenue now.",
+      ctaHelper: "Same CTA as the hero, no extra action needed.",
     },
     usp: {
       badge: "Services",
