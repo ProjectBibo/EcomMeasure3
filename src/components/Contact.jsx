@@ -31,7 +31,7 @@ export default function Contact() {
   const submitLabel = language === "nl" ? "Plan vrijblijvend gesprek" : primaryCta;
   const headlineText =
     language === "nl"
-      ? "Ontdek hoe ik je kan helpen met conversie-optimalisatie tijdens een gratis adviesgesprek"
+      ? "Ontdek hoe ik je kan helpen tijdens een gratis adviesgesprek"
       : t.heading;
   const recaptchaSiteKey =
     import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
@@ -141,24 +141,24 @@ export default function Contact() {
           </h2>
         </motion.div>
 
-        <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="flex flex-col items-center gap-14 lg:gap-16">
           <motion.form
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.5, delay: 0.1 }}
-            className="flex flex-col items-start gap-8"
+            className="flex w-full max-w-[560px] flex-col items-center gap-8"
             action="https://formspree.io/f/mpqzpevp"
             method="POST"
             onSubmit={handleSubmit}
           >
-            <div className="flex flex-col items-start gap-7">
+            <div className="flex w-full flex-col items-center gap-7">
               <label className="block text-sm font-semibold text-neutral-900">
                 <span className="sr-only">{language === "nl" ? "Naam" : "Name"}</span>
                 <input
                   type="text"
                   name="name"
-                  className="w-[520px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3.5 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   placeholder={language === "nl" ? "Jouw naam" : "Your name"}
                   required
                 />
@@ -168,7 +168,7 @@ export default function Contact() {
                 <input
                   type="email"
                   name="email"
-                  className="w-[520px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3.5 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   placeholder="you@example.com"
                   required
                 />
@@ -180,7 +180,7 @@ export default function Contact() {
                 <textarea
                   name="message"
                   rows="3"
-                  className="w-[520px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   placeholder={language === "nl" ? "Vertel kort over je website of vraag" : "Share a bit about your site or question"}
                 />
               </label>
@@ -188,7 +188,7 @@ export default function Contact() {
                 <span className="sr-only">{language === "nl" ? "Indicatief budget" : "Estimated budget"}</span>
                 <select
                   name="budget"
-                  className="w-[520px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-base text-neutral-800 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   defaultValue=""
                 >
                   {budgetOptions.map((option) => (
@@ -212,7 +212,7 @@ export default function Contact() {
               <button
                 type="submit"
                 id="cta-primary"
-                className="inline-flex min-w-[320px] max-w-[520px] items-center justify-center gap-2 rounded-xl border border-[#e2b200] bg-[#ffcc02] px-7 py-4 text-lg font-semibold text-neutral-900 transition hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f5c400]"
+                className="inline-flex min-w-[320px] max-w-[480px] items-center justify-center gap-2 rounded-xl border border-[#e2b200] bg-[#ffcc02] px-7 py-4 text-lg font-semibold text-neutral-900 transition hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f5c400]"
               >
                 {submitLabel}
                 <ArrowRight size={18} aria-hidden />
@@ -228,26 +228,16 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.55, delay: 0.12 }}
-            className="flex flex-col items-center gap-10 lg:pt-6"
+            className="flex w-full max-w-[480px] flex-col items-start gap-6"
           >
-            <div className="flex h-48 w-48 items-center justify-center rounded-full bg-[#c9ddff] ring-8 ring-[#e7f0fb]">
-              <img
-                src="/Ik.svg"
-                alt="Portret van de consultant"
-                className="h-36 w-36 object-contain drop-shadow"
-                loading="lazy"
-              />
-            </div>
-            <div className="w-full max-w-md space-y-4">
-              {checklistHighlights.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <span className="mt-1 text-emerald-600">
-                    <CheckCircle2 size={20} aria-hidden />
-                  </span>
-                  <p className="text-base font-semibold text-neutral-900">{item}</p>
-                </div>
-              ))}
-            </div>
+            {checklistHighlights.map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="mt-1 text-emerald-600">
+                  <CheckCircle2 size={20} aria-hidden />
+                </span>
+                <p className="text-base font-semibold text-neutral-900">{item}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
