@@ -72,6 +72,7 @@ export default function Contact() {
             method="POST"
             onSubmit={handleSubmit}
           >
+            <input type="hidden" name="_redirect" value="/bevestiging-kennismaking" />
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="space-y-2 text-sm font-semibold text-neutral-800">
                 <span>{language === "nl" ? "Naam" : "Name"}</span>
