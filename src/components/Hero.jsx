@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import useViewTransitionNavigate, {
@@ -22,10 +22,6 @@ export default function Hero() {
   const navigateWithTransition = useViewTransitionNavigate();
   const handlePrimaryCtaClick = useMemo(
     () => createViewTransitionClickHandler(navigateWithTransition, "/contact"),
-    [navigateWithTransition]
-  );
-  const handleSecondaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/measurement"),
     [navigateWithTransition]
   );
   const phrasesFromLocale = t.rotatingPhrases ?? [];
@@ -71,7 +67,7 @@ export default function Hero() {
               transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
               className="pill-badge shadow-sm"
             >
-              <Sparkles size={14} /> {t.badge}
+              {t.badge}
             </motion.span>
 
             <motion.h1
@@ -149,29 +145,42 @@ export default function Hero() {
               className="max-w-2xl text-lg sm:text-xl text-neutral-700  text-max-width"
             />
 
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
-              className="flex flex-wrap items-center justify-start gap-3"
-            >
-              <MotionLink
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
-                whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-                to="/contact"
-                className="button-primary text-sm uppercase tracking-wide"
-                onClick={handlePrimaryCtaClick}
-              >
-                {t.primaryCta} <ArrowRight size={18} />
-              </MotionLink>
-              <Link
-                to="/measurement"
-                className="button-secondary text-sm"
-                onClick={handleSecondaryCtaClick}
-              >
-                {t.secondaryCta}
-              </Link>
-            </motion.div>
+            <div className="w-full max-w-xl rounded-2xl border border-neutral-200/80 bg-white/90 p-5 shadow-[0_16px_36px_rgba(15,23,42,0.14)] backdrop-blur">
+              <p className="text-sm font-semibold text-neutral-900">Gratis CRO-tips direct in je inbox:</p>
+              <form className="mt-4 space-y-3" onSubmit={(event) => event.preventDefault()}>
+                <label className="block space-y-2 text-sm font-semibold text-neutral-800">
+                  <span className="sr-only">E-mailadres</span>
+                  <div className="relative flex items-center rounded-xl border border-neutral-200 bg-white px-3 py-2.5 shadow-sm">
+                    <Mail size={18} className="text-neutral-500" aria-hidden />
+                    <input
+                      type="email"
+                      placeholder="je@email.nl"
+                      className="ml-3 w-full border-0 bg-transparent text-base text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
+                    />
+                  </div>
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  <MotionLink
+                    whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
+                    whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FFD447] px-5 py-3 text-sm font-semibold text-neutral-900 shadow-md transition hover:shadow-lg"
+                    onClick={handlePrimaryCtaClick}
+                  >
+                    Meld je aan!
+                    <ArrowRight size={18} aria-hidden />
+                  </MotionLink>
+                </div>
+                <ul className="space-y-2 pt-1 text-sm text-neutral-700">
+                  {["5.000+ mensen ontvangen mijn CRO tips", "Max één e-mail per maand"].map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <CheckCircle size={18} className="mt-0.5 text-green-600" aria-hidden />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </form>
+            </div>
 
             <div className="pb-4" aria-hidden />
           </div>
