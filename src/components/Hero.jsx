@@ -35,10 +35,7 @@ export default function Hero() {
   }, [rotatingPhrases, shouldReduceMotion]);
 
   const activePhrase = rotatingPhrases[phraseIndex] ?? "";
-  const croTipsBenefits = [
-    "5.000+ mensen ontvangen mijn CRO tips",
-    "Max één e-mail per maand",
-  ];
+  const croTipsBenefits = ["Max één e-mail per maand"];
 
   return (
     <section
@@ -142,7 +139,7 @@ export default function Hero() {
               initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
-              className="w-full max-w-2xl rounded-2xl border border-neutral-200/80 bg-white/90 p-5 shadow-sm backdrop-blur"
+              className="w-full max-w-2xl"
             >
               <div className="flex flex-wrap items-center gap-3 sm:items-start">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
@@ -154,12 +151,13 @@ export default function Hero() {
               </div>
               <form
                 className="mt-4 space-y-4"
-                onSubmit={(event) => event.preventDefault()}
+                action="https://formspree.io/f/xaqnjwkv"
+                method="POST"
               >
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <input
                     type="email"
-                    name="hero-email"
+                    name="email"
                     placeholder="je@email.nl"
                     className="w-full flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   />
