@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useForm, ValidationError } from "@formspree/react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
@@ -15,7 +14,6 @@ export default function QuickScanRequest() {
   const [showEmail, setShowEmail] = useState(false);
   const [errors, setErrors] = useState({});
   const [pagePath, setPagePath] = useState("/");
-  const [state, handleSubmit] = useForm("xpqwdpag");
   const emailRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -54,10 +52,7 @@ export default function QuickScanRequest() {
     return "";
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    if (state.submitting) return;
-
+  const handleFormSubmit = (event) => {
     const nextErrors = {};
     if (!validateUrl(url)) {
       nextErrors.url = copy.errors.urlInvalid;
@@ -68,6 +63,7 @@ export default function QuickScanRequest() {
       if (Object.keys(nextErrors).length === 0) {
         setShowEmail(true);
       }
+      event.preventDefault();
       return;
     }
 
@@ -77,12 +73,12 @@ export default function QuickScanRequest() {
     }
 
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
-
-    await handleSubmit(event);
+    if (Object.keys(nextErrors).length > 0) {
+      event.preventDefault();
+    }
   };
 
-  const isDisabled = state.submitting || state.succeeded;
+  const isDisabled = false;
 
   return (
     <section className="relative w-full px-4 py-16 sm:px-6 lg:px-8">
@@ -98,125 +94,109 @@ export default function QuickScanRequest() {
             <p className="mt-2 max-w-2xl text-base text-slate-600">{copy.description}</p>
           </div>
         </div>
+        <form
+          name="quickscan"
+          className="flex flex-col gap-4"
+          onSubmit={handleFormSubmit}
+          action="https://formspree.io/f/xpqwdpag"
+          method="POST"
+        >
+          <input type="hidden" name="source" value="quickscan" />
+          <input type="hidden" name="page_path" value={pagePath} />
+          <p className="hidden">
+            <label>
+              Don’t fill this out if you’re human: <input name="bot-field" onChange={() => {}} />
+            </label>
+          </p>
 
-        {state.succeeded ? (
-          <div className="rounded-2xl border border-emerald-100 bg-emerald-50/80 p-6 text-slate-800">
-            <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">{copy.successTitle}</p>
-            <p className="mt-2 text-base text-slate-700">{copy.successBody}</p>
-          </div>
-        ) : (
-          <form
-            name="quickscan"
-            className="flex flex-col gap-4"
-            onSubmit={handleFormSubmit}
-          >
-            <input type="hidden" name="source" value="quickscan" />
-            <input type="hidden" name="page_path" value={pagePath} />
-            <p className="hidden">
-              <label>
-                Don’t fill this out if you’re human: <input name="bot-field" onChange={() => {}} />
+          <div className="flex flex-col gap-3 md:flex-row md:items-end">
+            <div className="flex-1">
+              <label htmlFor="quickscan-url" className="text-sm font-medium text-slate-800">
+                {copy.urlLabel}
               </label>
-            </p>
-
-            <div className="flex flex-col gap-3 md:flex-row md:items-end">
-              <div className="flex-1">
-                <label htmlFor="quickscan-url" className="text-sm font-medium text-slate-800">
-                  {copy.urlLabel}
-                </label>
-                <input
-                  id="quickscan-url"
-                  name="page_url"
-                  type="url"
-                  inputMode="url"
-                  autoComplete="url"
-                  placeholder={copy.urlPlaceholder}
-                  value={url}
-                  onChange={(event) => setUrl(event.target.value)}
-                  disabled={isDisabled}
-                  className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white/90 px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
-                  aria-describedby="quickscan-url-helper quickscan-url-error"
-                />
-                <div className="mt-2 flex flex-col gap-1 text-sm">
-                  {errors.url ? (
-                    <p id="quickscan-url-error" className="text-rose-600">
-                      {errors.url}
-                    </p>
-                  ) : null}
-                  <p id="quickscan-url-helper" className="text-slate-500">
-                    {copy.helper}
+              <input
+                id="quickscan-url"
+                name="page_url"
+                type="url"
+                inputMode="url"
+                autoComplete="url"
+                placeholder={copy.urlPlaceholder}
+                value={url}
+                onChange={(event) => setUrl(event.target.value)}
+                disabled={isDisabled}
+                className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white/90 px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
+                aria-describedby="quickscan-url-helper quickscan-url-error"
+              />
+              <div className="mt-2 flex flex-col gap-1 text-sm">
+                {errors.url ? (
+                  <p id="quickscan-url-error" className="text-rose-600">
+                    {errors.url}
                   </p>
-                </div>
+                ) : null}
+                <p id="quickscan-url-helper" className="text-slate-500">
+                  {copy.helper}
+                </p>
               </div>
-
-              {!showEmail && (
-                <div className="md:self-end">
-                  <button type="submit" className="button-primary w-full justify-center" disabled={isDisabled}>
-                    {copy.primaryCta}
-                  </button>
-                </div>
-              )}
             </div>
 
-            <AnimatePresence initial={false}>
-              {showEmail && (
-                <motion.div
-                  initial={shouldReduceMotion ? false : { opacity: 0, height: 0, y: -6 }}
-                  animate={shouldReduceMotion ? { opacity: 1, height: "auto" } : { opacity: 1, height: "auto", y: 0 }}
-                  exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0, y: -6 }}
-                  transition={shouldReduceMotion ? undefined : { duration: 0.3, ease: "easeOut" }}
-                  className="rounded-2xl border border-slate-200/80 bg-surface-light/70 px-4 py-4 shadow-sm"
-                >
-                  <div className="flex flex-col gap-3 md:flex-row md:items-end">
-                    <div className="flex-1">
-                      <label htmlFor="quickscan-email" className="text-sm font-medium text-slate-800">
-                        {copy.emailLabel}
-                      </label>
-                      <input
-                        ref={emailRef}
-                        id="quickscan-email"
-                        name="email"
-                        type="email"
-                        inputMode="email"
-                        autoComplete="email"
-                        placeholder={copy.emailPlaceholder}
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        disabled={isDisabled}
-                        className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
-                        aria-describedby="quickscan-email-error"
-                      />
-                      {errors.email ? (
-                        <p id="quickscan-email-error" className="mt-2 text-sm text-rose-600">
-                          {errors.email}
-                        </p>
-                      ) : null}
-                    </div>
+            {!showEmail && (
+              <div className="md:self-end">
+                <button type="submit" className="button-primary w-full justify-center" disabled={isDisabled}>
+                  {copy.primaryCta}
+                </button>
+              </div>
+            )}
+          </div>
 
-                    <div className="md:self-end">
-                      <button
-                        type="submit"
-                        className="button-primary w-full justify-center"
-                        disabled={isDisabled}
-                      >
-                        {state.submitting ? copy.loadingText : copy.submitCta}
-                      </button>
-                    </div>
+          <AnimatePresence initial={false}>
+            {showEmail && (
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, height: 0, y: -6 }}
+                animate={shouldReduceMotion ? { opacity: 1, height: "auto" } : { opacity: 1, height: "auto", y: 0 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0, y: -6 }}
+                transition={shouldReduceMotion ? undefined : { duration: 0.3, ease: "easeOut" }}
+                className="rounded-2xl border border-slate-200/80 bg-surface-light/70 px-4 py-4 shadow-sm"
+              >
+                <div className="flex flex-col gap-3 md:flex-row md:items-end">
+                  <div className="flex-1">
+                    <label htmlFor="quickscan-email" className="text-sm font-medium text-slate-800">
+                      {copy.emailLabel}
+                    </label>
+                    <input
+                      ref={emailRef}
+                      id="quickscan-email"
+                      name="email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      placeholder={copy.emailPlaceholder}
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      disabled={isDisabled}
+                      className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
+                      aria-describedby="quickscan-email-error"
+                    />
+                    {errors.email ? (
+                      <p id="quickscan-email-error" className="mt-2 text-sm text-rose-600">
+                        {errors.email}
+                      </p>
+                    ) : null}
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <ValidationError prefix="Form" field="form" errors={state.errors} className="hidden" />
-          </form>
-        )}
 
-        <div className="mt-8" role="status" aria-live="polite">
-          {state.errors && state.errors.length > 0 && (
-            <div className="rounded-2xl border border-rose-100 bg-rose-50/80 p-6 text-slate-800">
-              <p className="text-sm font-semibold uppercase tracking-wide text-rose-700">{copy.errorTitle}</p>
-              <p className="mt-2 text-base text-slate-700">{copy.errorMessage}</p>
-            </div>
-          )}
-        </div>
+                  <div className="md:self-end">
+                    <button
+                      type="submit"
+                      className="button-primary w-full justify-center"
+                      disabled={isDisabled}
+                    >
+                      {copy.submitCta}
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </form>
       </div>
     </section>
   );
