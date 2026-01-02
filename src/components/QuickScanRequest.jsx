@@ -6,11 +6,6 @@ import { translations } from "../i18n/content";
 
 const blockedDomains = ["gmail.com", "outlook.com", "hotmail.com", "yahoo.com"];
 
-const encode = (data) =>
-  Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&");
-
 export default function QuickScanRequest() {
   const { language } = useLanguage();
   const copy = translations[language].aiDemo;
@@ -86,12 +81,14 @@ export default function QuickScanRequest() {
     setStatus("loading");
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("https://formspree.io/f/xpqwdpag", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "quickscan",
-          url,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          page_url: url,
           email,
           source: "quickscan",
           page_path: pagePath,
@@ -107,6 +104,13 @@ export default function QuickScanRequest() {
   };
 
   const isDisabled = status === "loading" || status === "success";
+  const urlDescribedBy = [
+    copy.helper ? "quickscan-url-helper" : null,
+    errors.url ? "quickscan-url-error" : null,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
 
   return (
     <section className="relative w-full px-4 py-16 sm:px-6 lg:px-8">
@@ -126,19 +130,12 @@ export default function QuickScanRequest() {
         <form
           name="quickscan"
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
+          action="https://formspree.io/f/xpqwdpag"
           className="flex flex-col gap-4"
           onSubmit={handleSubmit}
         >
-          <input type="hidden" name="form-name" value="quickscan" />
           <input type="hidden" name="source" value="quickscan" />
           <input type="hidden" name="page_path" value={pagePath} />
-          <p className="hidden">
-            <label>
-              Don’t fill this out if you’re human: <input name="bot-field" onChange={() => {}} />
-            </label>
-          </p>
 
           <div className="flex flex-col gap-3 md:flex-row md:items-end">
             <div className="flex-1">
@@ -147,7 +144,7 @@ export default function QuickScanRequest() {
               </label>
               <input
                 id="quickscan-url"
-                name="url"
+                name="page_url"
                 type="url"
                 inputMode="url"
                 autoComplete="url"
@@ -156,7 +153,7 @@ export default function QuickScanRequest() {
                 onChange={(event) => setUrl(event.target.value)}
                 disabled={isDisabled}
                 className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white/90 px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
-                aria-describedby="quickscan-url-helper quickscan-url-error"
+                aria-describedby={urlDescribedBy || undefined}
               />
               <div className="mt-2 flex flex-col gap-1 text-sm">
                 {errors.url ? (
@@ -164,9 +161,11 @@ export default function QuickScanRequest() {
                     {errors.url}
                   </p>
                 ) : null}
-                <p id="quickscan-url-helper" className="text-slate-500">
-                  {copy.helper}
-                </p>
+                {copy.helper ? (
+                  <p id="quickscan-url-helper" className="text-slate-500">
+                    {copy.helper}
+                  </p>
+                ) : null}
               </div>
             </div>
 
