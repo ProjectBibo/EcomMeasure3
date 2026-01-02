@@ -107,15 +107,15 @@ export const translations = {
       scrollLabel: "Scroll verder",
     },
     problemSolution: {
-      headline: "Veel data, weinig richting",
+      headline: "Geen grip op wat er echt gebeurt",
       pains: [
-        "Dashboards laten prestaties zien, maar niet welke stap prioriteit heeft.",
-        "Kanalen meten anders, waardoor besluiten op onderbuikgevoel worden genomen.",
-        "Optimalisaties starten laat omdat niemand eigenaar is van de volgende stap.",
+        "Soms is er nog geen goede meting ingericht, waardoor gedrag en conversies nauwelijks inzichtelijk zijn.",
+        "Soms is er wél data, maar is onduidelijk wat klopt en wat niet.",
+        "En vaak is er geen helder antwoord op de vraag: waar moeten we nu verbeteren?",
       ],
       solution:
-        "EcomMeasure vertaalt je bestaande data naar actie. We controleren de metingen, verbinden kanalen en maken scherpe dashboards die laten zien welke verbeteringen nu het meeste opleveren.",
-      ctaHelper: "Zelfde CTA als in de hero, geen extra actie.",
+        "EcomMeasure helpt e-commerce teams om grip te krijgen op hun data — vanaf de basis.
+Ik richt metingen correct in, controleer bestaande setups en verbind data uit verschillende kanalen. Zo wordt duidelijk wat er gebeurt, waar gebruikers afhaken en welke verbeteringen prioriteit hebben.",
     },
     usp: {
       badge: "DIENSTEN",
