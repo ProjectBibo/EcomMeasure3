@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
@@ -46,87 +47,101 @@ export default function Contact() {
     <section
       id="contact"
       data-snap-section
-      className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 py-20 sm:py-24"
+      className="relative overflow-hidden bg-[#e8f1ff] py-20 sm:py-24"
     >
-      <div className="grain-overlay" aria-hidden />
-      <div className="glow-orb glow-orb--primary left-0 top-0 h-64 w-64 opacity-40" aria-hidden />
-
-      <div className="relative site-container grid gap-10 lg:grid-cols-2 lg:items-start">
+      <div className="relative site-container space-y-10">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-          className="space-y-4"
+          className="space-y-4 text-left"
         >
           <span className="pill-badge shadow-sm">{t.badge}</span>
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">{t.heading}</h2>
-          <p className="text-lg text-neutral-700">{t.intro}</p>
+          <h2 className="text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">{t.heading}</h2>
+          <p className="text-lg text-neutral-800">{t.intro}</p>
         </motion.div>
 
-        <div className="grid gap-8 lg:col-span-2 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <motion.form
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.5, delay: 0.1 }}
-            className="rounded-3xl border border-neutral-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
+            className="rounded-3xl bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.14)]"
             action="https://formspree.io/f/mpqzpevp"
             method="POST"
             onSubmit={handleSubmit}
           >
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="space-y-2 text-sm font-semibold text-neutral-800">
+            <div className="flex items-center gap-3 text-neutral-900">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-yellow text-neutral-900">
+                <Mail size={22} aria-hidden />
+              </div>
+              <p className="text-xl font-semibold">Plan een kennismaking</p>
+            </div>
+
+            <div className="mt-6 space-y-5">
+              <label className="block space-y-2 text-sm font-semibold text-neutral-800">
                 <span>{language === "nl" ? "Naam" : "Name"}</span>
                 <input
                   type="text"
                   name="name"
-                  className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
                   placeholder={language === "nl" ? "Jouw naam" : "Your name"}
                   required
                 />
               </label>
-              <label className="space-y-2 text-sm font-semibold text-neutral-800">
+
+              <label className="block space-y-2 text-sm font-semibold text-neutral-800">
                 <span>{language === "nl" ? "E-mailadres" : "Email"}</span>
                 <input
                   type="email"
                   name="email"
-                  className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
                   placeholder="you@example.com"
                   required
                 />
               </label>
-            </div>
-            <label className="mt-4 block space-y-2 text-sm font-semibold text-neutral-800">
-              <span>{language === "nl" ? "Project of vraag (optioneel)" : "Project or question (optional)"}</span>
-              <textarea
-                name="message"
-                rows="4"
-                className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
-                placeholder={language === "nl" ? "Vertel kort over je website of vraag" : "Share a bit about your site or question"}
-              />
-            </label>
-            <label className="mt-4 block space-y-2 text-sm font-semibold text-neutral-800">
-              <span>{language === "nl" ? "Indicatief budget" : "Estimated budget"}</span>
-              <select
-                name="budget"
-                className="w-full rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/40"
-                defaultValue=""
+
+              <label className="block space-y-2 text-sm font-semibold text-neutral-800">
+                <span>{language === "nl" ? "Project of vraag (optioneel)" : "Project or question (optional)"}</span>
+                <textarea
+                  name="message"
+                  rows="5"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
+                  placeholder={language === "nl" ? "Vertel kort over je website of vraag" : "Share a bit about your site or question"}
+                />
+              </label>
+
+              <label className="block space-y-2 text-sm font-semibold text-neutral-800">
+                <span>{language === "nl" ? "Indicatief budget" : "Estimated budget"}</span>
+                <select
+                  name="budget"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/15"
+                  defaultValue=""
+                >
+                  {budgetOptions.map((option) => (
+                    <option key={option.value || "placeholder"} value={option.value} disabled={option.value === ""}>
+                      {option.label[language]}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-neutral-300 bg-neutral-100/80 px-4 py-3 text-sm font-semibold text-neutral-700">
+                <div className="h-10 w-10 rounded bg-neutral-300" aria-hidden />
+                <span>reCAPTCHA</span>
+              </div>
+
+              <button
+                type="submit"
+                id="cta-primary"
+                className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-yellow px-6 py-3 text-base font-semibold text-neutral-900 shadow-[0_12px_34px_rgba(0,0,0,0.12)] transition hover:bg-brand-yellow-dark"
               >
-                {budgetOptions.map((option) => (
-                  <option key={option.value || "placeholder"} value={option.value} disabled={option.value === ""}>
-                    {option.label[language]}
-                  </option>
-                ))}
-              </select>
-            </label>
-           <button
-  type="submit"
-  id="cta-primary"
-  className="button-primary mt-6 w-full justify-center"
->
-              {primaryCta}
-            </button>
+                {primaryCta}
+                <ArrowRight size={18} aria-hidden />
+              </button>
+            </div>
             {status === "success" && (
               <p className="mt-4 text-sm text-neutral-800">Bedankt, we nemen contact met je op.</p>
             )}
@@ -137,21 +152,27 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.55, delay: 0.12 }}
-            className="relative h-full rounded-3xl border border-neutral-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
+            className="flex flex-col items-center gap-6 rounded-3xl bg-white/70 p-8 text-left shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur lg:items-start"
           >
-            <div className="space-y-4">
-              {checklist.slice(0, 4).map((item) => (
-                <div key={item.title} className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-3 w-3 flex-shrink-0 rounded-full bg-brand-blue" aria-hidden />
+            <div className="flex h-48 w-48 items-center justify-center rounded-full bg-[#c8dcff] shadow-inner">
+              <img
+                src="/Ik.svg"
+                alt="Portret van [naam], oprichter van EcomMeasure"
+                className="h-40 w-40 rounded-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="w-full space-y-4">
+              {checklist.slice(0, 3).map((item) => (
+                <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm">
+                  <CheckCircle2 size={20} className="mt-1 text-green-600" aria-hidden />
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-neutral-900">{item.title}</p>
-                    <p className="text-sm text-neutral-600">{item.description}</p>
+                    <p className="text-base font-semibold text-neutral-900">{item.title}</p>
+                    <p className="text-sm text-neutral-700">{item.description}</p>
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="absolute bottom-6 right-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-teal text-white shadow-lg ring-8 ring-white/70">
-              <span className="text-xl font-bold">R</span>
             </div>
           </motion.div>
         </div>
