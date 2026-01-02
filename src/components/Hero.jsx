@@ -1,16 +1,10 @@
 // src/components/Hero.jsx
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
-import useViewTransitionNavigate, {
-  createViewTransitionClickHandler,
-} from "../hooks/useViewTransitionNavigate";
 import { AnimatedParagraph } from "./ExpressiveText";
-
-const MotionLink = motion(Link);
 
 const gradientHeadlineClass = "bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent";
 
@@ -19,15 +13,6 @@ export default function Hero() {
   const { language } = useLanguage();
   const t = translations[language].hero;
   const [phraseIndex, setPhraseIndex] = useState(0);
-  const navigateWithTransition = useViewTransitionNavigate();
-  const handlePrimaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/contact"),
-    [navigateWithTransition]
-  );
-  const handleSecondaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/measurement"),
-    [navigateWithTransition]
-  );
   const phrasesFromLocale = t.rotatingPhrases ?? [];
   const rotatingPhrases = phrasesFromLocale.length > 0 ? phrasesFromLocale : [""];
   const leadWords = useMemo(() => t.titleLead.trim().split(/\s+/), [t.titleLead]);
@@ -71,7 +56,7 @@ export default function Hero() {
               transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
               className="pill-badge shadow-sm"
             >
-              <Sparkles size={14} /> {t.badge}
+              {t.badge}
             </motion.span>
 
             <motion.h1
@@ -153,24 +138,55 @@ export default function Hero() {
               initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
-              className="flex flex-wrap items-center justify-start gap-3"
+              className="w-full max-w-xl"
             >
-              <MotionLink
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
-                whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-                to="/contact"
-                className="button-primary text-sm uppercase tracking-wide"
-                onClick={handlePrimaryCtaClick}
-              >
-                {t.primaryCta} <ArrowRight size={18} />
-              </MotionLink>
-              <Link
-                to="/measurement"
-                className="button-secondary text-sm"
-                onClick={handleSecondaryCtaClick}
-              >
-                {t.secondaryCta}
-              </Link>
+              <div className="rounded-2xl bg-brand-yellow p-5 shadow-lg sm:p-6">
+                <div className="flex items-center gap-3 text-base font-semibold text-neutral-900 sm:text-lg">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-brand-blue">
+                    <Mail size={18} aria-hidden />
+                  </span>
+                  <span>Gratis CRO-tips direct in je inbox:</span>
+                </div>
+                <form className="mt-4 space-y-4" onSubmit={(event) => event.preventDefault()}>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                    <label className="sr-only" htmlFor="hero-email">
+                      E-mailadres
+                    </label>
+                    <div className="relative flex-1">
+                      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-brand-blue" aria-hidden>
+                        <Mail size={16} />
+                      </span>
+                      <input
+                        id="hero-email"
+                        type="email"
+                        inputMode="email"
+                        placeholder="je@email.nl"
+                        className="w-full rounded-xl border border-neutral-200/70 bg-white px-4 py-3 pl-10 text-base text-neutral-900 placeholder:text-neutral-500 shadow-sm focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <motion.button
+                      whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
+                      whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+                      type="submit"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-yellow-dark px-4 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-md transition hover:bg-brand-yellow focus:outline-none sm:px-6"
+                    >
+                      Meld je aan!
+                      <ArrowRight size={16} aria-hidden />
+                    </motion.button>
+                  </div>
+                  <ul className="space-y-2 text-sm font-semibold text-neutral-900">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-emerald-600" aria-hidden />
+                      5.000+ mensen ontvangen mijn CRO tips
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-emerald-600" aria-hidden />
+                      Max één e-mail per maand
+                    </li>
+                  </ul>
+                </form>
+              </div>
             </motion.div>
 
             <div className="pb-4" aria-hidden />
