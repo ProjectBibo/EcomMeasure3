@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -18,18 +18,88 @@ export default function Contact() {
   const t = translations[language].contact;
   const primaryCta = translations[language].header.cta;
   const [status, setStatus] = useState("idle");
+  const [captchaToken, setCaptchaToken] = useState("");
   const navigate = useNavigate();
+  const recaptchaContainerRef = useRef(null);
+  const recaptchaWidgetId = useRef(null);
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
   const checklistHighlights = [
     "Geheel vrijblijvende kennismaking",
     "Krijg gratis conversie tips",
     "Ontdek waar ik je mee kan helpen",
   ];
   const submitLabel = language === "nl" ? "Plan vrijblijvend gesprek" : primaryCta;
+  const headlineText =
+    language === "nl"
+      ? "Ontdek hoe ik je kan helpen tijdens een gratis adviesgesprek"
+      : t.heading;
+  const recaptchaSiteKey =
+    import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+
+  useEffect(() => {
+    if (window.grecaptcha) {
+      setRecaptchaReady(true);
+      return undefined;
+    }
+
+    const existingScript = document.querySelector(
+      'script[src="https://www.google.com/recaptcha/api.js?render=explicit"]',
+    );
+
+    const onLoad = () => setRecaptchaReady(true);
+
+    if (existingScript) {
+      existingScript.addEventListener("load", onLoad);
+      return () => existingScript.removeEventListener("load", onLoad);
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.onload = onLoad;
+    document.body.appendChild(script);
+
+    return () => {
+      script.removeEventListener("load", onLoad);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      recaptchaReady &&
+      recaptchaContainerRef.current &&
+      window.grecaptcha &&
+      recaptchaWidgetId.current === null
+    ) {
+      recaptchaWidgetId.current = window.grecaptcha.render(recaptchaContainerRef.current, {
+        sitekey: recaptchaSiteKey,
+        callback: (token) => {
+          setCaptchaToken(token || "");
+          setStatus("idle");
+        },
+        "expired-callback": () => {
+          setCaptchaToken("");
+        },
+        "error-callback": () => {
+          setStatus("captcha-error");
+          setCaptchaToken("");
+        },
+      });
+    }
+  }, [recaptchaReady, recaptchaSiteKey]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    if (!captchaToken) {
+      setStatus("captcha-error");
+      return;
+    }
+
+    formData.append("g-recaptcha-response", captchaToken);
 
     try {
       const response = await fetch("https://formspree.io/f/mpqzpevp", {
@@ -41,6 +111,10 @@ export default function Contact() {
       if (response.ok) {
         form.reset();
         setStatus("success");
+        setCaptchaToken("");
+        if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+          window.grecaptcha.reset(recaptchaWidgetId.current);
+        }
         navigate("/confirmation");
       }
     } catch (error) {
@@ -54,67 +128,67 @@ export default function Contact() {
       data-snap-section
       className="relative overflow-hidden bg-[#e7f0fb] py-20 sm:py-24"
     >
-      <div className="relative site-container space-y-10">
+      <div className="relative site-container space-y-12">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-          className="space-y-3"
+          className="text-center"
         >
-          <span className="pill-badge bg-white/80 text-brand-blue shadow-sm">{t.badge}</span>
-          <h2 className="text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
-            {t.heading}
+          <h2 className="text-3xl font-extrabold leading-snug tracking-tight text-neutral-900 sm:text-4xl">
+            {headlineText}
           </h2>
-          <p className="max-w-3xl text-lg text-neutral-800">{t.intro}</p>
         </motion.div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="flex flex-col items-center gap-14 lg:gap-16">
           <motion.form
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.5, delay: 0.1 }}
-            className="rounded-[28px] border border-[#d8e2f1] bg-white p-7 shadow-[0_22px_48px_rgba(15,23,42,0.12)] sm:p-8"
+            className="flex w-full max-w-[560px] flex-col items-center gap-8"
             action="https://formspree.io/f/mpqzpevp"
             method="POST"
             onSubmit={handleSubmit}
           >
-            <div className="space-y-5">
-              <label className="block space-y-2 text-sm font-semibold text-neutral-900">
-                <span>{language === "nl" ? "Naam" : "Name"}</span>
+            <div className="flex w-full flex-col items-center gap-7">
+              <label className="block text-sm font-semibold text-neutral-900">
+                <span className="sr-only">{language === "nl" ? "Naam" : "Name"}</span>
                 <input
                   type="text"
                   name="name"
-                  className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-4 text-base text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   placeholder={language === "nl" ? "Jouw naam" : "Your name"}
                   required
                 />
               </label>
-              <label className="block space-y-2 text-sm font-semibold text-neutral-900">
-                <span>{language === "nl" ? "E-mailadres" : "Email"}</span>
+              <label className="block text-sm font-semibold text-neutral-900">
+                <span className="sr-only">{language === "nl" ? "E-mailadres" : "Email"}</span>
                 <input
                   type="email"
                   name="email"
-                  className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-4 text-base text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   placeholder="you@example.com"
                   required
                 />
               </label>
-              <label className="block space-y-2 text-sm font-semibold text-neutral-900">
-                <span>{language === "nl" ? "Project of vraag (optioneel)" : "Project or question (optional)"}</span>
+              <label className="block text-sm font-semibold text-neutral-900">
+                <span className="sr-only">
+                  {language === "nl" ? "Project of vraag (optioneel)" : "Project or question (optional)"}
+                </span>
                 <textarea
                   name="message"
-                  rows="4"
-                  className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-4 text-base text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  rows="3"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-base text-neutral-900 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   placeholder={language === "nl" ? "Vertel kort over je website of vraag" : "Share a bit about your site or question"}
                 />
               </label>
-              <label className="block space-y-2 text-sm font-semibold text-neutral-900">
-                <span>{language === "nl" ? "Indicatief budget" : "Estimated budget"}</span>
+              <label className="block text-sm font-semibold text-neutral-900">
+                <span className="sr-only">{language === "nl" ? "Indicatief budget" : "Estimated budget"}</span>
                 <select
                   name="budget"
-                  className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-4 text-base text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  className="w-[480px] max-w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-base text-neutral-800 outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
                   defaultValue=""
                 >
                   {budgetOptions.map((option) => (
@@ -124,16 +198,21 @@ export default function Contact() {
                   ))}
                 </select>
               </label>
-              <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm font-medium text-neutral-600">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-500">
-                  <span className="text-xs font-bold">re</span>
-                </div>
-                <span>reCAPTCHA</span>
+              <div className="flex flex-col gap-3 pt-2">
+                <div ref={recaptchaContainerRef} className="g-recaptcha" aria-label="reCAPTCHA" />
+                {status === "captcha-error" && (
+                  <p className="text-sm text-red-600">
+                    {language === "nl"
+                      ? "Bevestig de reCAPTCHA voordat je verzendt."
+                      : "Please complete the reCAPTCHA before submitting."}
+                  </p>
+                )}
               </div>
+              <div className="pt-6" />
               <button
                 type="submit"
                 id="cta-primary"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-[#e2b200] bg-[#ffcc02] px-6 py-4 text-base font-semibold text-neutral-900 shadow-[0_14px_28px_rgba(255,204,2,0.32)] transition hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f5c400]"
+                className="inline-flex min-w-[320px] max-w-[480px] items-center justify-center gap-2 rounded-xl border border-[#e2b200] bg-[#ffcc02] px-7 py-4 text-lg font-semibold text-neutral-900 transition hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f5c400]"
               >
                 {submitLabel}
                 <ArrowRight size={18} aria-hidden />
@@ -149,26 +228,16 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.55, delay: 0.12 }}
-            className="flex flex-col items-center gap-6 lg:pt-4"
+            className="flex w-full max-w-[480px] flex-col items-start gap-6"
           >
-            <div className="flex h-48 w-48 items-center justify-center rounded-full bg-[#c9ddff] shadow-lg ring-8 ring-[#e7f0fb]">
-              <img
-                src="/Ik.svg"
-                alt="Portret van de consultant"
-                className="h-36 w-36 object-contain drop-shadow"
-                loading="lazy"
-              />
-            </div>
-            <div className="w-full max-w-md space-y-3">
-              {checklistHighlights.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
-                  <span className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                    <CheckCircle2 size={18} aria-hidden />
-                  </span>
-                  <p className="text-base font-semibold text-neutral-900">{item}</p>
-                </div>
-              ))}
-            </div>
+            {checklistHighlights.map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="mt-1 text-emerald-600">
+                  <CheckCircle2 size={20} aria-hidden />
+                </span>
+                <p className="text-base font-semibold text-neutral-900">{item}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
