@@ -113,9 +113,7 @@ export const translations = {
         "Soms is er wél data, maar is onduidelijk wat klopt en wat niet.",
         "En vaak is er geen helder antwoord op de vraag: waar moeten we nu verbeteren?",
       ],
-      solution:
-        "EcomMeasure helpt e-commerce teams om grip te krijgen op hun data — vanaf de basis.
-Ik richt metingen correct in, controleer bestaande setups en verbind data uit verschillende kanalen. Zo wordt duidelijk wat er gebeurt, waar gebruikers afhaken en welke verbeteringen prioriteit hebben.",
+      solution: `EcomMeasure helpt e-commerce teams om grip te krijgen op hun data — vanaf de basis.\nIk richt metingen correct in, controleer bestaande setups en verbind data uit verschillende kanalen. Zo wordt duidelijk wat er gebeurt, waar gebruikers afhaken en welke verbeteringen prioriteit hebben.`,
     },
     usp: {
       badge: "DIENSTEN",
