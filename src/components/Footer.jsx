@@ -13,7 +13,12 @@ export default function Footer() {
   const t = translations[language].footer;
   const navigateWithTransition = useViewTransitionNavigate();
 
-  const columns = [t.columns.services, t.columns.knowledge, t.columns.company];
+  const columns = [
+    t.columns.services,
+    t.columns.popular,
+    t.columns.tools,
+    t.columns.company,
+  ];
 
   return (
     <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft border-t border-neutral-200 py-14">
@@ -26,7 +31,7 @@ export default function Footer() {
         <div className="story-stripe" aria-hidden />
       </div>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-5">
           <div className="max-w-sm space-y-3">
             <h4 className="font-semibold text-brand-blue">EcomMeasure</h4>
             <p className="text-neutral-600 text-sm leading-relaxed">{t.intro}</p>

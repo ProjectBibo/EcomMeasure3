@@ -398,11 +398,18 @@ export const translations = {
             { label: "CRO", href: "/cro" },
           ],
         },
-        knowledge: {
-          title: "Kennis",
+        popular: {
+          title: "Populaire artikelen",
           items: [
-            { label: "Blog", href: "/blog" },
-            { label: "Tools", href: "/tools" },
+            { label: "Wat is conversie-optimalisatie?", href: "/blog/wat-is-conversie-optimalisatie" },
+            { label: "Psychologische prijzen: 30 principes", href: "/blog/psychologische-prijzen-30-principes" },
+          ],
+        },
+        tools: {
+          title: "Tools",
+          items: [
+            { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
+            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
           ],
         },
         company: {
@@ -823,11 +830,24 @@ export const translations = {
             { label: "CRO", href: "/cro" },
           ],
         },
-        knowledge: {
-          title: "Knowledge",
+        popular: {
+          title: "Popular articles",
           items: [
-            { label: "Blog", href: "/blog" },
-            { label: "Tools", href: "/tools" },
+            {
+              label: "What is conversion optimisation?",
+              href: "/blog/wat-is-conversie-optimalisatie",
+            },
+            {
+              label: "Psychological pricing: 30 principles",
+              href: "/blog/psychologische-prijzen-30-principes",
+            },
+          ],
+        },
+        tools: {
+          title: "Tools",
+          items: [
+            { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
+            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
           ],
         },
         company: {
