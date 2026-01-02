@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 
@@ -17,6 +18,7 @@ export default function Contact() {
   const primaryCta = translations[language].header.cta;
   const checklist = t.options || [];
   const [status, setStatus] = useState("idle");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,6 +35,7 @@ export default function Contact() {
       if (response.ok) {
         form.reset();
         setStatus("success");
+        navigate("/confirmation");
       }
     } catch (error) {
       console.error("Form submission failed", error);

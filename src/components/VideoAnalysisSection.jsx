@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function VideoAnalysisSection({ copy }) {
   const [formValues, setFormValues] = useState({ website: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
+  const navigate = useNavigate();
 
   const placeholders = useMemo(
     () => ({
@@ -50,6 +52,7 @@ export default function VideoAnalysisSection({ copy }) {
         setStatus("success");
         setFormValues({ website: "", email: "", message: "" });
         formElement.reset();
+        navigate("/confirmation");
       } else {
         setStatus("idle");
       }
