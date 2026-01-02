@@ -4,16 +4,14 @@ import { Sparkles } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 
-const blockedDomains = ["gmail.com", "outlook.com", "hotmail.com", "yahoo.com"];
-
 export default function QuickScanRequest() {
   const { language } = useLanguage();
   const copy = translations[language].aiDemo;
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [showEmail, setShowEmail] = useState(false);
-  const [errors, setErrors] = useState({});
   const [pagePath, setPagePath] = useState("/");
+  const urlRef = useRef(null);
   const emailRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -29,52 +27,14 @@ export default function QuickScanRequest() {
     }
   }, [showEmail]);
 
-  const validateUrl = (value) => {
-    try {
-      const parsed = new URL(value);
-      return ["http:", "https:"].includes(parsed.protocol);
-    } catch (error) {
-      return false;
-    }
-  };
-
-  const validateEmail = (value) => {
-    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/i;
-    if (!emailPattern.test(value)) {
-      return copy.errors.emailInvalid;
-    }
-
-    const domain = value.split("@")[1]?.toLowerCase() || "";
-    if (blockedDomains.includes(domain)) {
-      return copy.errors.freeEmail;
-    }
-
-    return "";
-  };
-
-  const handleFormSubmit = (event) => {
-    const nextErrors = {};
-    if (!validateUrl(url)) {
-      nextErrors.url = copy.errors.urlInvalid;
-    }
-
-    if (!showEmail) {
-      setErrors(nextErrors);
-      if (Object.keys(nextErrors).length === 0) {
-        setShowEmail(true);
-      }
-      event.preventDefault();
-      return;
-    }
-
-    const emailError = validateEmail(email);
-    if (emailError) {
-      nextErrors.email = emailError;
-    }
-
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      event.preventDefault();
+  const handleRevealEmail = () => {
+    if (urlRef.current && urlRef.current.reportValidity()) {
+      setShowEmail(true);
+      queueMicrotask(() => {
+        if (emailRef.current) {
+          emailRef.current.focus();
+        }
+      });
     }
   };
 
@@ -97,7 +57,6 @@ export default function QuickScanRequest() {
         <form
           name="quickscan"
           className="flex flex-col gap-4"
-          onSubmit={handleFormSubmit}
           action="https://formspree.io/f/xpqwdpag"
           method="POST"
         >
@@ -122,17 +81,14 @@ export default function QuickScanRequest() {
                 autoComplete="url"
                 placeholder={copy.urlPlaceholder}
                 value={url}
+                ref={urlRef}
                 onChange={(event) => setUrl(event.target.value)}
                 disabled={isDisabled}
+                required
                 className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white/90 px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
                 aria-describedby="quickscan-url-helper quickscan-url-error"
               />
               <div className="mt-2 flex flex-col gap-1 text-sm">
-                {errors.url ? (
-                  <p id="quickscan-url-error" className="text-rose-600">
-                    {errors.url}
-                  </p>
-                ) : null}
                 <p id="quickscan-url-helper" className="text-slate-500">
                   {copy.helper}
                 </p>
@@ -141,7 +97,7 @@ export default function QuickScanRequest() {
 
             {!showEmail && (
               <div className="md:self-end">
-                <button type="submit" className="button-primary w-full justify-center" disabled={isDisabled}>
+                <button type="button" className="button-primary w-full justify-center" disabled={isDisabled} onClick={handleRevealEmail}>
                   {copy.primaryCta}
                 </button>
               </div>
@@ -173,14 +129,10 @@ export default function QuickScanRequest() {
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                       disabled={isDisabled}
+                      required
                       className="mt-2 w-full rounded-xl border border-slate-300/70 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/60 disabled:cursor-not-allowed disabled:bg-slate-50"
                       aria-describedby="quickscan-email-error"
                     />
-                    {errors.email ? (
-                      <p id="quickscan-email-error" className="mt-2 text-sm text-rose-600">
-                        {errors.email}
-                      </p>
-                    ) : null}
                   </div>
 
                   <div className="md:self-end">
