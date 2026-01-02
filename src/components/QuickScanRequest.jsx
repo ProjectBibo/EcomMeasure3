@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
@@ -16,7 +16,6 @@ export default function QuickScanRequest() {
   const [errors] = useState({});
   const [pagePath, setPagePath] = useState("/");
   const [redirectUrl, setRedirectUrl] = useState("/confirmation");
-  const emailRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -25,12 +24,6 @@ export default function QuickScanRequest() {
       setRedirectUrl(`${window.location.origin}/confirmation`);
     }
   }, []);
-
-  useEffect(() => {
-    if (showEmail && emailRef.current) {
-      emailRef.current.focus();
-    }
-  }, [showEmail]);
 
   const validateUrl = (value) => {
     try {
@@ -142,7 +135,6 @@ export default function QuickScanRequest() {
                       {copy.emailLabel}
                     </label>
                     <input
-                      ref={emailRef}
                       id="quickscan-email"
                       name="email"
                       type="email"
