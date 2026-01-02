@@ -280,11 +280,14 @@ const content = {
 export default function About() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
-  const copy = content[language];
+  const copy = content[language] ?? content.en;
   const navigateWithTransition = useViewTransitionNavigate();
   const primaryCtaHandler = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, copy.hero.ctaPrimary.href),
-    [copy.hero.ctaPrimary.href, navigateWithTransition]
+    () =>
+      copy?.hero?.ctaPrimary?.href
+        ? createViewTransitionClickHandler(navigateWithTransition, copy.hero.ctaPrimary.href)
+        : undefined,
+    [copy?.hero?.ctaPrimary?.href, navigateWithTransition]
   );
   const handleBadgeClick = useCallback((label) => {
     if (typeof window !== "undefined" && window.dataLayer) {
@@ -340,19 +343,19 @@ export default function About() {
               className="mt-8 flex flex-col gap-4 sm:flex-row"
             >
               <Link
-                to={copy.hero.ctaPrimary.href}
+                to={copy?.hero?.ctaPrimary?.href ?? "#"}
                 className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-brand-yellow-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white "
                 onClick={primaryCtaHandler}
               >
-                {copy.hero.ctaPrimary.label}
+                {copy?.hero?.ctaPrimary?.label || ""}
               </Link>
               <a
-                href={copy.hero.ctaSecondary.href}
+                href={copy?.hero?.ctaSecondary?.href ?? "#"}
                 data-magnetic
                 data-variant="secondary"
                 className="inline-flex items-center justify-center rounded-full border border-neutral-300/80 px-6 py-3 text-sm font-semibold text-neutral-800 transition-colors duration-200 hover:border-brand-teal hover:text-brand-teal  "
               >
-                {copy.hero.ctaSecondary.label}
+                {copy?.hero?.ctaSecondary?.label || ""}
               </a>
             </motion.div>
           </header>
@@ -606,20 +609,20 @@ export default function About() {
               <p className="max-w-2xl text-base text-white/90">{copy.cta.body}</p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <a
-                  href={copy.cta.primary.href}
+                  href={copy?.cta?.primary?.href ?? "#"}
                   data-magnetic
                   data-variant="secondary"
                   className="inline-flex items-center justify-center rounded-full bg-white/95 px-6 py-3 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:bg-white"
                 >
-                  {copy.cta.primary.label}
+                  {copy?.cta?.primary?.label || ""}
                 </a>
                 <a
-                  href={copy.cta.secondary.href}
+                  href={copy?.cta?.secondary?.href ?? "#"}
                   data-magnetic
                   data-variant="secondary"
                   className="inline-flex items-center justify-center rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-white/10"
                 >
-                  {copy.cta.secondary.label}
+                  {copy?.cta?.secondary?.label || ""}
                 </a>
               </div>
             </motion.div>
