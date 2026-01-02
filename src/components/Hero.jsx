@@ -1,16 +1,10 @@
 // src/components/Hero.jsx
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { CheckCircle2, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
-import useViewTransitionNavigate, {
-  createViewTransitionClickHandler,
-} from "../hooks/useViewTransitionNavigate";
 import { AnimatedParagraph } from "./ExpressiveText";
-
-const MotionLink = motion(Link);
 
 const gradientHeadlineClass = "bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent";
 
@@ -19,15 +13,6 @@ export default function Hero() {
   const { language } = useLanguage();
   const t = translations[language].hero;
   const [phraseIndex, setPhraseIndex] = useState(0);
-  const navigateWithTransition = useViewTransitionNavigate();
-  const handlePrimaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/contact"),
-    [navigateWithTransition]
-  );
-  const handleSecondaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/measurement"),
-    [navigateWithTransition]
-  );
   const phrasesFromLocale = t.rotatingPhrases ?? [];
   const rotatingPhrases = phrasesFromLocale.length > 0 ? phrasesFromLocale : [""];
   const leadWords = useMemo(() => t.titleLead.trim().split(/\s+/), [t.titleLead]);
@@ -71,7 +56,7 @@ export default function Hero() {
               transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
               className="pill-badge shadow-sm"
             >
-              <Sparkles size={14} /> {t.badge}
+              {t.badge}
             </motion.span>
 
             <motion.h1
@@ -153,24 +138,41 @@ export default function Hero() {
               initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
-              className="flex flex-wrap items-center justify-start gap-3"
+              className="w-full max-w-2xl rounded-2xl border border-neutral-200/80 bg-white/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
             >
-              <MotionLink
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
-                whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-                to="/contact"
-                className="button-primary text-sm uppercase tracking-wide"
-                onClick={handlePrimaryCtaClick}
-              >
-                {t.primaryCta} <ArrowRight size={18} />
-              </MotionLink>
-              <Link
-                to="/measurement"
-                className="button-secondary text-sm"
-                onClick={handleSecondaryCtaClick}
-              >
-                {t.secondaryCta}
-              </Link>
+              <div className="flex items-center gap-3 text-neutral-900">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-yellow text-neutral-900 shadow-sm">
+                  <Mail size={22} aria-hidden />
+                </div>
+                <p className="text-xl font-semibold leading-tight">
+                  Gratis CRO-tips direct in je inbox:
+                </p>
+              </div>
+
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  placeholder="je@email.nl"
+                  className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 placeholder-neutral-500 shadow-sm focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
+                />
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-xl bg-brand-yellow px-5 py-3 text-base font-semibold text-neutral-900 shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-colors hover:bg-brand-yellow-dark"
+                >
+                  Meld je aan!
+                </button>
+              </div>
+
+              <ul className="mt-4 flex flex-col gap-2 text-sm font-medium text-neutral-800">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={18} className="text-green-600" aria-hidden />
+                  5.000+ mensen ontvangen mijn CRO tips
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={18} className="text-green-600" aria-hidden />
+                  Max één e-mail per maand
+                </li>
+              </ul>
             </motion.div>
 
             <div className="pb-4" aria-hidden />

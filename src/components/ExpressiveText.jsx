@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const KEYWORDS = {
   en: ["measure", "measurement", "optimize", "optimise", "optimization", "grow", "growth"],
-  nl: ["meten", "measurement", "optimaliseren", "optimalisatie", "groei", "groeien"],
+  nl: ["meten", "measurement", "optimaliseren", "optimalisatie", "groeien", "groei"],
 };
 
 const wordVariants = {
