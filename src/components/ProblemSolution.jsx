@@ -1,21 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { AnimatedHeading, AnimatedParagraph } from "./ExpressiveText";
-import useViewTransitionNavigate, {
-  createViewTransitionClickHandler,
-} from "../hooks/useViewTransitionNavigate";
 
 export default function ProblemSolution() {
   const shouldReduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const copy = translations[language].problemSolution;
-  const ctaLabel = translations[language].header?.cta ?? translations[language].hero?.primaryCta ?? "";
-  const navigateWithTransition = useViewTransitionNavigate();
-  const handleCtaClick = createViewTransitionClickHandler(navigateWithTransition, "/contact");
 
   return (
     <section className="section-shell bg-white" aria-labelledby="problem-solution-heading">
@@ -50,17 +42,6 @@ export default function ProblemSolution() {
               highlight
               className="text-base leading-relaxed text-neutral-800"
             />
-            <div className="flex items-center gap-3">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition hover:text-brand-teal"
-                onClick={handleCtaClick}
-              >
-                {ctaLabel}
-                <ArrowRight size={16} aria-hidden />
-              </Link>
-              <span className="text-sm text-neutral-500">{copy.ctaHelper}</span>
-            </div>
           </div>
         </div>
       </div>

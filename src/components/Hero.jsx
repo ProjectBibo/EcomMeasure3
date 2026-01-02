@@ -1,16 +1,10 @@
 // src/components/Hero.jsx
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
-import useViewTransitionNavigate, {
-  createViewTransitionClickHandler,
-} from "../hooks/useViewTransitionNavigate";
 import { AnimatedParagraph } from "./ExpressiveText";
-
-const MotionLink = motion(Link);
 
 const gradientHeadlineClass = "bg-gradient-to-r from-brand-blue to-brand-teal bg-clip-text text-transparent";
 
@@ -19,15 +13,6 @@ export default function Hero() {
   const { language } = useLanguage();
   const t = translations[language].hero;
   const [phraseIndex, setPhraseIndex] = useState(0);
-  const navigateWithTransition = useViewTransitionNavigate();
-  const handlePrimaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/contact"),
-    [navigateWithTransition]
-  );
-  const handleSecondaryCtaClick = useMemo(
-    () => createViewTransitionClickHandler(navigateWithTransition, "/measurement"),
-    [navigateWithTransition]
-  );
   const phrasesFromLocale = t.rotatingPhrases ?? [];
   const rotatingPhrases = phrasesFromLocale.length > 0 ? phrasesFromLocale : [""];
   const leadWords = useMemo(() => t.titleLead.trim().split(/\s+/), [t.titleLead]);
@@ -50,6 +35,10 @@ export default function Hero() {
   }, [rotatingPhrases, shouldReduceMotion]);
 
   const activePhrase = rotatingPhrases[phraseIndex] ?? "";
+  const croTipsBenefits = [
+    "5.000+ mensen ontvangen mijn CRO tips",
+    "Max één e-mail per maand",
+  ];
 
   return (
     <section
@@ -71,7 +60,7 @@ export default function Hero() {
               transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: "easeOut" }}
               className="pill-badge shadow-sm"
             >
-              <Sparkles size={14} /> {t.badge}
+              {t.badge}
             </motion.span>
 
             <motion.h1
@@ -150,27 +139,49 @@ export default function Hero() {
             />
 
             <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { delay: 0.15, duration: 0.6 }}
-              className="flex flex-wrap items-center justify-start gap-3"
+              className="w-full max-w-2xl rounded-2xl border border-neutral-200/80 bg-white/90 p-5 shadow-sm backdrop-blur"
             >
-              <MotionLink
-                whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
-                whileTap={shouldReduceMotion ? undefined : { scale: 0.97 }}
-                to="/contact"
-                className="button-primary text-sm uppercase tracking-wide"
-                onClick={handlePrimaryCtaClick}
+              <div className="flex flex-wrap items-center gap-3 sm:items-start">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                  <Mail size={20} aria-hidden />
+                </div>
+                <p className="text-base font-semibold leading-tight text-neutral-900 sm:text-lg">
+                  Gratis CRO-tips direct in je inbox:
+                </p>
+              </div>
+              <form
+                className="mt-4 space-y-4"
+                onSubmit={(event) => event.preventDefault()}
               >
-                {t.primaryCta} <ArrowRight size={18} />
-              </MotionLink>
-              <Link
-                to="/measurement"
-                className="button-secondary text-sm"
-                onClick={handleSecondaryCtaClick}
-              >
-                {t.secondaryCta}
-              </Link>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <input
+                    type="email"
+                    name="hero-email"
+                    placeholder="je@email.nl"
+                    className="w-full flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+                  />
+                  <button
+                    type="submit"
+                    className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-xl border border-[#e2b200] bg-[#ffcc02] px-5 py-3 text-base font-semibold text-neutral-900 shadow-[0_10px_24px_rgba(255,204,2,0.28)] transition hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f5c400]"
+                  >
+                    Meld je aan!
+                    <ArrowRight size={18} aria-hidden />
+                  </button>
+                </div>
+                <ul className="space-y-2 text-sm text-neutral-700">
+                  {croTipsBenefits.map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                        <CheckCircle2 size={16} aria-hidden />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </form>
             </motion.div>
 
             <div className="pb-4" aria-hidden />
