@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO";
 import FocusAreas from "../components/FocusAreas";
+import ProblemSolution from "../components/ProblemSolution";
 import QuickScanRequest from "../components/QuickScanRequest";
 import SectionFallback from "../components/SectionFallback";
 import { useLanguage } from "../context/LanguageContext";
@@ -29,6 +30,7 @@ export default function Home() {
         <Suspense fallback={<SectionFallback label="Hero" />}>
           <Hero />
         </Suspense>
+        <ProblemSolution />
         <FocusAreas />
         <QuickScanRequest />
         <Suspense fallback={<SectionFallback label="USP" />}>
