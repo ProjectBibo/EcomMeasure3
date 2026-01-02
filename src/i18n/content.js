@@ -389,36 +389,35 @@ export const translations = {
       },
     },
     footer: {
-      intro:
-        "Samen bouwen we aan een meet- en optimalisatieprogramma dat aansluit op jouw doelen en budget.",
+      intro: "Klaar om je meet- en optimalisatieprogramma te versnellen? Stuur een bericht en we plannen direct een call.",
       columns: {
-        measurement: {
-          title: "Measurement",
+        services: {
+          title: "Diensten",
           items: [
-            { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
-            { label: "Looker Studio", href: "/measurement/looker-studio" },
+            { label: "Measurement", href: "/measurement" },
+            { label: "CRO", href: "/cro" },
           ],
         },
-        cro: {
-          title: "Conversion Rate Optimization",
+        knowledge: {
+          title: "Kennis",
           items: [
-            { label: "Gedragsanalyse", href: "/cro/gedragsanalyse" },
-            { label: "Hypotheses & A/B-tests", href: "/cro/hypotheses-ab-tests" },
-            { label: "Implementatie", href: "/cro/implementatie" },
+            { label: "Blog", href: "/blog" },
+            { label: "Tools", href: "/tools" },
           ],
         },
-        tools: {
-          title: "Tools",
+        company: {
+          title: "Bedrijf",
           items: [
-            { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
-            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+            { label: "Over EcomMeasure", href: "/about" },
+            { label: "Contact", href: "/contact" },
           ],
-        },
-        contact: {
-          title: "Contact",
-          items: ["info@ecommeasure.com", "+31 6 12345678", "Deventer, Nederland"],
         },
       },
+      bottomLinks: [
+        { label: "Cookie-instellingen", href: "#cookie-settings" },
+        { label: "Privacy- en cookieverklaring", href: "/privacy" },
+        { label: "Sitemap", href: "/sitemap.xml" },
+      ],
       cta: "Plan een kennismaking",
       rights: "Alle rechten voorbehouden.",
     },
@@ -815,36 +814,35 @@ export const translations = {
       },
     },
     footer: {
-      intro:
-        "Together we build a measurement and optimisation programme aligned with your goals and budget.",
+      intro: "Want a cleaner measurement stack and better conversions? Reach out and we'll schedule a call right away.",
       columns: {
-        measurement: {
-          title: "Measurement",
+        services: {
+          title: "Services",
           items: [
-            { label: "GA4 & GTM", href: "/measurement/ga4-gtm" },
-            { label: "Looker Studio", href: "/measurement/looker-studio" },
+            { label: "Measurement", href: "/measurement" },
+            { label: "CRO", href: "/cro" },
           ],
         },
-        cro: {
-          title: "Conversion Rate Optimisation",
+        knowledge: {
+          title: "Knowledge",
           items: [
-            { label: "Behaviour analysis", href: "/cro/gedragsanalyse" },
-            { label: "Hypotheses & A/B tests", href: "/cro/hypotheses-ab-tests" },
-            { label: "Implementation", href: "/cro/implementatie" },
+            { label: "Blog", href: "/blog" },
+            { label: "Tools", href: "/tools" },
           ],
         },
-        tools: {
-          title: "Tools",
+        company: {
+          title: "Company",
           items: [
-            { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
-            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+            { label: "About", href: "/about" },
+            { label: "Contact", href: "/contact" },
           ],
-        },
-        contact: {
-          title: "Contact",
-          items: ["info@ecommeasure.com", "+31 6 12345678", "Deventer, Netherlands"],
         },
       },
+      bottomLinks: [
+        { label: "Cookie settings", href: "#cookie-settings" },
+        { label: "Privacy & cookie policy", href: "/privacy" },
+        { label: "Sitemap", href: "/sitemap.xml" },
+      ],
       cta: "Book an intro call",
       rights: "All rights reserved.",
     },

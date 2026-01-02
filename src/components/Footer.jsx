@@ -13,8 +13,10 @@ export default function Footer() {
   const t = translations[language].footer;
   const navigateWithTransition = useViewTransitionNavigate();
 
+  const columns = [t.columns.services, t.columns.knowledge, t.columns.company];
+
   return (
-    <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft  border-t border-neutral-200  py-14">
+    <footer data-snap-section className="relative mt-16 overflow-hidden bg-surface-soft border-t border-neutral-200 py-14">
       <motion.div
         animate={shouldReduceMotion ? { backgroundPosition: "0% 50%" } : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
@@ -24,86 +26,68 @@ export default function Footer() {
         <div className="story-stripe" aria-hidden />
       </div>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid gap-8 md:grid-cols-5">
-          <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">EcomMeasure</h4>
-            <p className="text-neutral-600  text-sm">{t.intro}</p>
+        <div className="grid gap-10 md:grid-cols-4">
+          <div className="max-w-sm space-y-3">
+            <h4 className="font-semibold text-brand-blue">EcomMeasure</h4>
+            <p className="text-neutral-600 text-sm leading-relaxed">{t.intro}</p>
             <Link
               to="/contact"
-              className="mt-4 inline-block rounded-md bg-brand-yellow px-4 py-2 font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
+              className="inline-block rounded-md bg-brand-yellow px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
               onClick={createViewTransitionClickHandler(navigateWithTransition, "/contact")}
             >
               {t.cta}
             </Link>
           </div>
-          <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.measurement.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 ">
-              {t.columns.measurement.items.map((item) => (
-                <li key={typeof item === "string" ? item : item.href}>
-                  {typeof item === "string" ? (
-                    item
-                  ) : (
+          {columns.map((column) => (
+            <div key={column.title}>
+              <h4 className="font-semibold mb-3 text-brand-blue">{column.title}</h4>
+              <ul className="space-y-2 text-sm text-neutral-600">
+                {column.items.map((item) => (
+                  <li key={item.href}>
                     <Link
                       to={item.href}
-                      className="text-neutral-600 transition-colors hover:text-brand-blue  "
+                      className="text-neutral-600 transition-colors hover:text-brand-blue"
                       onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
                     >
                       {item.label}
                     </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.cro.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 ">
-              {t.columns.cro.items.map((item) => (
-                <li key={typeof item === "string" ? item : item.href}>
-                  {typeof item === "string" ? (
-                    item
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className="text-neutral-600 transition-colors hover:text-brand-blue  "
-                      onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.tools.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 ">
-              {t.columns.tools.items.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    to={item.href}
-                    className="text-neutral-600 transition-colors hover:text-brand-blue  "
-                    onClick={createViewTransitionClickHandler(navigateWithTransition, item.href)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3 text-brand-blue">{t.columns.contact.title}</h4>
-            <ul className="space-y-2 text-sm text-neutral-600 ">
-              {t.columns.contact.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="mt-8 text-center text-neutral-500  text-xs">
-        © {new Date().getFullYear()} EcomMeasure. {t.rights}
+      <div className="mt-10 border-t border-neutral-200">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col gap-4 py-4 text-xs text-neutral-600 md:flex-row md:items-center md:justify-between">
+          <div className="text-center md:text-left">
+            © {new Date().getFullYear()} EcomMeasure. {t.rights}
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 md:justify-end">
+            {t.bottomLinks.map((link) => {
+              const isInternal = link.href.startsWith("/") && !link.href.startsWith("//");
+
+              if (isInternal) {
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="transition-colors hover:text-brand-blue"
+                    onClick={createViewTransitionClickHandler(navigateWithTransition, link.href)}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+
+              return (
+                <a key={link.href} href={link.href} className="transition-colors hover:text-brand-blue">
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </footer>
   );
