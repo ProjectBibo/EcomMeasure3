@@ -6,19 +6,14 @@ import { translations } from "../i18n/content";
 
 const blockedDomains = ["gmail.com", "outlook.com", "hotmail.com", "yahoo.com"];
 
-const encode = (data) =>
-  Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&");
-
 export default function QuickScanRequest() {
   const { language } = useLanguage();
   const copy = translations[language].aiDemo;
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
-  const [showEmail, setShowEmail] = useState(false);
-  const [status, setStatus] = useState("idle");
-  const [errors, setErrors] = useState({});
+  const [showEmail] = useState(true);
+  const [status] = useState("idle");
+  const [errors] = useState({});
   const [pagePath, setPagePath] = useState("/");
   const emailRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
@@ -58,54 +53,6 @@ export default function QuickScanRequest() {
     return "";
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (status === "loading") return;
-
-    const nextErrors = {};
-    if (!validateUrl(url)) {
-      nextErrors.url = copy.errors.urlInvalid;
-    }
-
-    if (!showEmail) {
-      setErrors(nextErrors);
-      if (Object.keys(nextErrors).length === 0) {
-        setShowEmail(true);
-      }
-      return;
-    }
-
-    const emailError = validateEmail(email);
-    if (emailError) {
-      nextErrors.email = emailError;
-    }
-
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
-
-    setStatus("loading");
-
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "quickscan",
-          url,
-          email,
-          source: "quickscan",
-          page_path: pagePath,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to submit quickscan");
-      }
-      setStatus("success");
-    } catch (error) {
-      setStatus("error");
-    }
-  };
-
   const isDisabled = status === "loading" || status === "success";
 
   return (
@@ -125,11 +72,9 @@ export default function QuickScanRequest() {
 
         <form
           name="quickscan"
+          action="https://formspree.io/f/xpqwdpag"
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
           className="flex flex-col gap-4"
-          onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="quickscan" />
           <input type="hidden" name="source" value="quickscan" />
