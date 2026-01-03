@@ -27,9 +27,6 @@ export default function Footer() {
         transition={shouldReduceMotion ? undefined : { duration: 15, repeat: Infinity, ease: "linear" }}
         className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-brand-teal bg-[length:200%_200%]"
       />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="story-stripe" aria-hidden />
-      </div>
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="max-w-sm space-y-3">
