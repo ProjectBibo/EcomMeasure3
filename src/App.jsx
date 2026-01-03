@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
+import CookieNoticeLoader from "./components/CookieNoticeLoader";
 import { LanguageProvider } from "./context/LanguageContext";
 import { isViewTransitionActive, resetPageView } from "./utils/viewTransition";
 
@@ -87,6 +88,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors ">
+      <CookieNoticeLoader />
       <Header />
       <Suspense fallback={<SectionFallback label="Pagina" />}>
         <ViewTransitionRoutes>
