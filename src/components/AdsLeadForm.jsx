@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+const budgetOptions = [
+  { value: "", label: "Selecteer budget" },
+  { value: "<5k", label: "Tot €5.000" },
+  { value: "5-15k", label: "€5.000 - €15.000" },
+  { value: ">15k", label: "Meer dan €15.000" },
+];
 
 export default function AdsLeadForm({ source }) {
   const [status, setStatus] = useState("idle");
-  const [pagePath, setPagePath] = useState("/ads");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPagePath(window.location.pathname || "/ads");
-    }
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,14 +32,14 @@ export default function AdsLeadForm({ source }) {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error("Form submission failed", error);
-      setStatus("error");
     }
   };
 
-  const isDisabled = status === "loading";
-
   return (
-    <div id="lead-form" className="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-xl sm:p-10">
+    <div
+      id="lead-form"
+      className="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-xl sm:p-10"
+    >
       <div className="mb-6 space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">Plan gratis kennismaking</p>
         <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl">Laten we kort schakelen</h2>
@@ -47,6 +47,7 @@ export default function AdsLeadForm({ source }) {
           Deel je gegevens, dan plannen we een 30-minuten call om je situatie te bespreken en de eerste acties te bepalen.
         </p>
       </div>
+
       <form
         className="space-y-4"
         action="https://formspree.io/f/mpqzpevp"
@@ -54,62 +55,71 @@ export default function AdsLeadForm({ source }) {
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="source" value={source} />
-        <input type="hidden" name="page_path" value={pagePath} />
 
         <label className="block space-y-2 text-sm font-semibold text-slate-900">
           <span>Naam</span>
           <input
             type="text"
             name="name"
-            required
-            placeholder="Jouw naam"
             className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+            placeholder="Jouw naam"
+            required
           />
         </label>
 
         <label className="block space-y-2 text-sm font-semibold text-slate-900">
-          <span>Zakelijk e-mailadres</span>
+          <span>E-mailadres</span>
           <input
             type="email"
             name="email"
-            required
-            placeholder="naam@bedrijf.nl"
             className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+            placeholder="you@example.com"
+            required
           />
         </label>
 
         <label className="block space-y-2 text-sm font-semibold text-slate-900">
-          <span>Website</span>
-          <input
-            type="url"
-            name="url"
-            required
-            placeholder="https://"
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
-          />
-        </label>
-
-        <label className="block space-y-2 text-sm font-semibold text-slate-900">
-          <span>Waar loop je nu op vast? (kort)</span>
+          <span>Project of vraag (optioneel)</span>
           <textarea
             name="message"
-            rows="3"
-            placeholder="Bijvoorbeeld: data klopt niet in GA4, of checkout verliest conversie"
+            rows="4"
             className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+            placeholder="Vertel kort over je website of vraag"
           />
         </label>
+
+        <label className="block space-y-2 text-sm font-semibold text-slate-900">
+          <span>Indicatief budget</span>
+          <select
+            name="budget"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/25"
+            defaultValue=""
+          >
+            {budgetOptions.map((option) => (
+              <option key={option.value || "placeholder"} value={option.value} disabled={option.value === ""}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-neutral-50 px-4 py-3 text-sm font-medium text-slate-600">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500">
+            <span className="text-xs font-bold">re</span>
+          </div>
+          <span>reCAPTCHA</span>
+        </div>
 
         <button
           type="submit"
-          disabled={isDisabled}
           className="button-primary w-full justify-center text-base font-semibold"
         >
           Plan gratis kennismaking
         </button>
 
-        {status === "error" ? (
-          <p className="text-sm font-medium text-rose-600">Versturen mislukt. Probeer het later opnieuw.</p>
-        ) : null}
+        {status === "success" && (
+          <p className="text-sm text-slate-800">Bedankt, we nemen contact met je op.</p>
+        )}
       </form>
     </div>
   );
