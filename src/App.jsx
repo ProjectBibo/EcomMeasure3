@@ -22,6 +22,8 @@ const BehaviorAnalysis = lazy(() => import("./pages/BehaviorAnalysis"));
 const HypothesesAbTests = lazy(() => import("./pages/HypothesesAbTests"));
 const Implementation = lazy(() => import("./pages/Implementation"));
 const Confirmation = lazy(() => import("./pages/Confirmation"));
+const AdsMeasurement = lazy(() => import("./pages/AdsMeasurement"));
+const AdsCro = lazy(() => import("./pages/AdsCro"));
 
 function usePrefersReducedMotion() {
   const [prefersReduced, setPrefersReduced] = useState(() => {
@@ -78,6 +80,7 @@ function ViewTransitionRoutes({ children }) {
 
 function AppContent() {
   const location = useLocation();
+  const isAdsLanding = location.pathname.startsWith("/ads/");
 
   useEffect(() => {
     if (location.hash) return;
@@ -87,12 +90,14 @@ function AppContent() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors ">
-      <Header />
+      {!isAdsLanding && <Header />}
       <Suspense fallback={<SectionFallback label="Pagina" />}>
         <ViewTransitionRoutes>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="measurement" element={<Measurement />} />
+          <Route path="ads/measurement" element={<AdsMeasurement />} />
+          <Route path="ads/cro" element={<AdsCro />} />
           <Route path="measurement/ga4-gtm" element={<GA4GTM />} />
           <Route path="measurement/looker-studio" element={<LookerStudio />} />
           <Route path="cro" element={<Cro />} />
@@ -107,7 +112,7 @@ function AppContent() {
           <Route path="*" element={<NotFound />} />
         </ViewTransitionRoutes>
       </Suspense>
-      <Footer />
+      {!isAdsLanding && <Footer />}
     </div>
   );
 }
