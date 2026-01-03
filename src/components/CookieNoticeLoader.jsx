@@ -22,7 +22,9 @@ export default function CookieNoticeLoader() {
     window.__diffuseCookieNoticeInitialized = true;
     window.diffuseCookieNotice = { apiKey: DIFFUSE_COOKIE_NOTICE_KEY };
 
-    const hasExistingScript = document.querySelector("script[data-diffuse-cookie-notice='true']");
+    const hasExistingScript = document.querySelector(
+      "script[data-diffuse-cookie-notice='true'], script[src*='static.diffuse.tools/cookie-notice.js']"
+    );
     if (!hasExistingScript) {
       appendDiffuseScript();
     }
