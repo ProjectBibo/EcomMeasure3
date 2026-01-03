@@ -22,7 +22,7 @@ export default function Contact() {
   const checklistHighlights = [
     "Geheel vrijblijvende kennismaking",
     "Krijg gratis conversie tips",
-    "Ontdek waar ik je mee kan helpen",
+    "Ontdek hoe we je kunnen helpen tijdens een gratis adviesgesprek",
   ];
   const submitLabel = language === "nl" ? "Plan vrijblijvend gesprek" : primaryCta;
 
@@ -60,22 +60,22 @@ export default function Contact() {
           whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={shouldReduceMotion ? undefined : { once: true }}
           transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
-          className="space-y-3"
+          className="mx-auto max-w-3xl space-y-3 text-center"
         >
-          <span className="pill-badge bg-white/80 text-brand-blue shadow-sm">{t.badge}</span>
+          <span className="pill-badge mx-auto bg-white/80 text-brand-blue shadow-sm">{t.badge}</span>
           <h2 className="text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
             {t.heading}
           </h2>
-          <p className="max-w-3xl text-lg text-neutral-800">{t.intro}</p>
+          <p className="text-lg text-neutral-800">{t.intro}</p>
         </motion.div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-8">
           <motion.form
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.5, delay: 0.1 }}
-            className="rounded-[28px] border border-[#d8e2f1] bg-white p-7 shadow-[0_22px_48px_rgba(15,23,42,0.12)] sm:p-8"
+            className="w-full max-w-2xl space-y-5 rounded-3xl border border-[#d8e2f1] bg-white/90 p-8 shadow-[0_18px_36px_rgba(15,23,42,0.08)] sm:p-9"
             action="https://formspree.io/f/mpqzpevp"
             method="POST"
             onSubmit={handleSubmit}
@@ -124,12 +124,6 @@ export default function Contact() {
                   ))}
                 </select>
               </label>
-              <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm font-medium text-neutral-600">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-500">
-                  <span className="text-xs font-bold">re</span>
-                </div>
-                <span>reCAPTCHA</span>
-              </div>
               <button
                 type="submit"
                 id="cta-primary"
@@ -149,26 +143,16 @@ export default function Contact() {
             whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={shouldReduceMotion ? undefined : { once: true }}
             transition={shouldReduceMotion ? undefined : { duration: 0.55, delay: 0.12 }}
-            className="flex flex-col items-center gap-6 lg:pt-4"
+            className="w-full max-w-2xl space-y-3"
           >
-            <div className="flex h-48 w-48 items-center justify-center rounded-full bg-[#c9ddff] shadow-lg ring-8 ring-[#e7f0fb]">
-              <img
-                src="/Ik.svg"
-                alt="Portret van de consultant"
-                className="h-36 w-36 object-contain drop-shadow"
-                loading="lazy"
-              />
-            </div>
-            <div className="w-full max-w-md space-y-3">
-              {checklistHighlights.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
-                  <span className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                    <CheckCircle2 size={18} aria-hidden />
-                  </span>
-                  <p className="text-base font-semibold text-neutral-900">{item}</p>
-                </div>
-              ))}
-            </div>
+            {checklistHighlights.map((item) => (
+              <div key={item} className="flex items-start gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
+                <span className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                  <CheckCircle2 size={18} aria-hidden />
+                </span>
+                <p className="text-base font-semibold text-neutral-900">{item}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>

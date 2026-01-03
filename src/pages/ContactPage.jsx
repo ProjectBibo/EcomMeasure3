@@ -18,11 +18,7 @@ const content = {
       title: "Samen bouwen aan meetbare groei?",
       description:
         "Laat weten waar je staat met measurement of CRO. Binnen één werkdag reageren we met concrete vervolgstappen.",
-      highlights: [
-        "Kennismaking binnen één week mogelijk",
-        "Implementatie ervaring bij e-commerce & retail",
-        "Samenwerking met marketing, product en legal",
-      ],
+      highlights: [],
     },
   },
   en: {
@@ -36,11 +32,7 @@ const content = {
       title: "Ready to build measurable growth together?",
       description:
         "Share where you stand with measurement or CRO. Expect a reply with concrete next steps within one business day.",
-      highlights: [
-        "Intro call available within a week",
-        "Experience with e-commerce and retail organisations",
-        "Close collaboration with marketing, product and legal",
-      ],
+      highlights: [],
     },
   },
 };
