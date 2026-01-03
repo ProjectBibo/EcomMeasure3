@@ -432,7 +432,7 @@ export const translations = {
       bottomLinks: [
         { label: "Cookie-instellingen", href: "#cookie-settings" },
         { label: "Privacy- en cookieverklaring", href: "/privacy" },
-        { label: "Sitemap", href: "/sitemap.xml" },
+        { label: "Sitemap", href: "/sitemap" },
       ],
       cta: "Plan een kennismaking",
       rights: "Alle rechten voorbehouden.",
@@ -881,7 +881,7 @@ export const translations = {
       bottomLinks: [
         { label: "Cookie settings", href: "#cookie-settings" },
         { label: "Privacy & cookie policy", href: "/privacy" },
-        { label: "Sitemap", href: "/sitemap.xml" },
+        { label: "Sitemap", href: "/sitemap" },
       ],
       cta: "Book an intro call",
       rights: "All rights reserved.",

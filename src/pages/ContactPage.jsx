@@ -18,11 +18,7 @@ const content = {
       title: "Samen bouwen aan meetbare groei?",
       description:
         "Laat weten waar je staat met measurement of CRO. Binnen één werkdag reageren we met concrete vervolgstappen.",
-      highlights: [
-        "Kennismaking binnen één week mogelijk",
-        "Implementatie ervaring bij e-commerce & retail",
-        "Samenwerking met marketing, product en legal",
-      ],
+      highlights: [],
     },
   },
   en: {
@@ -36,11 +32,7 @@ const content = {
       title: "Ready to build measurable growth together?",
       description:
         "Share where you stand with measurement or CRO. Expect a reply with concrete next steps within one business day.",
-      highlights: [
-        "Intro call available within a week",
-        "Experience with e-commerce and retail organisations",
-        "Close collaboration with marketing, product and legal",
-      ],
+      highlights: [],
     },
   },
 };
@@ -89,22 +81,24 @@ export default function ContactPage() {
           >
             {copy.hero.description}
           </motion.p>
-          <motion.ul
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={shouldReduceMotion ? undefined : { delay: 0.24, duration: 0.7 }}
-            className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-3 text-sm text-neutral-600 "
-          >
-            {copy.hero.highlights.map((item) => (
-              <li
-                key={item}
-                className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-2 shadow-sm backdrop-blur  "
-              >
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-                {item}
-              </li>
-            ))}
-          </motion.ul>
+          {copy.hero.highlights.length > 0 && (
+            <motion.ul
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? undefined : { delay: 0.24, duration: 0.7 }}
+              className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-3 text-sm text-neutral-600 "
+            >
+              {copy.hero.highlights.map((item) => (
+                <li
+                  key={item}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-2 shadow-sm backdrop-blur  "
+                >
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
+          )}
         </div>
 
         <div className="relative mx-auto mt-16 max-w-6xl px-6">

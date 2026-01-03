@@ -35,7 +35,10 @@ export default function Hero() {
   }, [rotatingPhrases, shouldReduceMotion]);
 
   const activePhrase = rotatingPhrases[phraseIndex] ?? "";
-  const croTipsBenefits = ["Max één e-mail per maand"];
+  const croTipsBenefits = [
+    "Max één e-mail per maand",
+    "Uitschrijven kan op elk moment.",
+  ];
 
   return (
     <section
