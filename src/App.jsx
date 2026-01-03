@@ -23,6 +23,8 @@ const BehaviorAnalysis = lazy(() => import("./pages/BehaviorAnalysis"));
 const HypothesesAbTests = lazy(() => import("./pages/HypothesesAbTests"));
 const Implementation = lazy(() => import("./pages/Implementation"));
 const Confirmation = lazy(() => import("./pages/Confirmation"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
 
 function usePrefersReducedMotion() {
   const [prefersReduced, setPrefersReduced] = useState(() => {
@@ -106,6 +108,8 @@ function AppContent() {
           <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="confirmation" element={<Confirmation />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="sitemap" element={<Sitemap />} />
           <Route path="*" element={<NotFound />} />
         </ViewTransitionRoutes>
       </Suspense>

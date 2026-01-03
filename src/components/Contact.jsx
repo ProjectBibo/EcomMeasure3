@@ -22,7 +22,7 @@ export default function Contact() {
   const checklistHighlights = [
     "Geheel vrijblijvende kennismaking",
     "Krijg gratis conversie tips",
-    "Ontdek waar ik je mee kan helpen",
+    "Ontdek hoe we je kunnen helpen tijdens een gratis adviesgesprek",
   ];
   const submitLabel = language === "nl" ? "Plan vrijblijvend gesprek" : primaryCta;
 
