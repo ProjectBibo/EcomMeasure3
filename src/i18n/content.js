@@ -12,7 +12,7 @@ export const translations = {
         toolsLabel: "Tools",
         toolsItems: [
           { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
-          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+          { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
       },
@@ -415,7 +415,7 @@ export const translations = {
           title: "Tools",
           items: [
             { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
-            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+            { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
           ],
         },
         company: {
@@ -447,7 +447,7 @@ export const translations = {
         toolsLabel: "Tools",
         toolsItems: [
           { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
-          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+          { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
       },
@@ -863,7 +863,7 @@ export const translations = {
           title: "Tools",
           items: [
             { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
-            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+            { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
           ],
         },
         company: {
