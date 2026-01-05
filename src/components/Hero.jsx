@@ -149,7 +149,7 @@ export default function Hero() {
                   <Mail size={20} aria-hidden />
                 </div>
                 <p className="text-base font-semibold leading-tight text-neutral-900 sm:text-lg">
-                  Gratis CRO-tips direct in je inbox:
+                  Gratis CRO- en GA4-tips direct in je inbox
                 </p>
               </div>
               <form
