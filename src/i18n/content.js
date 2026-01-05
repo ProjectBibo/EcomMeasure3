@@ -69,8 +69,6 @@ export const translations = {
       rotatingPhrases: [
         "gedrag inzichtelijk maken",
         "metingen correct inrichten",
-        "zien waar conversie verloren gaat",
-        "knelpunten in je website blootleggen",
         "meer halen uit bestaand verkeer",
       ],
       titleHighlight: "GA4 en bewezen CRO-experimenten",
