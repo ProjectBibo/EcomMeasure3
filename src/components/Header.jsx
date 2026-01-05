@@ -22,7 +22,7 @@ const routePrefetchers = {
   "/measurement": () => import("../pages/Measurement"),
   "/cro": () => import("../pages/Cro"),
   "/blog": () => import("../pages/BlogArticle"),
-  "/tools/bayesian-ab-test": () => import("../pages/BayesianCalculator"),
+  "/tools/bayesian-ab-test": () => import("../pages/ConversionFunnelCalculator"),
   "/tools/cro-roi": () => import("../pages/CroRoiCalculator"),
 };
 

@@ -11,7 +11,7 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
+          { label: "Conversiefunnel omzet calculator", href: "/tools/bayesian-ab-test" },
           { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
@@ -414,7 +414,7 @@ export const translations = {
         tools: {
           title: "Tools",
           items: [
-            { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
+            { label: "Conversiefunnel omzet calculator", href: "/tools/bayesian-ab-test" },
             { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
           ],
         },
@@ -446,7 +446,7 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
+          { label: "Conversion funnel revenue calculator", href: "/tools/bayesian-ab-test" },
           { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
@@ -862,7 +862,7 @@ export const translations = {
         tools: {
           title: "Tools",
           items: [
-            { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
+            { label: "Conversion funnel revenue calculator", href: "/tools/bayesian-ab-test" },
             { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
           ],
         },
