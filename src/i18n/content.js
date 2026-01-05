@@ -11,8 +11,8 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
-          { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
+          { label: "Conversiefunnel omzet calculator", href: "/tools/bayesian-ab-test" },
+          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
       },
@@ -414,8 +414,8 @@ export const translations = {
         tools: {
           title: "Tools",
           items: [
-            { label: "Bayesiaanse A/B-test calculator", href: "/tools/bayesian-ab-test" },
-            { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
+            { label: "Conversiefunnel omzet calculator", href: "/tools/bayesian-ab-test" },
+            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
           ],
         },
         company: {
@@ -446,8 +446,8 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
-          { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
+          { label: "Conversion funnel revenue calculator", href: "/tools/bayesian-ab-test" },
+          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
         ],
         contact: "Contact",
       },
@@ -862,8 +862,8 @@ export const translations = {
         tools: {
           title: "Tools",
           items: [
-            { label: "Bayesian A/B test calculator", href: "/tools/bayesian-ab-test" },
-            { label: "Funnel Impact Calculator", href: "/tools/cro-roi" },
+            { label: "Conversion funnel revenue calculator", href: "/tools/bayesian-ab-test" },
+            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
           ],
         },
         company: {

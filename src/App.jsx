@@ -13,7 +13,7 @@ const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Measurement = lazy(() => import("./pages/Measurement"));
 const Cro = lazy(() => import("./pages/Cro"));
-const BayesianCalculator = lazy(() => import("./pages/BayesianCalculator"));
+const ConversionFunnelCalculator = lazy(() => import("./pages/ConversionFunnelCalculator"));
 const CroRoiCalculator = lazy(() => import("./pages/CroRoiCalculator"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -114,7 +114,7 @@ function AppContent() {
           <Route path="cro/gedragsanalyse" element={<BehaviorAnalysis />} />
           <Route path="cro/hypotheses-ab-tests" element={<HypothesesAbTests />} />
           <Route path="cro/implementatie" element={<Implementation />} />
-          <Route path="tools/bayesian-ab-test" element={<BayesianCalculator />} />
+          <Route path="tools/bayesian-ab-test" element={<ConversionFunnelCalculator />} />
           <Route path="tools/cro-roi" element={<CroRoiCalculator />} />
           <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="privacy" element={<Privacy />} />
