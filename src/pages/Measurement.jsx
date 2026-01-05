@@ -22,10 +22,10 @@ const content = {
     },
     trust: {
       bullets: [
-        "Binnen 2 weken een helder meetplan",
+        "GA4 inrichten",
         "AVG-proof inrichting en beheer",
         "GA4 + GTM + consent op één lijn",
-        "Eerlijke, concrete aanbevelingen",
+        "Inzicht in al je website bezoekers",
       ],
     },
     helpSections: [
@@ -53,7 +53,7 @@ const content = {
     services: {
       eyebrow: "Diensten",
       title: "Van basis tot enhanced e-commerce",
-      intro: "Geen pakketten of bundels – alleen wat nodig is om jouw meting betrouwbaar, compliant en bruikbaar te maken.",
+      intro: "",
       ctaLabel: "Plan een kennismaking",
       list: [
         {

@@ -39,6 +39,26 @@ export default function Hero() {
     "Max één e-mail per maand",
     "Uitschrijven kan op elk moment.",
   ];
+  const descriptionContent =
+    language === "nl" && typeof t.description === "string"
+      ? (() => {
+          const [before, after] = t.description.split("optimaliseren");
+
+          if (after === undefined) {
+            return t.description;
+          }
+
+          return (
+            <>
+              {before}
+              <a className="keyword-animate" href="/cro">
+                optimaliseren
+              </a>
+              {after}
+            </>
+          );
+        })()
+      : t.description;
 
   return (
     <section
@@ -131,7 +151,7 @@ export default function Hero() {
             </motion.h1>
 
             <AnimatedParagraph
-              text={t.description}
+              text={descriptionContent}
               language={language}
               highlight
               delay={0.18}

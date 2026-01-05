@@ -22,7 +22,6 @@ const content = {
     },
     trust: {
       bullets: [
-        "Geen A/B-testfabriek, wel scherpe inzichten",
         "Combinatie van kwalitatief en kwantitatief",
         "Roadmap met prioriteit en haalbaarheid",
         "Heldere aanbevelingen, geen jargon",

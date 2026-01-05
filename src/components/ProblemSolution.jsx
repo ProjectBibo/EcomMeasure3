@@ -13,7 +13,7 @@ export default function ProblemSolution() {
     <section className="section-shell bg-white" aria-labelledby="problem-solution-heading">
       <div className="site-container">
         <div className="mx-auto max-w-5xl space-y-10">
-          <div className="space-y-4 text-left">
+          <div className="space-y-5 text-left">
             <AnimatedHeading
               id="problem-solution-heading"
               className="text-3xl font-bold leading-tight tracking-tight text-neutral-900 sm:text-4xl"
