@@ -1,0 +1,68 @@
+# llms.txt for https://ecommeasure.com/
+
+# Core site info
+Homepage: https://ecommeasure.com/
+Title: EcomMeasure – Data, Metingen & Conversie Optimalisatie
+Description: EcomMeasure helpt e-commerce teams om grip te krijgen op hun data, betrouwbare metingen in te richten en CRO/UX-verbeteringen door te voeren op basis van data.
+
+# Key services
+Measurement services:
+- https://ecommeasure.com/measurement
+  Focus: Algemene measurement & analytics dienstverlening.
+- https://ecommeasure.com/measurement/ga4-gtm
+  Focus: GA4 en Google Tag Manager setup en validatie.
+- https://ecommeasure.com/measurement/looker-studio
+  Focus: Rapportage en visualisatie met Looker Studio.
+
+CRO services:
+- https://ecommeasure.com/cro
+  Focus: Conversie optimalisatie strategie en aanpak.
+- https://ecommeasure.com/cro/gedragsanalyse
+  Focus: Gedragsanalyse om knelpunten te identificeren.
+- https://ecommeasure.com/cro/hypotheses-ab-tests
+  Focus: Hypothesevorming en A/B-test planning.
+- https://ecommeasure.com/cro/implementatie
+  Focus: Implementatie van verbeteringen & experimenten.
+
+Tools and utilities:
+- https://ecommeasure.com/tools/conversion-funnel-calculator
+- https://ecommeasure.com/tools/funnel-impact-calculator
+
+Key pages:
+- https://ecommeasure.com/about
+- https://ecommeasure.com/confirmation
+- https://ecommeasure.com/privacy
+
+Key blog / knowledge content:
+- https://ecommeasure.com/blog/wat-is-conversie-optimalisatie
+- https://ecommeasure.com/blog/psychologische-prijzen-30-principes
+- https://ecommeasure.com/blog/conversie-optimalisatie-bureau-freelancer-of-zelf-doen
+- https://ecommeasure.com/blog/conversie-optimalisatie-boeken
+- https://ecommeasure.com/blog/conversie-optimalisatie-tools
+
+# Value propositions
+- Metingen correct ingericht
+- Gedrag & conversies inzichtelijk maken
+- Datagedreven beslissingen genereren
+- CRO/UX verbeteringen onderbouwen met data
+
+# Audience
+Primary audience:
+- E-commerce teams
+- Webshops
+- Groei-gedreven online bedrijven
+- Teams die data en conversie willen verbeteren
+
+# What the site helps with (short)
+- Reliable measurement setup
+- Analytics check & audit
+- Conversion analysis & optimization
+- Data visualization
+- Prioritizing website improvements
+
+# Contact point
+Primary CTA:
+- Plan een gratis adviesgesprek in (via homepage)
+
+# Notes
+This file is intended as a high-level summary of the site structure, key offerings, and pages to help AI systems understand important content and focus areas. It is not exhaustive of every page or detail.
