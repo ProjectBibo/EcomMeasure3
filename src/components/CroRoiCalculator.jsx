@@ -2,898 +2,301 @@ import React, { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 
-const ACTIVITY_OPTIONS = [
-  {
-    value: "none",
-    multiplier: 1,
-    label: {
-      nl: "Geen CRO activiteiten",
-      en: "No CRO activities",
-    },
-    description: {
-      nl: "Volledig onbenut – veel ruimte voor groei.",
-      en: "Untapped potential – plenty of room to grow.",
-    },
-  },
-  {
-    value: "ad-hoc",
-    multiplier: 0.75,
-    label: {
-      nl: "Af en toe experimenten",
-      en: "Occasional experiments",
-    },
-    description: {
-      nl: "Er wordt getest, maar zonder vast proces.",
-      en: "Some testing happens without a consistent programme.",
-    },
-  },
-  {
-    value: "team",
-    multiplier: 0.55,
-    label: {
-      nl: "In-house CRO team",
-      en: "In-house CRO team",
-    },
-    description: {
-      nl: "Team actief, maar extra expertise versnelt.",
-      en: "Team in place, external focus can accelerate.",
-    },
-  },
-];
-
-const INVESTMENT_OPTIONS = [
-  {
-    value: "starter",
-    monthly: 1995,
-    uplift: 0.08,
-    label: {
-      nl: "Starter – €1.995 p/m",
-      en: "Starter – €1,995 p/m",
-    },
-    description: {
-      nl: "Hypotheses & experimenten elke maand",
-      en: "Monthly hypotheses and experiments",
-    },
-  },
-  {
-    value: "growth",
-    monthly: 2995,
-    uplift: 0.14,
-    label: {
-      nl: "Growth – €2.995 p/m",
-      en: "Growth – €2,995 p/m",
-    },
-    description: {
-      nl: "Volledig CRO-programma met UX & analyse",
-      en: "Full CRO programme with UX & analysis",
-    },
-  },
-  {
-    value: "scale",
-    monthly: 4495,
-    uplift: 0.2,
-    label: {
-      nl: "Scale – €4.495 p/m",
-      en: "Scale – €4,495 p/m",
-    },
-    description: {
-      nl: "Meerdere experimenten per sprint en implementatie",
-      en: "Multiple experiments per sprint plus implementation",
-    },
-  },
-];
-
-const SCENARIOS = [
-  {
-    key: "conservative",
-    uplift: 0.2,
-    title: {
-      nl: "Conservatief (+20%)",
-      en: "Conservative (+20%)",
-    },
-    subtitle: {
-      nl: "Laaghangend fruit oplossen",
-      en: "Tackle low-hanging fruit",
-    },
-  },
-  {
-    key: "realistic",
-    uplift: 0.4,
-    expected: true,
-    title: {
-      nl: "Realistisch (+40%)",
-      en: "Realistic (+40%)",
-    },
-    subtitle: {
-      nl: "Belangrijkste pijnpunten aanpakken",
-      en: "Address core friction points",
-    },
-  },
-  {
-    key: "ambitious",
-    uplift: 0.8,
-    title: {
-      nl: "Ambitieus (+80%)",
-      en: "Ambitious (+80%)",
-    },
-    subtitle: {
-      nl: "Systematische verbeteringen",
-      en: "Systematic improvements",
-    },
-  },
-  {
-    key: "very-ambitious",
-    uplift: 1.5,
-    title: {
-      nl: "Zeer ambitieus (+150%)",
-      en: "Very ambitious (+150%)",
-    },
-    subtitle: {
-      nl: "Volledige website optimalisatie",
-      en: "Full site optimisation",
-    },
-  },
-];
-
 const copy = {
   nl: {
-    badge: "Calculator",
-    title: "CRO ROI Calculator",
-    intro:
-      "Bereken de impact van een CRO-programma op omzet, winst en ROI op basis van jouw bezoekers, transacties en marge.",
-    form: {
-      visitors: "Bezoekers per maand",
-      transactions: "Transacties per maand",
+    inputs: {
+      heading: "Jouw maandelijkse cijfers",
+      visits: "Maandelijkse bezoeken",
       aov: "Gemiddelde orderwaarde",
-      margin: "Bruto winstmarge (%)",
-      activity: "Huidige CRO activiteiten",
-      investment: "CRO investering per maand",
-      submit: "Bereken resultaat",
+      productPage: "% dat de productpagina ziet",
+      addToCart: "Add to cart rate",
+      checkoutProgression: "Add to cart → checkout progression",
+      checkoutConversion: "Checkout → conversie",
     },
-    results: {
-      headline: "Verwachte impact",
-      badges: {
-        conversionRate: "Huidige conversieratio",
-        transactions: "Huidige transacties/maand",
-        annualRevenue: "Huidige jaaromzet",
-      },
-      invalidTitle: "Onvoldoende gegevens",
-      invalidDescription:
-        "Vul minstens één bezoeker en één transactie per maand in om de scenario's te berekenen.",
-      table: {
-        ariaLabel: "Scenariovergelijking CRO ROI",
-        scenario: "Scenario",
-        newRate: "Nieuwe conversieratio",
-        extraTransactions: "Extra transacties / maand",
-        extraRevenue: "Extra omzet / jaar",
-        extraProfit: "Extra winst / jaar",
-        roi: "ROI per €1 geïnvesteerd",
-        expectedTag: "Verwacht scenario",
-      },
-      charts: {
-        revenueTitle: "Extra omzet per jaar",
-        profitTitle: "Extra winst per jaar",
-        fallback: "Geen data",
-      },
-      download: {
-        label: "Download resultaten",
-        csv: "Exporteer CSV",
-        pdf: "Exporteer PDF",
-      },
+    outputs: {
+      heading: "Impact per funnelstap",
+      conversionRate: "Totale conversieratio",
+      orders: "Bestellingen per maand",
+      revenue: "Omzet per maand",
+      dropOff: "Grootste lek",
+      dropLabel: (from, to) => `${from} → ${to}`,
     },
-    placeholders: {
-      visitors: "Bijv. 10000",
-      transactions: "Bijv. 200",
-      aov: "Bijv. 75",
-      margin: "Bijv. 35",
+    funnel: {
+      labels: ["Bezoeken", "Productpagina", "Winkelwagen", "Checkout", "Conversie"],
+    },
+    helper: {
+      leakNote: "Dit model volgt de GA4-logica: iedere stap bouwt voort op de vorige.",
     },
   },
   en: {
-    badge: "Calculator",
-    title: "CRO ROI Calculator",
-    intro:
-      "Estimate the impact of a CRO programme on revenue, profit and ROI using your visitors, transactions and margin.",
-    form: {
-      visitors: "Visitors per month",
-      transactions: "Transactions per month",
+    inputs: {
+      heading: "Your monthly numbers",
+      visits: "Monthly visits",
       aov: "Average order value",
-      margin: "Gross profit margin (%)",
-      activity: "Current CRO activity",
-      investment: "CRO investment per month",
-      submit: "Calculate impact",
+      productPage: "% of visits seeing product page",
+      addToCart: "Add to cart rate",
+      checkoutProgression: "Add to cart → checkout progression",
+      checkoutConversion: "Checkout → conversion",
     },
-    results: {
-      headline: "Projected impact",
-      badges: {
-        conversionRate: "Current conversion rate",
-        transactions: "Current orders/month",
-        annualRevenue: "Current annual revenue",
-      },
-      invalidTitle: "Not enough data",
-      invalidDescription: "Provide at least one visitor and one transaction per month to calculate the scenarios.",
-      table: {
-        ariaLabel: "CRO ROI scenario comparison",
-        scenario: "Scenario",
-        newRate: "New conversion rate",
-        extraTransactions: "Extra orders / month",
-        extraRevenue: "Extra revenue / year",
-        extraProfit: "Extra profit / year",
-        roi: "ROI per €1 invested",
-        expectedTag: "Expected scenario",
-      },
-      charts: {
-        revenueTitle: "Extra revenue per year",
-        profitTitle: "Extra profit per year",
-        fallback: "No data",
-      },
-      download: {
-        label: "Download results",
-        csv: "Export CSV",
-        pdf: "Export PDF",
-      },
+    outputs: {
+      heading: "Impact by funnel step",
+      conversionRate: "Overall conversion rate",
+      orders: "Orders per month",
+      revenue: "Revenue per month",
+      dropOff: "Largest leak",
+      dropLabel: (from, to) => `${from} → ${to}`,
     },
-    placeholders: {
-      visitors: "e.g. 10000",
-      transactions: "e.g. 200",
-      aov: "e.g. 75",
-      margin: "e.g. 35",
+    funnel: {
+      labels: ["Visits", "Product page", "Cart", "Checkout", "Conversion"],
+    },
+    helper: {
+      leakNote: "This model mirrors GA4-style funnels: every step depends on the previous one.",
     },
   },
 };
 
-function escapeCsvValue(value) {
-  const stringValue = value ?? "";
-  if (/[",\n]/.test(stringValue)) {
-    return `"${stringValue.replace(/"/g, '""')}"`;
-  }
-  return stringValue;
+function formatNumber(value, language, options = {}) {
+  return new Intl.NumberFormat(language === "nl" ? "nl-NL" : "en-US", {
+    maximumFractionDigits: 1,
+    ...options,
+  }).format(value);
 }
 
-function formatDateStamp(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}${month}${day}`;
+function formatCurrency(value, language) {
+  return new Intl.NumberFormat(language === "nl" ? "nl-NL" : "en-US", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
 }
 
-function escapePdfText(value) {
-  return value.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
-}
+export default function CroRoiCalculator() {
+  const { language } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
+  const text = copy[language];
 
-function createPdfBlob(lines) {
-  const textLines = lines.map((line) => escapePdfText(line));
-  const contentLines = textLines
-    .map((line, index) => (index === 0 ? `(${line}) Tj` : `T* (${line}) Tj`))
-    .join("\n");
-  const content = `BT\n/F1 12 Tf\n1 0 0 1 72 760 Tm\n14 TL\n${contentLines}\nET`;
-  const header = "%PDF-1.3\n";
+  const [visits, setVisits] = useState(100000);
+  const [averageOrderValue, setAverageOrderValue] = useState(49.99);
+  const [productPagePercent, setProductPagePercent] = useState(80);
+  const [addToCartPercent, setAddToCartPercent] = useState(10);
+  const [checkoutProgressPercent, setCheckoutProgressPercent] = useState(50);
+  const [checkoutConversionPercent, setCheckoutConversionPercent] = useState(75);
 
-  const objects = [];
-  const offsets = [];
-  let offset = header.length;
+  const funnel = useMemo(() => {
+    const productPageViews = (visits * productPagePercent) / 100;
+    const addToCarts = (productPageViews * addToCartPercent) / 100;
+    const checkouts = (addToCarts * checkoutProgressPercent) / 100;
+    const conversions = (checkouts * checkoutConversionPercent) / 100;
+    const revenue = conversions * averageOrderValue;
+    const conversionRate = visits > 0 ? conversions / visits : 0;
 
-  const pushObject = (obj) => {
-    offsets.push(offset);
-    const serialized = `${obj}\n`;
-    objects.push(serialized);
-    offset += serialized.length;
+    const steps = [
+      { key: "visits", label: text.funnel.labels[0], value: visits },
+      { key: "product", label: text.funnel.labels[1], value: productPageViews },
+      { key: "cart", label: text.funnel.labels[2], value: addToCarts },
+      { key: "checkout", label: text.funnel.labels[3], value: checkouts },
+      { key: "conversion", label: text.funnel.labels[4], value: conversions },
+    ];
+
+    const drops = steps.slice(0, -1).map((step, index) => {
+      if (step.value <= 0) return { index, percent: 0 };
+      const next = steps[index + 1].value;
+      const percent = (step.value - next) / step.value;
+      return { index, percent };
+    });
+
+    const largestDrop = drops.reduce(
+      (current, candidate) => (candidate.percent > current.percent ? candidate : current),
+      { index: 0, percent: 0 }
+    );
+
+    return {
+      productPageViews,
+      addToCarts,
+      checkouts,
+      conversions,
+      revenue,
+      conversionRate,
+      steps,
+      largestDrop,
+    };
+  }, [
+    visits,
+    averageOrderValue,
+    productPagePercent,
+    addToCartPercent,
+    checkoutProgressPercent,
+    checkoutConversionPercent,
+    text.funnel.labels,
+  ]);
+
+  const handlePercentChange = (setter) => (event) => {
+    const value = Number(event.target.value);
+    if (Number.isNaN(value)) {
+      setter(0);
+      return;
+    }
+    const clamped = Math.max(0, Math.min(100, value));
+    setter(clamped);
   };
 
-  pushObject("1 0 obj<</Type /Catalog /Pages 2 0 R>>endobj");
-  pushObject("2 0 obj<</Type /Pages /Kids [3 0 R] /Count 1>>endobj");
-  pushObject(
-    "3 0 obj<</Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources<</Font<</F1 5 0 R>>>>>>endobj"
-  );
-  pushObject(`4 0 obj<</Length ${content.length}>>stream\n${content}\nendstream\nendobj`);
-  pushObject("5 0 obj<</Type /Font /Subtype /Type1 /BaseFont /Helvetica>>endobj");
-
-  const body = objects.join("");
-  const xrefOffset = header.length + body.length;
-  const xrefHeader = "xref\n0 6\n0000000000 65535 f \n";
-  const xrefEntries = offsets
-    .map((value) => `${value.toString().padStart(10, "0")} 00000 n \n`)
-    .join("");
-  const trailer = `trailer<</Size 6 /Root 1 0 R>>\nstartxref\n${xrefOffset}\n%%EOF`;
-
-  return new Blob([header, body, xrefHeader, xrefEntries, trailer], { type: "application/pdf" });
-}
-
-function ResultBadge({ label, value, description, ariaLabel }) {
   return (
-    <div
-      role="listitem"
-      aria-label={ariaLabel}
-      className="rounded-2xl border border-white/60 bg-white/80 px-5 py-4 shadow-[14px_20px_60px_rgba(15,23,42,0.16)] backdrop-blur   "
-    >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500 ">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-neutral-900 ">{value}</p>
-      {description ? <p className="mt-1 text-xs text-neutral-500 ">{description}</p> : null}
-    </div>
-  );
-}
+    <div className="grid gap-8 rounded-[28px] border border-white/60 bg-white/90 p-6 shadow-[22px_34px_90px_rgba(15,23,42,0.14)] backdrop-blur md:grid-cols-2 md:p-8  ">
+      <div className="space-y-6">
+        <motion.h2
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          transition={shouldReduceMotion ? undefined : { duration: 0.4 }}
+          className="text-xl font-semibold text-neutral-900 "
+        >
+          {text.inputs.heading}
+        </motion.h2>
 
-function ScenarioBarChart({ title, valueKey, data, formatter, fallbackLabel, ariaLabel }) {
-  const maxValue = data.reduce((acc, item) => (item[valueKey] > acc ? item[valueKey] : acc), 0);
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white/70 p-4 shadow-sm">
+            <span className="text-sm font-semibold text-neutral-800 ">{text.inputs.visits}</span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value={visits}
+              onChange={(event) => setVisits(Math.max(0, Number(event.target.value) || 0))}
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-base text-neutral-900 shadow-inner focus:border-brand-blue focus:outline-none "
+            />
+          </label>
+          <label className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white/70 p-4 shadow-sm">
+            <span className="text-sm font-semibold text-neutral-800 ">{text.inputs.aov}</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={averageOrderValue}
+              onChange={(event) => setAverageOrderValue(Math.max(0, Number(event.target.value) || 0))}
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-base text-neutral-900 shadow-inner focus:border-brand-blue focus:outline-none "
+            />
+          </label>
+          <label className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white/70 p-4 shadow-sm">
+            <span className="text-sm font-semibold text-neutral-800 ">{text.inputs.productPage}</span>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              step="0.1"
+              value={productPagePercent}
+              onChange={handlePercentChange(setProductPagePercent)}
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-base text-neutral-900 shadow-inner focus:border-brand-blue focus:outline-none "
+            />
+          </label>
+          <label className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white/70 p-4 shadow-sm">
+            <span className="text-sm font-semibold text-neutral-800 ">{text.inputs.addToCart}</span>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              step="0.1"
+              value={addToCartPercent}
+              onChange={handlePercentChange(setAddToCartPercent)}
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-base text-neutral-900 shadow-inner focus:border-brand-blue focus:outline-none "
+            />
+          </label>
+          <label className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white/70 p-4 shadow-sm">
+            <span className="text-sm font-semibold text-neutral-800 ">{text.inputs.checkoutProgression}</span>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              step="0.1"
+              value={checkoutProgressPercent}
+              onChange={handlePercentChange(setCheckoutProgressPercent)}
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-base text-neutral-900 shadow-inner focus:border-brand-blue focus:outline-none "
+            />
+          </label>
+          <label className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white/70 p-4 shadow-sm">
+            <span className="text-sm font-semibold text-neutral-800 ">{text.inputs.checkoutConversion}</span>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              step="0.1"
+              value={checkoutConversionPercent}
+              onChange={handlePercentChange(setCheckoutConversionPercent)}
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-base text-neutral-900 shadow-inner focus:border-brand-blue focus:outline-none "
+            />
+          </label>
+        </div>
+        <p className="text-sm text-neutral-500 ">{text.helper.leakNote}</p>
+      </div>
 
-  return (
-    <div
-      className="rounded-3xl border border-white/60 bg-white/80 p-6 shadow-[20px_28px_80px_rgba(15,23,42,0.18)] backdrop-blur  "
-      role="group"
-      aria-label={ariaLabel}
-    >
-      <h4 className="text-sm font-semibold text-neutral-700 ">{title}</h4>
-      {maxValue > 0 ? (
-        <div className="mt-5 space-y-4">
-          {data.map((scenario) => {
-            const value = scenario[valueKey];
-            const width = maxValue > 0 && value > 0 ? Math.max(6, Math.round((value / maxValue) * 100)) : 0;
+      <div className="space-y-6 rounded-2xl border border-neutral-200 bg-gradient-to-b from-white to-surface-soft p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-neutral-900 ">{text.outputs.heading}</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-inner">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 ">{text.outputs.conversionRate}</p>
+            <p className="mt-2 text-2xl font-semibold text-neutral-900 ">
+              {formatNumber(funnel.conversionRate * 100, language, { maximumFractionDigits: 2 })}%
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-inner">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 ">{text.outputs.orders}</p>
+            <p className="mt-2 text-2xl font-semibold text-neutral-900 ">{formatNumber(funnel.conversions, language)}</p>
+          </div>
+          <div className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-inner">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 ">{text.outputs.revenue}</p>
+            <p className="mt-2 text-2xl font-semibold text-neutral-900 ">{formatCurrency(funnel.revenue, language)}</p>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between rounded-xl border border-neutral-200 bg-white/70 px-4 py-3 shadow-inner">
+          <div className="flex items-center gap-2 text-sm font-semibold text-neutral-800 ">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-blue/10 text-xs font-bold text-brand-blue">
+              ↓
+            </span>
+            {text.outputs.dropOff}
+          </div>
+          <div className="text-sm text-neutral-600 ">
+            {text.outputs.dropLabel(
+              funnel.steps[funnel.largestDrop.index].label,
+              funnel.steps[funnel.largestDrop.index + 1].label
+            )}
+            {` (${formatNumber(funnel.largestDrop.percent * 100, language, { maximumFractionDigits: 1 })}%)`}
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {funnel.steps.map((step, index) => {
+            const maxValue = funnel.steps[0].value || 1;
+            const width = Math.max(4, (step.value / maxValue) * 100);
+            const isLargestLeak = index > 0 && funnel.largestDrop.index === index - 1;
             return (
-              <div key={scenario.key} className="space-y-1">
-                <div className="flex items-center justify-between text-xs font-medium text-neutral-500 ">
-                  <span>{scenario.title}</span>
-                  <span>{formatter(value)}</span>
+              <div key={step.key} className="space-y-2">
+                <div className="flex items-center justify-between text-sm text-neutral-700 ">
+                  <span className="font-semibold text-neutral-900 ">{step.label}</span>
+                  <span>{formatNumber(step.value, language)}</span>
                 </div>
-                <div className="h-2 rounded-full bg-neutral-200/70 " aria-hidden>
+                <div className="relative h-3 rounded-full bg-neutral-100 ">
                   <div
-                    className="h-2 rounded-full bg-brand-blue/70 "
+                    className={`h-3 rounded-full ${isLargestLeak ? "bg-brand-yellow" : "bg-brand-blue"}`}
                     style={{ width: `${width}%` }}
                   />
                 </div>
+                {index < funnel.steps.length - 1 ? (
+                  <p className="text-xs text-neutral-500 ">
+                    {formatNumber(
+                      funnel.steps[index].value > 0
+                        ? ((funnel.steps[index + 1].value - funnel.steps[index].value) / funnel.steps[index].value) * -100
+                        : 0,
+                      language,
+                      { maximumFractionDigits: 1 }
+                    )}%
+                    {" "}
+                    {language === "nl" ? "van vorige stap" : "from previous step"}
+                  </p>
+                ) : null}
               </div>
             );
           })}
         </div>
-      ) : (
-        <p className="mt-6 text-sm text-neutral-500 ">{fallbackLabel}</p>
-      )}
-    </div>
-  );
-}
-
-function getRoiTone(roiPercent) {
-  if (roiPercent === null) {
-    return "text-neutral-500 ";
-  }
-  if (roiPercent < -5) {
-    return "text-red-600 ";
-  }
-  if (roiPercent <= 5) {
-    return "text-neutral-500 ";
-  }
-  return "text-brand-teal ";
-}
-
-export default function CroRoiCalculator() {
-  const shouldReduceMotion = useReducedMotion();
-  const { language } = useLanguage();
-  const text = copy[language];
-
-  const [formState, setFormState] = useState({
-    visitors: "",
-    transactions: "",
-    aov: "",
-    margin: "",
-    activity: ACTIVITY_OPTIONS[0].value,
-    investment: INVESTMENT_OPTIONS[1].value,
-  });
-  const [hasCalculated, setHasCalculated] = useState(false);
-  const [results, setResults] = useState(null);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const currencyFormatter = useMemo(
-    () =>
-      new Intl.NumberFormat(language === "nl" ? "nl-NL" : "en-US", {
-        style: "currency",
-        currency: "EUR",
-        maximumFractionDigits: 0,
-      }),
-    [language]
-  );
-
-  const percentFormatter = useMemo(
-    () =>
-      new Intl.NumberFormat(language === "nl" ? "nl-NL" : "en-US", {
-        style: "percent",
-        maximumFractionDigits: 0,
-      }),
-    [language]
-  );
-
-  const integerFormatter = useMemo(
-    () =>
-      new Intl.NumberFormat(language === "nl" ? "nl-NL" : "en-US", {
-        maximumFractionDigits: 0,
-      }),
-    [language]
-  );
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const visitors = Number(formState.visitors);
-    const transactions = Number(formState.transactions);
-    const aov = Number(formState.aov);
-    const margin = Number(formState.margin);
-
-    const selectedActivity =
-      ACTIVITY_OPTIONS.find((option) => option.value === formState.activity) ?? ACTIVITY_OPTIONS[0];
-    const selectedInvestment =
-      INVESTMENT_OPTIONS.find((option) => option.value === formState.investment) ?? INVESTMENT_OPTIONS[0];
-
-    const monthlyInvestment = selectedInvestment.monthly;
-    const annualInvestment = monthlyInvestment * 12;
-
-    if (visitors <= 0 || transactions <= 0 || aov <= 0 || margin < 0) {
-      setResults({
-        valid: false,
-        visitors,
-        transactions,
-        aov,
-        margin,
-        monthlyInvestment,
-        annualInvestment,
-        selectedActivity,
-        selectedInvestment,
-      });
-      setHasCalculated(true);
-      return;
-    }
-
-    const baseConversionRate = transactions / visitors;
-    const annualRevenue = Math.round(transactions * aov * 12);
-
-    const scenarioResults = SCENARIOS.map((scenario) => {
-      const newConversionRate = baseConversionRate * (1 + scenario.uplift);
-      const extraTransactionsMonthly = Math.max(
-        0,
-        Math.round((newConversionRate - baseConversionRate) * visitors)
-      );
-      const extraRevenueYear = Math.max(0, Math.round(extraTransactionsMonthly * aov * 12));
-      const extraProfitYear = Math.max(0, Math.round(extraRevenueYear * (margin / 100)));
-      const roi = annualInvestment > 0 ? (extraProfitYear - annualInvestment) / annualInvestment : null;
-
-      return {
-        ...scenario,
-        newConversionRate,
-        extraTransactionsMonthly,
-        extraRevenueYear,
-        extraProfitYear,
-        roi,
-      };
-    }).map((scenario) => ({
-      ...scenario,
-      title: scenario.title[language],
-      subtitle: scenario.subtitle[language],
-    }));
-
-    setResults({
-      valid: true,
-      visitors,
-      transactions,
-      aov,
-      margin,
-      baseConversionRate,
-      annualRevenue,
-      scenarioResults,
-      monthlyInvestment,
-      annualInvestment,
-      selectedActivity,
-      selectedInvestment,
-    });
-    setHasCalculated(true);
-  };
-
-  const handleDownloadCsv = () => {
-    if (!results?.valid) {
-      return;
-    }
-
-    const baseFileName = `cro-roi-berekening-${formatDateStamp(new Date())}`;
-    const rows = [
-      [text.results.badges.conversionRate, percentFormatter.format(results.baseConversionRate)],
-      [text.results.badges.transactions, integerFormatter.format(results.transactions)],
-      [text.results.badges.annualRevenue, currencyFormatter.format(results.annualRevenue)],
-      [],
-      [
-        text.results.table.scenario,
-        text.results.table.newRate,
-        text.results.table.extraTransactions,
-        text.results.table.extraRevenue,
-        text.results.table.extraProfit,
-        text.results.table.roi,
-      ],
-      ...results.scenarioResults.map((scenario) => [
-        scenario.title,
-        percentFormatter.format(scenario.newConversionRate),
-        `+${integerFormatter.format(scenario.extraTransactionsMonthly)}`,
-        currencyFormatter.format(scenario.extraRevenueYear),
-        currencyFormatter.format(scenario.extraProfitYear),
-        scenario.roi === null ? "—" : percentFormatter.format(scenario.roi),
-      ]),
-    ];
-
-    const csvContent = rows
-      .map((row) => row.map((cell) => escapeCsvValue(cell)).join(","))
-      .join("\n");
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `${baseFileName}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  const handleDownloadPdf = () => {
-    if (!results?.valid) {
-      return;
-    }
-
-    const baseFileName = `cro-roi-berekening-${formatDateStamp(new Date())}`;
-    const lines = [
-      `${text.title}`,
-      "",
-      `${text.results.badges.conversionRate}: ${percentFormatter.format(results.baseConversionRate)}`,
-      `${text.results.badges.transactions}: ${integerFormatter.format(results.transactions)}`,
-      `${text.results.badges.annualRevenue}: ${currencyFormatter.format(results.annualRevenue)}`,
-      "",
-      `${text.results.table.scenario} | ${text.results.table.newRate} | ${text.results.table.extraTransactions} | ${text.results.table.extraRevenue} | ${text.results.table.extraProfit} | ${text.results.table.roi}`,
-      ...results.scenarioResults.map((scenario) =>
-        `${scenario.title} | ${percentFormatter.format(scenario.newConversionRate)} | +${integerFormatter.format(
-          scenario.extraTransactionsMonthly
-        )} | ${currencyFormatter.format(scenario.extraRevenueYear)} | ${currencyFormatter.format(
-          scenario.extraProfitYear
-        )} | ${scenario.roi === null ? "—" : percentFormatter.format(scenario.roi)}`
-      ),
-    ];
-
-    const blob = createPdfBlob(lines);
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `${baseFileName}.pdf`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  const selectedInvestment =
-    INVESTMENT_OPTIONS.find((option) => option.value === formState.investment) ?? INVESTMENT_OPTIONS[0];
-  const selectedActivity =
-    ACTIVITY_OPTIONS.find((option) => option.value === formState.activity) ?? ACTIVITY_OPTIONS[0];
-  const badgesAriaLabel = language === "nl" ? "Belangrijkste kengetallen" : "Key metrics";
-
-  return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[28px_38px_110px_rgba(15,23,42,0.16)] backdrop-blur   ">
-      <div className="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_rgba(56,189,248,0))]" aria-hidden />
-      <div className="relative">
-        <motion.span
-          initial={shouldReduceMotion ? false : { opacity: 0, y: -16 }}
-          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { duration: 0.4 }}
-          className="inline-flex items-center rounded-full border border-brand-blue/20 bg-brand-blue/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-brand-blue"
-        >
-          {text.badge}
-        </motion.span>
-        <motion.h2
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.06, duration: 0.55 }}
-          className="mt-6 text-3xl font-semibold tracking-tight text-neutral-900 "
-        >
-          {text.title}
-        </motion.h2>
-        <motion.p
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          transition={shouldReduceMotion ? undefined : { delay: 0.1, duration: 0.55 }}
-          className="mt-4 max-w-2xl text-sm text-neutral-600 "
-        >
-          {text.intro}
-        </motion.p>
-
-        <form onSubmit={handleSubmit} className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
-                {text.form.visitors}
-                <input
-                  type="number"
-                  min="0"
-                  step="1"
-                  name="visitors"
-                  value={formState.visitors}
-                  onChange={handleInputChange}
-                  placeholder={text.placeholders.visitors}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40   "
-                  required
-                />
-              </label>
-              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
-                {text.form.transactions}
-                <input
-                  type="number"
-                  min="0"
-                  step="1"
-                  name="transactions"
-                  value={formState.transactions}
-                  onChange={handleInputChange}
-                  placeholder={text.placeholders.transactions}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40   "
-                  required
-                />
-              </label>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
-                {text.form.aov}
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  name="aov"
-                  value={formState.aov}
-                  onChange={handleInputChange}
-                  placeholder={text.placeholders.aov}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40   "
-                  required
-                />
-              </label>
-              <label className="flex flex-col text-sm font-medium text-neutral-700 ">
-                {text.form.margin}
-                <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  step="0.1"
-                  name="margin"
-                  value={formState.margin}
-                  onChange={handleInputChange}
-                  placeholder={text.placeholders.margin}
-                  className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40   "
-                  required
-                />
-              </label>
-            </div>
-            <label className="flex flex-col text-sm font-medium text-neutral-700 ">
-              {text.form.activity}
-              <select
-                name="activity"
-                value={formState.activity}
-                onChange={handleInputChange}
-                className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40   "
-              >
-                {ACTIVITY_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label[language]}
-                  </option>
-                ))}
-              </select>
-              <p className="mt-2 text-xs text-neutral-500 ">
-                {selectedActivity.description[language]}
-              </p>
-            </label>
-            <label className="flex flex-col text-sm font-medium text-neutral-700 ">
-              {text.form.investment}
-              <select
-                name="investment"
-                value={formState.investment}
-                onChange={handleInputChange}
-                className="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/40   "
-              >
-                {INVESTMENT_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label[language]}
-                  </option>
-                ))}
-              </select>
-              <p className="mt-2 text-xs text-neutral-500 ">
-                {selectedInvestment.description[language]}
-              </p>
-            </label>
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center rounded-xl bg-brand-yellow px-6 py-3 text-sm font-semibold text-neutral-900 shadow-lg shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition hover:translate-y-0.5 hover:bg-brand-yellow-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow-dark"
-            >
-              {text.form.submit}
-            </button>
-          </div>
-
-          <div className="space-y-6" aria-live="polite">
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              transition={shouldReduceMotion ? undefined : { delay: 0.12, duration: 0.6 }}
-              className="rounded-3xl border border-white/60 bg-white/70 p-6 shadow-[20px_28px_80px_rgba(15,23,42,0.18)] backdrop-blur   "
-            >
-              <h3 className="text-lg font-semibold text-neutral-900 ">{text.results.headline}</h3>
-              {hasCalculated ? (
-                <div className="mt-6 space-y-6">
-                  <div className="grid gap-4 md:grid-cols-3" role="list" aria-label={badgesAriaLabel}>
-                    <ResultBadge
-                      label={text.results.badges.conversionRate}
-                      value={
-                        results?.valid
-                          ? percentFormatter.format(results.baseConversionRate)
-                          : "—"
-                      }
-                      ariaLabel={`${text.results.badges.conversionRate}: ${
-                        results?.valid ? percentFormatter.format(results.baseConversionRate) : "—"
-                      }`}
-                      description={language === "nl" ? "Transacties ÷ bezoekers" : "Orders ÷ visitors"}
-                    />
-                    <ResultBadge
-                      label={text.results.badges.transactions}
-                      value={
-                        results?.valid
-                          ? integerFormatter.format(results.transactions)
-                          : "—"
-                      }
-                      ariaLabel={`${text.results.badges.transactions}: ${
-                        results?.valid ? integerFormatter.format(results.transactions) : "—"
-                      }`}
-                      description={language === "nl" ? "Per maand" : "Per month"}
-                    />
-                    <ResultBadge
-                      label={text.results.badges.annualRevenue}
-                      value={
-                        results?.valid
-                          ? currencyFormatter.format(results.annualRevenue)
-                          : "—"
-                      }
-                      ariaLabel={`${text.results.badges.annualRevenue}: ${
-                        results?.valid ? currencyFormatter.format(results.annualRevenue) : "—"
-                      }`}
-                      description={language === "nl" ? "Op basis van huidige cijfers" : "Based on current figures"}
-                    />
-                  </div>
-
-                  {results?.valid ? (
-                    <>
-                      <div className="overflow-hidden rounded-3xl border border-white/50 bg-white/80 shadow-inner backdrop-blur  ">
-                        <div className="overflow-x-auto">
-                          <table
-                            className="min-w-full divide-y divide-white/60 text-left text-sm "
-                            aria-label={text.results.table.ariaLabel}
-                          >
-                            <thead className="bg-white/70 ">
-                              <tr>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
-                                  {text.results.table.scenario}
-                                </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
-                                  {text.results.table.newRate}
-                                </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
-                                  {text.results.table.extraTransactions}
-                                </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
-                                  {text.results.table.extraRevenue}
-                                </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
-                                  {text.results.table.extraProfit}
-                                </th>
-                                <th scope="col" className="px-6 py-4 font-semibold text-neutral-600 ">
-                                  {text.results.table.roi}
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/40 ">
-                              {results.scenarioResults.map((scenario) => {
-                                const roiPercent = scenario.roi === null ? null : scenario.roi * 100;
-                                return (
-                                  <tr
-                                    key={scenario.key}
-                                    className={
-                                      scenario.expected
-                                        ? "bg-brand-blue/5 "
-                                        : ""
-                                    }
-                                  >
-                                    <th scope="row" className="px-6 py-4 text-sm font-semibold text-neutral-800 ">
-                                      <div className="space-y-1">
-                                        <span>{scenario.title}</span>
-                                        <p className="text-xs font-normal text-neutral-500 ">
-                                          {scenario.subtitle}
-                                        </p>
-                                        {scenario.expected ? (
-                                          <span className="inline-flex items-center rounded-full bg-brand-blue/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-blue  ">
-                                            {text.results.table.expectedTag}
-                                          </span>
-                                        ) : null}
-                                      </div>
-                                    </th>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
-                                      {percentFormatter.format(scenario.newConversionRate)}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
-                                      +{integerFormatter.format(scenario.extraTransactionsMonthly)}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
-                                      {currencyFormatter.format(scenario.extraRevenueYear)}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-neutral-700 ">
-                                      {currencyFormatter.format(scenario.extraProfitYear)}
-                                    </td>
-                                    <td className={`px-6 py-4 text-sm font-semibold ${getRoiTone(roiPercent)}`}>
-                                      {scenario.roi === null
-                                        ? "—"
-                                        : percentFormatter.format(scenario.roi)}
-                                    </td>
-                                  </tr>
-                                );
-                              })}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-
-                      <div className="grid gap-6 lg:grid-cols-2">
-                        <ScenarioBarChart
-                          title={text.results.charts.revenueTitle}
-                          valueKey="extraRevenueYear"
-                          data={results.scenarioResults}
-                          formatter={(value) => currencyFormatter.format(value)}
-                          fallbackLabel={text.results.charts.fallback}
-                          ariaLabel={text.results.charts.revenueTitle}
-                        />
-                        <ScenarioBarChart
-                          title={text.results.charts.profitTitle}
-                          valueKey="extraProfitYear"
-                          data={results.scenarioResults}
-                          formatter={(value) => currencyFormatter.format(value)}
-                          fallbackLabel={text.results.charts.fallback}
-                          ariaLabel={text.results.charts.profitTitle}
-                        />
-                      </div>
-
-                      <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500 ">
-                          {text.results.download.label}
-                        </p>
-                        <div className="flex flex-wrap gap-3" role="group" aria-label={text.results.download.label}>
-                          <button
-                            type="button"
-                            onClick={handleDownloadCsv}
-                            className="inline-flex items-center justify-center rounded-xl border border-brand-blue/30 bg-white px-5 py-2.5 text-sm font-semibold text-brand-blue shadow-sm transition hover:border-brand-blue hover:bg-brand-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue  "
-                          >
-                            {text.results.download.csv}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleDownloadPdf}
-                            className="inline-flex items-center justify-center rounded-xl border border-brand-blue/30 bg-white px-5 py-2.5 text-sm font-semibold text-brand-blue shadow-sm transition hover:border-brand-blue hover:bg-brand-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue  "
-                          >
-                            {text.results.download.pdf}
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="rounded-2xl border border-dashed border-neutral-300/60 bg-white/60 p-6 text-sm text-neutral-600   ">
-                      <p className="font-semibold text-neutral-800 ">{text.results.invalidTitle}</p>
-                      <p className="mt-2 text-sm">{text.results.invalidDescription}</p>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="mt-4 text-sm text-neutral-600 ">
-                  {language === "nl"
-                    ? "Vul je cijfers in en klik op bereken om de ROI-scenario's te zien."
-                    : "Enter your figures and calculate to reveal the ROI scenarios."}
-                </p>
-              )}
-            </motion.div>
-          </div>
-        </form>
       </div>
     </div>
   );
