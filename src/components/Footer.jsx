@@ -31,14 +31,6 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-5">
           <div className="max-w-sm space-y-3">
             <h4 className="font-semibold text-brand-blue">EcomMeasure</h4>
-            <p className="text-neutral-600 text-sm leading-relaxed">{t.intro}</p>
-            <Link
-              to="/contact"
-              className="inline-block rounded-md bg-brand-yellow px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-brand-yellow-dark"
-              onClick={createViewTransitionClickHandler(navigateWithTransition, "/contact")}
-            >
-              {t.cta}
-            </Link>
           </div>
           {columns.map((column) => (
             <div key={column.title}>

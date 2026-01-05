@@ -422,7 +422,6 @@ export const translations = {
           title: "Bedrijf",
           items: [
             { label: "Over EcomMeasure", href: "/about" },
-            { label: "Contact", href: "/contact" },
           ],
         },
       },
@@ -871,7 +870,6 @@ export const translations = {
           title: "Company",
           items: [
             { label: "About", href: "/about" },
-            { label: "Contact", href: "/contact" },
           ],
         },
       },
