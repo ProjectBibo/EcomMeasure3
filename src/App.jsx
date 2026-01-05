@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
 import CookieNoticeLoader from "./components/CookieNoticeLoader";
 import { LanguageProvider } from "./context/LanguageContext";
+import { scrollToContactSection } from "./utils/scrollToContact";
 import { isViewTransitionActive, resetPageView } from "./utils/viewTransition";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -14,7 +15,6 @@ const Measurement = lazy(() => import("./pages/Measurement"));
 const Cro = lazy(() => import("./pages/Cro"));
 const BayesianCalculator = lazy(() => import("./pages/BayesianCalculator"));
 const CroRoiCalculator = lazy(() => import("./pages/CroRoiCalculator"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const GA4GTM = lazy(() => import("./pages/GA4GTM"));
@@ -87,6 +87,18 @@ function AppContent() {
     resetPageView();
   }, [location.hash, location.pathname, location.search]);
 
+  useEffect(() => {
+    if (!location.hash) return;
+    if (location.hash === "#contact") {
+      scrollToContactSection();
+      return;
+    }
+
+    const target = document.querySelector(location.hash);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [location]);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors ">
       <CookieNoticeLoader />
@@ -105,7 +117,6 @@ function AppContent() {
           <Route path="tools/bayesian-ab-test" element={<BayesianCalculator />} />
           <Route path="tools/cro-roi" element={<CroRoiCalculator />} />
           <Route path="blog/:slug" element={<BlogArticle />} />
-          <Route path="contact" element={<ContactPage />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="confirmation" element={<Confirmation />} />
           <Route path="*" element={<NotFound />} />

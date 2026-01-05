@@ -14,13 +14,13 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
 import useViewTransitionNavigate from "../hooks/useViewTransitionNavigate";
+import { scrollToContactSection } from "../utils/scrollToContact";
 
 const routePrefetchers = {
   "/": () => import("../pages/Home"),
   "/about": () => import("../pages/About"),
   "/measurement": () => import("../pages/Measurement"),
   "/cro": () => import("../pages/Cro"),
-  "/contact": () => import("../pages/ContactPage"),
   "/blog": () => import("../pages/BlogArticle"),
   "/tools/bayesian-ab-test": () => import("../pages/BayesianCalculator"),
   "/tools/cro-roi": () => import("../pages/CroRoiCalculator"),
@@ -69,7 +69,7 @@ export default function Header() {
     [language]
   );
 
-  const { about, blogLabel, contact, toolsLabel, toolsItems } = t.nav;
+  const { about, blogLabel, toolsLabel, toolsItems } = t.nav;
 
   const toolLinks = useMemo(
     () =>
@@ -86,9 +86,8 @@ export default function Header() {
       { id: "about", type: "link", to: "/about", label: about },
       { id: "blog", type: "dropdown", label: blogLabel, items: blogLinks },
       { id: "tools", type: "dropdown", label: toolsLabel, items: toolLinks },
-      { id: "contact", type: "link", to: "/contact", label: contact },
     ],
-    [about, blogLabel, blogLinks, contact, toolLinks, toolsLabel]
+    [about, blogLabel, blogLinks, toolLinks, toolsLabel]
   );
 
   const prefetchRoute = useCallback((target) => {
@@ -315,6 +314,24 @@ export default function Header() {
       isActive ? "text-brand-blue " : ""
     }`;
 
+  const handleContactNavigation = useCallback(
+    (event) => {
+      if (event?.preventDefault) {
+        event.preventDefault();
+      }
+      setOpenDropdown(null);
+      setIsMenuOpen(false);
+
+      if (location.pathname === "/") {
+        scrollToContactSection();
+        return;
+      }
+
+      navigateWithTransition("/#contact");
+    },
+    [location.pathname, navigateWithTransition]
+  );
+
   return (
     <>
       <header
@@ -493,13 +510,11 @@ export default function Header() {
                 <span className="whitespace-nowrap">+31 6 8252 3260</span>
               </a>
               <Link
-                to="/contact"
+                to="/#contact"
                 data-magnetic
                 data-variant="primary"
                 className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200"
-                onMouseEnter={() => prefetchRoute("/contact")}
-                onFocus={() => prefetchRoute("/contact")}
-                onClick={navClickFactory("/contact")}
+                onClick={handleContactNavigation}
               >
                 {t.cta}
               </Link>
@@ -531,18 +546,16 @@ export default function Header() {
                     <Phone size={16} aria-hidden />
                     <span className="whitespace-nowrap">+31 6 8252 3260</span>
                   </a>
-                  <Link
-                    to="/contact"
-                    data-magnetic
-                    data-variant="primary"
-                    className="inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
-                    onMouseEnter={() => prefetchRoute("/contact")}
-                    onFocus={() => prefetchRoute("/contact")}
-                    onClick={navClickFactory("/contact")}
-                  >
-                    {t.cta}
-                  </Link>
-                </div>
+                <Link
+                  to="/#contact"
+                  data-magnetic
+                  data-variant="primary"
+                  className="inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                  onClick={handleContactNavigation}
+                >
+                  {t.cta}
+                </Link>
+              </div>
               </div>
             </div>
         </div>
@@ -639,9 +652,12 @@ export default function Header() {
               </nav>
               <div className="space-y-4">
                 <Link
-                  to="/contact"
-                  onClick={navClickFactory("/contact")}
+                  to="/#contact"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
+                  onClick={(event) => {
+                    handleContactNavigation(event);
+                    setIsMenuOpen(false);
+                  }}
                 >
                   {t.cta}
                 </Link>

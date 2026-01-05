@@ -1,4 +1,5 @@
 import React from "react";
+import { scrollToContactSection } from "../utils/scrollToContact";
 
 export default function PilotCTA() {
   return (
@@ -15,6 +16,10 @@ export default function PilotCTA() {
             data-magnetic
             data-variant="primary"
             className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_18px_40px_rgba(255,204,2,0.35)] transition-colors duration-200"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToContactSection();
+            }}
           >
             Plan een gratis kennismaking
           </a>

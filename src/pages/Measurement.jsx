@@ -160,11 +160,6 @@ const content = {
         emailInvalid: "Gebruik een geldig e-mailadres.",
       },
     },
-    finalCta: {
-      title: "Meten dat beslissingen versnelt",
-      body: "Plan een korte kennismaking. We laten je zien hoe we meten, documenteren en opleveren.",
-      cta: "Plan een kennismaking",
-    },
   },
   en: {
     seo: {
@@ -322,11 +317,6 @@ const content = {
         emailInvalid: "Use a valid email address.",
       },
     },
-    finalCta: {
-      title: "Measurement that speeds up decisions",
-      body: "Book a short intro. We will show how we measure, document and deliver.",
-      cta: "Book an intro call",
-    },
   },
 };
 
@@ -343,12 +333,6 @@ function Hero({ hero }) {
             ))}
           </div>
           <div className="flex flex-wrap gap-3">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-[4px] border border-neutral-900/10 bg-[#ffcc02] px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-colors hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900/40"
-            >
-              {hero.primaryCta}
-            </a>
             <a
               href="#video-analyse"
               className="inline-flex items-center justify-center rounded-[4px] border border-neutral-300 px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:border-neutral-500 hover:text-neutral-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900/30"
@@ -382,7 +366,7 @@ function TrustStrip({ bullets }) {
   );
 }
 
-function HelpSection({ section, reversed, contactLabel }) {
+function HelpSection({ section, reversed }) {
   return (
     <section className="section-shell bg-white">
       <div className={`site-container grid gap-8 lg:grid-cols-2 ${reversed ? "lg:[&>div:first-child]:order-2" : ""}`}>
@@ -397,12 +381,6 @@ function HelpSection({ section, reversed, contactLabel }) {
               </li>
             ))}
           </ul>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-600"
-          >
-            {contactLabel}
-          </a>
         </div>
 
         <div className="space-y-3">
@@ -414,29 +392,9 @@ function HelpSection({ section, reversed, contactLabel }) {
   );
 }
 
-function FinalCta({ copy }) {
-  return (
-    <section className="section-shell border-t border-neutral-200 bg-neutral-50/70">
-      <div className="site-container flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-2">
-          <h3 className="text-2xl font-semibold text-neutral-900">{copy.title}</h3>
-          <p className="text-neutral-700">{copy.body}</p>
-        </div>
-        <a
-          href="/contact"
-          className="inline-flex items-center justify-center rounded-[4px] border border-neutral-900/10 bg-[#ffcc02] px-4 py-2.5 text-sm font-semibold text-neutral-900 shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-colors hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900/40"
-        >
-          {copy.cta}
-        </a>
-      </div>
-    </section>
-  );
-}
-
 export default function Measurement() {
   const { language } = useLanguage();
   const copy = content[language];
-  const contactLabel = language === "nl" ? "Plan kennismaking" : "Book intro call";
 
   return (
     <>
@@ -449,7 +407,6 @@ export default function Measurement() {
             key={section.title}
             section={section}
             reversed={index % 2 === 1}
-            contactLabel={contactLabel}
           />
         ))}
         <ServiceRowsSection
@@ -457,13 +414,10 @@ export default function Measurement() {
           title={copy.services.title}
           intro={copy.services.intro}
           services={copy.services.list}
-          ctaLabel={copy.services.ctaLabel}
-          ctaHref="/contact"
         />
         <div id="video-analyse">
           <VideoAnalysisSection copy={copy.video} />
         </div>
-        <FinalCta copy={copy.finalCta} />
       </main>
     </>
   );
