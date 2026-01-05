@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
+import { scrollToContactSection } from "../utils/scrollToContact";
 
 export default function CaseHighlight() {
   const shouldReduceMotion = useReducedMotion();
@@ -39,6 +40,10 @@ export default function CaseHighlight() {
             data-magnetic
             data-variant="primary"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-neutral-900 shadow-[0_24px_55px_rgba(255,204,2,0.35)] transition-colors duration-200"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToContactSection();
+            }}
           >
             {t.cta}
           </a>

@@ -14,6 +14,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
 import { blogPosts } from "../data/blogPosts";
 import useViewTransitionNavigate from "../hooks/useViewTransitionNavigate";
+import { scrollToContactSection } from "../utils/scrollToContact";
 
 const routePrefetchers = {
   "/": () => import("../pages/Home"),
@@ -313,6 +314,24 @@ export default function Header() {
       isActive ? "text-brand-blue " : ""
     }`;
 
+  const handleContactNavigation = useCallback(
+    (event) => {
+      if (event?.preventDefault) {
+        event.preventDefault();
+      }
+      setOpenDropdown(null);
+      setIsMenuOpen(false);
+
+      if (location.pathname === "/") {
+        scrollToContactSection();
+        return;
+      }
+
+      navigateWithTransition("/#contact");
+    },
+    [location.pathname, navigateWithTransition]
+  );
+
   return (
     <>
       <header
@@ -495,6 +514,7 @@ export default function Header() {
                 data-magnetic
                 data-variant="primary"
                 className="rounded-md bg-brand-yellow px-5 py-2 font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                onClick={handleContactNavigation}
               >
                 {t.cta}
               </Link>
@@ -526,15 +546,16 @@ export default function Header() {
                     <Phone size={16} aria-hidden />
                     <span className="whitespace-nowrap">+31 6 8252 3260</span>
                   </a>
-                  <Link
-                    to="/#contact"
-                    data-magnetic
-                    data-variant="primary"
-                    className="inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
-                  >
-                    {t.cta}
-                  </Link>
-                </div>
+                <Link
+                  to="/#contact"
+                  data-magnetic
+                  data-variant="primary"
+                  className="inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                  onClick={handleContactNavigation}
+                >
+                  {t.cta}
+                </Link>
+              </div>
               </div>
             </div>
         </div>
@@ -633,7 +654,10 @@ export default function Header() {
                 <Link
                   to="/#contact"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-3 text-sm font-semibold uppercase tracking-wide text-neutral-900 shadow-[0_24px_50px_rgba(255,204,2,0.35)] transition hover:-translate-y-0.5 hover:bg-brand-yellow-dark hover:shadow-[0_28px_60px_rgba(255,204,2,0.45)]"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(event) => {
+                    handleContactNavigation(event);
+                    setIsMenuOpen(false);
+                  }}
                 >
                   {t.cta}
                 </Link>

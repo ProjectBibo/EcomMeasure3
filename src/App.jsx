@@ -86,6 +86,13 @@ function AppContent() {
     resetPageView();
   }, [location.hash, location.pathname, location.search]);
 
+  useEffect(() => {
+    if (!location.hash) return;
+    const target = document.querySelector(location.hash);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [location]);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-surface-light transition-colors ">
       <CookieNoticeLoader />
