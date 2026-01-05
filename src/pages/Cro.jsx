@@ -316,8 +316,11 @@ function Hero({ hero }) {
         </div>
 
         <div className="space-y-3">
-          <div className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 bg-neutral-50" />
-          <p className="text-sm text-neutral-500">Ruimte voor een hero-afbeelding of visual.</p>
+          <img
+            src="/Foto CRO.svg"
+            alt="CRO analysis examples"
+            className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 object-cover"
+          />
         </div>
       </div>
     </section>
