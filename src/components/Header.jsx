@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../i18n/content";
@@ -480,7 +480,18 @@ export default function Header() {
               ))}
             </div>
 
-            <div className="hidden flex-shrink-0 md:block">
+            <div className="hidden items-center gap-4 md:flex">
+              <a
+                href="tel:+31682523260"
+                className="group inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <Phone
+                  size={18}
+                  className="transition-colors duration-200 group-hover:text-brand-blue"
+                  aria-hidden
+                />
+                <span className="whitespace-nowrap">+31 6 8252 3260</span>
+              </a>
               <Link
                 to="/contact"
                 data-magnetic
@@ -512,19 +523,28 @@ export default function Header() {
                     </Link>
                   ))}
                 </div>
-              <Link
-                to="/contact"
-                data-magnetic
-                data-variant="primary"
-                className="ml-4 inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
-                onMouseEnter={() => prefetchRoute("/contact")}
-                onFocus={() => prefetchRoute("/contact")}
-                onClick={navClickFactory("/contact")}
-              >
-                {t.cta}
-              </Link>
+                <div className="ml-4 flex items-center gap-3">
+                  <a
+                    href="tel:+31682523260"
+                    className="inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-3 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    <Phone size={16} aria-hidden />
+                    <span className="whitespace-nowrap">+31 6 8252 3260</span>
+                  </a>
+                  <Link
+                    to="/contact"
+                    data-magnetic
+                    data-variant="primary"
+                    className="inline-flex items-center rounded-full bg-brand-yellow px-4 py-2 text-sm font-semibold text-neutral-900 shadow-[0_16px_38px_rgba(255,204,2,0.35)] transition-colors duration-200"
+                    onMouseEnter={() => prefetchRoute("/contact")}
+                    onFocus={() => prefetchRoute("/contact")}
+                    onClick={navClickFactory("/contact")}
+                  >
+                    {t.cta}
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
         </div>
       </header>
 
