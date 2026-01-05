@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import SectionFallback from "./components/SectionFallback";
 import CookieNoticeLoader from "./components/CookieNoticeLoader";
 import { LanguageProvider } from "./context/LanguageContext";
+import { scrollToContactSection } from "./utils/scrollToContact";
 import { isViewTransitionActive, resetPageView } from "./utils/viewTransition";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -88,6 +89,11 @@ function AppContent() {
 
   useEffect(() => {
     if (!location.hash) return;
+    if (location.hash === "#contact") {
+      scrollToContactSection();
+      return;
+    }
+
     const target = document.querySelector(location.hash);
     if (!target) return;
     target.scrollIntoView({ behavior: "smooth", block: "start" });
