@@ -343,8 +343,13 @@ function Hero({ hero }) {
         </div>
 
         <div className="relative">
-          <div className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 bg-neutral-50" />
-          <p className="mt-3 text-sm text-neutral-500">Ruimte voor een hero-afbeelding of visual.</p>
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-[6px] border border-neutral-200 bg-neutral-50">
+            <img
+              src="/Foto%20Measurement.svg"
+              alt="Measurement visual"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
