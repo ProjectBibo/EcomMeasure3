@@ -67,11 +67,9 @@ export const translations = {
       badge: "Meetbaar maken wat er gebeurd, helder maken wat je kunt verbeteren",
       titleLead: "Wij helpen je",
       rotatingPhrases: [
-        "beter meten",
-        "slimmer optimaliseren",
-        "beslissen op data",
-        "conversiegericht verbeteren",
-        "je website laten presteren",
+        "gedrag inzichtelijk maken",
+        "metingen correct inrichten",
+        "meer halen uit bestaand verkeer",
       ],
       titleHighlight: "GA4 en bewezen CRO-experimenten",
       description:
