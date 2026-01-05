@@ -160,11 +160,6 @@ const content = {
         emailInvalid: "Gebruik een geldig e-mailadres.",
       },
     },
-    finalCta: {
-      title: "Meten dat beslissingen versnelt",
-      body: "Plan een korte kennismaking. We laten je zien hoe we meten, documenteren en opleveren.",
-      cta: "Plan een kennismaking",
-    },
   },
   en: {
     seo: {
@@ -322,11 +317,6 @@ const content = {
         emailInvalid: "Use a valid email address.",
       },
     },
-    finalCta: {
-      title: "Measurement that speeds up decisions",
-      body: "Book a short intro. We will show how we measure, document and deliver.",
-      cta: "Book an intro call",
-    },
   },
 };
 
@@ -402,19 +392,6 @@ function HelpSection({ section, reversed }) {
   );
 }
 
-function FinalCta({ copy }) {
-  return (
-    <section className="section-shell border-t border-neutral-200 bg-neutral-50/70">
-      <div className="site-container flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-2">
-          <h3 className="text-2xl font-semibold text-neutral-900">{copy.title}</h3>
-          <p className="text-neutral-700">{copy.body}</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Measurement() {
   const { language } = useLanguage();
   const copy = content[language];
@@ -441,7 +418,6 @@ export default function Measurement() {
         <div id="video-analyse">
           <VideoAnalysisSection copy={copy.video} />
         </div>
-        <FinalCta copy={copy.finalCta} />
       </main>
     </>
   );
