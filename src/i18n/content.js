@@ -11,8 +11,8 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Conversiefunnel omzet calculator", href: "/tools/bayesian-ab-test" },
-          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+          { label: "Conversiefunnel omzet calculator", href: "/tools/conversion-funnel-calculator" },
+          { label: "CRO ROI Calculator", href: "/tools/funnel-impact-calculator" },
         ],
         contact: "Contact",
       },
@@ -414,8 +414,8 @@ export const translations = {
         tools: {
           title: "Tools",
           items: [
-            { label: "Conversiefunnel omzet calculator", href: "/tools/bayesian-ab-test" },
-            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+            { label: "Conversiefunnel omzet calculator", href: "/tools/conversion-funnel-calculator" },
+            { label: "CRO ROI Calculator", href: "/tools/funnel-impact-calculator" },
           ],
         },
         company: {
@@ -446,8 +446,8 @@ export const translations = {
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
-          { label: "Conversion funnel revenue calculator", href: "/tools/bayesian-ab-test" },
-          { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+          { label: "Conversion funnel revenue calculator", href: "/tools/conversion-funnel-calculator" },
+          { label: "CRO ROI Calculator", href: "/tools/funnel-impact-calculator" },
         ],
         contact: "Contact",
       },
@@ -862,8 +862,8 @@ export const translations = {
         tools: {
           title: "Tools",
           items: [
-            { label: "Conversion funnel revenue calculator", href: "/tools/bayesian-ab-test" },
-            { label: "CRO ROI Calculator", href: "/tools/cro-roi" },
+            { label: "Conversion funnel revenue calculator", href: "/tools/conversion-funnel-calculator" },
+            { label: "CRO ROI Calculator", href: "/tools/funnel-impact-calculator" },
           ],
         },
         company: {

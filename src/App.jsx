@@ -114,8 +114,8 @@ function AppContent() {
           <Route path="cro/gedragsanalyse" element={<BehaviorAnalysis />} />
           <Route path="cro/hypotheses-ab-tests" element={<HypothesesAbTests />} />
           <Route path="cro/implementatie" element={<Implementation />} />
-          <Route path="tools/bayesian-ab-test" element={<ConversionFunnelCalculator />} />
-          <Route path="tools/cro-roi" element={<CroRoiCalculator />} />
+          <Route path="tools/conversion-funnel-calculator" element={<ConversionFunnelCalculator />} />
+          <Route path="tools/funnel-impact-calculator" element={<CroRoiCalculator />} />
           <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="confirmation" element={<Confirmation />} />
