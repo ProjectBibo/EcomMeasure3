@@ -18,7 +18,7 @@ function CroServiceCard({ service }) {
       <div className="grid gap-3 text-sm leading-relaxed text-neutral-800">
         {service.blocks.map((block) => (
           <div key={block.title} className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-neutral-500">{block.title}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-neutral-900">{block.title}</p>
             <ul className="space-y-1">
               {block.items.map((item) => (
                 <li key={item} className="flex gap-2">
@@ -30,6 +30,8 @@ function CroServiceCard({ service }) {
           </div>
         ))}
       </div>
+
+      <div className="mt-auto pt-3 text-base font-semibold text-neutral-900">{service.price}</div>
     </div>
   );
 }

@@ -51,15 +51,16 @@ const content = {
     ],
     services: {
       eyebrow: "Diensten",
-      title: "CRO als scherp advies, geen testfabriek",
+      title: "CRO-diensten gericht op inzicht, niet op volume",
       intro:
-        "Drie complementaire CRO-diensten in hetzelfde format als onze meetpakketten: duidelijk, gefocust en zonder ruis.",
+        "Geen testfabriek of losse experimenten. Deze CRO-diensten zijn bedoeld om scherp inzicht te krijgen in gedrag, knelpunten en groeikansen — zodat optimalisaties onderbouwd en doelgericht zijn.",
       services: [
         {
           badge: "Review",
           title: "Kwalitatieve analyse via UX expert review",
           description:
             "Een grondige beoordeling van de website of funnel door een ervaren UX- en usability specialist, gericht op het vinden van frictie, onduidelijkheid en gemiste conversiekansen.",
+          price: "Vanaf €750 (ex btw)",
           blocks: [
             {
               title: "Wat we doen",
@@ -94,6 +95,7 @@ const content = {
           title: "Kwantitatieve gedragsanalyse voor groeikansen",
           description:
             "Analyse van grootschalig gebruikersgedrag om patronen, afhakers en optimalisatiemogelijkheden bloot te leggen.",
+          price: "Vanaf €1200 (ex btw)",
           blocks: [
             {
               title: "Wat we doen",
@@ -127,6 +129,7 @@ const content = {
           title: "User testing over de volledige customer journey",
           description:
             "Testen met echte gebruikers om te begrijpen waar verwachtingen, intenties en realiteit uit elkaar lopen.",
+          price: "Vanaf €2100 (ex btw)",
           blocks: [
             {
               title: "Wat we doen",
@@ -228,14 +231,16 @@ const content = {
     ],
     services: {
       eyebrow: "Services",
-      title: "CRO as sharp advice, not a test factory",
-      intro: "Three complementary CRO services in the same calm format as our measurement packages: clear, focused, and free of noise.",
+      title: "CRO services aimed at insight, not volume",
+      intro:
+        "No test factory or loose experiments. These CRO services are designed to deliver sharp insight into behaviour, friction points and growth opportunities — so optimisation is evidence-based and purposeful.",
       services: [
         {
           badge: "Review",
           title: "Qualitative analysis via UX expert review",
           description:
             "A thorough review of your site or funnel by an experienced UX and usability specialist, focused on friction, confusion and missed conversion opportunities.",
+          price: "From €750 (ex VAT)",
           blocks: [
             {
               title: "What we do",
@@ -270,6 +275,7 @@ const content = {
           title: "Quantitative behaviour analysis for growth",
           description:
             "Analysis of large-scale user behaviour to uncover patterns, drop-offs and optimisation opportunities.",
+          price: "From €1200 (ex VAT)",
           blocks: [
             {
               title: "What we do",
@@ -303,6 +309,7 @@ const content = {
           title: "User testing across the full customer journey",
           description:
             "Testing with real users to see where expectations, intent and reality diverge.",
+          price: "From €2100 (ex VAT)",
           blocks: [
             {
               title: "What we do",
