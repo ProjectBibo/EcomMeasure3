@@ -1,8 +1,8 @@
 import React from "react";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
-import ServiceRowsSection from "../components/ServiceRowsSection";
 import VideoAnalysisSection from "../components/VideoAnalysisSection";
+import MeasurementPackages from "../components/MeasurementPackages";
 
 const content = {
   nl: {
@@ -50,91 +50,90 @@ const content = {
         imageLabel: "GTM en consent flows",
       },
     ],
-    services: {
+    packages: {
       eyebrow: "Diensten",
-      title: "Van basis tot enhanced e-commerce",
-      intro: "",
-      ctaLabel: "Plan een kennismaking",
-      list: [
+      title: "GA4 & metingen: pakketten die je meting wél bruikbaar maken",
+      intro:
+        "We richten GA4, consent en events in zonder ruis. Zo heb je betrouwbare cijfers, korte lijntjes met marketing en sneller antwoord op meetvragen.",
+      note: "Geen lange contracten. Pakketprijzen zijn vanaf en hangen af van platform en complexiteit.",
+      packages: [
         {
-          label: "GA4",
-          title: "GA4 inrichting en configuratie",
-          description: "Property-structuur, datastromen, filters en koppelingen afgestemd op jouw organisatie.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Schoon ingestelde GA4-property",
-            "Dashboards met kern-KPI's",
-            "Handover en teamwalkthrough",
+          badge: "Startpakket",
+          title: "GA4 Start",
+          subtitle: "Kerninrichting van GA4 zodat je basis klopt en gedeeld kan worden.",
+          bullets: [
+            "GA4-property en datastream netjes ingericht",
+            "Baseline events + belangrijkste conversies",
+            "Uitsluiten intern verkeer en basisfilters",
+            "Koppeling met Google Tag Manager",
+            "Korte walkthrough + oplevernotities",
           ],
-          resultTitle: "Resultaat",
-          results: [
-            "Betrouwbare rapportages",
-            "Sneller antwoord op meetvragen",
-          ],
+          extra: {
+            getsTitle: "Wat je krijgt",
+            gets: ["Schoon ingestelde meting", "Documentatie van keuzes"],
+            resultTitle: "Resultaat",
+            results: ["Betrouwbare basisdata", "Sneller antwoord op meetvragen"],
+          },
+          price: "Vanaf €199 (ex btw)",
         },
         {
-          label: "GTM",
-          title: "GTM, events en conversies",
-          description: "Tagging en events die aansluiten op je funnel, inclusief server-side of consent integraties waar nodig.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Duidelijke eventdefinities",
-            "Netjes ingerichte tags en triggers",
-            "Controlelijst voor QA",
+          badge: "Plus",
+          title: "GA4 Start + cookiebanner",
+          subtitle: "Start plus consent dat past bij jouw situatie.",
+          bullets: [
+            "Alles uit GA4 Start",
+            "Cookiebanner + consentflow afgestemd",
+            "Consent Mode v2 ingericht en getest",
+            "Basis koppelingen met Ads/Meta waar nodig",
+            "Documentatie van meet- en consentkeuzes",
           ],
-          resultTitle: "Resultaat",
-          results: [
-            "Consistente meetpunten",
-            "Heldere conversie- en funnels",
-          ],
+          extra: {
+            getsTitle: "Wat je krijgt",
+            gets: ["Ingerichte banner en consent"],
+            resultTitle: "Resultaat",
+            results: ["Meting die klopt én compliant is", "Minder datalek/risico"],
+          },
+          price: "Vanaf €399 (ex btw)",
         },
         {
-          label: "Consent",
-          title: "Consent en AVG-proof meten",
-          description: "Consent mode en cookiebanners afgestemd op jouw situatie, inclusief documentatie voor compliance.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Implementatie- en testenplan",
-            "Afgesproken consent flows",
-            "Compliance-notes voor legal",
+          badge: "Advanced",
+          title: "GA4 Advanced",
+          subtitle: "Events en conversies scherp op funnel en micro-acties.",
+          bullets: [
+            "Alles uit GA4 Start",
+            "Funnel events + microconversies (add_to_cart/checkout)",
+            "Event-naming + meetplan light",
+            "Conversies ingesteld in GA4 en optioneel Ads import",
+            "QA-checklist en testscenario's",
           ],
-          resultTitle: "Resultaat",
-          results: [
-            "Transparante, conforme meting",
-            "Minder datalek- en risico zorgen",
-          ],
+          extra: {
+            getsTitle: "Wat je krijgt",
+            gets: ["Meetplan light", "Testrapport"],
+            resultTitle: "Resultaat",
+            results: ["Consistente meetpunten", "Heldere funnel-inzichten"],
+          },
+          price: "Vanaf €399 (ex btw)",
+          note: "* afhankelijk van huidige setup",
         },
         {
-          label: "E-commerce",
-          title: "Enhanced e-commerce",
-          description: "Volledige e-commerce tagging en rapportage afgestemd op jouw platform en datalayer.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Mapping van alle e-commerce events",
-            "Validatie en testscenario's",
-            "Overzicht van rapportages",
+          badge: "E-commerce",
+          title: "GA4 E-commerce",
+          subtitle: "Enhanced e-commerce events en validatie voor je shop.",
+          bullets: [
+            "Alles uit Advanced of Start + uitbreidingen",
+            "Enhanced e-commerce mapping (view_item t/m purchase)",
+            "Afstemming met dev/bureau over datalaag",
+            "Validatie, debugging en testorders",
+            "Rapportage-overzicht waar je wat vindt",
           ],
-          resultTitle: "Resultaat",
-          results: [
-            "Klarer inzicht in basket en checkout",
-            "Betere basis voor optimalisaties",
-          ],
-        },
-        {
-          label: "Dashboards",
-          title: "Dashboards, meetplan en KPI's",
-          description: "Dashboards die de businessvragen beantwoorden en gekoppeld zijn aan een actueel meetplan.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Meetplan met KPI's en definities",
-            "Dashboard met de relevante lagen",
-            "Ritme voor rapportage en review",
-          ],
-          resultTitle: "Resultaat",
-          results: [
-            "Shared language over performance",
-            "Snelle signalering van afwijkingen",
-          ],
+          extra: {
+            getsTitle: "Wat je krijgt",
+            gets: ["Eventmapping per stap", "Testscenario's en checks"],
+            resultTitle: "Resultaat",
+            results: ["Inzicht in basket & checkout", "Betere basis voor CRO"],
+          },
+          price: "Vanaf €799 (ex btw)",
+          note: "* afhankelijk van platform en complexiteit",
         },
       ],
     },
@@ -206,91 +205,90 @@ const content = {
         imageLabel: "GTM and consent flows",
       },
     ],
-    services: {
+    packages: {
       eyebrow: "Services",
-      title: "From fundamentals to enhanced e-commerce",
-      intro: "No bundles or packages – only what you need to keep measurement reliable, compliant and actionable.",
-      ctaLabel: "Book an intro call",
-      list: [
+      title: "GA4 & measurement: packages that keep your data usable",
+      intro:
+        "We set up GA4, consent and events with clean governance. That means reliable numbers, faster answers and direct collaboration with marketing.",
+      note: "No long contracts. Package prices start here and vary by platform and complexity.",
+      packages: [
         {
-          label: "GA4",
-          title: "GA4 setup and configuration",
-          description: "Property structure, data streams, filters and integrations tailored to your organisation.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Clean GA4 property setup",
-            "Dashboards with core KPIs",
-            "Handover and team walkthrough",
+          badge: "Starter",
+          title: "GA4 Start",
+          subtitle: "Core GA4 setup so your foundation is trustworthy and shareable.",
+          bullets: [
+            "GA4 property and data stream configured correctly",
+            "Baseline events and key conversions",
+            "Internal traffic exclusions and filters",
+            "Google Tag Manager connection",
+            "Short walkthrough and handover notes",
           ],
-          resultTitle: "Result",
-          results: [
-            "Trustworthy reporting",
-            "Faster answers to measurement questions",
-          ],
+          extra: {
+            getsTitle: "What you get",
+            gets: ["Clean measurement setup", "Documented choices"],
+            resultTitle: "Outcome",
+            results: ["Reliable baseline data", "Faster answers to measurement questions"],
+          },
+          price: "From €199 (ex VAT)",
         },
         {
-          label: "GTM",
-          title: "GTM, events and conversions",
-          description: "Tagging and events aligned to your funnel, including server-side or consent integrations where needed.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Clear event definitions",
-            "Well-structured tags and triggers",
-            "QA checklist",
+          badge: "Plus",
+          title: "GA4 Start + cookie banner",
+          subtitle: "Start plus consent that fits your legal reality.",
+          bullets: [
+            "Everything in GA4 Start",
+            "Cookie banner and consent flow tailored",
+            "Consent Mode v2 configured and tested",
+            "Core ad pixels aligned where needed",
+            "Documentation of measurement and consent choices",
           ],
-          resultTitle: "Result",
-          results: [
-            "Consistent measurement points",
-            "Clear conversion and funnel views",
-          ],
+          extra: {
+            getsTitle: "What you get",
+            gets: ["Live banner and consent flow"],
+            resultTitle: "Outcome",
+            results: ["Measurement that is correct and compliant", "Lower data-risk"],
+          },
+          price: "From €399 (ex VAT)",
         },
         {
-          label: "Consent",
-          title: "Consent and GDPR-ready tracking",
-          description: "Consent mode and cookie banners tailored to your situation, with documentation for compliance.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Implementation and testing plan",
-            "Agreed consent flows",
-            "Compliance notes for legal",
+          badge: "Advanced",
+          title: "GA4 Advanced",
+          subtitle: "Events and conversions shaped around your funnel and micro actions.",
+          bullets: [
+            "Everything in GA4 Start",
+            "Funnel events and micro conversions (add_to_cart/checkout)",
+            "Event naming and light measurement plan",
+            "Conversions in GA4 plus optional Google Ads import",
+            "QA checklist and test scenarios",
           ],
-          resultTitle: "Result",
-          results: [
-            "Transparent, compliant measurement",
-            "Less risk and fewer data concerns",
-          ],
+          extra: {
+            getsTitle: "What you get",
+            gets: ["Light measurement plan", "Test report"],
+            resultTitle: "Outcome",
+            results: ["Consistent measurement points", "Clear funnel insights"],
+          },
+          price: "From €399 (ex VAT)",
+          note: "* depends on current setup",
         },
         {
-          label: "E-commerce",
-          title: "Enhanced e-commerce",
-          description: "Complete e-commerce tagging and reporting tailored to your platform and data layer.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Mapping of all e-commerce events",
-            "Validation and testing scenarios",
-            "Overview of reporting views",
+          badge: "E-commerce",
+          title: "GA4 E-commerce",
+          subtitle: "Enhanced e-commerce tagging plus validation for your store.",
+          bullets: [
+            "Everything in Advanced or Start plus add-ons",
+            "Enhanced e-commerce mapping (view_item through purchase)",
+            "Alignment with dev/agency on data layer",
+            "Validation, debugging and test orders",
+            "Reporting overview so teams know where to look",
           ],
-          resultTitle: "Result",
-          results: [
-            "Clear insight into basket and checkout",
-            "Better base for optimisation",
-          ],
-        },
-        {
-          label: "Dashboards",
-          title: "Dashboards, plan and KPIs",
-          description: "Dashboards that answer business questions and tie back to an up-to-date measurement plan.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Measurement plan with KPI definitions",
-            "Dashboard with relevant layers",
-            "Cadence for reporting and review",
-          ],
-          resultTitle: "Result",
-          results: [
-            "Shared language on performance",
-            "Quick signal when metrics shift",
-          ],
+          extra: {
+            getsTitle: "What you get",
+            gets: ["Event mapping per step", "Test scenarios and checks"],
+            resultTitle: "Outcome",
+            results: ["Insight into basket and checkout", "Better base for CRO"],
+          },
+          price: "From €799 (ex VAT)",
+          note: "* depends on platform and complexity",
         },
       ],
     },
@@ -414,12 +412,7 @@ export default function Measurement() {
             reversed={index % 2 === 1}
           />
         ))}
-        <ServiceRowsSection
-          eyebrow={copy.services.eyebrow}
-          title={copy.services.title}
-          intro={copy.services.intro}
-          services={copy.services.list}
-        />
+        <MeasurementPackages section={copy.packages} />
         <div id="video-analyse">
           <VideoAnalysisSection copy={copy.video} />
         </div>
