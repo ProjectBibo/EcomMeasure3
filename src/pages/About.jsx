@@ -174,6 +174,7 @@ export default function About() {
   const [heroOpacity, setHeroOpacity] = useState(1);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [typedLines, setTypedLines] = useState(heroStatement.map(() => ""));
 
   const sections = useMemo(() => {
     let counter = 0;
@@ -190,6 +191,52 @@ export default function About() {
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
+
+  useEffect(() => {
+    let frame;
+    if (reduceMotion) {
+      setTypedLines(heroStatement);
+      return undefined;
+    }
+
+    const buffer = heroStatement.map(() => "");
+    setTypedLines(buffer);
+    let lineIndex = 0;
+    let charIndex = 0;
+    let lastTime = 0;
+
+    const typeStep = (time) => {
+      if (!lastTime) lastTime = time;
+      const current = heroStatement[lineIndex];
+      if (!current) return;
+      const isLineFinished = charIndex > current.length;
+      const interval = isLineFinished ? 420 : 74;
+
+      if (time - lastTime >= interval) {
+        lastTime = time;
+        if (!isLineFinished) {
+          buffer[lineIndex] = current.slice(0, charIndex);
+          setTypedLines([...buffer]);
+          charIndex += 1;
+        } else {
+          lineIndex += 1;
+          charIndex = 0;
+          lastTime = time + 120;
+        }
+      }
+
+      if (lineIndex < heroStatement.length) {
+        frame = requestAnimationFrame(typeStep);
+      } else {
+        setTypedLines(heroStatement);
+      }
+    };
+
+    frame = requestAnimationFrame(typeStep);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [reduceMotion]);
 
   useEffect(() => {
     if (reduceMotion) return undefined;
@@ -296,7 +343,7 @@ export default function About() {
             : "Een kinetisch manifest over inzicht en verbetering."
         }
       />
-      <main className="relative isolate overflow-hidden bg-[#0b1220] text-white">
+      <main className="relative isolate overflow-hidden text-white about-surface">
         <div className="progress-rail about-progress" aria-hidden>
           <span className="progress-bar" style={{ transform: `scaleX(${scrollProgress})` }} />
         </div>
@@ -319,14 +366,15 @@ export default function About() {
               opacity: heroOpacity,
               transition: reduceMotion
                 ? "none"
-                : "transform 360ms var(--motion-ease-emphasized), opacity 360ms var(--motion-ease-emphasized)",
+                : "transform 520ms var(--motion-ease-emphasized), opacity 520ms var(--motion-ease-emphasized)",
             }}
           >
-            <p className="text-sm uppercase tracking-[0.35em] text-white/60">Kinetic Manifesto</p>
-            <div className="mt-6 flex flex-col gap-2 text-[12vw] font-black leading-[0.95] tracking-tight sm:text-[10vw]">
-              {heroStatement.map((line) => (
-                <span key={line} className="block drop-shadow-[0_18px_38px_rgba(0,0,0,0.35)]">
-                  {line}
+            <div className="flex flex-col gap-2 text-[12vw] font-black leading-[0.95] tracking-tight sm:text-[10vw]">
+              {typedLines.map((line, index) => (
+                <span key={heroStatement[index] || index} className="block drop-shadow-[0_18px_38px_rgba(0,0,0,0.35)]">
+                  <span className="hero-typed" aria-live="polite" aria-label={heroStatement[index]}>
+                    {line}
+                  </span>
                 </span>
               ))}
             </div>
@@ -336,21 +384,15 @@ export default function About() {
           </div>
         </section>
 
-        <section ref={storyRef} className="relative bg-[#0b1220] px-6 pb-24 sm:px-10 lg:px-16">
+        <section ref={storyRef} className="relative px-6 pb-24 sm:px-10 lg:px-16">
           <div className="mx-auto flex max-w-6xl flex-col gap-12">
             {sections.map((section) => (
               <article key={section.id} className="space-y-5">
-                <div className="sticky top-10 z-10 flex items-center gap-3 text-sm uppercase tracking-[0.24em] text-white/45">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-white/5 font-semibold text-white/70">
-                    {section.label.split(" ")[0].charAt(0)}
-                  </span>
-                  <span className="backdrop-blur-sm">{section.label}</span>
-                </div>
-                <div className="space-y-3 rounded-3xl border border-white/5 bg-white/[0.02] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.4)]">
+                <div className="space-y-3 rounded-3xl border border-white/8 bg-white/[0.06] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.38)] backdrop-blur-md">
                   {section.lines.map((line) => {
                     const distance = activeLine < 0 ? 0 : Math.abs(activeLine - line.globalIndex);
-                    const opacity = activeLine < 0 ? 1 : distance === 0 ? 1 : distance === 1 ? 0.65 : 0.45;
-                    const translateY = activeLine < 0 ? 0 : clamp(distance * 2, 0, 8);
+                    const opacity = activeLine < 0 ? 1 : distance === 0 ? 1 : distance === 1 ? 0.68 : 0.48;
+                    const translateY = activeLine < 0 ? 0 : clamp(distance * 2, 0, 7);
                     return (
                       <p
                         key={line.id}
@@ -362,8 +404,8 @@ export default function About() {
                           opacity,
                           transform: reduceMotion ? "none" : `translateY(${translateY}px)`,
                           transition: reduceMotion
-                            ? "opacity 120ms linear"
-                            : "opacity 240ms var(--motion-ease-standard), transform 260ms var(--motion-ease-standard)",
+                            ? "opacity 180ms linear"
+                            : "opacity 420ms var(--motion-ease-standard), transform 420ms var(--motion-ease-emphasized)",
                         }}
                       >
                         {line.content}
@@ -376,9 +418,8 @@ export default function About() {
           </div>
         </section>
 
-        <section className="relative bg-[#0b1220] px-6 pb-28 pt-10 sm:px-10 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[28px] border border-white/10 bg-white/[0.04] p-10 text-center shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
-            <p className="text-sm uppercase tracking-[0.28em] text-white/60">Verder praten</p>
+        <section className="relative px-6 pb-28 pt-10 sm:px-10 lg:px-16">
+          <div className="mx-auto max-w-4xl rounded-[28px] border border-white/12 bg-white/[0.08] p-10 text-center shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
               Plan een gratis adviesgesprek
             </h2>
@@ -399,21 +440,29 @@ export default function About() {
       </main>
 
       <style>{`
+        .about-surface {
+          background: radial-gradient(120% 160% at 15% 10%, rgba(255, 255, 255, 0.08), transparent 55%),
+            radial-gradient(120% 160% at 85% 80%, rgba(255, 255, 255, 0.06), transparent 45%),
+            linear-gradient(135deg, #1e6ce3 0%, #1a61d4 45%, #1149a4 100%);
+          background-size: 180% 180%;
+          animation: about-gradient 18s ease-in-out infinite alternate;
+        }
+
         .about-progress {
           position: fixed;
           inset: 0 auto auto 0;
           z-index: 20;
           height: 3px;
-          background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+          background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
         }
 
         .about-orb {
-          width: 420px;
-          height: 420px;
+          width: 440px;
+          height: 440px;
           top: 12%;
           left: 14%;
           opacity: 0.35;
-          background: radial-gradient(circle at 50% 50%, rgba(31, 111, 235, 0.26), transparent 60%);
+          background: radial-gradient(circle at 50% 50%, rgba(30, 108, 227, 0.38), transparent 62%);
         }
 
         .about-orb-secondary {
@@ -421,13 +470,25 @@ export default function About() {
           height: 420px;
           bottom: 6%;
           right: 10%;
-          opacity: 0.22;
-          background: radial-gradient(circle at 40% 50%, rgba(24, 79, 158, 0.24), transparent 60%);
+          opacity: 0.26;
+          background: radial-gradient(circle at 40% 50%, rgba(17, 73, 164, 0.32), transparent 60%);
         }
 
         .about-line strong {
           font-weight: 800;
           letter-spacing: 0.01em;
+        }
+
+        .hero-typed::after {
+          content: "";
+          display: inline-block;
+          width: 0.08em;
+          height: 0.9em;
+          margin-left: 0.1em;
+          vertical-align: -0.06em;
+          background: currentColor;
+          opacity: 0.75;
+          animation: hero-caret 1100ms steps(2, end) infinite;
         }
 
         .micro-keyword {
@@ -460,6 +521,15 @@ export default function About() {
           .about-progress {
             display: none;
           }
+
+          .about-surface {
+            animation: none;
+            background-size: auto;
+          }
+
+          .hero-typed::after {
+            display: none;
+          }
         }
 
         @keyframes pulse-slow {
@@ -469,6 +539,17 @@ export default function About() {
 
         .animate-pulse-slow {
           animation: pulse-slow 1800ms ease-in-out infinite;
+        }
+
+        @keyframes hero-caret {
+          0%, 49% { opacity: 0; }
+          50%, 100% { opacity: 0.9; }
+        }
+
+        @keyframes about-gradient {
+          0% { background-position: 18% 22%, 82% 78%, 0% 0%; }
+          50% { background-position: 24% 30%, 76% 66%, 40% 30%; }
+          100% { background-position: 30% 36%, 70% 58%, 100% 80%; }
         }
       `}</style>
     </>
