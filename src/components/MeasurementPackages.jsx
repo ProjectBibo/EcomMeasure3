@@ -28,7 +28,7 @@ function PackageCard({ pkg }) {
 
       {pkg.note && <p className="text-xs text-neutral-600">{pkg.note}</p>}
 
-      <div className="pt-3 text-base font-semibold text-neutral-900">
+      <div className="mt-auto pt-3 text-base font-semibold text-neutral-900">
         <p>{pkg.price}</p>
       </div>
     </div>
@@ -50,7 +50,7 @@ export default function MeasurementPackages({ section }) {
           <div aria-hidden className="pricing-blob pricing-blob-2" />
           <div aria-hidden className="pricing-blob pricing-blob-3" />
 
-          <div className="relative z-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="relative z-10 grid auto-rows-fr gap-6 md:grid-cols-2 xl:grid-cols-4">
             {section.packages.map((pkg) => (
               <PackageCard key={pkg.title} pkg={pkg} />
             ))}
