@@ -500,7 +500,7 @@ export default function Header() {
             <div className="hidden items-center gap-4 md:flex">
               <a
                 href="tel:+31682523260"
-                className="group inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-5 py-2 text-base font-semibold text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <Phone
                   size={18}
@@ -541,7 +541,7 @@ export default function Header() {
                 <div className="ml-4 flex items-center gap-3">
                   <a
                     href="tel:+31682523260"
-                    className="inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-3 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  className="inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                   >
                     <Phone size={16} aria-hidden />
                     <span className="whitespace-nowrap">+31 6 8252 3260</span>
