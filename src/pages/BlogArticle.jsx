@@ -62,7 +62,11 @@ export default function BlogArticle() {
   if (!post || !content) {
     return (
       <>
-        <SEO title={copy.title} description={copy.body} />
+        <SEO
+          title={copy.title}
+          description={copy.body}
+          robots="noindex, follow"
+        />
         <main
           role="main"
           aria-labelledby="blog-fallback-title"
@@ -93,7 +97,11 @@ export default function BlogArticle() {
 
   return (
     <>
-      <SEO title={content.seoTitle} description={content.seoDescription} />
+      <SEO
+        title={content.seoTitle}
+        description={content.seoDescription}
+        robots="noindex, follow"
+      />
       <main
         role="main"
         aria-labelledby="blog-hero-title"

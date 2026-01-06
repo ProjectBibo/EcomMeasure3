@@ -6,12 +6,14 @@ export default function SEO({
   description = "EcomMeasure helpt webshops groeien met GA4, Consent Mode en UX optimalisaties.",
   url = "https://www.ecommeasure.com",
   image = "/og-image.png",
+  robots,
 }) {
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content="EcomMeasure, GA4, Google Analytics, Consent Mode, UX Research, CRO, website optimalisatie" />
+      {robots ? <meta name="robots" content={robots} /> : null}
 
       {/* Open Graph */}
       <meta property="og:title" content={title} />
