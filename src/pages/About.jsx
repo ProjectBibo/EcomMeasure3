@@ -428,7 +428,7 @@ export default function About() {
               Plan een gratis adviesgesprek
             </h2>
             <p className="mt-4 text-lg text-white/70">
-              Rustig tempo, scherpe vragen, directe inzichten. Geen druk, wel richting.
+              Ontdek hoe we je kunnen helpen tijdens een gratis adviesgesprek.
             </p>
             <div className="mt-8 flex justify-center">
               <Link
