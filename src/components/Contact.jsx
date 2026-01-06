@@ -7,9 +7,11 @@ import { translations } from "../i18n/content";
 
 const budgetOptions = [
   { value: "", label: { nl: "Selecteer budget", en: "Select budget" } },
-  { value: "<5k", label: { nl: "Tot €5.000", en: "Up to €5,000" } },
-  { value: "5-15k", label: { nl: "€5.000 - €15.000", en: "€5,000 - €15,000" } },
-  { value: ">15k", label: { nl: "Meer dan €15.000", en: "Above €15,000" } },
+  { value: "<750", label: { nl: "Tot €750", en: "Up to €750" } },
+  { value: "750-1500", label: { nl: "€750 – €1.500", en: "€750 – €1,500" } },
+  { value: "1500-3000", label: { nl: "€1.500 – €3.000", en: "€1,500 – €3,000" } },
+  { value: ">3000", label: { nl: "€3.000+", en: "€3,000+" } },
+  { value: "not-sure", label: { nl: "Nog niet zeker / wil dit bespreken", en: "Not sure yet / would like to discuss" } },
 ];
 
 export default function Contact() {
