@@ -1,8 +1,8 @@
 import React from "react";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
-import ServiceRowsSection from "../components/ServiceRowsSection";
 import VideoAnalysisSection from "../components/VideoAnalysisSection";
+import CroServicesSection from "../components/CroServicesSection";
 
 const content = {
   nl: {
@@ -52,71 +52,107 @@ const content = {
     services: {
       eyebrow: "Diensten",
       title: "CRO als scherp advies, geen testfabriek",
-      intro: "",
-      ctaLabel: "Plan een kennismaking",
-      list: [
+      intro:
+        "Drie complementaire CRO-diensten in hetzelfde format als onze meetpakketten: duidelijk, gefocust en zonder ruis.",
+      services: [
         {
-          label: "Review",
-          title: "UX expert review",
-          description: "Kwalitatieve analyse van flows, pagina's en micro-interacties door een ervaren UX-specialist.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Rapport met duidelijke issues",
-            "Screenshots en voorbeelden",
-            "Topaanbevelingen per flow",
-          ],
-          resultTitle: "Resultaat",
-          results: [
-            "Snelle duidelijkheid over frictie",
-            "Verbeteringen die direct uitvoerbaar zijn",
+          badge: "Review",
+          title: "Kwalitatieve analyse via UX expert review",
+          description:
+            "Een grondige beoordeling van de website of funnel door een ervaren UX- en usability specialist, gericht op het vinden van frictie, onduidelijkheid en gemiste conversiekansen.",
+          blocks: [
+            {
+              title: "Wat we doen",
+              items: [
+                "Systematische inspectie van gebruiksvriendelijkheid en conversiepunten",
+                "Analyse van navigatie, content, formulieren, vertrouwen en interactie",
+                "Beoordeling op bewezen UX-principes en best practices",
+                "Uitgebreide checklist met tientallen concrete aandachtspunten",
+              ],
+            },
+            {
+              title: "Je ontvangt",
+              items: [
+                "Een overzichtelijk rapport (PDF) met bevindingen",
+                "Concrete verbeterpunten per pagina of flow",
+                "Prioritering op basis van impact en inspanning",
+                "Heldere toelichting van de belangrijkste issues",
+              ],
+            },
+            {
+              title: "Resultaat",
+              items: [
+                "Direct inzicht in knelpunten",
+                "Sneller beslissen wat eerst aangepakt moet worden",
+                "Sterkere basis voor CRO- en UX-verbeteringen",
+              ],
+            },
           ],
         },
         {
-          label: "Analyse",
-          title: "Kwantitatieve analyse",
-          description: "Data uit GA4, Search Console en behaviour tools om groeidrivers en knelpunten met cijfers te onderbouwen.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Analyse van flows en bronnen",
-            "Heatmap/scroll inzichten waar relevant",
-            "Actielijst per kanaal of pagina",
-          ],
-          resultTitle: "Resultaat",
-          results: [
-            "Onderbouwde keuzes voor verbeteringen",
-            "Focus op kansen met hoogste potentie",
+          badge: "Analyse",
+          title: "Kwantitatieve gedragsanalyse voor groeikansen",
+          description:
+            "Analyse van grootschalig gebruikersgedrag om patronen, afhakers en optimalisatiemogelijkheden bloot te leggen.",
+          blocks: [
+            {
+              title: "Wat we doen",
+              items: [
+                "Analyse van gebruikersgedrag via analytics (o.a. GA4, Search data)",
+                "Onderzoek naar funnels, pagina-interacties en drop-offs",
+                "Gebruik van visuele gedragstools (heatmaps, scroll- en clickdata)",
+                "Combinatie van data uit meerdere bronnen voor context",
+              ],
+            },
+            {
+              title: "Je ontvangt",
+              items: [
+                "Heldere inzichten in waar gebruikers vastlopen of afhaken",
+                "Overzicht van pagina’s en stappen met de meeste optimalisatiepotentie",
+                "Concreet overzicht van kansen onderbouwd met data",
+              ],
+            },
+            {
+              title: "Resultaat",
+              items: [
+                "Objectieve prioriteiten voor CRO",
+                "Betere onderbouwing voor UX- en conversieverbeteringen",
+                "Minder aannames, meer richting",
+              ],
+            },
           ],
         },
         {
-          label: "User",
-          title: "User testing & journey inzichten",
-          description: "Optionele user testing of interviews om aannames te toetsen en journeys te verfijnen.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Testplan en scenario's",
-            "Samenvatting met quotes en beelden",
-            "Belangrijkste aanbevelingen",
-          ],
-          resultTitle: "Resultaat",
-          results: [
-            "Bevestiging van wat werkt of hapert",
-            "Kwalitatieve input voor ontwerp",
-          ],
-        },
-        {
-          label: "Roadmap",
-          title: "Prioritering en roadmap",
-          description: "Eenduidige lijst met acties, effort-inschatting en volgorde. Geen losse ideeën maar een route.",
-          deliverableTitle: "Wat je ontvangt",
-          deliverables: [
-            "Roadmap met impact/effort",
-            "Voorbeelden van copy/design opties",
-            "Validatie-advies (test of implementatie)",
-          ],
-          resultTitle: "Resultaat",
-          results: [
-            "Helder plan voor komende kwartalen",
-            "Betere keuzes zonder A/B-testfabriek",
+          badge: "User testing",
+          title: "User testing over de volledige customer journey",
+          description:
+            "Testen met echte gebruikers om te begrijpen waar verwachtingen, intenties en realiteit uit elkaar lopen.",
+          blocks: [
+            {
+              title: "Wat we doen",
+              items: [
+                "Opzetten van een gestructureerd testplan met duidelijke doelen",
+                "Testen met meerdere deelnemers op desktop en mobiel",
+                "Uitvoering remote of on-site, afhankelijk van situatie",
+                "Analyse van gedrag, feedback en terugkerende patronen",
+              ],
+            },
+            {
+              title: "Je ontvangt",
+              items: [
+                "Concreet overzicht van problemen en kansen",
+                "Actiepunten gekoppeld aan context en locatie in de funnel",
+                "Prioriteitenlijst met quick wins en verbeteringen",
+              ],
+            },
+            {
+              title: "Resultaat",
+              items: [
+                "Direct inzicht vanuit het perspectief van echte gebruikers",
+                "Sneller draagvlak voor verbeteringen",
+                "Betere beslissingen in UX- en CRO-trajecten",
+              ],
+            },
           ],
         },
       ],
@@ -193,72 +229,106 @@ const content = {
     services: {
       eyebrow: "Services",
       title: "CRO as sharp advice, not a test factory",
-      intro: "From deep review to route map. We don't build variants; we help you know what to improve.",
-      ctaLabel: "Book an intro call",
-      list: [
+      intro: "Three complementary CRO services in the same calm format as our measurement packages: clear, focused, and free of noise.",
+      services: [
         {
-          label: "Review",
-          title: "UX expert review",
-          description: "Qualitative analysis of flows, pages and micro-interactions by an experienced UX specialist.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Report with clear issues",
-            "Screenshots and examples",
-            "Top recommendations per flow",
-          ],
-          resultTitle: "Result",
-          results: [
-            "Fast clarity on friction",
-            "Improvements ready to implement",
-          ],
-        },
-        {
-          label: "Analysis",
-          title: "Quantitative analysis",
+          badge: "Review",
+          title: "Qualitative analysis via UX expert review",
           description:
-            "Data from GA4, Search Console and behaviour tools to underpin growth drivers and bottlenecks with numbers.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Flow and source analysis",
-            "Heatmap/scroll insights where relevant",
-            "Action list per channel or page",
-          ],
-          resultTitle: "Result",
-          results: [
-            "Evidence-backed improvement choices",
-            "Focus on the highest-potential opportunities",
+            "A thorough review of your site or funnel by an experienced UX and usability specialist, focused on friction, confusion and missed conversion opportunities.",
+          blocks: [
+            {
+              title: "What we do",
+              items: [
+                "Systematic inspection of usability and conversion points",
+                "Analysis of navigation, content, forms, trust and interactions",
+                "Assessment against proven UX principles and best practices",
+                "Extensive checklist with dozens of concrete checkpoints",
+              ],
+            },
+            {
+              title: "You receive",
+              items: [
+                "A clear report (PDF) with findings",
+                "Concrete improvements per page or flow",
+                "Prioritisation based on impact and effort",
+                "Straightforward explanation of the key issues",
+              ],
+            },
+            {
+              title: "Outcome",
+              items: [
+                "Immediate insight into bottlenecks",
+                "Faster decisions on what to tackle first",
+                "Stronger foundation for CRO and UX improvements",
+              ],
+            },
           ],
         },
         {
-          label: "User",
-          title: "User testing & journey insight",
-          description: "Optional user testing or interviews to validate assumptions and refine journeys.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Test plan and scenarios",
-            "Summary with quotes and footage",
-            "Key recommendations",
-          ],
-          resultTitle: "Result",
-          results: [
-            "Validation of what works or breaks",
-            "Qualitative input for design",
+          badge: "Analysis",
+          title: "Quantitative behaviour analysis for growth",
+          description:
+            "Analysis of large-scale user behaviour to uncover patterns, drop-offs and optimisation opportunities.",
+          blocks: [
+            {
+              title: "What we do",
+              items: [
+                "Analyse user behaviour via analytics (incl. GA4, search data)",
+                "Study funnels, page interactions and drop-offs",
+                "Use behaviour tools like heatmaps, scroll and click data",
+                "Combine data from multiple sources for context",
+              ],
+            },
+            {
+              title: "You receive",
+              items: [
+                "Clear insight into where users stall or drop off",
+                "Overview of pages and steps with highest optimisation potential",
+                "Concrete list of opportunities backed by data",
+              ],
+            },
+            {
+              title: "Outcome",
+              items: [
+                "Objective priorities for CRO",
+                "Better rationale for UX and conversion improvements",
+                "Fewer assumptions, more direction",
+              ],
+            },
           ],
         },
         {
-          label: "Roadmap",
-          title: "Prioritisation and roadmap",
-          description: "A clear list of actions with effort estimates and order. Not loose ideas but a route.",
-          deliverableTitle: "What you receive",
-          deliverables: [
-            "Roadmap with impact/effort",
-            "Examples of copy/design options",
-            "Validation advice (test or implement)",
-          ],
-          resultTitle: "Result",
-          results: [
-            "Clear plan for coming quarters",
-            "Better choices without a test factory",
+          badge: "User testing",
+          title: "User testing across the full customer journey",
+          description:
+            "Testing with real users to see where expectations, intent and reality diverge.",
+          blocks: [
+            {
+              title: "What we do",
+              items: [
+                "Set up a structured test plan with clear goals",
+                "Test with multiple participants on desktop and mobile",
+                "Run sessions remote or on-site depending on context",
+                "Analyse behaviour, feedback and recurring patterns",
+              ],
+            },
+            {
+              title: "You receive",
+              items: [
+                "Concise overview of issues and opportunities",
+                "Action points tied to context and funnel location",
+                "Prioritised list with quick wins and improvements",
+              ],
+            },
+            {
+              title: "Outcome",
+              items: [
+                "Immediate insight from real-user perspective",
+                "Faster buy-in for improvements",
+                "Better decisions in UX and CRO work",
+              ],
+            },
           ],
         },
       ],
@@ -398,12 +468,7 @@ export default function Cro() {
             reversed={index % 2 === 1}
           />
         ))}
-        <ServiceRowsSection
-          eyebrow={copy.services.eyebrow}
-          title={copy.services.title}
-          intro={copy.services.intro}
-          services={copy.services.list}
-        />
+        <CroServicesSection section={copy.services} />
         <div id="video-analyse">
           <VideoAnalysisSection copy={copy.video} />
         </div>
