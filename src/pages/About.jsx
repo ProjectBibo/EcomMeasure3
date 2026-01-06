@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
 
-const heroStatement = ["Eerst begrijpen.", "Dan verbeteren."];
+const heroStatement = ["Eerst begrijpen,", "dan verbeteren."];
 
 const manifestoSections = [
   {
@@ -370,13 +370,20 @@ export default function About() {
             }}
           >
             <div className="flex flex-col gap-2 text-[12vw] font-black leading-[0.95] tracking-tight sm:text-[10vw]">
-              {typedLines.map((line, index) => (
-                <span key={heroStatement[index] || index} className="block drop-shadow-[0_18px_38px_rgba(0,0,0,0.35)]">
-                  <span className="hero-typed" aria-live="polite" aria-label={heroStatement[index]}>
-                    {line}
+              {typedLines.map((line, index) => {
+                const isLast = index === heroStatement.length - 1;
+                return (
+                  <span key={heroStatement[index] || index} className="block drop-shadow-[0_18px_38px_rgba(0,0,0,0.35)]">
+                    <span
+                      className={isLast ? "hero-typed" : "hero-typed hero-typed--no-caret"}
+                      aria-live="polite"
+                      aria-label={heroStatement[index]}
+                    >
+                      {line}
+                    </span>
                   </span>
-                </span>
-              ))}
+                );
+              })}
             </div>
           </div>
           <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">
@@ -387,32 +394,30 @@ export default function About() {
         <section ref={storyRef} className="relative px-6 pb-24 sm:px-10 lg:px-16">
           <div className="mx-auto flex max-w-6xl flex-col gap-12">
             {sections.map((section) => (
-              <article key={section.id} className="space-y-5">
-                <div className="space-y-3 rounded-3xl border border-white/8 bg-white/[0.06] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.38)] backdrop-blur-md">
-                  {section.lines.map((line) => {
-                    const distance = activeLine < 0 ? 0 : Math.abs(activeLine - line.globalIndex);
-                    const opacity = activeLine < 0 ? 1 : distance === 0 ? 1 : distance === 1 ? 0.68 : 0.48;
-                    const translateY = activeLine < 0 ? 0 : clamp(distance * 2, 0, 7);
-                    return (
-                      <p
-                        key={line.id}
-                        ref={(el) => {
-                          lineRefs.current[line.globalIndex] = el;
-                        }}
-                        className="about-line text-lg leading-relaxed text-white/80 sm:text-xl"
-                        style={{
-                          opacity,
-                          transform: reduceMotion ? "none" : `translateY(${translateY}px)`,
-                          transition: reduceMotion
-                            ? "opacity 180ms linear"
-                            : "opacity 420ms var(--motion-ease-standard), transform 420ms var(--motion-ease-emphasized)",
-                        }}
-                      >
-                        {line.content}
-                      </p>
-                    );
-                  })}
-                </div>
+              <article key={section.id} className="space-y-4 sm:space-y-5">
+                {section.lines.map((line) => {
+                  const distance = activeLine < 0 ? 0 : Math.abs(activeLine - line.globalIndex);
+                  const opacity = activeLine < 0 ? 1 : distance === 0 ? 1 : distance === 1 ? 0.7 : 0.5;
+                  const translateY = activeLine < 0 ? 0 : clamp(distance * 2, 0, 7);
+                  return (
+                    <p
+                      key={line.id}
+                      ref={(el) => {
+                        lineRefs.current[line.globalIndex] = el;
+                      }}
+                      className="about-line text-lg font-semibold leading-relaxed text-white sm:text-xl"
+                      style={{
+                        opacity,
+                        transform: reduceMotion ? "none" : `translateY(${translateY}px)`,
+                        transition: reduceMotion
+                          ? "opacity 180ms linear"
+                          : "opacity 460ms var(--motion-ease-standard), transform 460ms var(--motion-ease-emphasized)",
+                      }}
+                    >
+                      {line.content}
+                    </p>
+                  );
+                })}
               </article>
             ))}
           </div>
@@ -443,9 +448,10 @@ export default function About() {
         .about-surface {
           background: radial-gradient(120% 160% at 15% 10%, rgba(255, 255, 255, 0.08), transparent 55%),
             radial-gradient(120% 160% at 85% 80%, rgba(255, 255, 255, 0.06), transparent 45%),
-            linear-gradient(135deg, #1e6ce3 0%, #1a61d4 45%, #1149a4 100%);
-          background-size: 180% 180%;
-          animation: about-gradient 18s ease-in-out infinite alternate;
+            linear-gradient(120deg, rgba(30, 108, 227, 0.24) 0%, rgba(52, 140, 255, 0.18) 45%, rgba(17, 73, 164, 0.2) 100%),
+            linear-gradient(135deg, #1e6ce3 0%, #2c7df0 35%, #1a61d4 65%, #0f3c9f 100%);
+          background-size: 220% 220%;
+          animation: about-gradient 16s ease-in-out infinite alternate;
         }
 
         .about-progress {
@@ -489,6 +495,10 @@ export default function About() {
           background: currentColor;
           opacity: 0.75;
           animation: hero-caret 1100ms steps(2, end) infinite;
+        }
+
+        .hero-typed--no-caret::after {
+          display: none;
         }
 
         .micro-keyword {
@@ -547,9 +557,10 @@ export default function About() {
         }
 
         @keyframes about-gradient {
-          0% { background-position: 18% 22%, 82% 78%, 0% 0%; }
-          50% { background-position: 24% 30%, 76% 66%, 40% 30%; }
-          100% { background-position: 30% 36%, 70% 58%, 100% 80%; }
+          0% { background-position: 12% 16%, 82% 84%, 8% 12%, 0% 0%; }
+          33% { background-position: 20% 26%, 78% 72%, 26% 20%, 32% 22%; }
+          66% { background-position: 26% 34%, 72% 64%, 44% 34%, 64% 48%; }
+          100% { background-position: 30% 38%, 66% 54%, 68% 44%, 100% 78%; }
         }
       `}</style>
     </>
