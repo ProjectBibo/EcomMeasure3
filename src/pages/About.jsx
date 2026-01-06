@@ -1,116 +1,567 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { useLanguage } from "../context/LanguageContext";
 
-const content = {
-  nl: {
-    seo: {
-      title: "Over EcomMeasure",
-      description: "Persoonlijke achtergrond en motivatie achter EcomMeasure.",
-    },
-    eyebrow: "Over EcomMeasure",
-    title: "Wie er achter EcomMeasure zit",
-    intro:
-      "Een eenvoudige pagina om jezelf kort voor te stellen. Vertel waarom je dit werk doet en hoe je hier terecht bent gekomen.",
-    sections: [
+const heroStatement = ["Eerst begrijpen,", "dan verbeteren."];
+
+const manifestoSections = [
+  {
+    id: "over",
+    label: "Over EcomMeasure",
+    lines: [
+      { id: "over-1", content: "EcomMeasure is ontstaan in Deventer." },
       {
-        title: "Persoonlijke achtergrond",
-        body: "Schrijf hier een korte alinea over je loopbaan en waar je vandaan komt. Gebruik eventueel 2-3 zinnen om de belangrijkste momenten te beschrijven.",
-        hint: "Tip: noem opleiding, eerste stappen in data of marketing, en wat je nu drijft.",
+        id: "over-2",
+        content:
+          "Niet omdat ik, Rowan Gülsen, per se een bureau wilde beginnen, maar omdat ik steeds vaker zag dat teams beslissingen moesten nemen op basis van halve informatie — en dat eigenlijk normaal vonden.",
       },
       {
-        title: "Motivatie",
-        body: "Leg in je eigen woorden uit waarom je graag met meetbaarheid en gebruikersgedrag werkt. Dit mag in een paar zinnen, zonder verkooppraat.",
-        hint: "Beschrijf wat je energie geeft in projecten en welke waarden je belangrijk vindt.",
+        id: "over-3",
+        content:
+          "Tijdens mijn opleiding E-commerce aan Hogeschool Windesheim werkte ik met analytics, campagnes en optimalisatie.",
       },
       {
-        title: "Ervaring in het kort",
-        body: "Vat de belangrijkste rollen of projecten samen. Denk aan teams waar je mee werkte en wat je daar leerde.",
-        hint: "Gebruik bullet points of korte zinnen; houd het menselijk en concreet.",
+        id: "over-4",
+        content: (
+          <>
+            Wat me opviel: bijna iedereen was bezig met <span className="micro-keyword">verbeteren</span>, maar lang niet iedereen wist waarom iets werkte of juist niet.
+          </>
+        ),
+      },
+      { id: "over-5", content: "Soms was de meting niet op orde." },
+      { id: "over-6", content: "Soms was er wél data, maar geen richting." },
+      {
+        id: "over-7",
+        content:
+          "En soms werden CRO-beslissingen genomen zonder context, gewoon omdat “het logisch leek”.",
+      },
+      { id: "over-8", content: "Dat kan beter." },
+    ],
+  },
+  {
+    id: "begin",
+    label: "Hoe dit begon",
+    lines: [
+      {
+        id: "begin-1",
+        content:
+          "Ik begon EcomMeasure omdat ik merkte dat analytics en CRO vaak los van elkaar worden ingezet, terwijl ze elkaar juist moeten versterken.",
+      },
+      { id: "begin-2", content: "Meten zonder verbeteren levert weinig op." },
+      { id: "begin-3", content: "Optimaliseren zonder inzicht nog minder." },
+      { id: "begin-4", content: "Sommige teams hebben hun metingen nog niet goed ingericht." },
+      {
+        id: "begin-5",
+        content: "Andere teams meten al jaren, maar halen er nauwelijks concrete acties uit.",
       },
       {
-        title: "Wat je hier mag verwachten",
-        body: "Vertel wat bezoekers op de site zullen vinden: persoonlijke inzichten, lessen en reflecties. Geen verkoop, wel context over jouw manier van werken.",
-        hint: "Sluit af met een uitnodiging om contact op te nemen bij vragen (zonder call-to-action-knop).",
+        id: "begin-6",
+        content:
+          "In beide gevallen ontbreekt hetzelfde: helder inzicht in wat er gebeurt en wat dat betekent voor de volgende stap.",
+      },
+      {
+        id: "begin-7",
+        content: "Daarom richt EcomMeasure zich niet op één discipline, maar op de combinatie.",
       },
     ],
-    closing:
-      "Heb je vragen over hoe je werkt of waar je in gelooft? Voeg hier een paar regels tekst toe die laten zien hoe iemand je kan bereiken.",
   },
-  en: {
-    seo: {
-      title: "About EcomMeasure",
-      description: "Personal background and motivation behind EcomMeasure.",
-    },
-    eyebrow: "About EcomMeasure",
-    title: "The person behind EcomMeasure",
-    intro:
-      "A straightforward page to introduce yourself. Share why you do this work and how you arrived here.",
-    sections: [
+  {
+    id: "duet",
+    label: "Analytics én CRO, in samenhang",
+    lines: [
       {
-        title: "Personal background",
-        body: "Write a short paragraph about your career path and where you come from. Two or three sentences are enough to highlight key moments.",
-        hint: "Tip: mention education, first steps in data or marketing, and what drives you now.",
+        id: "duet-1",
+        content: (
+          <>
+            Bij EcomMeasure werken we aan twee dingen tegelijk: <span className="micro-keyword">inzicht</span> en <span className="micro-keyword">verbetering</span>.
+          </>
+        ),
       },
       {
-        title: "Motivation",
-        body: "Describe in your own words why you enjoy working with measurement and user behavior. Keep it to a few sentences without sales language.",
-        hint: "Share what gives you energy in projects and which values matter to you.",
+        id: "duet-2",
+        content:
+          "We helpen teams hun metingen op orde te brengen — of te controleren — zodat duidelijk is wat gebruikers doen, waar ze afhaken en welke stappen in de funnel aandacht verdienen.",
+      },
+      { id: "duet-3", content: "Tegelijk kijken we naar de website zelf: UX, content, flows en interacties." },
+      { id: "duet-4", content: "Wat zien gebruikers?" },
+      { id: "duet-5", content: "Wat verwachten ze?" },
+      { id: "duet-6", content: "En waar ontstaat frictie?" },
+      { id: "duet-7", content: "Soms begint dat bij analytics." },
+      { id: "duet-8", content: "Soms juist bij een UX-review of gedragsanalyse." },
+      { id: "duet-9", content: "De volgorde hangt af van de situatie, niet van een vast stappenplan." },
+    ],
+  },
+  {
+    id: "keuzes",
+    label: "Onderbouwde keuzes boven aannames",
+    lines: [
+      {
+        id: "keuzes-1",
+        content:
+          "CRO draait niet om zoveel mogelijk wijzigingen doorvoeren, maar om betere keuzes maken.",
       },
       {
-        title: "Experience snapshot",
-        body: "Summarize the most relevant roles or projects. Think about the teams you worked with and what you learned there.",
-        hint: "Bullet points or short sentences work well; stay human and concrete.",
+        id: "keuzes-2",
+        content: (
+          <>
+            Bij EcomMeasure combineren we <span className="micro-keyword">gedragsanalyse</span>, UX-inzichten en data om verbeteringen te onderbouwen.
+          </>
+        ),
       },
       {
-        title: "What to expect here",
-        body: "Explain what visitors will find on this site: personal insights, lessons and reflections. No sales, just context on how you approach work.",
-        hint: "Close with a note on how to reach you for questions (no call-to-action button).",
+        id: "keuzes-3",
+        content:
+          "Dat kan leiden tot concrete optimalisaties, maar ook tot het loslaten van ideeën die op papier logisch klonken, maar in de praktijk weinig toevoegen.",
       },
     ],
-    closing:
-      "Questions about how you work or what you believe in? Add a few lines here that show the best way to get in touch.",
   },
-};
+  {
+    id: "team",
+    label: "Waarom dit geen klassiek ZZP-verhaal is",
+    lines: [
+      {
+        id: "team-1",
+        content: "Hoewel ik EcomMeasure zelf heb opgezet, is het bewust geen one-man-show voor altijd.",
+      },
+      { id: "team-2", content: "Goede digitale ervaringen ontstaan op het snijvlak van data, UX en techniek." },
+      {
+        id: "team-3",
+        content:
+          "Daarom is EcomMeasure opgezet met de ambitie om uit te groeien tot een klein, inhoudelijk sterk team.",
+      },
+      { id: "team-4", content: "Geen productieband, geen ruis, geen lagen." },
+      { id: "team-5", content: "Wel mensen die weten wat ze doen en elkaar aanvullen." },
+      { id: "team-6", content: "Klein genoeg om scherp te blijven." },
+      { id: "team-7", content: "Groot genoeg om kwaliteit te leveren." },
+    ],
+  },
+  {
+    id: "voor-wie",
+    label: "Voor wie EcomMeasure werkt",
+    lines: [
+      { id: "wie-1", content: "EcomMeasure werkt voor e-commerce teams die:" },
+      { id: "wie-2", content: "• betere beslissingen willen nemen over hun website" },
+      { id: "wie-3", content: "• inzicht zoeken in gedrag, niet alleen cijfers" },
+      { id: "wie-4", content: "• analytics en CRO niet los zien, maar als één geheel" },
+      { id: "wie-5", content: "Niet voor wie snel iets wil proberen zonder richting." },
+      { id: "wie-6", content: "Wel voor teams die willen begrijpen waar verbetering nodig is — en waarom." },
+      { id: "wie-7", content: "EcomMeasure staat nog aan het begin." },
+      { id: "wie-8", content: "Maar de manier van werken is helder:" },
+      {
+        id: "wie-9",
+        content: (
+          <strong className="micro-keyword">inzicht en verbetering horen bij elkaar. En daar nemen we de tijd voor.</strong>
+        ),
+      },
+    ],
+  },
+];
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
 
 export default function About() {
   const { language } = useLanguage();
-  const copy = content[language];
+  const heroRef = useRef(null);
+  const storyRef = useRef(null);
+  const lineRefs = useRef([]);
+  const activeLineRef = useRef(0);
+  const [activeLine, setActiveLine] = useState(0);
+  const [heroScale, setHeroScale] = useState(1);
+  const [heroOpacity, setHeroOpacity] = useState(1);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [typedLines, setTypedLines] = useState(heroStatement.map(() => ""));
+
+  const sections = useMemo(() => {
+    let counter = 0;
+    return manifestoSections.map((section) => ({
+      ...section,
+      lines: section.lines.map((line) => ({ ...line, globalIndex: counter++ })),
+    }));
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setReduceMotion(mediaQuery.matches);
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    let frame;
+    if (reduceMotion) {
+      setTypedLines(heroStatement);
+      return undefined;
+    }
+
+    const buffer = heroStatement.map(() => "");
+    setTypedLines(buffer);
+    let lineIndex = 0;
+    let charIndex = 0;
+    let lastTime = 0;
+
+    const typeStep = (time) => {
+      if (!lastTime) lastTime = time;
+      const current = heroStatement[lineIndex];
+      if (!current) return;
+      const isLineFinished = charIndex > current.length;
+      const interval = isLineFinished ? 420 : 74;
+
+      if (time - lastTime >= interval) {
+        lastTime = time;
+        if (!isLineFinished) {
+          buffer[lineIndex] = current.slice(0, charIndex);
+          setTypedLines([...buffer]);
+          charIndex += 1;
+        } else {
+          lineIndex += 1;
+          charIndex = 0;
+          lastTime = time + 120;
+        }
+      }
+
+      if (lineIndex < heroStatement.length) {
+        frame = requestAnimationFrame(typeStep);
+      } else {
+        setTypedLines(heroStatement);
+      }
+    };
+
+    frame = requestAnimationFrame(typeStep);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    const hero = heroRef.current;
+    if (!hero) return undefined;
+    let frame = null;
+
+    const handleMove = (event) => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const relX = (event.clientX - rect.left) / rect.width - 0.5;
+        const relY = (event.clientY - rect.top) / rect.height - 0.5;
+        hero.style.setProperty("--hero-tilt-x", `${clamp(relX * 12, -10, 10)}px`);
+        hero.style.setProperty("--hero-tilt-y", `${clamp(relY * 12, -10, 10)}px`);
+      });
+    };
+
+    const handleLeave = () => {
+      hero.style.setProperty("--hero-tilt-x", "0px");
+      hero.style.setProperty("--hero-tilt-y", "0px");
+    };
+
+    hero.addEventListener("mousemove", handleMove);
+    hero.addEventListener("mouseleave", handleLeave);
+    return () => {
+      hero.removeEventListener("mousemove", handleMove);
+      hero.removeEventListener("mouseleave", handleLeave);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    let ticking = false;
+
+    const updateStates = () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? scrollY / docHeight : 0);
+
+      const heroHeight = heroRef.current?.offsetHeight || 1;
+      const heroProgress = clamp(scrollY / (heroHeight * 0.9), 0, 1);
+      setHeroScale(1 - heroProgress * 0.12);
+      setHeroOpacity(1 - heroProgress * 0.55);
+
+      const viewportCenter = window.innerHeight / 2;
+      let closestIndex = activeLineRef.current;
+      let smallestDistance = Number.POSITIVE_INFINITY;
+
+      lineRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(viewportCenter - center);
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== activeLineRef.current) {
+        activeLineRef.current = closestIndex;
+        setActiveLine(closestIndex);
+      }
+
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateStates);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    updateStates();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    if (!reduceMotion) return undefined;
+    setHeroScale(1);
+    setHeroOpacity(1);
+    activeLineRef.current = -1;
+    setActiveLine(-1);
+    setScrollProgress(0);
+    return undefined;
+  }, [reduceMotion]);
 
   return (
     <>
-      <SEO title={copy.seo.title} description={copy.seo.description} />
-      <main className="bg-surface-light pb-20 pt-20">
-        <div className="site-container space-y-14">
-          <header className="space-y-4 max-w-3xl">
-            <span className="pill-badge bg-white/90 text-brand-blue shadow-sm">{copy.eyebrow}</span>
-            <h1 className="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
-              {copy.title}
-            </h1>
-            <p className="text-lg text-neutral-700">{copy.intro}</p>
-          </header>
+      <SEO
+        title={language === "en" ? "About EcomMeasure" : "Over EcomMeasure"}
+        description={
+          language === "en"
+            ? "A kinetic manifesto about measurement and improvement."
+            : "Een kinetisch manifest over inzicht en verbetering."
+        }
+      />
+      <main className="relative isolate overflow-hidden text-white about-surface">
+        <div className="progress-rail about-progress" aria-hidden>
+          <span className="progress-bar" style={{ transform: `scaleX(${scrollProgress})` }} />
+        </div>
 
-          <section className="grid gap-6 md:grid-cols-2">
-            {copy.sections.map((section) => (
-              <article
-                key={section.title}
-                className="h-full rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
-              >
-                <h2 className="text-xl font-semibold text-neutral-900">{section.title}</h2>
-                <p className="mt-3 text-neutral-700 leading-relaxed">{section.body}</p>
-                <p className="mt-4 rounded-lg bg-surface-light px-4 py-3 text-sm text-neutral-600">
-                  {section.hint}
-                </p>
+        <section
+          ref={heroRef}
+          className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pb-20 pt-28 sm:px-10 lg:px-16"
+          style={{ "--hero-tilt-x": "0px", "--hero-tilt-y": "0px" }}
+        >
+          <div className="pointer-events-none absolute inset-0 opacity-60" aria-hidden>
+            <div className="glow-orb about-orb" />
+            <div className="glow-orb about-orb-secondary" />
+          </div>
+          <div
+            className="relative max-w-6xl text-center"
+            style={{
+              transform: reduceMotion
+                ? "none"
+                : `translate3d(var(--hero-tilt-x), var(--hero-tilt-y), 0) scale(${heroScale})`,
+              opacity: heroOpacity,
+              transition: reduceMotion
+                ? "none"
+                : "transform 520ms var(--motion-ease-emphasized), opacity 520ms var(--motion-ease-emphasized)",
+            }}
+          >
+            <div className="flex flex-col gap-2 text-[12vw] font-black leading-[0.95] tracking-tight sm:text-[10vw]">
+              {typedLines.map((line, index) => {
+                const isLast = index === heroStatement.length - 1;
+                return (
+                  <span key={heroStatement[index] || index} className="block drop-shadow-[0_18px_38px_rgba(0,0,0,0.35)]">
+                    <span
+                      className={isLast ? "hero-typed" : "hero-typed hero-typed--no-caret"}
+                      aria-live="polite"
+                      aria-label={heroStatement[index]}
+                    >
+                      {line}
+                    </span>
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">
+            <div className="h-8 w-px animate-pulse-slow bg-white/50" aria-hidden />
+          </div>
+        </section>
+
+        <section ref={storyRef} className="relative px-6 pb-24 sm:px-10 lg:px-16">
+          <div className="mx-auto flex max-w-6xl flex-col gap-12">
+            {sections.map((section) => (
+              <article key={section.id} className="space-y-4 sm:space-y-5">
+                {section.lines.map((line) => {
+                  const distance = activeLine < 0 ? 0 : Math.abs(activeLine - line.globalIndex);
+                  const opacity = activeLine < 0 ? 1 : distance === 0 ? 1 : distance === 1 ? 0.7 : 0.5;
+                  const translateY = activeLine < 0 ? 0 : clamp(distance * 2, 0, 7);
+                  return (
+                    <p
+                      key={line.id}
+                      ref={(el) => {
+                        lineRefs.current[line.globalIndex] = el;
+                      }}
+                      className="about-line text-lg font-semibold leading-relaxed text-white sm:text-xl"
+                      style={{
+                        opacity,
+                        transform: reduceMotion ? "none" : `translateY(${translateY}px)`,
+                        transition: reduceMotion
+                          ? "opacity 180ms linear"
+                          : "opacity 460ms var(--motion-ease-standard), transform 460ms var(--motion-ease-emphasized)",
+                      }}
+                    >
+                      {line.content}
+                    </p>
+                  );
+                })}
               </article>
             ))}
-          </section>
+          </div>
+        </section>
 
-          <section className="max-w-3xl rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-neutral-900">{language === "nl" ? "Afsluiting" : "Closing note"}</h2>
-            <p className="mt-3 text-neutral-700 leading-relaxed">{copy.closing}</p>
-          </section>
-        </div>
+        <section className="relative px-6 pb-28 pt-10 sm:px-10 lg:px-16">
+          <div className="mx-auto max-w-4xl rounded-[28px] border border-white/12 bg-white/[0.08] p-10 text-center shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+            <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+              Plan een gratis adviesgesprek
+            </h2>
+            <p className="mt-4 text-lg text-white/70">
+              Ontdek hoe we je kunnen helpen tijdens een gratis adviesgesprek.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link
+                to="/#contact"
+                data-variant="primary"
+                className="rounded-full bg-brand-yellow px-7 py-3 text-base font-semibold text-neutral-900 shadow-[0_20px_45px_rgba(255,204,2,0.35)] transition-colors duration-200 hover:bg-[#e6b700] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow"
+              >
+                Plan een gratis adviesgesprek
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <style>{`
+        .about-surface {
+          background: radial-gradient(120% 160% at 15% 10%, rgba(255, 255, 255, 0.08), transparent 55%),
+            radial-gradient(120% 160% at 85% 80%, rgba(255, 255, 255, 0.06), transparent 45%),
+            linear-gradient(120deg, rgba(30, 108, 227, 0.24) 0%, rgba(52, 140, 255, 0.18) 45%, rgba(17, 73, 164, 0.2) 100%),
+            linear-gradient(135deg, #1e6ce3 0%, #2c7df0 35%, #1a61d4 65%, #0f3c9f 100%);
+          background-size: 220% 220%;
+          animation: about-gradient 16s ease-in-out infinite alternate;
+        }
+
+        .about-progress {
+          position: fixed;
+          inset: 0 auto auto 0;
+          z-index: 20;
+          height: 3px;
+          background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
+        }
+
+        .about-orb {
+          width: 440px;
+          height: 440px;
+          top: 12%;
+          left: 14%;
+          opacity: 0.35;
+          background: radial-gradient(circle at 50% 50%, rgba(30, 108, 227, 0.38), transparent 62%);
+        }
+
+        .about-orb-secondary {
+          width: 420px;
+          height: 420px;
+          bottom: 6%;
+          right: 10%;
+          opacity: 0.26;
+          background: radial-gradient(circle at 40% 50%, rgba(17, 73, 164, 0.32), transparent 60%);
+        }
+
+        .about-line strong {
+          font-weight: 800;
+          letter-spacing: 0.01em;
+        }
+
+        .hero-typed::after {
+          content: "";
+          display: inline-block;
+          width: 0.08em;
+          height: 0.9em;
+          margin-left: 0.1em;
+          vertical-align: -0.06em;
+          background: currentColor;
+          opacity: 0.75;
+          animation: hero-caret 1100ms steps(2, end) infinite;
+        }
+
+        .hero-typed--no-caret::after {
+          display: none;
+        }
+
+        .micro-keyword {
+          position: relative;
+          display: inline-block;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+          .micro-keyword::after {
+            content: "";
+            position: absolute;
+            inset: 65% 0 -6px 0;
+            background: linear-gradient(90deg, rgba(255, 204, 2, 0.2), rgba(31, 111, 235, 0.2));
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms var(--motion-ease-standard);
+          }
+
+          .micro-keyword:hover::after {
+            transform: scaleX(1);
+          }
+
+          .micro-keyword:hover {
+            letter-spacing: 0.01em;
+            font-variation-settings: "wght" 640;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .about-progress {
+            display: none;
+          }
+
+          .about-surface {
+            animation: none;
+            background-size: auto;
+          }
+
+          .hero-typed::after {
+            display: none;
+          }
+        }
+
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.35; }
+          50% { opacity: 1; }
+        }
+
+        .animate-pulse-slow {
+          animation: pulse-slow 1800ms ease-in-out infinite;
+        }
+
+        @keyframes hero-caret {
+          0%, 49% { opacity: 0; }
+          50%, 100% { opacity: 0.9; }
+        }
+
+        @keyframes about-gradient {
+          0% { background-position: 12% 16%, 82% 84%, 8% 12%, 0% 0%; }
+          33% { background-position: 20% 26%, 78% 72%, 26% 20%, 32% 22%; }
+          66% { background-position: 26% 34%, 72% 64%, 44% 34%, 64% 48%; }
+          100% { background-position: 30% 38%, 66% 54%, 68% 44%, 100% 78%; }
+        }
+      `}</style>
     </>
   );
 }
