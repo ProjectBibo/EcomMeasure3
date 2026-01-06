@@ -111,7 +111,7 @@ export const translations = {
         "Soms is er wél data, maar is onduidelijk wat klopt en wat niet.",
         "En vaak is er geen helder antwoord op de vraag: waar moeten we nu verbeteren?",
       ],
-      solution: `EcomMeasure helpt e-commerce teams om grip te krijgen op hun data — vanaf de basis.\nWe richten metingen correct in, controleren bestaande setups en verbinden data uit verschillende kanalen. Zo wordt duidelijk wat er gebeurt, waar gebruikers afhaken en welke verbeteringen prioriteit hebben.\n\nOp basis van die inzichten werken we gericht aan CRO- en UX-verbeteringen: geen losse optimalisaties, maar onderbouwde keuzes die bijdragen aan betere prestaties van de website. Eerst begrijpen wat er gebeurt, daarna verbeteren wat echt impact heeft.`,
+      solution: `EcomMeasure helpt e-commerce teams om hun website beter te laten presteren.\nWe zorgen dat metingen goed zijn ingericht, controleren bestaande analytics en brengen data uit verschillende tools samen. Zo wordt duidelijk wat er op de website gebeurt, hoe bezoekers zich gedragen en waar conversies verloren gaan.\n\nDaarnaast verbeteren we websites op basis van dat gedrag. We analyseren pagina’s, funnels en interacties, brengen knelpunten in kaart en werken aan concrete verbeteringen in UX, content en structuur.`,
     },
     usp: {
       badge: "DIENSTEN",
