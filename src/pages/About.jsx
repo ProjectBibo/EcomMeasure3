@@ -14,12 +14,12 @@ const manifestoSections = [
       {
         id: "over-2",
         content:
-          "Niet omdat ik per se een bureau wilde beginnen, maar omdat ik steeds vaker zag dat teams beslissingen moesten nemen op basis van halve informatie — en dat eigenlijk normaal vonden.",
+          "Niet omdat ik, Rowan Gülsen, per se een bureau wilde beginnen, maar omdat ik steeds vaker zag dat teams beslissingen moesten nemen op basis van halve informatie — en dat eigenlijk normaal vonden.",
       },
       {
         id: "over-3",
         content:
-          "Tijdens mijn opleiding Digital Marketing werkte ik met analytics, campagnes en optimalisatie.",
+          "Tijdens mijn opleiding E-commerce aan Hogeschool Windesheim werkte ik met analytics, campagnes en optimalisatie.",
       },
       {
         id: "over-4",
@@ -114,7 +114,6 @@ const manifestoSections = [
         content:
           "Dat kan leiden tot concrete optimalisaties, maar ook tot het loslaten van ideeën die op papier logisch klonken, maar in de praktijk weinig toevoegen.",
       },
-      { id: "keuzes-4", content: "Dat is geen stap terug — dat is richting." },
     ],
   },
   {
