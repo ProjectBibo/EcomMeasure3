@@ -84,10 +84,16 @@ export default function MeasurementPackages({ section }) {
           <p className="text-lg text-neutral-700">{section.intro}</p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {section.packages.map((pkg) => (
-            <PackageCard key={pkg.title} pkg={pkg} />
-          ))}
+        <div className="pricing-section relative overflow-hidden rounded-[28px] bg-[#0b1024] px-4 py-10 sm:px-8 sm:py-12">
+          <div aria-hidden className="pricing-blob pricing-blob-1" />
+          <div aria-hidden className="pricing-blob pricing-blob-2" />
+          <div aria-hidden className="pricing-blob pricing-blob-3" />
+
+          <div className="relative z-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {section.packages.map((pkg) => (
+              <PackageCard key={pkg.title} pkg={pkg} />
+            ))}
+          </div>
         </div>
 
         <p className="text-sm text-neutral-700">{section.note}</p>
