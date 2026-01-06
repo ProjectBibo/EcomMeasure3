@@ -2,9 +2,9 @@ import React from "react";
 
 function PackageCard({ pkg }) {
   return (
-    <div className="glass-card flex h-full flex-col gap-5 text-neutral-900">
+    <div className="glass-card flex h-full flex-col gap-4 text-neutral-900">
       <div className="flex items-center justify-between gap-3">
-        <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffcc02] shadow-[0_8px_18px_rgba(255,204,2,0.25)]">
+        <span className="rounded-full bg-white/75 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffcc02] shadow-[0_8px_18px_rgba(255,204,2,0.25)]">
           {pkg.badge}
         </span>
         {pkg.tag && (
@@ -26,37 +26,10 @@ function PackageCard({ pkg }) {
         ))}
       </ul>
 
-      {pkg.extra && (
-        <div className="grid gap-3 rounded-xl bg-white/70 p-4 text-sm text-neutral-900 shadow-[0_12px_28px_rgba(15,23,42,0.04)] sm:grid-cols-2">
-          <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#ffcc02]">{pkg.extra.getsTitle}</p>
-            <ul className="space-y-1.5 text-neutral-800">
-              {pkg.extra.gets.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span aria-hidden className="mt-2 h-px w-5 flex-shrink-0 bg-neutral-300" />
-                  <span className="flex-1">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#ffcc02]">{pkg.extra.resultTitle}</p>
-            <ul className="space-y-1.5 text-neutral-800">
-              {pkg.extra.results.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span aria-hidden className="mt-2 h-px w-5 flex-shrink-0 bg-neutral-300" />
-                  <span className="flex-1">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
-
       {pkg.note && <p className="text-xs text-neutral-600">{pkg.note}</p>}
 
-      <div className="mt-auto border-t border-white/60 pt-4">
-        <p className="text-base font-semibold text-neutral-900">{pkg.price}</p>
+      <div className="pt-3 text-base font-semibold text-neutral-900">
+        <p>{pkg.price}</p>
       </div>
     </div>
   );
