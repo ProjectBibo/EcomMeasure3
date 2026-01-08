@@ -12,32 +12,32 @@ const copy = {
     hero: {
       title: "Zo werken wij",
       intro:
-        "We werken niet volgens een vast stappenplan. Elke website en situatie is anders. Wat wel vaststaat, is hoe we kijken, hoe we keuzes maken en waar we op sturen.",
+        "Elke samenwerking start vanuit een concrete vraag of probleem. Soms is dat een meetvraag, soms een conversieprobleem, soms simpelweg twijfel over waar verbetering nodig is. We werken niet volgens een vast stappenplan, maar wel volgens een vaste manier van kijken en beslissen.",
     },
     why: {
-      title: "Geen vaste start, wel vaste principes",
-      text: "We starten niet altijd op dezelfde plek. Soms begint een traject bij data, soms bij gedrag, soms bij een concrete frustratie of vraag. De situatie bepaalt waar we instappen, niet een vooraf bedacht proces.",
+      title: "Startpunt: een vraag of probleem",
+      text: "Een traject begint meestal met een duidelijke aanleiding. Dat kan een gekozen pakket zijn, een probleem op de website of een vraag die al langer speelt. In het eerste contact bespreken we kort de situatie en bepalen we waar het zinvol is om in te stappen.",
     },
     sections: [
       {
-        title: "Begrijpen vóór aannemen",
-        text: "We kijken eerst hoe een website daadwerkelijk wordt gebruikt. Dat doen we door bestaande data te beoordelen, gedrag te analyseren en aannames te toetsen aan wat er echt gebeurt. Niet om alles perfect te maken, maar om richting te krijgen.",
+        title: "Verkennen en scherpstellen",
+        text: "Na het eerste gesprek brengen we de context in kaart. We kijken naar doelen, bestaande data en hoe de website wordt gebruikt. Soms ligt de focus op metingen, soms op gedrag of UX. Het doel is niet alles tegelijk aanpakken, maar helder krijgen waar de grootste knelpunten zitten.",
       },
       {
-        title: "Van observatie naar keuzes",
-        text: "Inzichten zijn pas waardevol als ze leiden tot keuzes. We vertalen wat we zien naar concrete aandachtspunten en bepalen waar verbetering het meeste effect heeft. Focus staat altijd boven volledigheid.",
+        title: "Keuzes maken en richting bepalen",
+        text: "Op basis van wat we zien, bepalen we samen waar verbetering het meeste effect heeft. Dat vertalen we naar concrete aandachtspunten en een duidelijke richting. Geen uitgebreide roadmap, maar heldere keuzes waar we op gaan sturen.",
       },
       {
-        title: "Gericht verbeteren",
-        text: "Op basis van die keuzes werken we aan verbeteringen in UX, content en structuur. Wat we aanpassen verschilt per situatie, maar het doel is altijd hetzelfde: frictie verminderen en prestaties verbeteren op plekken die ertoe doen.",
+        title: "Verbeteren en bijsturen",
+        text: "Vervolgens werken we aan gerichte verbeteringen in UX, content en structuur, of aan het verbeteren van inzicht en metingen. Wat we doen en hoe ver we gaan, hangt af van de vraag en het gekozen pakket. We sturen bij waar nodig en blijven scherp op wat echt bijdraagt.",
       },
       {
-        title: "Transparante samenwerking",
-        text: "We werken met korte lijnen en duidelijke afspraken. Je weet wat we doen, waarom we het doen en wat de volgende stap is. Geen vaste trajecten, wel helderheid en voortgang.",
+        title: "Samenwerking en communicatie",
+        text: "Tijdens het traject houden we de lijnen kort. Je weet wat we doen, waarom we het doen en wat de volgende stap is. We werken transparant en stemmen af met marketing-, product- of developmentteams wanneer dat nodig is.",
       },
     ],
     cta: {
-      text: "Benieuwd hoe deze werkwijze eruitziet voor jouw website?\nPlan een gratis adviesgesprek en we kijken samen waar de grootste kansen liggen.",
+      text: "Benieuwd hoe dit er in de praktijk uitziet voor jouw website?\nPlan een gratis adviesgesprek en bespreek je vraag of situatie.",
       button: "Plan een gratis adviesgesprek",
     },
   },
@@ -49,32 +49,32 @@ const copy = {
     hero: {
       title: "Zo werken wij",
       intro:
-        "We werken niet volgens een vast stappenplan. Elke website en situatie is anders. Wat wel vaststaat, is hoe we kijken, hoe we keuzes maken en waar we op sturen.",
+        "Elke samenwerking start vanuit een concrete vraag of probleem. Soms is dat een meetvraag, soms een conversieprobleem, soms simpelweg twijfel over waar verbetering nodig is. We werken niet volgens een vast stappenplan, maar wel volgens een vaste manier van kijken en beslissen.",
     },
     why: {
-      title: "Geen vaste start, wel vaste principes",
-      text: "We starten niet altijd op dezelfde plek. Soms begint een traject bij data, soms bij gedrag, soms bij een concrete frustratie of vraag. De situatie bepaalt waar we instappen, niet een vooraf bedacht proces.",
+      title: "Startpunt: een vraag of probleem",
+      text: "Een traject begint meestal met een duidelijke aanleiding. Dat kan een gekozen pakket zijn, een probleem op de website of een vraag die al langer speelt. In het eerste contact bespreken we kort de situatie en bepalen we waar het zinvol is om in te stappen.",
     },
     sections: [
       {
-        title: "Begrijpen vóór aannemen",
-        text: "We kijken eerst hoe een website daadwerkelijk wordt gebruikt. Dat doen we door bestaande data te beoordelen, gedrag te analyseren en aannames te toetsen aan wat er echt gebeurt. Niet om alles perfect te maken, maar om richting te krijgen.",
+        title: "Verkennen en scherpstellen",
+        text: "Na het eerste gesprek brengen we de context in kaart. We kijken naar doelen, bestaande data en hoe de website wordt gebruikt. Soms ligt de focus op metingen, soms op gedrag of UX. Het doel is niet alles tegelijk aanpakken, maar helder krijgen waar de grootste knelpunten zitten.",
       },
       {
-        title: "Van observatie naar keuzes",
-        text: "Inzichten zijn pas waardevol als ze leiden tot keuzes. We vertalen wat we zien naar concrete aandachtspunten en bepalen waar verbetering het meeste effect heeft. Focus staat altijd boven volledigheid.",
+        title: "Keuzes maken en richting bepalen",
+        text: "Op basis van wat we zien, bepalen we samen waar verbetering het meeste effect heeft. Dat vertalen we naar concrete aandachtspunten en een duidelijke richting. Geen uitgebreide roadmap, maar heldere keuzes waar we op gaan sturen.",
       },
       {
-        title: "Gericht verbeteren",
-        text: "Op basis van die keuzes werken we aan verbeteringen in UX, content en structuur. Wat we aanpassen verschilt per situatie, maar het doel is altijd hetzelfde: frictie verminderen en prestaties verbeteren op plekken die ertoe doen.",
+        title: "Verbeteren en bijsturen",
+        text: "Vervolgens werken we aan gerichte verbeteringen in UX, content en structuur, of aan het verbeteren van inzicht en metingen. Wat we doen en hoe ver we gaan, hangt af van de vraag en het gekozen pakket. We sturen bij waar nodig en blijven scherp op wat echt bijdraagt.",
       },
       {
-        title: "Transparante samenwerking",
-        text: "We werken met korte lijnen en duidelijke afspraken. Je weet wat we doen, waarom we het doen en wat de volgende stap is. Geen vaste trajecten, wel helderheid en voortgang.",
+        title: "Samenwerking en communicatie",
+        text: "Tijdens het traject houden we de lijnen kort. Je weet wat we doen, waarom we het doen en wat de volgende stap is. We werken transparant en stemmen af met marketing-, product- of developmentteams wanneer dat nodig is.",
       },
     ],
     cta: {
-      text: "Benieuwd hoe deze werkwijze eruitziet voor jouw website?\nPlan een gratis adviesgesprek en we kijken samen waar de grootste kansen liggen.",
+      text: "Benieuwd hoe dit er in de praktijk uitziet voor jouw website?\nPlan een gratis adviesgesprek en bespreek je vraag of situatie.",
       button: "Plan een gratis adviesgesprek",
     },
   },
