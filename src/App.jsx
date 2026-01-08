@@ -24,6 +24,7 @@ const HypothesesAbTests = lazy(() => import("./pages/HypothesesAbTests"));
 const Implementation = lazy(() => import("./pages/Implementation"));
 const Confirmation = lazy(() => import("./pages/Confirmation"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const Werkwijze = lazy(() => import("./pages/Werkwijze"));
 
 function usePrefersReducedMotion() {
   const [prefersReduced, setPrefersReduced] = useState(() => {
@@ -118,6 +119,7 @@ function AppContent() {
           <Route path="tools/funnel-impact-calculator" element={<CroRoiCalculator />} />
           <Route path="blog/:slug" element={<BlogArticle />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="werkwijze" element={<Werkwijze />} />
           <Route path="confirmation" element={<Confirmation />} />
           <Route path="*" element={<NotFound />} />
         </ViewTransitionRoutes>

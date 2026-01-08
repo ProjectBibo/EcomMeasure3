@@ -8,6 +8,7 @@ export const translations = {
     header: {
       nav: {
         about: "Over EcomMeasure",
+        werkwijze: "Werkwijze",
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
@@ -443,6 +444,7 @@ export const translations = {
     header: {
       nav: {
         about: "About EcomMeasure",
+        werkwijze: "How we work",
         blogLabel: "Blog",
         toolsLabel: "Tools",
         toolsItems: [
