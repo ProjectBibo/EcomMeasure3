@@ -7,51 +7,35 @@ const copy = {
   nl: {
     seo: {
       title: "Werkwijze",
-      description: "Zo werken wij: van inzicht naar gerichte verbetering.",
+      description: "Zo werken wij: helder, eerlijk en gericht op betere keuzes.",
     },
     hero: {
-      title: "Zo werken wij: van inzicht naar gerichte verbetering",
-      intro: "Geen losse acties, maar een duidelijke aanpak voor meten, begrijpen en verbeteren.",
+      title: "Zo werken wij",
+      intro:
+        "We werken niet volgens een vast stappenplan. Elke website en situatie is anders. Wat wel vaststaat, is hoe we kijken, hoe we keuzes maken en waar we op sturen.",
     },
     why: {
-      title: "Waarom een vaste werkwijze?",
-      text: "Elke website is anders, maar de manier waarop je tot goede beslissingen komt niet. Daarom werken we met een vaste werkwijze: eerst begrijpen wat er speelt, daarna verbeteren wat écht impact heeft.",
+      title: "Geen vaste start, wel vaste principes",
+      text: "We starten niet altijd op dezelfde plek. Soms begint een traject bij data, soms bij gedrag, soms bij een concrete frustratie of vraag. De situatie bepaalt waar we instappen, niet een vooraf bedacht proces.",
     },
-    steps: [
+    sections: [
       {
-        title: "1. Begrijpen wat er speelt",
-        text: "We starten altijd met context. Wat wil je bereiken, waar loop je tegenaan en welke informatie is er al beschikbaar? Soms is er al data, soms nog niet — beide zijn prima. Dit bepaalt de richting, niet het tempo.",
+        title: "Begrijpen vóór aannemen",
+        text: "We kijken eerst hoe een website daadwerkelijk wordt gebruikt. Dat doen we door bestaande data te beoordelen, gedrag te analyseren en aannames te toetsen aan wat er echt gebeurt. Niet om alles perfect te maken, maar om richting te krijgen.",
       },
       {
-        title: "2. Inzicht creëren",
-        text: "We maken zichtbaar wat er op de website gebeurt. Dat doen we door metingen in te richten of te controleren, én door gedrag te analyseren op pagina’s, flows en interacties. Zo wordt duidelijk waar bezoekers afhaken en waar kansen liggen.",
+        title: "Van observatie naar keuzes",
+        text: "Inzichten zijn pas waardevol als ze leiden tot keuzes. We vertalen wat we zien naar concrete aandachtspunten en bepalen waar verbetering het meeste effect heeft. Focus staat altijd boven volledigheid.",
       },
       {
-        title: "3. Kansen scherp maken en prioriteren",
-        text: "Inzichten zijn pas waardevol als je weet wat je ermee moet doen. Daarom vertalen we analyses naar concrete verbeterpunten en heldere prioriteiten. Geen lange lijst, maar focus op wat de meeste impact heeft.",
+        title: "Gericht verbeteren",
+        text: "Op basis van die keuzes werken we aan verbeteringen in UX, content en structuur. Wat we aanpassen verschilt per situatie, maar het doel is altijd hetzelfde: frictie verminderen en prestaties verbeteren op plekken die ertoe doen.",
       },
       {
-        title: "4. Verbeteren en doorontwikkelen",
-        text: "Op basis van die prioriteiten werken we aan verbeteringen in UX, content en structuur. Soms testen we, soms optimaliseren we direct — afhankelijk van wat nodig is. Altijd onderbouwd, altijd doelgericht.",
+        title: "Transparante samenwerking",
+        text: "We werken met korte lijnen en duidelijke afspraken. Je weet wat we doen, waarom we het doen en wat de volgende stap is. Geen vaste trajecten, wel helderheid en voortgang.",
       },
     ],
-    collaboration: {
-      title: "Hoe we samenwerken",
-      items: [
-        "Korte lijnen en duidelijke communicatie",
-        "Transparant over keuzes en vervolgstappen",
-        "Geen lange contracten, wel heldere afspraken",
-        "Samenwerking met marketing, product en development waar nodig",
-      ],
-    },
-    audience: {
-      title: "Voor wie deze werkwijze werkt",
-      items: [
-        "E-commerce teams",
-        "Bedrijven die grip willen op data én conversie",
-        "Teams die betere beslissingen willen nemen over hun website",
-      ],
-    },
     cta: {
       text: "Benieuwd hoe deze werkwijze eruitziet voor jouw website?\nPlan een gratis adviesgesprek en we kijken samen waar de grootste kansen liggen.",
       button: "Plan een gratis adviesgesprek",
@@ -60,51 +44,35 @@ const copy = {
   en: {
     seo: {
       title: "Werkwijze",
-      description: "Zo werken wij: van inzicht naar gerichte verbetering.",
+      description: "Zo werken wij: helder, eerlijk en gericht op betere keuzes.",
     },
     hero: {
-      title: "Zo werken wij: van inzicht naar gerichte verbetering",
-      intro: "Geen losse acties, maar een duidelijke aanpak voor meten, begrijpen en verbeteren.",
+      title: "Zo werken wij",
+      intro:
+        "We werken niet volgens een vast stappenplan. Elke website en situatie is anders. Wat wel vaststaat, is hoe we kijken, hoe we keuzes maken en waar we op sturen.",
     },
     why: {
-      title: "Waarom een vaste werkwijze?",
-      text: "Elke website is anders, maar de manier waarop je tot goede beslissingen komt niet. Daarom werken we met een vaste werkwijze: eerst begrijpen wat er speelt, daarna verbeteren wat écht impact heeft.",
+      title: "Geen vaste start, wel vaste principes",
+      text: "We starten niet altijd op dezelfde plek. Soms begint een traject bij data, soms bij gedrag, soms bij een concrete frustratie of vraag. De situatie bepaalt waar we instappen, niet een vooraf bedacht proces.",
     },
-    steps: [
+    sections: [
       {
-        title: "1. Begrijpen wat er speelt",
-        text: "We starten altijd met context. Wat wil je bereiken, waar loop je tegenaan en welke informatie is er al beschikbaar? Soms is er al data, soms nog niet — beide zijn prima. Dit bepaalt de richting, niet het tempo.",
+        title: "Begrijpen vóór aannemen",
+        text: "We kijken eerst hoe een website daadwerkelijk wordt gebruikt. Dat doen we door bestaande data te beoordelen, gedrag te analyseren en aannames te toetsen aan wat er echt gebeurt. Niet om alles perfect te maken, maar om richting te krijgen.",
       },
       {
-        title: "2. Inzicht creëren",
-        text: "We maken zichtbaar wat er op de website gebeurt. Dat doen we door metingen in te richten of te controleren, én door gedrag te analyseren op pagina’s, flows en interacties. Zo wordt duidelijk waar bezoekers afhaken en waar kansen liggen.",
+        title: "Van observatie naar keuzes",
+        text: "Inzichten zijn pas waardevol als ze leiden tot keuzes. We vertalen wat we zien naar concrete aandachtspunten en bepalen waar verbetering het meeste effect heeft. Focus staat altijd boven volledigheid.",
       },
       {
-        title: "3. Kansen scherp maken en prioriteren",
-        text: "Inzichten zijn pas waardevol als je weet wat je ermee moet doen. Daarom vertalen we analyses naar concrete verbeterpunten en heldere prioriteiten. Geen lange lijst, maar focus op wat de meeste impact heeft.",
+        title: "Gericht verbeteren",
+        text: "Op basis van die keuzes werken we aan verbeteringen in UX, content en structuur. Wat we aanpassen verschilt per situatie, maar het doel is altijd hetzelfde: frictie verminderen en prestaties verbeteren op plekken die ertoe doen.",
       },
       {
-        title: "4. Verbeteren en doorontwikkelen",
-        text: "Op basis van die prioriteiten werken we aan verbeteringen in UX, content en structuur. Soms testen we, soms optimaliseren we direct — afhankelijk van wat nodig is. Altijd onderbouwd, altijd doelgericht.",
+        title: "Transparante samenwerking",
+        text: "We werken met korte lijnen en duidelijke afspraken. Je weet wat we doen, waarom we het doen en wat de volgende stap is. Geen vaste trajecten, wel helderheid en voortgang.",
       },
     ],
-    collaboration: {
-      title: "Hoe we samenwerken",
-      items: [
-        "Korte lijnen en duidelijke communicatie",
-        "Transparant over keuzes en vervolgstappen",
-        "Geen lange contracten, wel heldere afspraken",
-        "Samenwerking met marketing, product en development waar nodig",
-      ],
-    },
-    audience: {
-      title: "Voor wie deze werkwijze werkt",
-      items: [
-        "E-commerce teams",
-        "Bedrijven die grip willen op data én conversie",
-        "Teams die betere beslissingen willen nemen over hun website",
-      ],
-    },
     cta: {
       text: "Benieuwd hoe deze werkwijze eruitziet voor jouw website?\nPlan een gratis adviesgesprek en we kijken samen waar de grootste kansen liggen.",
       button: "Plan een gratis adviesgesprek",
@@ -133,34 +101,16 @@ export default function Werkwijze() {
 
           <section className="space-y-6">
             <div className="grid gap-6">
-              {t.steps.map((step) => (
+              {t.sections.map((section) => (
                 <article
-                  key={step.title}
+                  key={section.title}
                   className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
                 >
-                  <h3 className="text-xl font-semibold text-neutral-900">{step.title}</h3>
-                  <p className="mt-3 text-neutral-700 leading-relaxed">{step.text}</p>
+                  <h3 className="text-xl font-semibold text-neutral-900">{section.title}</h3>
+                  <p className="mt-3 text-neutral-700 leading-relaxed">{section.text}</p>
                 </article>
               ))}
             </div>
-          </section>
-
-          <section className="max-w-3xl space-y-3">
-            <h2 className="text-2xl font-semibold text-neutral-900">{t.collaboration.title}</h2>
-            <ul className="list-disc space-y-2 pl-5 text-neutral-700">
-              {t.collaboration.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="max-w-3xl space-y-3">
-            <h2 className="text-2xl font-semibold text-neutral-900">{t.audience.title}</h2>
-            <ul className="list-disc space-y-2 pl-5 text-neutral-700">
-              {t.audience.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
           </section>
 
           <section className="rounded-3xl border border-neutral-200 bg-white p-8 text-center shadow-sm sm:p-10">
