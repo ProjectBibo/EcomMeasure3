@@ -6,14 +6,24 @@ import { useLanguage } from "../context/LanguageContext";
 
 const content = {
   nl: {
-    title: "Bedankt!",
-    message: "We nemen binnen 1-3 werkdagen contact met je op.",
-    cta: "Terug naar home",
+    title: "🎉 Gelukt! Je bericht is verzonden",
+    subtitle: "We nemen binnen 1–2 werkdagen contact met je op om een gratis adviesgesprek in te plannen.",
+    sectionTitle: "Wat gebeurt er nu?",
+    steps: [
+      "Je ontvangt een reactie per mail om een moment te plannen",
+      "In het gesprek kijken we samen waar kansen liggen in meting en conversie",
+    ],
+    cta: "Terug naar home →",
   },
   en: {
-    title: "Thank you!",
-    message: "We will contact you within 1-3 business days.",
-    cta: "Back to home",
+    title: "🎉 Success! Your message has been sent",
+    subtitle: "We will contact you within 1–2 business days to schedule a free consultation call.",
+    sectionTitle: "What happens next?",
+    steps: [
+      "You will receive an email to schedule a time",
+      "During the call we explore opportunities in measurement and conversion",
+    ],
+    cta: "Back to home →",
   },
 };
 
@@ -24,7 +34,7 @@ export default function Confirmation() {
 
   return (
     <>
-      <SEO title={copy.title} description={copy.message} />
+      <SEO title={copy.title} description={copy.subtitle} />
       <main className="relative overflow-hidden bg-gradient-to-br from-white via-surface-soft to-brand-blue/10 py-20 sm:py-24">
         <div className="glow-orb glow-orb--primary left-0 top-0 h-64 w-64 opacity-40" aria-hidden />
         <div className="glow-orb glow-orb--primary-soft right-0 top-1/2 h-56 w-56 opacity-30" aria-hidden />
@@ -46,8 +56,22 @@ export default function Confirmation() {
             transition={shouldReduceMotion ? undefined : { delay: 0.08, duration: 0.6, ease: "easeOut" }}
             className="max-w-xl text-lg text-neutral-700"
           >
-            {copy.message}
+            {copy.subtitle}
           </motion.p>
+
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { delay: 0.12, duration: 0.6, ease: "easeOut" }}
+            className="flex w-full max-w-xl flex-col gap-4 text-left text-neutral-800"
+          >
+            <h2 className="text-xl font-semibold">{copy.sectionTitle}</h2>
+            <ol className="list-decimal space-y-2 pl-6 text-base text-neutral-700">
+              {copy.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </motion.div>
 
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
