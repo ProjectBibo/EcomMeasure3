@@ -19,6 +19,7 @@ import { scrollToContactSection } from "../utils/scrollToContact";
 const routePrefetchers = {
   "/": () => import("../pages/Home"),
   "/about": () => import("../pages/About"),
+  "/werkwijze": () => import("../pages/Werkwijze"),
   "/measurement": () => import("../pages/Measurement"),
   "/cro": () => import("../pages/Cro"),
   "/blog": () => import("../pages/BlogArticle"),
@@ -69,7 +70,7 @@ export default function Header() {
     [language]
   );
 
-  const { about, blogLabel, toolsLabel, toolsItems } = t.nav;
+  const { about, werkwijze, blogLabel, toolsLabel, toolsItems } = t.nav;
 
   const toolLinks = useMemo(
     () =>
@@ -84,10 +85,11 @@ export default function Header() {
   const navLinks = useMemo(
     () => [
       { id: "about", type: "link", to: "/about", label: about },
+      { id: "werkwijze", type: "link", to: "/werkwijze", label: werkwijze },
       { id: "blog", type: "dropdown", label: blogLabel, items: blogLinks },
       { id: "tools", type: "dropdown", label: toolsLabel, items: toolLinks },
     ],
-    [about, blogLabel, blogLinks, toolLinks, toolsLabel]
+    [about, blogLabel, blogLinks, toolLinks, toolsLabel, werkwijze]
   );
 
   const prefetchRoute = useCallback((target) => {
