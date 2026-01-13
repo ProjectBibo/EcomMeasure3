@@ -75,9 +75,6 @@ export default function VideoAnalysisSection({ copy }) {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500">{copy.eyebrow}</p>
           <h2 className="text-3xl font-semibold text-neutral-900 sm:text-4xl">{copy.title}</h2>
           <p className="text-neutral-700">{copy.description}</p>
-          <div className="rounded-[6px] border border-dashed border-neutral-300 bg-neutral-50/70 p-6 text-sm text-neutral-600">
-            {copy.previewNote}
-          </div>
         </div>
 
         <div className="space-y-4 rounded-[6px] border border-neutral-200 bg-neutral-50/40 p-6 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
