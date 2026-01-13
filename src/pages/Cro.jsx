@@ -48,7 +48,9 @@ const content = {
           "Kant-en-klare user stories of tickets",
           "Optioneel: user testing voor bevestiging",
         ],
-        imageLabel: "Roadmap en prioriteiten",
+        imageSrc: "/Van inzichten naar roadmap.svg",
+        imageAlt: "Van inzichten naar roadmap",
+        imageLabel: null,
       },
     ],
     services: {
