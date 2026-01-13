@@ -37,7 +37,8 @@ const content = {
           "Events en conversies scherp gedefinieerd",
           "Ownership, rollen en kwaliteitsoverzicht",
         ],
-        imageLabel: "Structuur voor KPI's en events",
+        imageSrc: "/Meetplan%20en%20governance.svg",
+        imageAlt: "Meetplan en governance visual",
       },
       {
         title: "Technische inrichting zonder ruis",
@@ -192,6 +193,8 @@ const content = {
           "Events and conversions defined tightly",
           "Ownership, roles and quality checks",
         ],
+        imageSrc: "/Meetplan%20en%20governance.svg",
+        imageAlt: "Measurement plan and governance visual",
         imageLabel: "Structure for KPIs and events",
       },
       {
@@ -387,8 +390,18 @@ function HelpSection({ section, reversed }) {
         </div>
 
         <div className="space-y-3">
-          <div className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 bg-neutral-50" />
-          <p className="text-sm text-neutral-500">{section.imageLabel}</p>
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-[6px] border border-neutral-200 bg-neutral-50">
+            {section.imageSrc ? (
+              <img
+                src={section.imageSrc}
+                alt={section.imageAlt || ""}
+                className="h-full w-full object-cover"
+              />
+            ) : null}
+          </div>
+          {section.imageLabel ? (
+            <p className="text-sm text-neutral-500">{section.imageLabel}</p>
+          ) : null}
         </div>
       </div>
     </section>
