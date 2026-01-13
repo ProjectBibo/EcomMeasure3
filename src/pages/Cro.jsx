@@ -36,7 +36,9 @@ const content = {
           "Gedrag in analytics en search naast elkaar",
           "Kansen voor sneller vertrouwen en minder afhaken",
         ],
-        imageLabel: "Voorbeeld van UX bevindingen",
+        imageSrc: "/Snel zicht op wat remt en wat werkt.svg",
+        imageAlt: "Snel zicht op wat remt en wat werkt",
+        imageLabel: null,
       },
       {
         title: "Van inzichten naar roadmap",
@@ -216,7 +218,9 @@ const content = {
           "Behaviour and search data side by side",
           "Opportunities to build trust and reduce drop-off",
         ],
-        imageLabel: "Examples of UX findings",
+        imageSrc: "/Snel zicht op wat remt en wat werkt.svg",
+        imageAlt: "See blockers and wins quickly",
+        imageLabel: null,
       },
       {
         title: "From insight to roadmap",
@@ -437,8 +441,16 @@ function HelpSection({ section, reversed }) {
         </div>
 
         <div className="space-y-3">
-          <div className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 bg-neutral-50" />
-          <p className="text-sm text-neutral-500">{section.imageLabel}</p>
+          {section.imageSrc ? (
+            <img
+              src={section.imageSrc}
+              alt={section.imageAlt}
+              className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 object-cover"
+            />
+          ) : (
+            <div className="aspect-[4/3] w-full rounded-[6px] border border-neutral-200 bg-neutral-50" />
+          )}
+          {section.imageLabel ? <p className="text-sm text-neutral-500">{section.imageLabel}</p> : null}
         </div>
       </div>
     </section>
