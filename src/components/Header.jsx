@@ -339,7 +339,7 @@ export default function Header() {
       <header
         ref={headerRef}
         data-condensed={isCondensed}
-        className={`sticky top-0 z-[120] w-full transform-gpu transition-transform duration-300 ease-out ${
+        className={`sticky top-0 z-[2000] w-full transform-gpu transition-transform duration-300 ease-out ${
           isHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
@@ -415,7 +415,7 @@ export default function Header() {
                         {isOpen && (
                           <div
                             ref={registerDropdownMenu}
-                            className="absolute left-0 top-full z-[140] mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur pointer-events-auto"
+                            className="absolute left-0 top-full z-[2100] mt-3 w-72 rounded-2xl border border-neutral-200/80 bg-white/95 p-3 shadow-[0_16px_36px_rgba(15,23,42,0.15)] backdrop-blur pointer-events-auto"
                           >
                             <span className="px-3 text-xs font-semibold uppercase tracking-[0.32em] text-neutral-500 ">
                               {t.menu.label}
