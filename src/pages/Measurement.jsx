@@ -48,7 +48,8 @@ const content = {
           "Validatie van events en conversies",
           "Heldere documentatie en overdracht",
         ],
-        imageLabel: "GTM en consent flows",
+        imageSrc: "/Technische%20inrichting%20zonder%20ruis.svg",
+        imageAlt: "Technische inrichting zonder ruis visual",
       },
     ],
     packages: {
@@ -205,7 +206,8 @@ const content = {
           "Validation of events and conversions",
           "Clear documentation and handover",
         ],
-        imageLabel: "GTM and consent flows",
+        imageSrc: "/Technische%20inrichting%20zonder%20ruis.svg",
+        imageAlt: "Clean technical setup visual",
       },
     ],
     packages: {
